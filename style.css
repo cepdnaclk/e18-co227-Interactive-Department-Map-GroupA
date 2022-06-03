@@ -1,0 +1,27 @@
+/* github token (ruchira) ->  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 */
+.information {
+    position: absolute;
+    top: 5%;
+    right: 2%;
+}
+
+.main_information{
+    color: brown;
+    position: relative;
+    background-color: aliceblue;
+    width: 250px;
+    height: 100px;
+    opacity: 0.5;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.more_information{
+    color: brown;
+    position: relative;
+    background-color: aliceblue;
+    width: 250px;
+    height: 300px;
+    opacity: 0;
+    padding: 15px;
+}

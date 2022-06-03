@@ -149,6 +149,15 @@
             }
         }
 
+        function showInformation(){
+            document.getElementsByClassName("more_information")[0].style.opacity = 0.5;
+        }
+
+        function hideInformation(){
+            document.getElementsByClassName("more_information")[0].style.opacity = 0;
+        }
+
+
         document.onkeydown = function(event){
             switch (event.keyCode){
                 case 37:    //arrow left
@@ -180,8 +189,14 @@
         animate();
 
     </script>
-    
-    <p id="label" style="font-style: bold;">Department Building</p>
+    <div class="information">
+        <div class="main_information" onmouseover="showInformation()" onmouseout="hideInformation()">
+            <h2 id="label">Department Building</h2>
+        </div>
+        <div class="more_information">
+            <h3>More information here</h3>
+        </div>
+    </div>
 </body>
 
 </html>
