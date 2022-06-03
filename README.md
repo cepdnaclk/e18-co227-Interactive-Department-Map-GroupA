@@ -1,7 +1,1 @@
-___
-# DELETE THIS INSTRUCTIONS AND ADD A SHORT INTRODUCTION ABOUT YOUR PROJECT
-___
-
-## Please refer the instructions in below URL:
-
-https://projects.ce.pdn.ac.lk/docs/how-to-add-a-project
+### An up to date web-based map of the department, which includes the Labs, Resources, and Staff room details, and links to relevant information
