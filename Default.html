@@ -101,29 +101,52 @@
 
         camera.rotation.z -= Math.PI/2; 
 
-        function turnleft(){
-            camera.rotation.x += Math.PI/20; 
-            angle_x = angle_x + Math.PI/20;
+        async function sleep(miliseconds){
+            return new Promise((resolve) => setTimeout(resolve,miliseconds));
         }
-        function turnright(){
-            camera.rotation.x -= Math.PI/20;
-            angle_x = angle_x - Math.PI/20; 
+
+        async function turnleft(){
+            for(var i =0;i<10;i++){
+                await sleep(20);
+                camera.rotation.x += Math.PI/200; 
+                angle_x = angle_x + Math.PI/200;
+            }
         }
-        function turnup(){
-            camera.rotation.y -= Math.PI/20; 
-            angle_y = angle_y - Math.PI/20;
+        async function turnright(){
+            for(var i =0;i<10;i++){
+                await sleep(20);
+                camera.rotation.x -= Math.PI/200;
+                angle_x = angle_x - Math.PI/200;
+            } 
         }
-        function turndown(){
-            camera.rotation.y += Math.PI/20; 
-            angle_y = angle_y + Math.PI/20;
+        async function turnup(){
+            for(var i =0;i<10;i++){
+                await sleep(20);
+                camera.rotation.y -= Math.PI/200; 
+                angle_y = angle_y - Math.PI/200;
+            }
         }
-        function forward(){
-            camera.position.y += Math.sin(angle_x);
-            camera.position.z -= Math.cos(angle_x);
+        async function turndown(){
+            for(var i =0;i<10;i++){
+                await sleep(20);
+                camera.rotation.y += Math.PI/200; 
+                angle_y = angle_y + Math.PI/200;
+            }
         }
-        function backward(){ 
-            camera.position.y -= Math.sin(angle_x);
-            camera.position.z += Math.cos(angle_x);
+        async function forward(){
+            for(var i =0;i<10;i++){
+                await sleep(20);
+                camera.position.y += (Math.sin(angle_x)/10);
+                camera.position.z -= (Math.cos(angle_x)/10);
+            }
+        }
+
+        async function backward(){ 
+            for(var i =0;i<10;i++){
+                await sleep(20);
+                camera.position.y -= (Math.sin(angle_x)/10);
+                camera.position.z += (Math.cos(angle_x)/10);
+            }
         }
 
         document.onkeydown = function(event){
