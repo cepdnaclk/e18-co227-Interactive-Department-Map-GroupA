@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+</head>
+<body>
+    <script src="three.js"></script>
+    <script src="jquery.js"></script>
+    <script src="threex.domevents.js"></script>
+    <script type="text/javascript">
+        var angle_x=0,angle_y=0;
+
+        //Scene
+        var scene = new THREE.Scene();
+        //Camera
+        var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight);
+        //Renderer
+        var renderer = new THREE.WebGLRenderer({antilias:false});
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        $('body').append(renderer.domElement);    
+        
+        const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
+        
+        //Building1 (cube1) blue colour
+        var geometry1 = new THREE.BoxGeometry(10,4,8);
+        var material1 = new THREE.MeshBasicMaterial({color: 0x0813f9}); 
+        var cube1 = new THREE.Mesh(geometry1,material1);
+        scene.add(cube1);
+        cube1.position.y = 6;
+        cube1.position.x = 2;
+        cube1.position.z = -14;
+        // domEvents.addEventListener(cube1,'click',event => {
+        //    alert("Building 1");
+        // });
+
+        //Building2 (cube2) yellow colour
+        var geometry2 = new THREE.BoxGeometry(8,4,6);
+        var material2 = new THREE.MeshBasicMaterial({color: 0xf2f908}); 
+        var cube2 = new THREE.Mesh(geometry2,material2);
+        scene.add(cube2);
+        cube2.position.y = -6;
+        cube2.position.x = 1;
+        cube2.position.z = -13;
+        // domEvents.addEventListener(cube2,'click',event => {
+        //    alert("Building 2");
+        // });
+
+        //Building3 (cube3) red colour
+        var geometry3 = new THREE.BoxGeometry(10,4,6);
+        var material3 = new THREE.MeshBasicMaterial({color: 0xf90808}); 
+        var cube3 = new THREE.Mesh(geometry3,material3);
+        scene.add(cube3);
+        cube3.position.y = -6;
+        cube3.position.x = 2;
+        cube3.position.z = -19;
+        // domEvents.addEventListener(cube3,'click',event => {
+        //    alert("Building 3");
+        // });
+
+        //Building4 (cube4) green colour
+        var geometry4 = new THREE.BoxGeometry(10,4,6);
+        var material4 = new THREE.MeshBasicMaterial({color: 0x1cb214}); 
+        var cube4 = new THREE.Mesh(geometry4,material4);
+        scene.add(cube4);
+        cube4.position.y = 6;
+        cube4.position.x = 2;
+        cube4.position.z = -24;
+        // domEvents.addEventListener(cube4,'click',event => {
+        //    alert("Building 4");
+        // });
+
+        //Building5 (cube5) orange colour
+        var geometry5 = new THREE.BoxGeometry(6,4,2);
+        var material5 = new THREE.MeshBasicMaterial({color: 0xf79a23}); 
+        var cube5 = new THREE.Mesh(geometry5,material5);
+        scene.add(cube5);
+        cube5.position.y = 2;
+        cube5.position.z = -26;
+        // domEvents.addEventListener(cube5,'click',event => {
+        //    alert("Building 5");
+        // });
+
+        //Building6 (cube6) green colour
+        var geometry6 = new THREE.BoxGeometry(8,4,2);
+        var material6 = new THREE.MeshBasicMaterial({color: 0xfc1Aff}); 
+        var cube6 = new THREE.Mesh(geometry6,material6);
+        scene.add(cube6);
+        cube6.position.y = -6;
+        cube6.position.x = 1;
+        cube6.position.z = -26;
+        // domEvents.addEventListener(cube6,'click',event => {
+        //    alert("Building 6");
+        // });
+
+        //Floor (cube7) white colour
+        var geometry7 = new THREE.BoxGeometry(1,22,24);
+        var material7 = new THREE.MeshBasicMaterial({color: 0xffffff}); 
+        var cube7 = new THREE.Mesh(geometry7,material7);
+        scene.add(cube7);
+        cube7.position.z = -18;
+        cube7.position.x = -3.5;
+        // domEvents.addEventListener(cube7,'click',event => {
+        //    alert("Floor");
+        // });
+
+        camera.rotation.z -= Math.PI/2; 
+
+        function turnleft(){
+            camera.rotation.x += Math.PI/20; 
+            angle_x = angle_x + Math.PI/20;
+        }
+        function turnright(){
+            camera.rotation.x -= Math.PI/20;
+            angle_x = angle_x - Math.PI/20; 
+        }
+        function turnup(){
+            camera.rotation.y -= Math.PI/20; 
+            angle_y = angle_y - Math.PI/20;
+        }
+        function turndown(){
+            camera.rotation.y += Math.PI/20; 
+            angle_y = angle_y + Math.PI/20;
+        }
+        function forward(){
+            camera.position.y += Math.sin(angle_x);
+            camera.position.z -= Math.cos(angle_x);
+        }
+        function backward(){ 
+            camera.position.y -= Math.sin(angle_x);
+            camera.position.z += Math.cos(angle_x);
+        }
+        
+        var animate = function(){
+            
+            renderer.render(scene,camera);
+            requestAnimationFrame(animate);
+        };
+        animate();
+
+    </script>
+    
+    <button onclick="turnleft()">Turn left</button>
+    <button onclick="turnright()">Turn right</button>
+    <button onclick="forward()" style="color: green;">forward</button>
+    <button onclick="backward()" style="color: green;">backward</button>
+    <button onclick="turnup()">Turn up</button>
+    <button onclick="turndown()">Turn down</button>
+</body>
+
+</html>
