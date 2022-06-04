@@ -18,7 +18,7 @@
             "name" : "Cube",
             "scale" : [
                 3,
-                2,
+                5,
                 2
             ]
         }
@@ -26,12 +26,12 @@
     "materials" : [
         {
             "doubleSided" : true,
-            "name" : "yellow",
+            "name" : "green",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.7366454005241394,
+                    0.0616915188729763,
                     0.8000000715255737,
-                    0.09398595988750458,
+                    0.09643279016017914,
                     1
                 ],
                 "metallicFactor" : 0,

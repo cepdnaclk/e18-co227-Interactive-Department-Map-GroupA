@@ -17,8 +17,8 @@
             "mesh" : 0,
             "name" : "Cube",
             "scale" : [
-                4,
-                2,
+                1,
+                3,
                 2
             ]
         }
@@ -26,12 +26,12 @@
     "materials" : [
         {
             "doubleSided" : true,
-            "name" : "blue",
+            "name" : "orange",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.11114814877510071,
-                    0.2395055741071701,
                     0.8000000715255737,
+                    0.29608824849128723,
+                    0.042737849056720734,
                     1
                 ],
                 "metallicFactor" : 0,
