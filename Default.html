@@ -10,6 +10,23 @@
     <script src="threex.domevents.js"></script>
     <script type="text/javascript">
         var angle_x=0,angle_y=0;
+        var clicked = 0, expanding = 0, expanded = 0;
+
+        //Database
+        var building0 = ["Department Building","Welcome to Computer Engineering Department","Head of the department is Mr.Rohitha","This is a 4 story building","Welcome to Computer Engineering Department, University of Peradeniya","Head of the department is Mr.Rohitha (BsC .jhbasdvll)","This is a 4 story building which has 4 labs and bla bla bla"];
+        var building1 = ["Building 1","blue colour","height-10m","Dr. Namal","This is a blue colour building","Height of this builing is 10m.","This building belongs to Dr. Namal","His mobiile number is 012545466"];
+        var building2 = ["Building 2","yellow colour","height-8m","Dr. Kelum","This is a yellow colour building","Height of this builing is 8m.","This building belongs to Dr. Kelum","His mobiile number is 064664646"];
+        var building3 = ["Building 3","red colour","height-10m","Dr. Amal","This is a red colour building","Height of this builing is 10m.","This building belongs to Dr. Amal","His mobiile number is 46461331136"];
+        var building4 = ["Building 4","green colour","height-10m","Dr. Chamindu","This is a green colour building","Height of this builing is 10m.","This building belongs to Dr. Chamindu","His mobiile number is 0164643"];
+        var building5 = ["Building 5","orange colour","height-6m","Dr. Sujeewa","This is a orange colour building","Height of this builing is 6m.","This building belongs to Dr. Sujeewa","His mobiile number is 012540313"];
+        var building6 = ["Building 6","pink colour","height-8m","Dr. Thamindu","This is a pink colour building","Height of this builing is 8m.","This building belongs to Dr. Thamindu","His mobiile number is 012986133032"];
+        var building7 = ["Building 7","white floor","height-10m","Dr. Namal","This is a white colour building","This is a white colour floor.","This building belongs to Dr. Namal","His mobiile number is 0125863100"];
+
+        var departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7];
+
+        //End of Database
+
+
 
         //Scene
         var scene = new THREE.Scene();
@@ -22,12 +39,38 @@
         
         const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
 
-        function addMouseEvents(cube, string){
+        function addMouseEvents(cube, buildingID){
+            domEvents.addEventListener(cube,'click',event => {
+                if(clicked){
+                    document.getElementById("main_information").style.opacity = 0.5;
+                    clicked = !clicked;
+                }else{
+                    document.getElementById("main_information").style.opacity = 0.8;
+                    clicked = !clicked;
+                }
+            });
             domEvents.addEventListener(cube,'mousemove',event => {
-                document.getElementById("label").innerHTML = string;
+                if(clicked==0){
+                    document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];
+                    document.getElementById("main_description1").innerHTML = departmentDatabase[buildingID][1];
+                    document.getElementById("main_description2").innerHTML = departmentDatabase[buildingID][2];
+                    document.getElementById("main_description3").innerHTML = departmentDatabase[buildingID][3];
+                    document.getElementById("more_description1").innerHTML = departmentDatabase[buildingID][4];
+                    document.getElementById("more_description2").innerHTML = departmentDatabase[buildingID][5];
+                    document.getElementById("more_description3").innerHTML = departmentDatabase[buildingID][6];
+                }
             });    
             domEvents.addEventListener(cube,'mouseout',event => {
-                document.getElementById("label").innerHTML = "Department Building";
+                if(clicked==0){
+                    document.getElementById("label").innerHTML = "Department Building";
+                    document.getElementById("label").innerHTML = departmentDatabase[0][0];
+                    document.getElementById("main_description1").innerHTML = departmentDatabase[0][1];
+                    document.getElementById("main_description2").innerHTML = departmentDatabase[0][2];
+                    document.getElementById("main_description3").innerHTML = departmentDatabase[0][3];
+                    document.getElementById("more_description1").innerHTML = departmentDatabase[0][4];
+                    document.getElementById("more_description2").innerHTML = departmentDatabase[0][5];
+                    document.getElementById("more_description3").innerHTML = departmentDatabase[0][6];
+                }
             });    
         }
 
@@ -39,7 +82,7 @@
         cube1.position.y = 6;
         cube1.position.x = 2;
         cube1.position.z = -14;
-        addMouseEvents(cube1,"Building 1 (Blue)");
+        addMouseEvents(cube1,1);
 
         //Building2 (cube2) yellow colour
         var geometry2 = new THREE.BoxGeometry(8,4,6);
@@ -49,7 +92,7 @@
         cube2.position.y = -6;
         cube2.position.x = 1;
         cube2.position.z = -13;
-        addMouseEvents(cube2,"Building 2 (Yellow)");
+        addMouseEvents(cube2,2);
 
         //Building3 (cube3) red colour
         var geometry3 = new THREE.BoxGeometry(10,4,6);
@@ -59,7 +102,7 @@
         cube3.position.y = -6;
         cube3.position.x = 2;
         cube3.position.z = -19;
-        addMouseEvents(cube3,"Building 3 (Red)");
+        addMouseEvents(cube3,3);
 
         //Building4 (cube4) green colour
         var geometry4 = new THREE.BoxGeometry(10,4,6);
@@ -69,7 +112,7 @@
         cube4.position.y = 6;
         cube4.position.x = 2;
         cube4.position.z = -24;
-        addMouseEvents(cube4,"Building 4 (Green)");
+        addMouseEvents(cube4,4);
 
         //Building5 (cube5) orange colour
         var geometry5 = new THREE.BoxGeometry(6,4,2);
@@ -78,7 +121,7 @@
         scene.add(cube5);
         cube5.position.y = 2;
         cube5.position.z = -26;
-        addMouseEvents(cube5,"Building 5 (Orange)");
+        addMouseEvents(cube5,5);
 
         //Building6 (cube6) pink colour
         var geometry6 = new THREE.BoxGeometry(8,4,2);
@@ -88,7 +131,7 @@
         cube6.position.y = -6;
         cube6.position.x = 1;
         cube6.position.z = -26;
-        addMouseEvents(cube6,"Building 6 (Pink)");
+        addMouseEvents(cube6,6);
 
         //Floor (cube7) white colour
         var geometry7 = new THREE.BoxGeometry(1,22,24);
@@ -97,7 +140,7 @@
         scene.add(cube7);
         cube7.position.z = -18;
         cube7.position.x = -3.5;
-        addMouseEvents(cube7,"Floor (White)");
+        addMouseEvents(cube7,7);
 
         camera.rotation.z -= Math.PI/2; 
 
@@ -149,12 +192,33 @@
             }
         }
 
-        function showInformation(){
-            document.getElementsByClassName("more_information")[0].style.opacity = 0.5;
+        async function showInformation(){
+            if(clicked&&(!expanding)&&(!expanded)){
+                expanding=1;
+                document.getElementById("label2").innerHTML = "More information about "+document.getElementById("label").innerHTML;
+                for(var i =0;i<10;i++){
+                    await sleep(20);
+                    document.getElementById("list").style.opacity = 1-(0.1*(i+1));
+                    document.getElementById("more_information").style.opacity = 0.08*(i+1);
+                    document.getElementById("main_information").style.height = 200-14*(i+1)+"px";       
+                }
+                expanding=0;
+                expanded = 1;
+            }
         }
 
-        function hideInformation(){
-            document.getElementsByClassName("more_information")[0].style.opacity = 0;
+        async function hideInformation(){
+            if(clicked&&(!expanding)&&expanded){
+                expanding=1;
+                document.getElementById("list").style.opacity = 1;
+                for(var i =0;i<10;i++){
+                    await sleep(20);
+                    document.getElementById("more_information").style.opacity = 0.8-0.08*(i+1);
+                    document.getElementById("main_information").style.height = 60+14*(i+1)+"px";   
+                }
+                expanding=0;
+                expanded = 0;
+            }
         }
 
 
@@ -189,14 +253,27 @@
         animate();
 
     </script>
-    <div class="information">
-        <div class="main_information" onmouseover="showInformation()" onmouseout="hideInformation()">
-            <h2 id="label">Department Building</h2>
+    
+    <div id="information" class="information_class" >
+        <div id ="main_information" class="main_information_class">
+            <p1 style="font-size: 25px;" id="label">Department Building</p1><br><br>
+            <ul id="list" style="list-style-type:square">
+                <li id="main_description1">Welcome to Computer Engineering Department</li>
+                <li id="main_description2">Head of the department is Mr.Rohitha</li>
+                <li id="main_description3">This is a 4 story building</li>
+            </ul>
         </div>
-        <div class="more_information">
-            <h3>More information here</h3>
+        <div id="more_information" class="more_information_class">
+            <h3 id="label2">More information here</h3>
+            <ul style="list-style-type:square">
+                <li id="more_description1">Welcome to Computer Engineering Department, University of Peradeniya.</li>
+                <li id="more_description2">Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
+                <li id="more_description3">This is a 4 story building which has 4 labs and bla bla bla</li>
+            </ul>
+            <button>More</button>
         </div>
     </div>
+    <div class="controlLayout" onmouseover="showInformation()" onmouseout="hideInformation()"></div>
 </body>
 
 </html>
