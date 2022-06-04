@@ -8,6 +8,7 @@
     <script src="three.js"></script>
     <script src="jquery.js"></script>
     <script src="threex.domevents.js"></script>
+    <script src="GLTFLoader.js"></script>
     <script type="text/javascript">
         var angle_x=0,angle_y=0;
         var clicked = 0, expanding = 0, expanded = 0;
@@ -74,9 +75,34 @@
             });    
         }
 
+        let light;
+
+        function setLight() {
+            light = new THREE.AmbientLight(0xffffff); // soft white light
+            scene.add(light);
+        }
+
+        setLight();
+
+
+        let buildingMesh;
+        
+        let buildingloader = new THREE.GLTFLoader();
+
+        buildingloader.load('https://raw.githubusercontent.com/RuchiraTharaka/e18-co227-Interactive-Department-Map-GroupA/main/blue-building.gltf',(gltf) => {
+            buildingMesh = gltf.scene;
+            buildingMesh.scale.set(0.2,0.2,0.2);
+            scene.add(buildingMesh);
+            buildingMesh.color = 0xffffff;
+            buildingMesh.position.z = -14;
+            buildingMesh.position.x = 0;
+            buildingMesh.position.y = 2;
+        });
+
         //Building1 (cube1) blue colour
         var geometry1 = new THREE.BoxGeometry(10,4,8);
-        var material1 = new THREE.MeshBasicMaterial({color: 0x0813f9}); 
+        var material1 = new THREE.MeshBasicMaterial({color: 0x0813f9});
+        // var material1 = new THREE.MeshBasicMaterial({color: 0x0813f9, transparent:true, opacity:0});
         var cube1 = new THREE.Mesh(geometry1,material1);
         scene.add(cube1);
         cube1.position.y = 6;
