@@ -1,22 +1,23 @@
-/* github token (ruchira) ->  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 */
-.information {
+/* github token (ruchira) ->  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 */
+.information_class {
     position: absolute;
     top: 5%;
     right: 2%;
 }
 
-.main_information{
+.main_information_class{
     color: brown;
     position: relative;
     background-color: aliceblue;
     width: 250px;
-    height: 100px;
+    height: 200px;
     opacity: 0.5;
     padding: 15px;
     margin-bottom: 10px;
+    border-radius: 20px;
 }
 
-.more_information{
+.more_information_class{
     color: brown;
     position: relative;
     background-color: aliceblue;
@@ -24,4 +25,15 @@
     height: 300px;
     opacity: 0;
     padding: 15px;
+    border-radius: 20px;
+}
+
+.controlLayout{
+    position: absolute;
+    top: 5%;
+    right: 0;
+    height: 450px;
+    padding: 15px;
+    width: 300px;opacity: 0;
+    background-color: blue;
 }
