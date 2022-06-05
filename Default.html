@@ -48,7 +48,7 @@
         
         let materialArray = [];
         let texture_ft = new THREE.TextureLoader().load('./images/4.png');
-        let texture_bk = new THREE.TextureLoader().load('C:/Ruchira/Academic/.IMMEDIATE/Map Project/Project/e18-co227-Interactive-Department-Map-GroupA/images/5.png');
+        let texture_bk = new THREE.TextureLoader().load('./images/5.png');
         let texture_up = new THREE.TextureLoader().load('./images/2.png');
         let texture_dn = new THREE.TextureLoader().load('./images/6.png');
         let texture_rt = new THREE.TextureLoader().load('./images/3.png');
@@ -60,6 +60,10 @@
         materialArray.push(new THREE.MeshBasicMaterial({map: texture_dn}));
         materialArray.push(new THREE.MeshBasicMaterial({map: texture_rt}));
         materialArray.push(new THREE.MeshBasicMaterial({map: texture_lf}));
+
+        for(let i=0;i<6;i++){
+            materialArray[i].side = THREE.BackSide;
+        }
 
         let skyboxGeo = new THREE.BoxGeometry(100,100,100);
         let skybox = new THREE.Mesh(skyboxGeo, materialArray);
