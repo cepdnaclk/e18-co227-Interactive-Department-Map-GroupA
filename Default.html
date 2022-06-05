@@ -41,11 +41,11 @@
         var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight);
         //Renderer
         var renderer = new THREE.WebGLRenderer({antilias:false});
-        renderer.setSize(window.innerWidth,window.innerHeight);
-        //renderer.setClearColor(0x1c2833);                       //Set the background color      
+        renderer.setSize(window.innerWidth,window.innerHeight);      
         $('body').append(renderer.domElement);    
         
         
+        //Import images to the cube
         let materialArray = [];
         let texture_ft = new THREE.TextureLoader().load('./images/4.png');
         let texture_bk = new THREE.TextureLoader().load('./images/5.png');
@@ -65,9 +65,11 @@
             materialArray[i].side = THREE.BackSide;
         }
 
-        let skyboxGeo = new THREE.BoxGeometry(100,100,100);
+        let skyboxGeo = new THREE.BoxGeometry(1500,250,1500);       //Creats the backgroud cube
         let skybox = new THREE.Mesh(skyboxGeo, materialArray);
         scene.add(skybox);
+        skybox.rotation.z -= Math.PI/2;         //Set the position of the cube
+        skybox.position.set(121,0,0);
 
         const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
 
@@ -107,11 +109,16 @@
 
         let light1,light2,light3,light4;                                      //Initialize a light
         function setLight(lightId,X,Y,Z) {                           //This function set the light
-            lightId = new THREE.AmbientLight(0xffffff,1); //Soft white light
+            lightId = new THREE.DirectionalLight(0xffffff,1); //Soft white light
             scene.add(lightId);                           //Add light to the scene
+            lightId.position.set(X,Y,Z);
         }
-        setLight(light1,2,6,-14);                                     //Use the function to set the light
-        
+        setLight(light1,0,0,14);                                     //Use the function to set the light
+        setLight(light2,0,50,-30);
+        setLight(light3,20,-30,-10);
+        setLight(light4,20,30,-10);
+
+
         camera.position.x = 0;              //Set the camera elevation (default value is 0)
         camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
 
@@ -134,13 +141,13 @@
         }
 
         //Load the blender 3D objects by using the created function above
-        importObject(blenderBuilding1,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/blue1.gltf',2,6,-14,Math.PI/2);
-        importObject(blenderBuilding2,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);
-        importObject(blenderBuilding3,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/red3.gltf',2,-6,-19,-Math.PI/2);
-        importObject(blenderBuilding4,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/green4.gltf',2,6,-24,Math.PI/2);
-        importObject(blenderBuilding5,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/orange5.gltf',0,2,-26,Math.PI/2);
-        importObject(blenderBuilding6,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/pink6.gltf',1,-6,-26,-Math.PI/2);
-        importObject(blenderBuilding7,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/floor.gltf',-3.5,0,-18,-Math.PI/2);
+        importObject(blenderBuilding1,'./blender-objects/blue1.gltf',2,6,-14,Math.PI/2);
+        importObject(blenderBuilding2,'./blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);
+        importObject(blenderBuilding3,'./blender-objects/red3.gltf',2,-6,-19,-Math.PI/2);
+        importObject(blenderBuilding4,'./blender-objects/green4.gltf',2,6,-24,Math.PI/2);
+        importObject(blenderBuilding5,'./blender-objects/orange5.gltf',0,2,-26,Math.PI/2);
+        importObject(blenderBuilding6,'./blender-objects/pink6.gltf',1,-6,-26,-Math.PI/2);
+        importObject(blenderBuilding7,'./blender-objects/floor.gltf',-3.5,0,-18,-Math.PI/2);
 
         //Building1 (cube1) blue colour
         var geometry1 = new THREE.BoxGeometry(10,4,8);
