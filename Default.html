@@ -107,17 +107,27 @@
             });    
         }
 
-        let light1,light2,light3,light4;                                      //Initialize a light
-        function setLight(lightId,X,Y,Z) {                           //This function set the light
+        let light1,light2,light3,light4,light5,light6,light7,light8,light9,light10;                                      //Initialize a light
+        function setDirectionalLight(lightId,X,Y,Z) {                           //This function set the light
             lightId = new THREE.DirectionalLight(0xffffff,1); //Soft white light
             scene.add(lightId);                           //Add light to the scene
             lightId.position.set(X,Y,Z);
         }
-        setLight(light1,0,0,14);                                     //Use the function to set the light
-        setLight(light2,0,50,-30);
-        setLight(light3,20,-30,-10);
-        setLight(light4,20,30,-10);
-
+        function setPointLight(lightId,X,Y,Z) {                           //This function set the light
+            lightId = new THREE.PointLight(0xffffff,0.3); //Soft white light
+            scene.add(lightId);                           //Add light to the scene
+            lightId.position.set(X,Y,Z);
+        }
+        setDirectionalLight(light1,0,0,14);                                     //Use the function to set the light
+        setDirectionalLight(light2,0,50,-30);
+        setDirectionalLight(light3,20,-30,-10);
+        setDirectionalLight(light4,20,30,-10);
+        setPointLight(light5,6,6,-14);
+        setPointLight(light6,4,-6,-13);
+        setPointLight(light7,6,-6,-19);
+        setPointLight(light8,6,6,-24);
+        setPointLight(light9,2,2,-26);
+        setPointLight(light10,4,-6,-26);
 
         camera.position.x = 0;              //Set the camera elevation (default value is 0)
         camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
@@ -143,11 +153,11 @@
         //Load the blender 3D objects by using the created function above
         importObject(blenderBuilding1,'./blender-objects/blue1.gltf',2,6,-14,Math.PI/2);
         importObject(blenderBuilding2,'./blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);
-        importObject(blenderBuilding3,'./blender-objects/red3.gltf',2,-6,-19,-Math.PI/2);
+        importObject(blenderBuilding3,'./blender-objects/red3.gltf',2,-6,-19.1,-Math.PI/2);
         importObject(blenderBuilding4,'./blender-objects/green4.gltf',2,6,-24,Math.PI/2);
-        importObject(blenderBuilding5,'./blender-objects/orange5.gltf',0,2,-26,Math.PI/2);
+        importObject(blenderBuilding5,'./blender-objects/orange5.gltf',0,1.9,-26,Math.PI/2);
         importObject(blenderBuilding6,'./blender-objects/pink6.gltf',1,-6,-26,-Math.PI/2);
-        importObject(blenderBuilding7,'./blender-objects/floor.gltf',-3.5,0,-18,-Math.PI/2);
+        importObject(blenderBuilding7,'./blender-objects/floor.gltf',-3.6,0,-18,-Math.PI/2);
 
         //Building1 (cube1) blue colour
         var geometry1 = new THREE.BoxGeometry(10,4,8);
