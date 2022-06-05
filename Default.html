@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Website</title>
-    <link rel="stylesheet" href="style.css"/>
+    <title>My Website</title>   <!--Name of the website -->
+    <link rel="stylesheet" href="style.css"/>   <!--Linking the css file-->
 </head>
 <body>
-    <script src="three.js"></script>
-    <script src="jquery.js"></script>
-    <script src="threex.domevents.js"></script>
-    <script src="GLTFLoader.js"></script>
-    <script type="text/javascript">
-        var angle_x=0,angle_y=0;
-        var clicked = 0, expanding = 0, expanded = 0;
+    <script src="three.js"></script>            <!-- Importing the three.js library-->
+    <script src="jquery.js"></script>           <!-- Importing the jquery.js library-->
+    <script src="threex.domevents.js"></script> <!-- Importing the threex.domevents.js library-->
+    <script src="GLTFLoader.js"></script>       <!-- Importing the GLTFLoader.js library-->
+    <script type="text/javascript">             
+        var angle_x=0,angle_y=0;                //Starting rotation values of the camera
+        var clicked = 0;                //To check whether a building has been clicked or not
+        var expanding = 0;              //To check if top right labels are expanding or not
+        var expanded = 0;               //To check whether top right main label has been expanded or not
 
         //Database
+        //This database is used to load the information about the buildings
+        var departmentDatabase;
+        
+        //Data of a particular room can be added to the database as an array
         var building0 = ["Department Building","Welcome to Computer Engineering Department","Head of the department is Mr.Rohitha","This is a 4 story building","Welcome to Computer Engineering Department, University of Peradeniya","Head of the department is Mr.Rohitha (BsC .jhbasdvll)","This is a 4 story building which has 4 labs and bla bla bla"];
         var building1 = ["Building 1","blue colour","height-10m","Dr. Namal","This is a blue colour building","Height of this builing is 10m.","This building belongs to Dr. Namal","His mobiile number is 012545466"];
         var building2 = ["Building 2","yellow colour","height-8m","Dr. Kelum","This is a yellow colour building","Height of this builing is 8m.","This building belongs to Dr. Kelum","His mobiile number is 064664646"];
@@ -23,7 +29,7 @@
         var building6 = ["Building 6","pink colour","height-8m","Dr. Thamindu","This is a pink colour building","Height of this builing is 8m.","This building belongs to Dr. Thamindu","His mobiile number is 012986133032"];
         var building7 = ["Building 7","white floor","height-10m","Dr. Namal","This is a white colour building","This is a white colour floor.","This building belongs to Dr. Namal","His mobiile number is 0125863100"];
 
-        var departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7];
+        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7];
 
         //End of Database
 
@@ -36,23 +42,48 @@
         //Renderer
         var renderer = new THREE.WebGLRenderer({antilias:false});
         renderer.setSize(window.innerWidth,window.innerHeight);
+        //renderer.setClearColor(0x1c2833);                       //Set the background color      
         $('body').append(renderer.domElement);    
         
+        
+        let materialArray = [];
+        let texture_ft = new THREE.TextureLoader().load('./images/4.png');
+        let texture_bk = new THREE.TextureLoader().load('./images/5.png');
+        let texture_up = new THREE.TextureLoader().load('./images/2.png');
+        let texture_dn = new THREE.TextureLoader().load('./images/6.png');
+        let texture_rt = new THREE.TextureLoader().load('./images/3.png');
+        let texture_lf = new THREE.TextureLoader().load('./images/1.png');
+
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_ft}));
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_bk}));
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_up}));
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_dn}));
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_rt}));
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_lf}));
+
+        for(let i=0;i<6;i++){
+            materialArray[i].side = THREE.BackSide;
+        }
+
+        let skyboxGeo = new THREE.BoxGeometry(100,100,100);
+        let skybox = new THREE.Mesh(skyboxGeo, materialArray);
+        scene.add(skybox);
+
         const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
 
-        function addMouseEvents(cube, buildingID){
-            domEvents.addEventListener(cube,'click',event => {
-                if(clicked){
-                    document.getElementById("main_information").style.opacity = 0.5;
-                    clicked = !clicked;
-                }else{
-                    document.getElementById("main_information").style.opacity = 0.8;
-                    clicked = !clicked;
+        function addMouseEvents(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
+            domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
+                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                    document.getElementById("main_information").style.opacity = 0.5;    //Decrease the opacity of top right main information label to 0.5 
+                    clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                }else{                                                                  //If user hasn't clicked earlier
+                    document.getElementById("main_information").style.opacity = 0.8;    //Decrease the opacity of top right main information label to 0.5
+                    clicked = !clicked;                                                 //change the 'clicked' flag to 1
                 }
             });
-            domEvents.addEventListener(cube,'mousemove',event => {
-                if(clicked==0){
-                    document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];
+            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+                if(clicked==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
                     document.getElementById("main_description1").innerHTML = departmentDatabase[buildingID][1];
                     document.getElementById("main_description2").innerHTML = departmentDatabase[buildingID][2];
                     document.getElementById("main_description3").innerHTML = departmentDatabase[buildingID][3];
@@ -61,10 +92,9 @@
                     document.getElementById("more_description3").innerHTML = departmentDatabase[buildingID][6];
                 }
             });    
-            domEvents.addEventListener(cube,'mouseout',event => {
-                if(clicked==0){
-                    document.getElementById("label").innerHTML = "Department Building";
-                    document.getElementById("label").innerHTML = departmentDatabase[0][0];
+            domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
+                if(clicked==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    document.getElementById("label").innerHTML = "Department Building";                             //Update the default information about the department on the top right labels
                     document.getElementById("main_description1").innerHTML = departmentDatabase[0][1];
                     document.getElementById("main_description2").innerHTML = departmentDatabase[0][2];
                     document.getElementById("main_description3").innerHTML = departmentDatabase[0][3];
@@ -75,41 +105,42 @@
             });    
         }
 
-        let light;
-
-        function setLight() {
-            light = new THREE.AmbientLight(0xffffff); // soft white light
-            scene.add(light);
+        let light1,light2,light3,light4;                                      //Initialize a light
+        function setLight(lightId,X,Y,Z) {                           //This function set the light
+            lightId = new THREE.AmbientLight(0xffffff,1); //Soft white light
+            scene.add(lightId);                           //Add light to the scene
         }
-
-        setLight();
-
-
-        let blenderBuilding1,blenderBuilding2,blenderBuilding3,blenderBuilding4,blenderBuilding5,blenderBuilding6,blenderBuilding7;
+        setLight(light1,2,6,-14);                                     //Use the function to set the light
         
-        let buildingloader = new THREE.GLTFLoader();
+        camera.position.x = 0;              //Set the camera elevation (default value is 0)
+        camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
 
-        function importObject(buildingId,location,xValue,yValue,zValue,xrotatevalue){
+        let blenderBuilding1,blenderBuilding2,blenderBuilding3,blenderBuilding4,blenderBuilding5,blenderBuilding6,blenderBuilding7;     //Create variables for blender buildings
+        
+        let buildingloader = new THREE.GLTFLoader();    //Create a loader to load the objects
+
+        function importObject(buildingId,location,xValue,yValue,zValue,xrotatevalue){   //This function imports the blender object, sets the position, angle and adds to the scene
             buildingloader.load(location,(gltf) => {
                 buildingId = gltf.scene;
-                buildingId.scale.set(1,1,1);
-                scene.add(buildingId);
-                buildingId.position.x = xValue;
+                buildingId.scale.set(1,1,1);                                            //Set the scale of the object
+                scene.add(buildingId);                                                  //Add to the scene
+                buildingId.position.x = xValue;                                         //Set the position
                 buildingId.position.y = yValue;
                 buildingId.position.z = zValue;
-                buildingId.rotation.z = Math.PI/2;
+                buildingId.rotation.z = Math.PI/2;                                      //Set the rotation
                 buildingId.rotation.x = xrotatevalue;
                 buildingId.rotation.y = Math.PI;
             });
         }
 
+        //Load the blender 3D objects by using the created function above
         importObject(blenderBuilding1,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/blue1.gltf',2,6,-14,Math.PI/2);
-        importObject(blenderBuilding1,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);
-        importObject(blenderBuilding1,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/red3.gltf',2,-6,-19,-Math.PI/2);
-        importObject(blenderBuilding1,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/green4.gltf',2,6,-24,Math.PI/2);
-        importObject(blenderBuilding1,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/orange5.gltf',0,2,-26,Math.PI/2);
-        importObject(blenderBuilding1,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/pink6.gltf',1,-6,-26,-Math.PI/2);
-        importObject(blenderBuilding1,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/floor.gltf',-3.5,0,-18,-Math.PI/2);
+        importObject(blenderBuilding2,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);
+        importObject(blenderBuilding3,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/red3.gltf',2,-6,-19,-Math.PI/2);
+        importObject(blenderBuilding4,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/green4.gltf',2,6,-24,Math.PI/2);
+        importObject(blenderBuilding5,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/orange5.gltf',0,2,-26,Math.PI/2);
+        importObject(blenderBuilding6,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/pink6.gltf',1,-6,-26,-Math.PI/2);
+        importObject(blenderBuilding7,'https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/blender-objects/floor.gltf',-3.5,0,-18,-Math.PI/2);
 
         //Building1 (cube1) blue colour
         var geometry1 = new THREE.BoxGeometry(10,4,8);
@@ -178,89 +209,86 @@
         scene.add(cube7);
         cube7.position.z = -18;
         cube7.position.x = -3.5;
-        addMouseEvents(cube7,7);
+        addMouseEvents(cube7,7); 
 
-        camera.rotation.z -= Math.PI/2; 
-
-        async function sleep(miliseconds){
+        async function sleep(miliseconds){  //This function sleeps for particular time 
             return new Promise((resolve) => setTimeout(resolve,miliseconds));
         }
 
-        async function turnleft(){
-            for(var i =0;i<10;i++){
-                await sleep(20);
-                camera.rotation.x += Math.PI/200; 
-                angle_x = angle_x + Math.PI/200;
+        async function turnleft(){          //This function turns the camera to left by unit amount
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                await sleep(20);                        //Sleep for 20 millieseconds
+                camera.rotation.x += Math.PI/200;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                angle_x = angle_x + Math.PI/200;        //Update the new camera angle
             }
         }
-        async function turnright(){
-            for(var i =0;i<10;i++){
-                await sleep(20);
-                camera.rotation.x -= Math.PI/200;
-                angle_x = angle_x - Math.PI/200;
+        async function turnright(){         //This function turns the camera to left by unit amount
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                await sleep(20);                        //Sleep for 20 millieseconds
+                camera.rotation.x -= Math.PI/200;       //Rotate the camera around x axis by 0.9 degrees to the right
+                angle_x = angle_x - Math.PI/200;        //Update the new camera angle
             } 
         }
-        async function turnup(){
-            for(var i =0;i<10;i++){
-                await sleep(20);
-                camera.rotation.y -= Math.PI/200; 
-                angle_y = angle_y - Math.PI/200;
+        async function turnup(){            //This function turns the camera to left by unit amount
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                await sleep(20);                        //Sleep for 20 millieseconds
+                camera.rotation.y -= Math.PI/200;       //Rotate the cmaera around y axis by 0.9 degrees to the up 
+                angle_y = angle_y - Math.PI/200;        //Update the new camera angle
             }
         }
-        async function turndown(){
-            for(var i =0;i<10;i++){
-                await sleep(20);
-                camera.rotation.y += Math.PI/200; 
-                angle_y = angle_y + Math.PI/200;
+        async function turndown(){          //This function turns the camera to left by unit amount
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                await sleep(20);                        //Sleep for 20 millieseconds
+                camera.rotation.y += Math.PI/200;       //Rotate the camera around y axis by 0.9 degrees to the down
+                angle_y = angle_y + Math.PI/200;        //Update the new camera angle
             }
         }
-        async function forward(){
-            for(var i =0;i<10;i++){
-                await sleep(20);
-                camera.position.y += (Math.sin(angle_x)/10);
-                camera.position.z -= (Math.cos(angle_x)/10);
+        async function forward(){           //This function brings the camera to back by unit amount
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                await sleep(20);                                    //Sleep for 20 millieseconds
+                camera.position.y += 2*(Math.sin(angle_x)/10);      //Change the position of camera on y axis towards the facing direction
+                camera.position.z -= 2*(Math.cos(angle_x)/10);      //Change the position of camera on z axis towards the facing direction
+            }
+        }
+        async function backward(){          //This function brings the camera to front by unit amount
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                await sleep(20);                                    //Sleep for 20 millieseconds
+                camera.position.y -= (Math.sin(angle_x)/10);        //Change the position of camera on y axis towards the facing direction
+                camera.position.z += (Math.cos(angle_x)/10);        //Change the position of camera on z axis towards the facing direction
             }
         }
 
-        async function backward(){ 
-            for(var i =0;i<10;i++){
-                await sleep(20);
-                camera.position.y -= (Math.sin(angle_x)/10);
-                camera.position.z += (Math.cos(angle_x)/10);
-            }
-        }
-
-        async function showInformation(){
-            if(clicked&&(!expanding)&&(!expanded)){
-                expanding=1;
-                document.getElementById("label2").innerHTML = "More information about "+document.getElementById("label").innerHTML;
-                for(var i =0;i<10;i++){
-                    await sleep(20);
-                    document.getElementById("list").style.opacity = 1-(0.1*(i+1));
-                    document.getElementById("more_information").style.opacity = 0.08*(i+1);
-                    document.getElementById("main_information").style.height = 200-14*(i+1)+"px";       
+        async function showInformation(){               //This function shrinks the top right main information label and makes the more information label appear
+            if(clicked&&(!expanding)&&(!expanded)){     //If a building is clicked, labels are not expanding currently and more information label is dissappeared
+                expanding=1;                            //set the expanding flag to 1
+                document.getElementById("label2").innerHTML = "More information about "+document.getElementById("label").innerHTML;     //set the second label
+                for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+                    await sleep(20);                    //Sleep for 20 millieseconds
+                    document.getElementById("list").style.opacity = 1-(0.1*(i+1));                  //dissappears the main information list
+                    document.getElementById("more_information").style.opacity = 0.08*(i+1);         //Shows the more information label
+                    document.getElementById("main_information").style.height = 200-14*(i+1)+"px";   //Shrinks the main information label
                 }
-                expanding=0;
-                expanded = 1;
+                expanding=0;        //set the expanding flag to 0
+                expanded = 1;       //Set the expanded flag to 1
             }
         }
 
-        async function hideInformation(){
-            if(clicked&&(!expanding)&&expanded){
-                expanding=1;
-                document.getElementById("list").style.opacity = 1;
-                for(var i =0;i<10;i++){
-                    await sleep(20);
-                    document.getElementById("more_information").style.opacity = 0.8-0.08*(i+1);
-                    document.getElementById("main_information").style.height = 60+14*(i+1)+"px";   
+        async function hideInformation(){               //This function expands the top right main information label and makes the more information label dissappear
+            if(clicked&&(!expanding)&&expanded){        //If a building is clicked, labels are not expanding currently and more information label is appeared
+                expanding=1;                            //set the expanding flag to 1
+                document.getElementById("list").style.opacity = 1;      //Shows the main information list
+                for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+                    await sleep(20);                    //Sleep for 20 millieseconds
+                    document.getElementById("more_information").style.opacity = 0.8-0.08*(i+1);     //Dissappears the more information label
+                    document.getElementById("main_information").style.height = 60+14*(i+1)+"px";    //Expands the main information label
                 }
-                expanding=0;
-                expanded = 0;
+                expanding=0;            //set the expanding flag to 0
+                expanded = 0;           //Set the expanded flag to 0
             }
         }
 
 
-        document.onkeydown = function(event){
+        document.onkeydown = function(event){   //Set event listeners for key presses
             switch (event.keyCode){
                 case 37:    //arrow left
                     turnleft();
@@ -292,18 +320,18 @@
 
     </script>
     
-    <div id="information" class="information_class" >
-        <div id ="main_information" class="main_information_class">
+    <div id="information" class="information_class" >                    
+        <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
             <p1 style="font-size: 25px;" id="label">Department Building</p1><br><br>
-            <ul id="list" style="list-style-type:square">
+            <ul id="list" style="list-style-type:square">                                   <!--Top right main information list-->
                 <li id="main_description1">Welcome to Computer Engineering Department</li>
                 <li id="main_description2">Head of the department is Mr.Rohitha</li>
                 <li id="main_description3">This is a 4 story building</li>
             </ul>
         </div>
-        <div id="more_information" class="more_information_class">
-            <h3 id="label2">More information here</h3>
-            <ul style="list-style-type:square">
+        <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
+            <h3 id="label2">More information here</h3>          
+            <ul style="list-style-type:square">                                             <!--Top right more information list-->
                 <li id="more_description1">Welcome to Computer Engineering Department, University of Peradeniya.</li>
                 <li id="more_description2">Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
                 <li id="more_description3">This is a 4 story building which has 4 labs and bla bla bla</li>
@@ -311,7 +339,7 @@
             <button>More</button>
         </div>
     </div>
-    <div class="controlLayout" onmouseover="showInformation()" onmouseout="hideInformation()"></div>
+    <div class="controlLayout" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
 </body>
 
 </html>
