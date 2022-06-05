@@ -27,9 +27,8 @@
         var building4 = ["Building 4","green colour","height-10m","Dr. Chamindu","This is a green colour building","Height of this builing is 10m.","This building belongs to Dr. Chamindu","His mobiile number is 0164643"];
         var building5 = ["Building 5","orange colour","height-6m","Dr. Sujeewa","This is a orange colour building","Height of this builing is 6m.","This building belongs to Dr. Sujeewa","His mobiile number is 012540313"];
         var building6 = ["Building 6","pink colour","height-8m","Dr. Thamindu","This is a pink colour building","Height of this builing is 8m.","This building belongs to Dr. Thamindu","His mobiile number is 012986133032"];
-        var building7 = ["Building 7","white floor","height-10m","Dr. Namal","This is a white colour building","This is a white colour floor.","This building belongs to Dr. Namal","His mobiile number is 0125863100"];
 
-        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7];
+        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6];
 
         //End of Database
 
@@ -73,19 +72,22 @@
 
         const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
 
-        function addMouseEvents(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
+        function addMouseEvents(materialId,cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
             domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
                 if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                     document.getElementById("main_information").style.opacity = 0.5;    //Decrease the opacity of top right main information label to 0.5 
+                    document.getElementById("hint").innerHTML = "Click on the building for more details";
                     clicked = !clicked;                                                 //change the 'clicked' flag to 0
                 }else{                                                                  //If user hasn't clicked earlier
                     document.getElementById("main_information").style.opacity = 0.8;    //Decrease the opacity of top right main information label to 0.5
+                    document.getElementById("hint").innerHTML = "More details below ↓";
                     clicked = !clicked;                                                 //change the 'clicked' flag to 1
                 }
             });
             domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
                 if(clicked==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
+                    materialId.opacity = 0.3;
                     document.getElementById("main_description1").innerHTML = departmentDatabase[buildingID][1];
                     document.getElementById("main_description2").innerHTML = departmentDatabase[buildingID][2];
                     document.getElementById("main_description3").innerHTML = departmentDatabase[buildingID][3];
@@ -97,6 +99,7 @@
             domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
                 if(clicked==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     document.getElementById("label").innerHTML = "Department Building";                             //Update the default information about the department on the top right labels
+                    materialId.opacity = 0;
                     document.getElementById("main_description1").innerHTML = departmentDatabase[0][1];
                     document.getElementById("main_description2").innerHTML = departmentDatabase[0][2];
                     document.getElementById("main_description3").innerHTML = departmentDatabase[0][3];
@@ -160,73 +163,64 @@
         importObject(blenderBuilding7,'./blender-objects/floor.gltf',-3.6,0,-18,-Math.PI/2);
 
         //Building1 (cube1) blue colour
-        var geometry1 = new THREE.BoxGeometry(10,4,8);
-        var material1 = new THREE.MeshBasicMaterial({color: 0x0813f9, transparent:true, opacity:0});
+        var geometry1 = new THREE.BoxGeometry(10.2,4.2,8.2);
+        var material1 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0});
         // var material1 = new THREE.MeshBasicMaterial({color: 0x0813f9, transparent:true, opacity:0});
         var cube1 = new THREE.Mesh(geometry1,material1);
         scene.add(cube1);
         cube1.position.y = 6;
         cube1.position.x = 2;
         cube1.position.z = -14;
-        addMouseEvents(cube1,1);
+        addMouseEvents(material1,cube1,1);
 
         //Building2 (cube2) yellow colour
-        var geometry2 = new THREE.BoxGeometry(8,4,6);
-        var material2 = new THREE.MeshBasicMaterial({color: 0xf2f908, transparent:true, opacity:0}); 
+        var geometry2 = new THREE.BoxGeometry(8.2,4.2,6.2);
+        var material2 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
         var cube2 = new THREE.Mesh(geometry2,material2);
         scene.add(cube2);
         cube2.position.y = -6;
         cube2.position.x = 1;
         cube2.position.z = -13;
-        addMouseEvents(cube2,2);
+        addMouseEvents(material2,cube2,2);
 
         //Building3 (cube3) red colour
-        var geometry3 = new THREE.BoxGeometry(10,4,6);
-        var material3 = new THREE.MeshBasicMaterial({color: 0xf90808, transparent:true, opacity:0}); 
+        var geometry3 = new THREE.BoxGeometry(10.2,4.2,6.2);
+        var material3 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
         var cube3 = new THREE.Mesh(geometry3,material3);
         scene.add(cube3);
         cube3.position.y = -6;
         cube3.position.x = 2;
-        cube3.position.z = -19;
-        addMouseEvents(cube3,3);
+        cube3.position.z = -19.1;
+        addMouseEvents(material3,cube3,3);
 
         //Building4 (cube4) green colour
-        var geometry4 = new THREE.BoxGeometry(10,4,6);
-        var material4 = new THREE.MeshBasicMaterial({color: 0x1cb214, transparent:true, opacity:0}); 
+        var geometry4 = new THREE.BoxGeometry(10.2,4.2,6.2);
+        var material4 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
         var cube4 = new THREE.Mesh(geometry4,material4);
         scene.add(cube4);
         cube4.position.y = 6;
         cube4.position.x = 2;
         cube4.position.z = -24;
-        addMouseEvents(cube4,4);
+        addMouseEvents(material4,cube4,4);
 
         //Building5 (cube5) orange colour
-        var geometry5 = new THREE.BoxGeometry(6,4,2);
-        var material5 = new THREE.MeshBasicMaterial({color: 0xf79a23, transparent:true, opacity:0}); 
+        var geometry5 = new THREE.BoxGeometry(6.2,4.2,2.2);
+        var material5 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
         var cube5 = new THREE.Mesh(geometry5,material5);
         scene.add(cube5);
-        cube5.position.y = 2;
+        cube5.position.y = 1.9;
         cube5.position.z = -26;
-        addMouseEvents(cube5,5);
+        addMouseEvents(material5,cube5,5);
 
         //Building6 (cube6) pink colour
-        var geometry6 = new THREE.BoxGeometry(8,4,2);
-        var material6 = new THREE.MeshBasicMaterial({color: 0xfc1Aff, transparent:true, opacity:0}); 
+        var geometry6 = new THREE.BoxGeometry(8.2,4.2,2.2);
+        var material6 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
         var cube6 = new THREE.Mesh(geometry6,material6);
         scene.add(cube6);
         cube6.position.y = -6;
         cube6.position.x = 1;
         cube6.position.z = -26;
-        addMouseEvents(cube6,6);
-
-        //Floor (cube7) white colour
-        var geometry7 = new THREE.BoxGeometry(1,22,24);
-        var material7 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
-        var cube7 = new THREE.Mesh(geometry7,material7);
-        scene.add(cube7);
-        cube7.position.z = -18;
-        cube7.position.x = -3.5;
-        addMouseEvents(cube7,7); 
+        addMouseEvents(material6,cube6,6);
 
         async function sleep(miliseconds){  //This function sleeps for particular time 
             return new Promise((resolve) => setTimeout(resolve,miliseconds));
@@ -345,6 +339,7 @@
                 <li id="main_description2">Head of the department is Mr.Rohitha</li>
                 <li id="main_description3">This is a 4 story building</li>
             </ul>
+            <p2 id="hint" class="hint_class"><strong>Click on the building for more details</strong></p2>
         </div>
         <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
             <h3 id="label2">More information here</h3>          

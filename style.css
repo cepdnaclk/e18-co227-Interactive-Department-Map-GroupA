@@ -1,4 +1,4 @@
-/* github token (ruchira) ->  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 */
+/* github token (ruchira) ->  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 */
 .information_class {
     position: absolute;
     top: 5%;
@@ -39,3 +39,9 @@
     background-color: blue;
 }
 
+.hint_class{
+    position: absolute;
+    bottom: 8px;
+    font-size: small;
+    text-decoration: underline;
+}
