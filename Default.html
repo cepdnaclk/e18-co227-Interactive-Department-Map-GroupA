@@ -77,17 +77,19 @@
                 if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                     document.getElementById("main_information").style.opacity = 0.5;    //Decrease the opacity of top right main information label to 0.5 
                     document.getElementById("hint").innerHTML = "Click on the building for more details";
+                    materialId.opacity = 0;
                     clicked = !clicked;                                                 //change the 'clicked' flag to 0
                 }else{                                                                  //If user hasn't clicked earlier
                     document.getElementById("main_information").style.opacity = 0.8;    //Decrease the opacity of top right main information label to 0.5
                     document.getElementById("hint").innerHTML = "More details below ↓";
+                    materialId.opacity = 0.4;
                     clicked = !clicked;                                                 //change the 'clicked' flag to 1
                 }
             });
             domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
                 if(clicked==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
-                    materialId.opacity = 0.3;
+                    materialId.opacity = 0.2;
                     document.getElementById("main_description1").innerHTML = departmentDatabase[buildingID][1];
                     document.getElementById("main_description2").innerHTML = departmentDatabase[buildingID][2];
                     document.getElementById("main_description3").innerHTML = departmentDatabase[buildingID][3];
