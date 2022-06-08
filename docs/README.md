@@ -20,8 +20,12 @@ title: Interactive Department Map
 
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [Other Sub Topics](#other-sub-topics)
-3. [Links](#links)
+2. [Objectives](#objectives)
+3. [Problem Domain](#problem_domain)
+4. [Solution and Specifications](#solution_and_specifications)
+5. [Solution Architecture](#solution_architecture)
+6. [Technology Stack](#technology_stack)
+7. [Links](#links)
 
 ---
 
@@ -38,18 +42,18 @@ There are 4 main stakeholders. They are student, academic staff, non-academic st
 * Provides information about department lecturers via their webpages 
 * Save your time and effort
 
-## Problem Domain
+## Problem_Domain
 It is common to see that there’re visitors to the Department and usually they would ask someone about the particular person or the place. As almost everyone is having a busy schedule here it would be inconvenient for both of the parties.
 Also, sometimes it is possible to have conflicts in identifying the needed person due to same names, etc. Considering these facts, it is obvious that this typical methods waste time and effort.
 
-## Solution and Specifications
+## Solution_and_Specifications
 As a solution this web-based application can be introduced that anyone can access anytime easily.  
 This system will allow user to move along the paths of the whole building while observing and getting details about each lecture rooms/labs by clicking on the 3d model. Those relevant information will be displayed on the information panel on the web page as he moves along the 3D model.
 Also here it facilitates user to search for the place they expect to visit or the person they want to meet. Then users will be directed to that particular place with relevant floor number in the 3D model.  
 Also, it is directly linked to the official pages of the department lecturers. So, users can easily access the necessary details like contact information etc.  
 
 
-## Solution Architecture
+## Solution_Architecture
 ---
 ![dd2](https://user-images.githubusercontent.com/73444543/172698244-b0fe3424-ce60-44d2-90ca-218b9667cc60.png)
 
@@ -63,7 +67,7 @@ Sample model demonstrating the information panel
 ---
 ![1111111111](https://user-images.githubusercontent.com/73444543/172698738-858c8617-8f72-4593-9682-ed8edef4b286.png)|![2222222222](https://user-images.githubusercontent.com/73444543/172698754-77f91daa-7202-4b99-9b5c-5d3ac02360ee.png)
 
-## Technology Stack
+## Technology_Stack
 
 * ThreeJS : Is a cross-browser JavaScript library and application programming interface (API) used to create and display animated 3D computer graphics in a web browser using WebGL
 * Blender : Is a free and open-source 3D computer graphics software toolset used for creating animated films, visual effects, art, 3D-printed models, motion graphics, interactive 3D applications, virtual reality, and, formerly, video games. Blender's features include 3D modelling, UV mapping, texturing, digital drawing, raster graphics editing, rigging and skinning, fluid and smoke simulation, particle simulation, soft body simulation, sculpting, animation, match moving, rendering, motion graphics, video editing, and compositing.
@@ -73,8 +77,8 @@ Sample model demonstrating the information panel
 
 ## Links
 
-- [Project Repository](https://github.com/cepdnaclk/{{ page.repository-name }}){:target="_blank"}
-- [Project Page](https://cepdnaclk.github.io/{{ page.repository-name}}){:target="_blank"}
+- [Project Repository](https://github.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA.git)
+- [Project Page](https://cepdnaclk.github.io/e18-co227-Interactive-Department-Map-GroupA)
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
 
