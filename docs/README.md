@@ -63,7 +63,9 @@ User Interface will get the user input of name of the lecturer or the building w
 The other approach of this system is navigating through the map. It will get commands(directions) from the user from the arrow keys and navigate through the whole model which consists of all 4 floors inside and outside. These movements are handled by three.js program and blender is used for creating 3D objects. Those objects and data will be retrieved from a local database as necessarily.
 
 ---
-Sample model demonstrating the information panel 
+Sample model demonstrating the information panel
+#
+
 ---
 ![1111111111](https://user-images.githubusercontent.com/73444543/172698738-858c8617-8f72-4593-9682-ed8edef4b286.png)|![2222222222](https://user-images.githubusercontent.com/73444543/172698754-77f91daa-7202-4b99-9b5c-5d3ac02360ee.png)
 
