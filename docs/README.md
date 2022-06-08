@@ -4,24 +4,19 @@ permalink: index.html
 
 # Please update this with your repository name and title
 repository-name: eYY-XXX-project-template
-title:
+title: 
 ---
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Project Title
+# Interactive Department Map
 
 ---
 
-This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/)
-
-![Sample Image](./images/sample.png)
-
-
 ## Team
--  eNumber, Name, [email](mailto:name@email.com)
--  eNumber, Name, [email](mailto:name@email.com)
--  eNumber, Name, [email](mailto:name@email.com)
+-  e/18/327, M.D.C.D.Senevirathna, [e18327@pdn.ac.lk](mailto:name@email.com)
+-  e/18/354, K.K.D.R.Tharaka, [e18354@pdn.ac.lk](mailto:name@email.com)
+-  e/18/318, S.A.P.Sandunika, [e18318@pdn.ac.lk](mailto:name@email.com)
 
 ## Table of Contents
 1. [Introduction](#introduction)
