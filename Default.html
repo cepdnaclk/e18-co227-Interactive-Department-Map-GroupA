@@ -38,7 +38,7 @@
         var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight);
         //Renderer
         var renderer = new THREE.WebGLRenderer({antilias:true});
-        renderer.setSize(window.innerWidth*0.98,window.innerHeight*0.98);      
+        renderer.setSize(window.innerWidth*0.991,window.innerHeight*0.978);      
         $('body').append(renderer.domElement);    
         
         
@@ -81,7 +81,6 @@
                     cube.material.opacity = 0;
                     clicked = !clicked;                                                 //change the 'clicked' flag to 0
                 }else{                                                                  //If user hasn't clicked earlier
-                    hideNavigator();
                     document.getElementById("main_information").style.opacity = 1;    //Decrease the opacity of top right main information label to 0.5
                     document.getElementById("hint").innerHTML = "More details below ↓";
                     cube.material.opacity = 0.3;
@@ -345,8 +344,8 @@
     <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="information" class="information_class" >                    
         <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
-            <p1 style="font-size: 25px;" id="label">Department Building</p1><br><br>
-            <ul id="list" style="list-style-type:square">                                   <!--Top right main information list-->
+            <p1 style="font-size: 1.66em;" id="label">Department Building</p1><br><br>
+            <ul id="list" style="list-style-type:square; font-size: 1em;">                                   <!--Top right main information list-->
                 <li>Welcome to Computer Engineering Department</li>
                 <li>Head of the department is Mr.Rohitha</li>
                 <li>This is a 4 story building</li>
@@ -355,7 +354,7 @@
         <div id="hint" class="hint_class">Click on the building for more details</div>
         <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
             <h3 id="label2">More information here</h3>          
-            <ul id="list2" style="list-style-type:square">                                             <!--Top right more information list-->
+            <ul id="list2" style="list-style-type:square; font-size: 1em;">                                             <!--Top right more information list-->
                 <li>Welcome to Computer Engineering Department, University of Peradeniya.</li>
                 <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
                 <li">This is a 4 story building which has 4 labs and bla bla bla</li>
