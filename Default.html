@@ -15,35 +15,34 @@
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
 
-        //Database
+
+//Database
         //This database is used to load the information about the buildings
         var departmentDatabase;
         
         //Data of a particular room can be added to the database as an array
-        var building0 = ["Department Building","Welcome to Computer Engineering Department","Head of the department is Mr.Rohitha","This is a 4 story building","Welcome to Computer Engineering Department, University of Peradeniya","Head of the department is Mr.Rohitha (BsC .jhbasdvll)","This is a 4 story building which has 4 labs and bla bla bla"];
-        var building1 = ["Building 1","blue colour","height-10m","Dr. Namal","This is a blue colour building","Height of this builing is 10m.","This building belongs to Dr. Namal","His mobiile number is 012545466"];
-        var building2 = ["Building 2","yellow colour","height-8m","Dr. Kelum","This is a yellow colour building","Height of this builing is 8m.","This building belongs to Dr. Kelum","His mobiile number is 064664646"];
-        var building3 = ["Building 3","red colour","height-10m","Dr. Amal","This is a red colour building","Height of this builing is 10m.","This building belongs to Dr. Amal","His mobiile number is 46461331136"];
-        var building4 = ["Building 4","green colour","height-10m","Dr. Chamindu","This is a green colour building","Height of this builing is 10m.","This building belongs to Dr. Chamindu","His mobiile number is 0164643"];
-        var building5 = ["Building 5","orange colour","height-6m","Dr. Sujeewa","This is a orange colour building","Height of this builing is 6m.","This building belongs to Dr. Sujeewa","His mobiile number is 012540313"];
-        var building6 = ["Building 6","pink colour","height-8m","Dr. Thamindu","This is a pink colour building","Height of this builing is 8m.","This building belongs to Dr. Thamindu","His mobiile number is 012986133032"];
+        var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","</li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)<li></li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
+        var building1 = ["Building 1","<li>blue colour</li><li>height-10m</li><li>Dr. Namal</li>","<li>This is a blue colour building</li><li>Height of this builing is 10m.</li><li>This building belongs to Dr. Namal</li><li>His mobiile number is 012545466</li>"];
+        var building2 = ["Building 2","<li>yellow colour</li><li>height-8m</li><li>Dr. Kelum</li>","<li>This is a yellow colour building</li><li>Height of this builing is 8m.</li><li>This building belongs to Dr. Kelum</li><li>His mobiile number is 064664646</li>"];
+        var building3 = ["Building 3","<li>red colour</li><li>height-10m</li><li>Dr. Amal</li>","<li>This is a red colour building</li><li>Height of this builing is 10m.</li><li>This building belongs to Dr. Amal</li><li>His mobiile number is 46461331136</li>"];
+        var building4 = ["Building 4","<li>green colour</li><li>height-10m</li><li>Dr. Chamindu</li>","<li>This is a green colour building</li><li>Height of this builing is 10m.</li><li>This building belongs to Dr. Chamindu</li><li>His mobiile number is 0164643</li>"];
+        var building5 = ["Building 5","<li>orange colour</li><li>height-6m</li><li>Dr. Sujeewa</li>","<li>This is a orange colour building</li><li>Height of this builing is 6m.</li><li>This building belongs to Dr. Sujeewa</li><li>His mobiile number is 012540313</li>"];
+        var building6 = ["Building 6","<li>pink colour</li><li>height-8m</li><li>Dr. Thamindu</li>","<li>This is a pink colour building</li><li>Height of this builing is 8m.</li><li>This building belongs to Dr. Thamindu</li><li>His mobiile number is 012986133032</li>"];
 
         departmentDatabase = [building0,building1,building2,building3,building4,building5,building6];
-
-        //End of Database
-
-
+        
 
         //Scene
         var scene = new THREE.Scene();
         //Camera
         var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight);
         //Renderer
-        var renderer = new THREE.WebGLRenderer({antilias:false});
-        renderer.setSize(window.innerWidth,window.innerHeight);      
+        var renderer = new THREE.WebGLRenderer({antilias:true});
+        renderer.setSize(window.innerWidth*0.98,window.innerHeight*0.98);      
         $('body').append(renderer.domElement);    
         
         
+//Creating Backgroud
         //Import images to the cube
         let materialArray = [];
         let texture_ft = new THREE.TextureLoader().load('./images/4.png');
@@ -70,160 +69,98 @@
         skybox.rotation.z -= Math.PI/2;         //Set the position of the cube
         skybox.position.set(121,0,0);
 
+
+//Mouse Event Listeners
         const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
 
-        function addMouseEvents(materialId,cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
+        function addMouseEvents(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
             domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
                 if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
-                    document.getElementById("main_information").style.opacity = 0.5;    //Decrease the opacity of top right main information label to 0.5 
+                    document.getElementById("main_information").style.opacity = 0.6;    //Decrease the opacity of top right main information label to 0.5 
                     document.getElementById("hint").innerHTML = "Click on the building for more details";
-                    materialId.opacity = 0;
+                    cube.material.opacity = 0;
                     clicked = !clicked;                                                 //change the 'clicked' flag to 0
                 }else{                                                                  //If user hasn't clicked earlier
-                    document.getElementById("main_information").style.opacity = 0.8;    //Decrease the opacity of top right main information label to 0.5
+                    hideNavigator();
+                    document.getElementById("main_information").style.opacity = 1;    //Decrease the opacity of top right main information label to 0.5
                     document.getElementById("hint").innerHTML = "More details below ↓";
-                    materialId.opacity = 0.4;
+                    cube.material.opacity = 0.3;
                     clicked = !clicked;                                                 //change the 'clicked' flag to 1
                 }
             });
             domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
                 if(clicked==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    cube.material.opacity = 0.2;
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
-                    materialId.opacity = 0.2;
-                    document.getElementById("main_description1").innerHTML = departmentDatabase[buildingID][1];
-                    document.getElementById("main_description2").innerHTML = departmentDatabase[buildingID][2];
-                    document.getElementById("main_description3").innerHTML = departmentDatabase[buildingID][3];
-                    document.getElementById("more_description1").innerHTML = departmentDatabase[buildingID][4];
-                    document.getElementById("more_description2").innerHTML = departmentDatabase[buildingID][5];
-                    document.getElementById("more_description3").innerHTML = departmentDatabase[buildingID][6];
+                    document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
+                    document.getElementById("list2").innerHTML = departmentDatabase[buildingID][2];
                 }
             });    
             domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
                 if(clicked==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    document.getElementById("label").innerHTML = "Department Building";                             //Update the default information about the department on the top right labels
-                    materialId.opacity = 0;
-                    document.getElementById("main_description1").innerHTML = departmentDatabase[0][1];
-                    document.getElementById("main_description2").innerHTML = departmentDatabase[0][2];
-                    document.getElementById("main_description3").innerHTML = departmentDatabase[0][3];
-                    document.getElementById("more_description1").innerHTML = departmentDatabase[0][4];
-                    document.getElementById("more_description2").innerHTML = departmentDatabase[0][5];
-                    document.getElementById("more_description3").innerHTML = departmentDatabase[0][6];
+                    cube.material.opacity = 0;
+                    document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+                    document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                    document.getElementById("list2").innerHTML = departmentDatabase[0][2];
                 }
             });    
         }
 
+
+//Import Blender Objects
+        let buildingloader = new THREE.GLTFLoader();    //Create a loader to load the objects
+
+        function importObject(location,xValue,yValue,zValue,xrotatevalue){   //This function imports the blender object, sets the position, angle and adds to the scene
+            var blenderBuilding;
+            buildingloader.load(location,(gltf) => {
+                blenderBuilding = gltf.scene;
+                blenderBuilding.scale.set(1,1,1);                                            //Set the scale of the object
+                scene.add(blenderBuilding);                                                  //Add to the scene
+                blenderBuilding.position.x = xValue;                                         //Set the position
+                blenderBuilding.position.y = yValue;
+                blenderBuilding.position.z = zValue;
+                blenderBuilding.rotation.z = Math.PI/2;                                      //Set the rotation
+                blenderBuilding.rotation.x = xrotatevalue;
+                blenderBuilding.rotation.y = Math.PI;
+            });
+            return blenderBuilding;
+        }
+
+
+//Creating Transparent Objects
+        var transparentMaterialArray = [];
+        for(var i=0;i<7;i++){
+            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0});
+        }
+        function createTransparentObject(buildingID,x,y,z,xPosition,yPosition,zPosition){
+            var geometry = new THREE.BoxGeometry(x,y,z);
+            var material = transparentMaterialArray[buildingID]
+            var cube = new THREE.Mesh(geometry,material);
+            scene.add(cube);
+            cube.position.x = xPosition;
+            cube.position.y = yPosition;
+            cube.position.z = zPosition;
+            addMouseEvents(cube,buildingID);
+            return cube;
+        }
+
+
+//Set Lights
         let light1,light2,light3,light4,light5,light6,light7,light8,light9,light10;                                      //Initialize a light
         function setDirectionalLight(lightId,X,Y,Z) {                           //This function set the light
             lightId = new THREE.DirectionalLight(0xffffff,1); //Soft white light
             scene.add(lightId);                           //Add light to the scene
             lightId.position.set(X,Y,Z);
         }
+
         function setPointLight(lightId,X,Y,Z) {                           //This function set the light
             lightId = new THREE.PointLight(0xffffff,0.3); //Soft white light
             scene.add(lightId);                           //Add light to the scene
             lightId.position.set(X,Y,Z);
         }
-        setDirectionalLight(light1,0,0,14);                                     //Use the function to set the light
-        setDirectionalLight(light2,0,50,-30);
-        setDirectionalLight(light3,20,-30,-10);
-        setDirectionalLight(light4,20,30,-10);
-        setPointLight(light5,6,6,-14);
-        setPointLight(light6,4,-6,-13);
-        setPointLight(light7,6,-6,-19);
-        setPointLight(light8,6,6,-24);
-        setPointLight(light9,2,2,-26);
-        setPointLight(light10,4,-6,-26);
 
-        camera.position.x = 0;              //Set the camera elevation (default value is 0)
-        camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
 
-        let blenderBuilding1,blenderBuilding2,blenderBuilding3,blenderBuilding4,blenderBuilding5,blenderBuilding6,blenderBuilding7;     //Create variables for blender buildings
-        
-        let buildingloader = new THREE.GLTFLoader();    //Create a loader to load the objects
-
-        function importObject(buildingId,location,xValue,yValue,zValue,xrotatevalue){   //This function imports the blender object, sets the position, angle and adds to the scene
-            buildingloader.load(location,(gltf) => {
-                buildingId = gltf.scene;
-                buildingId.scale.set(1,1,1);                                            //Set the scale of the object
-                scene.add(buildingId);                                                  //Add to the scene
-                buildingId.position.x = xValue;                                         //Set the position
-                buildingId.position.y = yValue;
-                buildingId.position.z = zValue;
-                buildingId.rotation.z = Math.PI/2;                                      //Set the rotation
-                buildingId.rotation.x = xrotatevalue;
-                buildingId.rotation.y = Math.PI;
-            });
-        }
-
-        //Load the blender 3D objects by using the created function above
-        importObject(blenderBuilding1,'./blender-objects/blue1.gltf',2,6,-14,Math.PI/2);
-        importObject(blenderBuilding2,'./blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);
-        importObject(blenderBuilding3,'./blender-objects/red3.gltf',2,-6,-19.1,-Math.PI/2);
-        importObject(blenderBuilding4,'./blender-objects/green4.gltf',2,6,-24,Math.PI/2);
-        importObject(blenderBuilding5,'./blender-objects/orange5.gltf',0,1.9,-26,Math.PI/2);
-        importObject(blenderBuilding6,'./blender-objects/pink6.gltf',1,-6,-26,-Math.PI/2);
-        importObject(blenderBuilding7,'./blender-objects/floor.gltf',-3.6,0,-18,-Math.PI/2);
-
-        //Building1 (cube1) blue colour
-        var geometry1 = new THREE.BoxGeometry(10.2,4.2,8.2);
-        var material1 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0});
-        // var material1 = new THREE.MeshBasicMaterial({color: 0x0813f9, transparent:true, opacity:0});
-        var cube1 = new THREE.Mesh(geometry1,material1);
-        scene.add(cube1);
-        cube1.position.y = 6;
-        cube1.position.x = 2;
-        cube1.position.z = -14;
-        addMouseEvents(material1,cube1,1);
-
-        //Building2 (cube2) yellow colour
-        var geometry2 = new THREE.BoxGeometry(8.2,4.2,6.2);
-        var material2 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
-        var cube2 = new THREE.Mesh(geometry2,material2);
-        scene.add(cube2);
-        cube2.position.y = -6;
-        cube2.position.x = 1;
-        cube2.position.z = -13;
-        addMouseEvents(material2,cube2,2);
-
-        //Building3 (cube3) red colour
-        var geometry3 = new THREE.BoxGeometry(10.2,4.2,6.2);
-        var material3 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
-        var cube3 = new THREE.Mesh(geometry3,material3);
-        scene.add(cube3);
-        cube3.position.y = -6;
-        cube3.position.x = 2;
-        cube3.position.z = -19.1;
-        addMouseEvents(material3,cube3,3);
-
-        //Building4 (cube4) green colour
-        var geometry4 = new THREE.BoxGeometry(10.2,4.2,6.2);
-        var material4 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
-        var cube4 = new THREE.Mesh(geometry4,material4);
-        scene.add(cube4);
-        cube4.position.y = 6;
-        cube4.position.x = 2;
-        cube4.position.z = -24;
-        addMouseEvents(material4,cube4,4);
-
-        //Building5 (cube5) orange colour
-        var geometry5 = new THREE.BoxGeometry(6.2,4.2,2.2);
-        var material5 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
-        var cube5 = new THREE.Mesh(geometry5,material5);
-        scene.add(cube5);
-        cube5.position.y = 1.9;
-        cube5.position.z = -26;
-        addMouseEvents(material5,cube5,5);
-
-        //Building6 (cube6) pink colour
-        var geometry6 = new THREE.BoxGeometry(8.2,4.2,2.2);
-        var material6 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0}); 
-        var cube6 = new THREE.Mesh(geometry6,material6);
-        scene.add(cube6);
-        cube6.position.y = -6;
-        cube6.position.x = 1;
-        cube6.position.z = -26;
-        addMouseEvents(material6,cube6,6);
-
+//Controls
         async function sleep(miliseconds){  //This function sleeps for particular time 
             return new Promise((resolve) => setTimeout(resolve,miliseconds));
         }
@@ -271,6 +208,8 @@
             }
         }
 
+
+//Information Panel movements
         async function showInformation(){               //This function shrinks the top right main information label and makes the more information label appear
             if(clicked&&(!expanding)&&(!expanded)){     //If a building is clicked, labels are not expanding currently and more information label is dissappeared
                 expanding=1;                            //set the expanding flag to 1
@@ -278,9 +217,10 @@
                 for(var i =0;i<10;i++){                 //Used a loop for smooth animations
                     await sleep(20);                    //Sleep for 20 millieseconds
                     document.getElementById("list").style.opacity = 1-(0.1*(i+1));                  //dissappears the main information list
-                    document.getElementById("more_information").style.opacity = 0.08*(i+1);         //Shows the more information label
-                    document.getElementById("main_information").style.height = 200-14*(i+1)+"px";   //Shrinks the main information label
+                    document.getElementById("more_information").style.opacity = 0.09*(i+1);         //Shows the more information label
+                    document.getElementById("main_information").style.height = 50-4.4*(i+1)+"%";   //Shrinks the main information label
                 }
+                document.getElementById("hint").style.backgroundColor = "#21618C";
                 expanding=0;        //set the expanding flag to 0
                 expanded = 1;       //Set the expanded flag to 1
             }
@@ -292,15 +232,45 @@
                 document.getElementById("list").style.opacity = 1;      //Shows the main information list
                 for(var i =0;i<10;i++){                 //Used a loop for smooth animations
                     await sleep(20);                    //Sleep for 20 millieseconds
-                    document.getElementById("more_information").style.opacity = 0.8-0.08*(i+1);     //Dissappears the more information label
-                    document.getElementById("main_information").style.height = 60+14*(i+1)+"px";    //Expands the main information label
+                    document.getElementById("more_information").style.opacity = 0.9-0.09*(i+1);     //Dissappears the more information label
+                    document.getElementById("main_information").style.height = 6+4.4*(i+1)+"%";    //Expands the main information label
                 }
+                document.getElementById("hint").style.backgroundColor = "#0B5345";
                 expanding=0;            //set the expanding flag to 0
                 expanded = 0;           //Set the expanded flag to 0
             }
         }
 
+//Latter Panel movements
+        function hideNavigator(){
+            document.getElementById("latterPanel").height = "80%";
+        }
 
+//Camera Position
+        async function changeView(){
+            if(camera.position.x==0){
+                for(var i=0;i<10;i++){
+                    await sleep(20);
+                    camera.position.x=(i+1)*0.8;
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-Math.PI/8)/10);
+                    
+                }
+                angle_y = Math.PI/8;
+                document.getElementById("viewButton").innerHTML = "First Person";
+            }else{
+                document.getElementById("viewButton").innerHTML = "Third Person";
+                for(var i=0;i<10;i++){
+                    await sleep(20);
+                    camera.position.x=8-((i+1)*0.8);
+                    camera.rotation.y = angle_y-(i+1)*(angle_y/10);
+                }
+                angle_y = 0;
+                document.getElementById("viewButton").innerHTML = "Third Person";
+            }
+        }
+
+
+//Key Controls
         document.onkeydown = function(event){   //Set event listeners for key presses
             switch (event.keyCode){
                 case 37:    //arrow left
@@ -324,36 +294,83 @@
             }
         }
 
+
+//Rendering
         var animate = function(){
             
             renderer.render(scene,camera);
             requestAnimationFrame(animate);
         };
+
+
+        //Load the blender 3D objects by using the created function above
+        var blenderBuilding1 = importObject('./blender-objects/blue1.gltf',2,6,-14,Math.PI/2);        //Blue
+        var blenderBuilding2 = importObject('./blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);    //Yellow
+        var blenderBuilding3 = importObject('./blender-objects/red3.gltf',2,-6,-19.1,-Math.PI/2);     //Red
+        var blenderBuilding4 = importObject('./blender-objects/green4.gltf',2,6,-24,Math.PI/2);       //Green
+        var blenderBuilding5 = importObject('./blender-objects/orange5.gltf',0,1.9,-26,Math.PI/2);    //Orange
+        var blenderBuilding6 = importObject('./blender-objects/pink6.gltf',1,-6,-26,-Math.PI/2);      //Pink
+        var blenderBuilding7 = importObject('./blender-objects/floor.gltf',-3.6,0,-18,-Math.PI/2);    //Floor
+        var blenderBuilding8 = importObject('./blender-objects/wall2.gltf',-4,13,-60,0);    //wall
+
+
+        //Creating transparent objects by using the created function above
+        var cube1 = createTransparentObject(1,10.2,4.2,8.2,2,6,-14);        //Blue
+        var cube2 = createTransparentObject(2,8.2,4.2,6.2,1,-6,-13);        //Yellow
+        var cube3 = createTransparentObject(3,10.2,4.2,6.2,2,-6,-19.1);     //Red
+        var cube4 = createTransparentObject(4,10.2,4.2,6.2,2,6,-24);        //Green
+        var cube5 = createTransparentObject(5,6.2,4.2,2.2,0,1.9,-26);       //Orange
+        var cube6 = createTransparentObject(6,8.2,4.2,2.2,1,-6,-26);        //Pink
+     
+        //Set lights by using the created function above
+        setPointLight(light5,6,6,-14);      //Blue
+        setPointLight(light6,4,-6,-13);     //Yellow
+        setPointLight(light7,6,-6,-19);     //Red
+        setPointLight(light8,6,6,-24);      //Green
+        setPointLight(light9,2,2,-26);      //Orange
+        setPointLight(light10,4,-6,-26);    //Pink
+
+        setDirectionalLight(light1,0,0,14);                                     //Use the function to set the light
+        setDirectionalLight(light2,0,50,-30);
+        setDirectionalLight(light3,20,-30,-10);
+        setDirectionalLight(light4,20,30,-10);
+
+        camera.position.x = 0;              //Set the camera elevation (default value is 0)
+        camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
+
         animate();
 
     </script>
-    
+
+    <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="information" class="information_class" >                    
         <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
             <p1 style="font-size: 25px;" id="label">Department Building</p1><br><br>
             <ul id="list" style="list-style-type:square">                                   <!--Top right main information list-->
-                <li id="main_description1">Welcome to Computer Engineering Department</li>
-                <li id="main_description2">Head of the department is Mr.Rohitha</li>
-                <li id="main_description3">This is a 4 story building</li>
+                <li>Welcome to Computer Engineering Department</li>
+                <li>Head of the department is Mr.Rohitha</li>
+                <li>This is a 4 story building</li>
             </ul>
-            <p2 id="hint" class="hint_class"><strong>Click on the building for more details</strong></p2>
         </div>
+        <div id="hint" class="hint_class">Click on the building for more details</div>
         <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
             <h3 id="label2">More information here</h3>          
-            <ul style="list-style-type:square">                                             <!--Top right more information list-->
-                <li id="more_description1">Welcome to Computer Engineering Department, University of Peradeniya.</li>
-                <li id="more_description2">Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
-                <li id="more_description3">This is a 4 story building which has 4 labs and bla bla bla</li>
+            <ul id="list2" style="list-style-type:square">                                             <!--Top right more information list-->
+                <li>Welcome to Computer Engineering Department, University of Peradeniya.</li>
+                <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
+                <li">This is a 4 story building which has 4 labs and bla bla bla</li>
             </ul>
-            <button>More</button>
+            <button id="moreButton" class="moreButton_class">More</button>
         </div>
     </div>
     <div class="controlLayout" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    <div id="latterPanel" class="latterPanelClass">
+        <div id ="navigate" class="navigate_class">                         <!--Top right main information label-->
+            
+        </div>
+        <div style="font-size: 18px;" id="label3;" class="label3_class">Navigator</div>
+    </div>
+    <button class="viewButtonClass" id="viewButton" onclick="changeView()">Third Person</button>
 </body>
 
 </html>
