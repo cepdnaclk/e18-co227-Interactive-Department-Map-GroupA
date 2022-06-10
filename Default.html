@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="style.css"/>   <!--Linking the css file-->
 </head>
 <body>
-    <script src="three.js"></script>            <!-- Importing the three.js library-->
-    <script src="jquery.js"></script>           <!-- Importing the jquery.js library-->
-    <script src="threex.domevents.js"></script> <!-- Importing the threex.domevents.js library-->
-    <script src="GLTFLoader.js"></script>       <!-- Importing the GLTFLoader.js library-->
+    <script src="./js/three.js"></script>            <!-- Importing the three.js library-->
+    <script src="./js/jquery.js"></script>           <!-- Importing the jquery.js library-->
+    <script src="./js/threex.domevents.js"></script> <!-- Importing the threex.domevents.js library-->
+    <script src="./js/GLTFLoader.js"></script>       <!-- Importing the GLTFLoader.js library-->
     <script type="text/javascript">             
         var angle_x=0,angle_y=0;                //Starting rotation values of the camera
         var clicked = 0;                //To check whether a building has been clicked or not
@@ -344,8 +344,8 @@
     <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="information" class="information_class" >                    
         <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
-            <p1 style="font-size: 1.66em;" id="label">Department Building</p1><br><br>
-            <ul id="list" style="list-style-type:square; font-size: 1em;">                                   <!--Top right main information list-->
+            <p1 style="font-size: 3.3vmin;" id="label">Department Building</p1><br><br>
+            <ul id="list" style="list-style-type:square; font-size: 2.15vmin;">                                   <!--Top right main information list-->
                 <li>Welcome to Computer Engineering Department</li>
                 <li>Head of the department is Mr.Rohitha</li>
                 <li>This is a 4 story building</li>
@@ -354,7 +354,7 @@
         <div id="hint" class="hint_class">Click on the building for more details</div>
         <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
             <h3 id="label2">More information here</h3>          
-            <ul id="list2" style="list-style-type:square; font-size: 1em;">                                             <!--Top right more information list-->
+            <ul id="list2" style="list-style-type:square; font-size: 2.15vmin;">                                             <!--Top right more information list-->
                 <li>Welcome to Computer Engineering Department, University of Peradeniya.</li>
                 <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
                 <li>This is a 4 story building which has 4 labs and bla bla bla</li>
@@ -367,9 +367,8 @@
         <div id ="navigate" class="navigate_class">                         <!--Top right main information label-->
             
         </div>
-        <div style="font-size: 18px;" id="label3;" class="label3_class">Navigator</div>
+        <div style="font-size: 2.4vmin;" id="label3;" class="label3_class">Navigator</div>
     </div>
     <button class="viewButtonClass" id="viewButton" onclick="changeView()">Third Person</button>
 </body>
-
 </html>
