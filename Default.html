@@ -9,11 +9,48 @@
     <script src="./js/jquery.js"></script>           <!-- Importing the jquery.js library-->
     <script src="./js/threex.domevents.js"></script> <!-- Importing the threex.domevents.js library-->
     <script src="./js/GLTFLoader.js"></script>       <!-- Importing the GLTFLoader.js library-->
-    <script type="text/javascript">             
+    <script type="text/javascript"> 
+    
+        // var conn = new ActiveXObject("ADODB.Connection");
+        // var conn_str = "";
+        // var db_Host = "";
+        // var db_User = "";
+        // var db_Password = "";
+        // var db_Provider = "";
+        // var db_Default = "";
+
+        // function Show_Data(){
+        //     db_Host = "RUCHIRA"
+        //     db_User = "root"
+        //     db_Password = ""
+        //     db_Provider = "SQLOLEDB"
+        //     db_Default = "ex"
+        //     conn_str = "Provider=" + db_Provider+";Data Source="+db_Host+"; User Id="+db_User+"; password="+db_Password+"; initial Catalog="+db_Default;
+        //     show_data_from_database();
+        // }
+
+        // function show_data_from_database(){
+        //     try{
+        //         conn.Open(conn_str);
+        //         var reader = new ActiveXObject("ADODB.Recordset");
+        //         var strQuery = "SELECT * FROM USERS";
+        //         reader.Open(strQuery,conn);
+        //         reader.MoveFirst();
+        //         while(!reader.eof){
+        //             reader.fields(0);
+        //             reader.fields(1);
+        //             reader.movenext();
+        //         }
+        //     }catch(e){
+        //         alert("Error");
+        //     }
+        // }
+
         var angle_x=0,angle_y=0;                //Starting rotation values of the camera
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
+        var circleCorners = 1;
 
 
 //Database
@@ -21,13 +58,13 @@
         var departmentDatabase;
         
         //Data of a particular room can be added to the database as an array
-        var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","</li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)<li></li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
+        var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
         var building1 = ["Building 1","<li>blue colour</li><li>height-10m</li><li>Dr. Namal</li>","<li>This is a blue colour building</li><li>Height of this builing is 10m.</li><li>This building belongs to Dr. Namal</li><li>His mobiile number is 012545466</li>"];
         var building2 = ["Building 2","<li>yellow colour</li><li>height-8m</li><li>Dr. Kelum</li>","<li>This is a yellow colour building</li><li>Height of this builing is 8m.</li><li>This building belongs to Dr. Kelum</li><li>His mobiile number is 064664646</li>"];
         var building3 = ["Building 3","<li>red colour</li><li>height-10m</li><li>Dr. Amal</li>","<li>This is a red colour building</li><li>Height of this builing is 10m.</li><li>This building belongs to Dr. Amal</li><li>His mobiile number is 46461331136</li>"];
         var building4 = ["Building 4","<li>green colour</li><li>height-10m</li><li>Dr. Chamindu</li>","<li>This is a green colour building</li><li>Height of this builing is 10m.</li><li>This building belongs to Dr. Chamindu</li><li>His mobiile number is 0164643</li>"];
         var building5 = ["Building 5","<li>orange colour</li><li>height-6m</li><li>Dr. Sujeewa</li>","<li>This is a orange colour building</li><li>Height of this builing is 6m.</li><li>This building belongs to Dr. Sujeewa</li><li>His mobiile number is 012540313</li>"];
-        var building6 = ["Building 6","<li>pink colour</li><li>height-8m</li><li>Dr. Thamindu</li>","<li>This is a pink colour building</li><li>Height of this builing is 8m.</li><li>This building belongs to Dr. Thamindu</li><li>His mobiile number is 012986133032</li>"];
+        var building6 = ["Building 6","<li>pink colour</li><li>height-8m</li><li>Dr. Thamindu</li>","<li>This is a pink colour building</li><li>Height of this builing is 8m.</li><li>This building belongs to Dr. Thamindu</li><li>His mobiile number is 012986133032</li><li>This is a pink colour building</li><li>Height of this builing is 8m.</li><li>This building belongs to Dr. Thamindu</li><li>His mobiile number is 012986133032</li>"];
 
         departmentDatabase = [building0,building1,building2,building3,building4,building5,building6];
         
@@ -76,14 +113,38 @@
         function addMouseEvents(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
             domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
                 if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
-                    document.getElementById("main_information").style.opacity = 0.6;    //Decrease the opacity of top right main information label to 0.5 
+                        //Decrease the opacity of top right main information label to 0.5 
                     document.getElementById("hint").innerHTML = "Click on the building for more details";
+                    document.getElementById("information").style.height = "40%";
+                    document.getElementById("main_information").style.height = "75%";
+                    document.getElementById("hint").style.height = "7.5%";
+                    document.getElementById("controlLayout").style.height = "20%";
+                    document.getElementById("more_information").style.removeProperty('min-height');
+                    document.getElementById("more_information").style.padding = "0%";
+                    document.getElementById("more_information").style.marginTop = "0%";
+                    document.getElementById("more_information").style.margin = "0%";
+                    document.getElementById("label2").style.fontSize = "0vmin";
+                    document.getElementById("list2").style.fontSize = "0vmin";
                     cube.material.opacity = 0;
+                    document.getElementById("label3").style.backgroundColor = "#1A5276";
+                    showNavigator();
                     clicked = !clicked;                                                 //change the 'clicked' flag to 0
                 }else{                                                                  //If user hasn't clicked earlier
-                    document.getElementById("main_information").style.opacity = 1;    //Decrease the opacity of top right main information label to 0.5
+                        //Decrease the opacity of top right main information label to 0.5
                     document.getElementById("hint").innerHTML = "More details below ↓";
+                    document.getElementById("information").style.height = "60%";
+                    document.getElementById("main_information").style.height = "50%";
+                    document.getElementById("hint").style.height = "5%";
+                    document.getElementById("controlLayout").style.height = "60%";
+                    document.getElementById("more_information").style.minHeight = "50%";
+                    document.getElementById("more_information").style.padding = "5%";
+                    document.getElementById("more_information").style.marginTop = "2.5%";
+                    document.getElementById("more_information").style.margin = "1.5%";
+                    document.getElementById("label2").style.fontSize = "2.8vmin";
+                    document.getElementById("list2").style.fontSize = "2.15vmin";
                     cube.material.opacity = 0.3;
+                    document.getElementById("label3").style.backgroundColor = "#5F6A6A";
+                    hideNavigator();
                     clicked = !clicked;                                                 //change the 'clicked' flag to 1
                 }
             });
@@ -241,13 +302,29 @@
         }
 
 //Latter Panel movements
-        function hideNavigator(){
-            document.getElementById("latterPanel").height = "80%";
+        async function hideNavigator(){
+            for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+                    await sleep(20);                    //Sleep for 20 millieseconds
+                    document.getElementById("navigator").style.height = 93 - (i+1)*8.6 + "%";     //Dissappears the more information label
+                    document.getElementById("navigator").style.opacity = 0.9 - (i+1)*0.07;
+                    document.getElementById("main_information").style.opacity = 0.6 + (i+1)*0.04;
+                }
+            document.getElementById("searchBar").style.opacity = 0;
+        }
+        async function showNavigator(){
+            document.getElementById("searchBar").style.opacity = 1;
+            for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+                    await sleep(20);                    //Sleep for 20 millieseconds
+                    document.getElementById("navigator").style.height = 7 + (i+1)*8.6 + "%";     //Dissappears the more information label
+                    document.getElementById("navigator").style.opacity = 0.2 + (i+1)*0.07;
+                    document.getElementById("main_information").style.opacity = 1 - (i+1)*0.04;
+                }
         }
 
 //Camera Position
         async function changeView(){
             if(camera.position.x==0){
+                document.getElementById("viewButton").innerHTML = "First Person";
                 for(var i=0;i<10;i++){
                     await sleep(20);
                     camera.position.x=(i+1)*0.8;
@@ -255,7 +332,6 @@
                     
                 }
                 angle_y = Math.PI/8;
-                document.getElementById("viewButton").innerHTML = "First Person";
             }else{
                 document.getElementById("viewButton").innerHTML = "Third Person";
                 for(var i=0;i<10;i++){
@@ -264,7 +340,29 @@
                     camera.rotation.y = angle_y-(i+1)*(angle_y/10);
                 }
                 angle_y = 0;
-                document.getElementById("viewButton").innerHTML = "Third Person";
+            }
+        }
+
+//Corner Controls
+        function changeCorners(){
+            if(circleCorners==1){
+                circleCorners = 0;
+                document.getElementById("changeCorners").innerHTML = "Circle Corners";
+                document.getElementById("main_information").style.borderRadius = "0vmin";
+                document.getElementById("hint").style.borderRadius = "0vmin";
+                document.getElementById("more_information").style.borderRadius = "0vmin";
+                document.getElementById("navigator").style.borderRadius = "0vmin";
+                document.getElementById("changeCorners").style.borderRadius = "0vmin";
+                document.getElementById("viewButton").style.borderRadius = "0vmin";
+            }else{
+                circleCorners = 1;
+                document.getElementById("changeCorners").innerHTML = "Square Corners";
+                document.getElementById("main_information").style.borderRadius = "3.5vmin 3.5vmin 0vmin 0vmin";
+                document.getElementById("hint").style.borderRadius = "0vmin 0vmin 3.5vmin 3.5vmin";
+                document.getElementById("more_information").style.borderRadius = "3.5vmin";
+                document.getElementById("navigator").style.borderRadius = "3.5vmin 3.5vmin 0vmin 0vmin";
+                document.getElementById("changeCorners").style.borderRadius = "1.65vmin";
+                document.getElementById("viewButton").style.borderRadius = "1.65vmin";
             }
         }
 
@@ -353,8 +451,8 @@
         </div>
         <div id="hint" class="hint_class">Click on the building for more details</div>
         <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
-            <h3 id="label2">More information here</h3>          
-            <ul id="list2" style="list-style-type:square; font-size: 2.15vmin;">                                             <!--Top right more information list-->
+            <p2 id="label2" class="label2_class">More information here</p2>          
+            <ul id="list2" class="list2_class" style="list-style-type:square;">                                             <!--Top right more information list-->
                 <li>Welcome to Computer Engineering Department, University of Peradeniya.</li>
                 <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
                 <li>This is a 4 story building which has 4 labs and bla bla bla</li>
@@ -362,13 +460,21 @@
             <button id="moreButton" class="moreButton_class">More</button>
         </div>
     </div>
-    <div class="controlLayout" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    
     <div id="latterPanel" class="latterPanelClass">
-        <div id ="navigate" class="navigate_class">                         <!--Top right main information label-->
-            
+        <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
+            <div id="searchBar" class="searchBar">
+                <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
+                <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
+                  <svg style="width:3.4vmin;height:3.4vmin" viewBox="0 0 24 24"><path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                  </svg>
+                </button>
+            </div>
         </div>
-        <div style="font-size: 2.4vmin;" id="label3;" class="label3_class">Navigator</div>
+        <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
     </div>
+    <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
     <button class="viewButtonClass" id="viewButton" onclick="changeView()">Third Person</button>
 </body>
 </html>
