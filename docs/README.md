@@ -14,9 +14,9 @@ title: Interactive Department Map
 ---
 
 ## Team
--  e/18/327, M.D.C.D.Senevirathna, [e18327@pdn.ac.lk](mailto:name@email.com)
--  e/18/354, K.K.D.R.Tharaka, [e18354@pdn.ac.lk](mailto:name@email.com)
--  e/18/318, S.A.P.Sandunika, [e18318@pdn.ac.lk](mailto:name@email.com)
+-  e/18/327, M.D.C.D.Senevirathna, [e18327@eng.pdn.ac.lk](mailto:name@email.com)
+-  e/18/354, K.K.D.R.Tharaka, [e18354@eng.pdn.ac.lk](mailto:name@email.com)
+-  e/18/318, S.A.P.Sandunika, [e18318@eng.pdn.ac.lk](mailto:name@email.com)
 
 ## Table of Contents
 1. [Introduction](#introduction)
