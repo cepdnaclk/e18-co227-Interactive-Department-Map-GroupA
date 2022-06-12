@@ -85,6 +85,7 @@ body {
     height: 98%;
     width: 19.5%;
     opacity: 0.2;
+    padding-left: 0.2%;
     background-color: black;
 }
 
@@ -115,6 +116,7 @@ body {
 .searchBar {
     width: 101%;
     margin-top: 3.5%;
+    margin-bottom: 2%;
     height: 10%;
     display: flex;
     flex-direction: row;
@@ -198,6 +200,14 @@ body {
 
 .viewButtonClass:active {
     transform: translateY(0.27vmin);
+}
+
+.glass{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 

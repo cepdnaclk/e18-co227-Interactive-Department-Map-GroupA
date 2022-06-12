@@ -51,7 +51,7 @@
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
         var circleCorners = 1;
-
+        var out = 0;
 
 //Database
         //This database is used to load the information about the buildings
@@ -109,47 +109,48 @@
 
 //Mouse Event Listeners
         const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
-
         function addMouseEvents(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
             domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
-                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
-                        //Decrease the opacity of top right main information label to 0.5 
-                    document.getElementById("hint").innerHTML = "Click on the building for more details";
-                    document.getElementById("information").style.height = "40%";
-                    document.getElementById("main_information").style.height = "75%";
-                    document.getElementById("hint").style.height = "7.5%";
-                    document.getElementById("controlLayout").style.height = "20%";
-                    document.getElementById("more_information").style.removeProperty('min-height');
-                    document.getElementById("more_information").style.padding = "0%";
-                    document.getElementById("more_information").style.marginTop = "0%";
-                    document.getElementById("more_information").style.margin = "0%";
-                    document.getElementById("label2").style.fontSize = "0vmin";
-                    document.getElementById("list2").style.fontSize = "0vmin";
-                    cube.material.opacity = 0;
-                    document.getElementById("label3").style.backgroundColor = "#1A5276";
-                    showNavigator();
-                    clicked = !clicked;                                                 //change the 'clicked' flag to 0
-                }else{                                                                  //If user hasn't clicked earlier
-                        //Decrease the opacity of top right main information label to 0.5
-                    document.getElementById("hint").innerHTML = "More details below ↓";
-                    document.getElementById("information").style.height = "60%";
-                    document.getElementById("main_information").style.height = "50%";
-                    document.getElementById("hint").style.height = "5%";
-                    document.getElementById("controlLayout").style.height = "60%";
-                    document.getElementById("more_information").style.minHeight = "50%";
-                    document.getElementById("more_information").style.padding = "5%";
-                    document.getElementById("more_information").style.marginTop = "2.5%";
-                    document.getElementById("more_information").style.margin = "1.5%";
-                    document.getElementById("label2").style.fontSize = "2.8vmin";
-                    document.getElementById("list2").style.fontSize = "2.15vmin";
-                    cube.material.opacity = 0.3;
-                    document.getElementById("label3").style.backgroundColor = "#5F6A6A";
-                    hideNavigator();
-                    clicked = !clicked;                                                 //change the 'clicked' flag to 1
+                if(out==0){
+                    if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                            //Decrease the opacity of top right main information label to 0.5 
+                        document.getElementById("hint").innerHTML = "Click on the building for more details";
+                        document.getElementById("information").style.height = "40%";
+                        document.getElementById("main_information").style.height = "75%";
+                        document.getElementById("hint").style.height = "7.5%";
+                        document.getElementById("controlLayout").style.height = "20%";
+                        document.getElementById("more_information").style.removeProperty('min-height');
+                        document.getElementById("more_information").style.padding = "0%";
+                        document.getElementById("more_information").style.marginTop = "0%";
+                        document.getElementById("more_information").style.margin = "0%";
+                        document.getElementById("label2").style.fontSize = "0vmin";
+                        document.getElementById("list2").style.fontSize = "0vmin";
+                        cube.material.opacity = 0;
+                        document.getElementById("label3").style.backgroundColor = "#1A5276";
+                        showNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                    }else{                                                                  //If user hasn't clicked earlier
+                            //Decrease the opacity of top right main information label to 0.5
+                        document.getElementById("hint").innerHTML = "More details below ↓";
+                        document.getElementById("information").style.height = "60%";
+                        document.getElementById("main_information").style.height = "50%";
+                        document.getElementById("hint").style.height = "5%";
+                        document.getElementById("controlLayout").style.height = "80%";
+                        document.getElementById("more_information").style.minHeight = "50%";
+                        document.getElementById("more_information").style.padding = "5%";
+                        document.getElementById("more_information").style.marginTop = "2.5%";
+                        document.getElementById("more_information").style.margin = "1.5%";
+                        document.getElementById("label2").style.fontSize = "2.8vmin";
+                        document.getElementById("list2").style.fontSize = "2.15vmin";
+                        cube.material.opacity = 0.3;
+                        document.getElementById("label3").style.backgroundColor = "#5F6A6A";
+                        hideNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 1
+                    }
                 }
             });
             domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
-                if(clicked==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                if(clicked==0 && out==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.2;
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
@@ -157,14 +158,15 @@
                 }
             });    
             domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
-                if(clicked==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                if(clicked==0 && out==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0;
                     document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[0][1];
                     document.getElementById("list2").innerHTML = departmentDatabase[0][2];
                 }
-            });    
+            }); 
         }
+    
 
 
 //Import Blender Objects
@@ -391,6 +393,12 @@
             }
         }
 
+        function nowin(){
+            out = 0;
+        }
+        function nowout(){
+            out = 1;
+        }
 
 //Rendering
         var animate = function(){
@@ -439,6 +447,7 @@
 
     </script>
 
+    <div id="glass" class="glass" onmouseover="nowin()" onmouseleave="nowout()"></div>
     <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="information" class="information_class" >                    
         <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
@@ -476,5 +485,6 @@
     <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
     <button class="viewButtonClass" id="viewButton" onclick="changeView()">Third Person</button>
+
 </body>
 </html>
