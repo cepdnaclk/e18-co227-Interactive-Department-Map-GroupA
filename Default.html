@@ -125,7 +125,7 @@
                         document.getElementById("more_information").style.margin = "0%";
                         document.getElementById("label2").style.fontSize = "0vmin";
                         document.getElementById("list2").style.fontSize = "0vmin";
-                        cube.material.opacity = 0.3;
+                        cube.material.opacity = 0.6;
                         document.getElementById("label3").style.backgroundColor = "#1A5276";
                         showNavigator();
                         clicked = !clicked;                                                 //change the 'clicked' flag to 0
@@ -142,7 +142,7 @@
                         document.getElementById("more_information").style.margin = "1.5%";
                         document.getElementById("label2").style.fontSize = "2.8vmin";
                         document.getElementById("list2").style.fontSize = "2.15vmin";
-                        cube.material.opacity = 0.7;
+                        cube.material.opacity = 0.9;
                         document.getElementById("label3").style.backgroundColor = "#5F6A6A";
                         hideNavigator();
                         clicked = !clicked;                                                 //change the 'clicked' flag to 1
@@ -151,7 +151,7 @@
             });
             domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
                 if(clicked==0 && out==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    cube.material.opacity = 0.5;
+                    cube.material.opacity = 0.8;
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
                     document.getElementById("list2").innerHTML = departmentDatabase[buildingID][2];
@@ -159,7 +159,7 @@
             });    
             domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
                 if(clicked==0 && out==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    cube.material.opacity = 0.3;
+                    cube.material.opacity = 0.6;
                     document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[0][1];
                     document.getElementById("list2").innerHTML = departmentDatabase[0][2];
@@ -187,12 +187,12 @@
             });
             return blenderBuilding;
         }
-
+        
 
 //Creating Transparent Objects
         var transparentMaterialArray = [];
         for(var i=0;i<7;i++){
-            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.3});
+            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
         }
         function createTransparentObject(buildingID,x,y,z,xPosition,yPosition,zPosition){
             var geometry = new THREE.BoxGeometry(x,y,z);
@@ -408,7 +408,7 @@
             requestAnimationFrame(animate);
         };
 
-
+        
         //Load the blender 3D objects by using the created function above
         // var blenderBuilding1 = importObject('./blender-objects/blue1.gltf',2,6,-14,Math.PI/2);        //Blue
         // var blenderBuilding2 = importObject('./blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);    //Yellow
@@ -418,12 +418,14 @@
         //var blenderBuilding6 = importObject('./blender-objects/pink6.gltf',-5,0,-80,0.5,-Math.PI/2);      //Pink
         // var blenderBuilding7 = importObject('./blender-objects/floor.gltf',-3.6,0,-18,-Math.PI/2);    //Floor
         // var blenderBuilding8 = importObject('./blender-objects/wall2.gltf',-4,13,-60,0);    //wall
+
+        //var blenderBuilding9 = importObject('./without-door-panels/without-door-panels.gltf',-5,0,-80,0,3.28084);    //wall
         var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
 
 
         //Creating transparent objects by using the created function above
-        var cube1 = createTransparentObject(1,6.5617,2.6247,0.2,-1.72,-17.35,-41);
-        var cube2 = createTransparentObject(2,6.5617,2.6247,0.2,-1.72,-17.35,-40.78);
+        var cube1 = createTransparentObject(1,6.5617,2.6247,0.2,-1.72,-17.35,-40.4);
+        var cube2 = createTransparentObject(2,6.5617,2.6247,0.2,-1.72,-17.35,-40.18);
 
         var cube3 = createTransparentObject(3,6.5617,2.6247,0.2,-1.72,-8.4,-58);
         var cube4 = createTransparentObject(4,6.5617,2.6247,0.2,-1.72,-8.4,-57.78);
