@@ -80,12 +80,11 @@ body {
  
 .controlLayoutColoured{
     position: absolute;
-    top: 1%;
+    top: 1.1%;
     right: 0.5%;
-    height: 98%;
+    height: 97.8%;
     width: 19.5%;
     opacity: 0.2;
-    padding-left: 0.2%;
     background-color: black;
 }
 
@@ -210,4 +209,15 @@ body {
     left: 0;
 }
 
-
+.name{
+    position: absolute;
+    left: 0.5%;
+    top: 1.1%;
+    padding-top: 0.2%;
+    border-radius: 0 0 1vmin ; 
+    width: 3%;
+    height: 3%;
+    text-align: center;
+    background-color: red;
+    color: white;
+}
