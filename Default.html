@@ -125,7 +125,7 @@
                         document.getElementById("more_information").style.margin = "0%";
                         document.getElementById("label2").style.fontSize = "0vmin";
                         document.getElementById("list2").style.fontSize = "0vmin";
-                        cube.material.opacity = 0;
+                        cube.material.opacity = 0.3;
                         document.getElementById("label3").style.backgroundColor = "#1A5276";
                         showNavigator();
                         clicked = !clicked;                                                 //change the 'clicked' flag to 0
@@ -142,7 +142,7 @@
                         document.getElementById("more_information").style.margin = "1.5%";
                         document.getElementById("label2").style.fontSize = "2.8vmin";
                         document.getElementById("list2").style.fontSize = "2.15vmin";
-                        cube.material.opacity = 0.3;
+                        cube.material.opacity = 0.7;
                         document.getElementById("label3").style.backgroundColor = "#5F6A6A";
                         hideNavigator();
                         clicked = !clicked;                                                 //change the 'clicked' flag to 1
@@ -151,7 +151,7 @@
             });
             domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
                 if(clicked==0 && out==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    cube.material.opacity = 0.2;
+                    cube.material.opacity = 0.5;
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
                     document.getElementById("list2").innerHTML = departmentDatabase[buildingID][2];
@@ -159,7 +159,7 @@
             });    
             domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
                 if(clicked==0 && out==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    cube.material.opacity = 0;
+                    cube.material.opacity = 0.3;
                     document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[0][1];
                     document.getElementById("list2").innerHTML = departmentDatabase[0][2];
@@ -192,7 +192,7 @@
 //Creating Transparent Objects
         var transparentMaterialArray = [];
         for(var i=0;i<7;i++){
-            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0});
+            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.3});
         }
         function createTransparentObject(buildingID,x,y,z,xPosition,yPosition,zPosition){
             var geometry = new THREE.BoxGeometry(x,y,z);
@@ -422,7 +422,14 @@
 
 
         //Creating transparent objects by using the created function above
-        // var cube1 = createTransparentObject(1,10.2,4.2,8.2,2,6,-14);        //Blue
+        var cube1 = createTransparentObject(1,6.5617,2.6247,0.2,-1.72,-17.35,-41);
+        var cube2 = createTransparentObject(2,6.5617,2.6247,0.2,-1.72,-17.35,-40.78);
+
+        var cube3 = createTransparentObject(3,6.5617,2.6247,0.2,-1.72,-8.4,-58);
+        var cube4 = createTransparentObject(4,6.5617,2.6247,0.2,-1.72,-8.4,-57.78);
+
+        var cube5 = createTransparentObject(5,6.5617,0.2,2.6247,-1.72,-21.2,-51.5);
+        var cube6 = createTransparentObject(6,6.5617,0.2,2.6247,-1.72,-20.95,-51.5);
         // var cube2 = createTransparentObject(2,8.2,4.2,6.2,1,-6,-13);        //Yellow
         // var cube3 = createTransparentObject(3,10.2,4.2,6.2,2,-6,-19.1);     //Red
         // var cube4 = createTransparentObject(4,10.2,4.2,6.2,2,6,-24);        //Green
