@@ -72,7 +72,7 @@
         //Scene
         var scene = new THREE.Scene();
         //Camera
-        var camera = new THREE.PerspectiveCamera(100,window.innerWidth/window.innerHeight);
+        var camera = new THREE.PerspectiveCamera(85,window.innerWidth/(window.innerHeight*1.5));
         //Renderer
         var renderer = new THREE.WebGLRenderer({antilias:true});
         renderer.setSize(window.innerWidth*0.991,window.innerHeight*0.978);      
@@ -104,7 +104,7 @@
         let skybox = new THREE.Mesh(skyboxGeo, materialArray);
         scene.add(skybox);
         skybox.rotation.z -= Math.PI/2;         //Set the position of the cube
-        skybox.position.set(121,0,0);
+        skybox.position.set(119,0,0);
 
 
 //Mouse Event Listeners
@@ -208,17 +208,18 @@
 
 
 //Set Lights
-        let light1,light2,light3,light4,light5,light6,light7,light8,light9,light10;                                      //Initialize a light
-        function setDirectionalLight(lightId,X,Y,Z) {                           //This function set the light
-            lightId = new THREE.DirectionalLight(0xffffff,1); //Soft white light
+        function setDirectionalLight(X,Y,Z) {                           //This function set the light
+            var lightId = new THREE.DirectionalLight(0xffffff,0.2); //Soft white light
             scene.add(lightId);                           //Add light to the scene
             lightId.position.set(X,Y,Z);
+            return lightId;
         }
 
-        function setPointLight(lightId,X,Y,Z) {                           //This function set the light
-            lightId = new THREE.PointLight(0xffffff,0.3); //Soft white light
+        function setPointLight(X,Y,Z) {                           //This function set the light
+            var lightId = new THREE.PointLight(0xffffff,0.2); //Soft white light
             scene.add(lightId);                           //Add light to the scene
             lightId.position.set(X,Y,Z);
+            return lightId;
         }
 
 
@@ -258,15 +259,15 @@
         async function forward(){           //This function brings the camera to back by unit amount
             for(var i =0;i<10;i++){         //Used a loop for smooth movements
                 await sleep(20);                                    //Sleep for 20 millieseconds
-                camera.position.y += 2*(Math.sin(angle_x)/10);      //Change the position of camera on y axis towards the facing direction
-                camera.position.z -= 2*(Math.cos(angle_x)/10);      //Change the position of camera on z axis towards the facing direction
+                camera.position.y += 2*(Math.sin(angle_x)/20);      //Change the position of camera on y axis towards the facing direction
+                camera.position.z -= 2*(Math.cos(angle_x)/20);      //Change the position of camera on z axis towards the facing direction
             }
         }
         async function backward(){          //This function brings the camera to front by unit amount
             for(var i =0;i<10;i++){         //Used a loop for smooth movements
                 await sleep(20);                                    //Sleep for 20 millieseconds
-                camera.position.y -= (Math.sin(angle_x)/10);        //Change the position of camera on y axis towards the facing direction
-                camera.position.z += (Math.cos(angle_x)/10);        //Change the position of camera on z axis towards the facing direction
+                camera.position.y -= (Math.sin(angle_x)/20);        //Change the position of camera on y axis towards the facing direction
+                camera.position.z += (Math.cos(angle_x)/20);        //Change the position of camera on z axis towards the facing direction
             }
         }
 
@@ -329,7 +330,7 @@
                 document.getElementById("viewButton").innerHTML = "First Person";
                 for(var i=0;i<10;i++){
                     await sleep(20);
-                    camera.position.x=(i+1)*0.8;
+                    camera.position.x=(i+1)*2;
                     camera.rotation.y = angle_y-(i+1)*((angle_y-Math.PI/8)/10);
                     
                 }
@@ -338,7 +339,7 @@
                 document.getElementById("viewButton").innerHTML = "Third Person";
                 for(var i=0;i<10;i++){
                     await sleep(20);
-                    camera.position.x=8-((i+1)*0.8);
+                    camera.position.x=20-((i+1)*2);    //8
                     camera.rotation.y = angle_y-(i+1)*(angle_y/10);
                 }
                 angle_y = 0;
@@ -414,10 +415,10 @@
         // var blenderBuilding3 = importObject('./blender-objects/red3.gltf',2,-6,-19.1,-Math.PI/2);     //Red
         // var blenderBuilding4 = importObject('./blender-objects/green4.gltf',2,6,-24,Math.PI/2);       //Green
         // var blenderBuilding5 = importObject('./blender-objects/orange5.gltf',0,1.9,-26,Math.PI/2);    //Orange
-        // var blenderBuilding6 = importObject('./blender-objects/pink6.gltf',1,-6,-26,-Math.PI/2);      //Pink
+        //var blenderBuilding6 = importObject('./blender-objects/pink6.gltf',-5,0,-80,0.5,-Math.PI/2);      //Pink
         // var blenderBuilding7 = importObject('./blender-objects/floor.gltf',-3.6,0,-18,-Math.PI/2);    //Floor
         // var blenderBuilding8 = importObject('./blender-objects/wall2.gltf',-4,13,-60,0);    //wall
-        var blenderBuilding9 = importObject('./blender-objects/ground-floor.gltf',-3.8,13,-80,0,3.28084);    //wall
+        var blenderBuilding9 = importObject('./blender-objects/ground-floor.gltf',-5,0,-80,0,3.28084);    //wall
 
 
         //Creating transparent objects by using the created function above
@@ -429,17 +430,35 @@
         // var cube6 = createTransparentObject(6,8.2,4.2,2.2,1,-6,-26);        //Pink
      
         //Set lights by using the created function above
-        setPointLight(light5,6,6,-14);      //Blue
-        setPointLight(light6,4,-6,-13);     //Yellow
-        setPointLight(light7,6,-6,-19);     //Red
-        setPointLight(light8,6,6,-24);      //Green
-        setPointLight(light9,2,2,-26);      //Orange
-        setPointLight(light10,4,-6,-26);    //Pink
 
-        setDirectionalLight(light1,0,0,14);                                     //Use the function to set the light
-        setDirectionalLight(light2,0,50,-30);
-        setDirectionalLight(light3,20,-30,-10);
-        setDirectionalLight(light4,20,30,-10);
+        var light1 = setPointLight(3,-5,-12.5);      //Blue
+        var light2 = setPointLight(3,-11.5,-16);     //Yellow
+        var light3 = setPointLight(3,-15.5,-23);     //Red
+        var light4 = setPointLight(3,-17,-16);
+        var light5 = setPointLight(3,-22.5,-25);
+        var light6 = setPointLight(3,-26,-17);
+        var light7 = setPointLight(3,-26,-33);
+        var light8 = setPointLight(3,-5,-22.5);
+        var light9 = setPointLight(3,-10.5,-32.5);
+        var light10 = setPointLight(3,-26,-47.5);
+        var light11 = setPointLight(3,-14,-47.5);
+        var light11 = setPointLight(3,-21,-59);
+        var light12 = setPointLight(3,-6,-73);
+        var light13 = setPointLight(3,-15,-73);
+        var light14 = setPointLight(3,-25,-74);
+        
+
+        const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
+        scene.add( lightt );
+
+        //setPointLight(light8,1.5,6,-24);      //Green
+        //setPointLight(light9,1.5,2,-26);      //Orange
+        //setPointLight(light10,1.5,-6,-26);    //Pink
+
+        //var lightD1 = setDirectionalLight(20,-10,-40);                                     //Use the function to set the light
+        //setDirectionalLight(light2,0,50,-30);
+        //setDirectionalLight(light3,20,-30,-10);
+        //setDirectionalLight(light4,20,30,-10);
 
         camera.position.x = 0;              //Set the camera elevation (default value is 0)
         camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
