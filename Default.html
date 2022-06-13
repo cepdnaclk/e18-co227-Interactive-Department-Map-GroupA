@@ -72,7 +72,7 @@
         //Scene
         var scene = new THREE.Scene();
         //Camera
-        var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight);
+        var camera = new THREE.PerspectiveCamera(100,window.innerWidth/window.innerHeight);
         //Renderer
         var renderer = new THREE.WebGLRenderer({antilias:true});
         renderer.setSize(window.innerWidth*0.991,window.innerHeight*0.978);      
@@ -172,11 +172,11 @@
 //Import Blender Objects
         let buildingloader = new THREE.GLTFLoader();    //Create a loader to load the objects
 
-        function importObject(location,xValue,yValue,zValue,xrotatevalue){   //This function imports the blender object, sets the position, angle and adds to the scene
+        function importObject(location,xValue,yValue,zValue,xrotatevalue,scale=1){   //This function imports the blender object, sets the position, angle and adds to the scene
             var blenderBuilding;
             buildingloader.load(location,(gltf) => {
                 blenderBuilding = gltf.scene;
-                blenderBuilding.scale.set(1,1,1);                                            //Set the scale of the object
+                blenderBuilding.scale.set(scale,scale,scale);                                            //Set the scale of the object
                 scene.add(blenderBuilding);                                                  //Add to the scene
                 blenderBuilding.position.x = xValue;                                         //Set the position
                 blenderBuilding.position.y = yValue;
@@ -409,23 +409,24 @@
 
 
         //Load the blender 3D objects by using the created function above
-        var blenderBuilding1 = importObject('./blender-objects/blue1.gltf',2,6,-14,Math.PI/2);        //Blue
-        var blenderBuilding2 = importObject('./blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);    //Yellow
-        var blenderBuilding3 = importObject('./blender-objects/red3.gltf',2,-6,-19.1,-Math.PI/2);     //Red
-        var blenderBuilding4 = importObject('./blender-objects/green4.gltf',2,6,-24,Math.PI/2);       //Green
-        var blenderBuilding5 = importObject('./blender-objects/orange5.gltf',0,1.9,-26,Math.PI/2);    //Orange
-        var blenderBuilding6 = importObject('./blender-objects/pink6.gltf',1,-6,-26,-Math.PI/2);      //Pink
-        var blenderBuilding7 = importObject('./blender-objects/floor.gltf',-3.6,0,-18,-Math.PI/2);    //Floor
-        var blenderBuilding8 = importObject('./blender-objects/wall2.gltf',-4,13,-60,0);    //wall
+        // var blenderBuilding1 = importObject('./blender-objects/blue1.gltf',2,6,-14,Math.PI/2);        //Blue
+        // var blenderBuilding2 = importObject('./blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);    //Yellow
+        // var blenderBuilding3 = importObject('./blender-objects/red3.gltf',2,-6,-19.1,-Math.PI/2);     //Red
+        // var blenderBuilding4 = importObject('./blender-objects/green4.gltf',2,6,-24,Math.PI/2);       //Green
+        // var blenderBuilding5 = importObject('./blender-objects/orange5.gltf',0,1.9,-26,Math.PI/2);    //Orange
+        // var blenderBuilding6 = importObject('./blender-objects/pink6.gltf',1,-6,-26,-Math.PI/2);      //Pink
+        // var blenderBuilding7 = importObject('./blender-objects/floor.gltf',-3.6,0,-18,-Math.PI/2);    //Floor
+        // var blenderBuilding8 = importObject('./blender-objects/wall2.gltf',-4,13,-60,0);    //wall
+        var blenderBuilding9 = importObject('./blender-objects/ground-floor.gltf',-3.8,13,-80,0,3.28084);    //wall
 
 
         //Creating transparent objects by using the created function above
-        var cube1 = createTransparentObject(1,10.2,4.2,8.2,2,6,-14);        //Blue
-        var cube2 = createTransparentObject(2,8.2,4.2,6.2,1,-6,-13);        //Yellow
-        var cube3 = createTransparentObject(3,10.2,4.2,6.2,2,-6,-19.1);     //Red
-        var cube4 = createTransparentObject(4,10.2,4.2,6.2,2,6,-24);        //Green
-        var cube5 = createTransparentObject(5,6.2,4.2,2.2,0,1.9,-26);       //Orange
-        var cube6 = createTransparentObject(6,8.2,4.2,2.2,1,-6,-26);        //Pink
+        // var cube1 = createTransparentObject(1,10.2,4.2,8.2,2,6,-14);        //Blue
+        // var cube2 = createTransparentObject(2,8.2,4.2,6.2,1,-6,-13);        //Yellow
+        // var cube3 = createTransparentObject(3,10.2,4.2,6.2,2,-6,-19.1);     //Red
+        // var cube4 = createTransparentObject(4,10.2,4.2,6.2,2,6,-24);        //Green
+        // var cube5 = createTransparentObject(5,6.2,4.2,2.2,0,1.9,-26);       //Orange
+        // var cube6 = createTransparentObject(6,8.2,4.2,2.2,1,-6,-26);        //Pink
      
         //Set lights by using the created function above
         setPointLight(light5,6,6,-14);      //Blue
