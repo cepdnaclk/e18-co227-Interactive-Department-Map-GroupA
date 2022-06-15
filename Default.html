@@ -53,6 +53,7 @@
         var circleCorners = 1;
         var out = 0;
         var X = 0.52,Y=0.7,R=0.9,S=0.08;
+        var Floor = 0;
 
 //Database
         //This database is used to load the information about the buildings
@@ -60,14 +61,30 @@
         
         //Data of a particular room can be added to the database as an array
         var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
-        var building1 = ["Building 1","<li>blue colour</li><li>height-10m</li><li>Dr. Namal</li>","<li>This is a blue colour building</li><li>Height of this builing is 10m.</li><li>This building belongs to Dr. Namal</li><li>His mobiile number is 012545466</li>"];
-        var building2 = ["Building 2","<li>yellow colour</li><li>height-8m</li><li>Dr. Kelum</li>","<li>This is a yellow colour building</li><li>Height of this builing is 8m.</li><li>This building belongs to Dr. Kelum</li><li>His mobiile number is 064664646</li>"];
-        var building3 = ["Building 3","<li>red colour</li><li>height-10m</li><li>Dr. Amal</li>","<li>This is a red colour building</li><li>Height of this builing is 10m.</li><li>This building belongs to Dr. Amal</li><li>His mobiile number is 46461331136</li>"];
-        var building4 = ["Building 4","<li>green colour</li><li>height-10m</li><li>Dr. Chamindu</li>","<li>This is a green colour building</li><li>Height of this builing is 10m.</li><li>This building belongs to Dr. Chamindu</li><li>His mobiile number is 0164643</li>"];
-        var building5 = ["Building 5","<li>orange colour</li><li>height-6m</li><li>Dr. Sujeewa</li>","<li>This is a orange colour building</li><li>Height of this builing is 6m.</li><li>This building belongs to Dr. Sujeewa</li><li>His mobiile number is 012540313</li>"];
-        var building6 = ["Building 6","<li>pink colour</li><li>height-8m</li><li>Dr. Thamindu</li>","<li>This is a pink colour building</li><li>Height of this builing is 8m.</li><li>This building belongs to Dr. Thamindu</li><li>His mobiile number is 012986133032</li><li>This is a pink colour building</li><li>Height of this builing is 8m.</li><li>This building belongs to Dr. Thamindu</li><li>His mobiile number is 012986133032</li>"];
+        var building1 = ["Department Office","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building2 = ["HOD's Office","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building3 = ["Conference Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building4 = ["Central Lobby","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building5 = ["Filling Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building6 = ["Staff Common Room 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building7 = ["Staff Common Room 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building8 = ["Open Lab 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building9 = ["Open Lab 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building10 = ["Gents Washrooms","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building11 = ["Ladies Washroom","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building12 = ["ACES Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building13 = ["Mens Washroom 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building14 = ["Mens Washroom 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building15 = ["Ladies Washroom 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building16 = ["Ladies Washroom 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building17 = ["Garden","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building18 = ["Corridor 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building19 = ["Corridor 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building20 = ["Lift","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building21 = ["Servant Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building22 = ["Entrance Lobby","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
 
-        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6];
+        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14,building15,building16,building17,building18,building19,building20,building21,building22];
         
 
         //Scene
@@ -193,15 +210,21 @@
 
 //Creating Transparent Objects
         var transparentMaterialArray = [];
-        for(var i=0;i<7;i++){
+        for(var i=0;i<23;i++){
             transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
         }
-        function createTransparentObject(buildingID,x,y,z,xPosition,yPosition,zPosition){
-            var geometry = new THREE.BoxGeometry(x,y,z);
+        function createTransparentObject(buildingID,horv,yPosition,zPosition){
+            if(horv=="h"){
+                var geometry = new THREE.BoxGeometry(6.5617,2.6247,0.2);
+            }else if(horv=="v"){
+                var geometry = new THREE.BoxGeometry(6.5617,0.2,2.6247);
+            }else if(horv=="th"){
+                var geometry = new THREE.BoxGeometry(6.5617,1.1,0.2);
+            }
             var material = transparentMaterialArray[buildingID]
             var cube = new THREE.Mesh(geometry,material);
             scene.add(cube);
-            cube.position.x = xPosition;
+            cube.position.x = -1.72;
             cube.position.y = yPosition;
             cube.position.z = zPosition;
             addMouseEvents(cube,buildingID);
@@ -400,7 +423,6 @@
             }
         }
 
-//Changed
 //Key Controls
         document.onkeydown = function(event){   //Set event listeners for key presses
             switch (event.keyCode){
@@ -422,6 +444,9 @@
                 case 65:    //Letter a
                     turndown();
                     break;
+                case 87:    //Letter w
+                    changeView();
+                    break;
             }
         }
 
@@ -438,74 +463,6 @@
             cubeBB.setFromObject(cube);
             return cubeBB;
         }
-
-        function nowin(){
-            out = 0;
-        }
-        function nowout(){
-            out = 1;
-        } 
-
-        //var blenderBuilding9 = importObject('./without-door-panels/without-door-panels.gltf',-5,0,-80,0,3.28084);    //wall
-        var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
-
-
-        //Creating transparent objects by using the created function above
-        var cube1 = createTransparentObject(1,6.5617,2.6247,0.2,-1.72,-17.35,-40.4);
-        var cube2 = createTransparentObject(2,6.5617,2.6247,0.2,-1.72,-17.35,-40.18);
-
-        var cube3 = createTransparentObject(3,6.5617,2.6247,0.2,-1.72,-8.4,-58);
-        var cube4 = createTransparentObject(4,6.5617,2.6247,0.2,-1.72,-8.4,-57.78);
-
-        var cube5 = createTransparentObject(5,6.5617,0.2,2.6247,-1.72,-21.2,-51.5);
-        var cube6 = createTransparentObject(6,6.5617,0.2,2.6247,-1.72,-20.95,-51.5);
-
-
-
-        var cubeV1BB = createWall(Y,70,-0.2,-45);
-        var cubeV2BB = createWall(Y,70,-30.8,-45);
-        var cubeV3BB = createWall(Y,2,-22,-67);
-        var cubeV4BB = createWall(Y,2,-19.2,-66.8);
-        var cubeV5BB = createWall(Y,9,-19.2,-75.5);
-        var cubeV6BB = createWall(Y,9.8,-11.2,-75.2);
-        var cubeV7BB = createWall(Y,3.4,-11.2,-65.25);
-        var cubeV8BB = createWall(Y,5.3,-11.2,-57.6);
-        var cubeV9BB = createWall(Y,8.6,-6.1,-61.7);
-        var cubeV10BB = createWall(Y,1.6,-21.1,-54); 
-        var cubeV11BB = createWall(Y,21,-21.1,-39.5);
-        var cubeV12BB = createWall(Y,2.1,-21.1,-25);
-        var cubeV13BB = createWall(Y,10.8,-21.1,-15.4);
-        var cubeV14BB = createWall(Y,11,-26,-25.2);
-        var cubeV15BB = createWall(Y,1,-12.9,-19.8);
-        var cubeV16BB = createWall(Y,5.5,-12.9,-13.2);
-        var cubeV17BB = createWall(Y,0.8,-9.8,-10.3);
-        var cubeV18BB = createWall(Y,11.3,-9.8,-19.75);
-        var cubeV19BB = createWall(Y,10.5,-4.9,-20);
-        var cubeV20BB = createWall(Y,5,-2.45,-17.5);
-        var cubeV21BB = createWall(Y,5,-7.45,-17.5);
-
-        var cubeH1BB = createWall(1,Y,-0.5,-10.2);
-        var cubeH2BB = createWall(27,Y,-17.5,-10.2);
-        var cubeH3BB = createWall(15.7,Y,-7.85,-40.2);
-        var cubeH4BB = createWall(12,Y,-25,-40.2);
-        var cubeH5BB = createWall(1,Y,-0.5,-25.1);
-        var cubeH6BB = createWall(1.6,Y,-4.95,-25.1);
-        var cubeH7BB = createWall(6,Y,-11.85,-25.1);
-        var cubeH8BB = createWall(2.8,Y,-19.5,-25.1);
-        var cubeH9BB = createWall(5,Y,-28.5,-25.4);
-        var cubeH10BB = createWall(10,Y,-5,-14.9);
-        var cubeH11BB = createWall(9.4,Y,-17.5,-20);
-        var cubeH12BB = createWall(1,Y,-21.5,-30.4);
-        var cubeH13BB = createWall(20,Y,-21,-55.1);
-        var cubeH14BB = createWall(1,Y,-0.5,-57.8);
-        var cubeH15BB = createWall(2.5,Y,-5.6,-57.8);
-        var cubeH16BB = createWall(1,Y,-10.5,-57.8);
-        var cubeH17BB = createWall(11,Y,-16.5,-65.8);
-        var cubeH18BB = createWall(6,Y,-3,-65.1);
-        var cubeH19BB = createWall(6.5,Y,-3.25,-70.2);
-        var cubeH20BB = createWall(4,Y,-29,-67.9);
-        var cubeH21BB = createWall(1.6,Y,-22.8,-67.9);
-        var cubeH22BB = createWall(31,Y,-15.5,-79.8);
 
         //Front cube
         var frontCameraBall = new THREE.Mesh(
@@ -531,6 +488,183 @@
         let backballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
         backballBB.setFromObject(backCameraBall);
 
+
+        function checkfrontIntersection(){
+            var sum=0;
+            for(var i=0;i<43;i++){
+                if(frontballBB.intersectsBox(transparentWallsList[i])){
+                    return 1;
+                } 
+            }
+            return 0;
+        }
+        function checkbackIntersection(){
+            var sum=0;
+            for(var i=0;i<43;i++){
+                if(backballBB.intersectsBox(transparentWallsList[i])){
+                    return 1;
+                } 
+            }
+            return 0;
+        }
+
+        function checkCollision(){
+            if(checkfrontIntersection()){
+                okToGoFront = 0;
+            }else{
+                okToGoFront = 1;
+            }
+            if(checkbackIntersection()){
+                okToGoBack = 0;
+            }else{
+                okToGoBack = 1;
+            }
+        }
+
+        function nowin(){
+            out = 0;
+        }
+        function nowout(){
+            out = 1;
+        } 
+
+        camera.position.x = 0;              //Set the camera elevation (default value is 0)
+        camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
+
+//Rendering
+        var animate = function(){
+            
+            frontballBB.copy(frontCameraBall.geometry.boundingBox).applyMatrix4(frontCameraBall.matrixWorld);
+            backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);
+            if(camera.position.x==0){
+                checkCollision();
+            }
+            renderer.render(scene,camera);
+            requestAnimationFrame(animate);
+        };
+
+
+        //var blenderBuilding9 = importObject('./without-door-panels/without-door-panels.gltf',-5,0,-80,0,3.28084);    //wall
+
+        var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
+        //var blenderBuilding9 = importObject('./Floor2/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    //wall
+
+
+        //Creating transparent objects by using the created function above
+        var G00_door1 = createTransparentObject(22,"v",-5.9,-67.7);
+        var G00_door2 = createTransparentObject(22,"h",-8.45,-57.78);
+        var G00_door3 = createTransparentObject(22,"v",-11.6,-61.8);
+        var G00_door4 = createTransparentObject(22,"v",-11.6,-68.6);
+        
+        var G01_door1 = createTransparentObject(1,"v",-11.38,-68.6);
+        var G01_door2 = createTransparentObject(1,"v",-19.4,-69.45);
+
+        var G02_door1 = createTransparentObject(2,"v",-19.18,-69.45);
+        var G02_door2 = createTransparentObject(2,"h",-25.35,-68);
+
+        var G03_door1 = createTransparentObject(3,"v",-11.38,-61.8);
+        var G03_door2 = createTransparentObject(3,"h",-25.35,-68.22);
+        //var G01_door2 = createTransparentObject(1,6.5617,2.6247,0.2,-1.72,-17.35,-40.4);
+        //var G01_door3 = createTransparentObject(1,6.5617,2.6247,0.2,-1.72,-17.35,-40.4);
+        //var G01_door4 = createTransparentObject(1,6.5617,2.6247,0.2,-1.72,-17.35,-40.4);
+        
+        var G04_door1 = createTransparentObject(4,"h",-17.35,-40.18);
+        var G04_door2 = createTransparentObject(4,"v",-21.2,-51.5);
+        var G04_door3 = createTransparentObject(4,"h",-8.45,-58);
+        var G04_door4 = createTransparentObject(4,"h",-2.65,-58.3);
+
+        var G05_door1 = createTransparentObject(5,"v",-20.95,-51.5);
+
+        var G06_door1 = createTransparentObject(6,"h",-23.7,-29.8);
+
+        var G07_door1 = createTransparentObject(7,"h",-23.9,-19.45);
+
+        var G08_door1 = createTransparentObject(8,"h",-2.6,-25.4);
+        var G08_door2 = createTransparentObject(8,"h",-7.2,-24.9);
+        var G08_door3 = createTransparentObject(8,"h",-16.51,-24.8);
+        var G08_door4 = createTransparentObject(8,"v",-21.4,-27.6);
+        var G08_door5 = createTransparentObject(8,"h",-17.35,-40.4);
+
+        var G09_door1 = createTransparentObject(9,"v",-12.9,-17.55);
+
+        var GBW_door1 = createTransparentObject(10,"th",-1.33,-19.78);
+        var GBW_door2 = createTransparentObject(10,"th",-3.55,-19.78);
+        var GBW_door6 = createTransparentObject(10,"h",-2.6,-25.62);
+        
+        var GGW_door1 = createTransparentObject(11,"th",-6.12,-19.78);
+        var GGW_door2 = createTransparentObject(11,"th",-8.68,-19.78);
+        var GGW_door3 = createTransparentObject(11,"h",-7.2,-25.12);
+        
+        var G11_door1 = createTransparentObject(12,"h",-2.65,-9.9);
+        var G11_door2 = createTransparentObject(12,"v",-10.1,-12.4);
+
+        var GT1_door1 = createTransparentObject(13,"th",-1.33,-20);
+        var GT2_door2 = createTransparentObject(14,"th",-3.55,-20);
+        var GT3_door3 = createTransparentObject(15,"th",-6.12,-20);
+        var GT4_door4 = createTransparentObject(16,"th",-8.68,-20);
+
+        var GBG_door1 = createTransparentObject(17,"h",-2.65,-10.12);
+
+        var GC1_door1 = createTransparentObject(18,"v",-9.79,-12.4);
+        var GC1_door2 = createTransparentObject(18,"v",-13.12,-17.55);
+        var GC1_door3 = createTransparentObject(18,"v",-21.4,-22.3);
+        var GC1_door4 = createTransparentObject(18,"h",-16.51,-25.02);
+
+        var GC2_door1 = createTransparentObject(19,"v",-21.18,-27.6);
+        var GC2_door2 = createTransparentObject(19,"v",-21.18,-22.3);
+        var GC2_door3 = createTransparentObject(19,"h",-23.9,-19.23);
+        var GC2_door4 = createTransparentObject(19,"h",-23.7,-30.02);
+
+        var GL1_door1 = createTransparentObject(20,"h",-2.65,-57.3);
+
+        var GS1_door1 = createTransparentObject(21,"v",-6.12,-67.7);
+
+        var transparentWallsList = [];
+
+        var cubeV1BB = createWall(Y,70,-0.2,-45);       transparentWallsList.push(cubeV1BB);
+        var cubeV2BB = createWall(Y,70,-30.8,-45);      transparentWallsList.push(cubeV2BB);
+        var cubeV3BB = createWall(Y,2,-22,-67);         transparentWallsList.push(cubeV3BB);
+        var cubeV4BB = createWall(Y,2,-19.2,-66.8);     transparentWallsList.push(cubeV4BB);
+        var cubeV5BB = createWall(Y,9,-19.2,-75.5);     transparentWallsList.push(cubeV5BB);
+        var cubeV6BB = createWall(Y,9.8,-11.2,-75.2);   transparentWallsList.push(cubeV6BB);
+        var cubeV7BB = createWall(Y,3.4,-11.2,-65.25);  transparentWallsList.push(cubeV7BB);
+        var cubeV8BB = createWall(Y,5.3,-11.2,-57.6);   transparentWallsList.push(cubeV8BB);
+        var cubeV9BB = createWall(Y,8.6,-6.1,-61.7);    transparentWallsList.push(cubeV9BB);
+        var cubeV10BB = createWall(Y,1.6,-21.1,-54);    transparentWallsList.push(cubeV10BB);
+        var cubeV11BB = createWall(Y,21,-21.1,-39.5);   transparentWallsList.push(cubeV11BB);
+        var cubeV12BB = createWall(Y,2.1,-21.1,-25);    transparentWallsList.push(cubeV12BB);
+        var cubeV13BB = createWall(Y,10.8,-21.1,-15.4); transparentWallsList.push(cubeV13BB);
+        var cubeV14BB = createWall(Y,11,-26,-25.2);     transparentWallsList.push(cubeV14BB);
+        var cubeV15BB = createWall(Y,1,-12.9,-19.8);    transparentWallsList.push(cubeV15BB);
+        var cubeV16BB = createWall(Y,5.5,-12.9,-13.2);  transparentWallsList.push(cubeV16BB);
+        var cubeV17BB = createWall(Y,0.8,-9.8,-10.3);   transparentWallsList.push(cubeV17BB);
+        var cubeV18BB = createWall(Y,11.3,-9.8,-19.75); transparentWallsList.push(cubeV18BB);
+        var cubeV19BB = createWall(Y,10.5,-4.9,-20);    transparentWallsList.push(cubeV19BB);
+        var cubeV20BB = createWall(Y,5,-2.45,-17.5);    transparentWallsList.push(cubeV20BB);
+        var cubeV21BB = createWall(Y,5,-7.45,-17.5);    transparentWallsList.push(cubeV21BB);
+
+        var cubeH1BB = createWall(1,Y,-0.5,-10.2);      transparentWallsList.push(cubeH1BB);
+        var cubeH2BB = createWall(27,Y,-17.5,-10.2);    transparentWallsList.push(cubeH2BB);
+        var cubeH3BB = createWall(15.7,Y,-7.85,-40.2);  transparentWallsList.push(cubeH3BB);
+        var cubeH4BB = createWall(12,Y,-25,-40.2);      transparentWallsList.push(cubeH4BB);
+        var cubeH5BB = createWall(1,Y,-0.5,-25.1);      transparentWallsList.push(cubeH5BB);
+        var cubeH6BB = createWall(1.6,Y,-4.95,-25.1);   transparentWallsList.push(cubeH6BB);
+        var cubeH7BB = createWall(6,Y,-11.85,-25.1);    transparentWallsList.push(cubeH7BB);
+        var cubeH8BB = createWall(2.8,Y,-19.5,-25.1);   transparentWallsList.push(cubeH8BB);
+        var cubeH9BB = createWall(5,Y,-28.5,-25.4);     transparentWallsList.push(cubeH9BB);
+        var cubeH10BB = createWall(10,Y,-5,-14.9);      transparentWallsList.push(cubeH10BB);
+        var cubeH11BB = createWall(9.4,Y,-17.5,-20);    transparentWallsList.push(cubeH11BB);
+        var cubeH12BB = createWall(1,Y,-21.5,-30.4);    transparentWallsList.push(cubeH12BB);
+        var cubeH13BB = createWall(20,Y,-21,-55.1);     transparentWallsList.push(cubeH13BB);
+        var cubeH14BB = createWall(1,Y,-0.5,-57.8);     transparentWallsList.push(cubeH14BB);
+        var cubeH15BB = createWall(2.5,Y,-5.6,-57.8);   transparentWallsList.push(cubeH15BB);
+        var cubeH16BB = createWall(1,Y,-10.5,-57.8);    transparentWallsList.push(cubeH16BB);
+        var cubeH17BB = createWall(11,Y,-16.5,-65.8);   transparentWallsList.push(cubeH17BB);
+        var cubeH18BB = createWall(6,Y,-3,-65.1);       transparentWallsList.push(cubeH18BB);
+        var cubeH19BB = createWall(6.5,Y,-3.25,-70.2);  transparentWallsList.push(cubeH19BB);
+        var cubeH20BB = createWall(4,Y,-29,-67.9);      transparentWallsList.push(cubeH20BB);
+        var cubeH21BB = createWall(1.6,Y,-22.8,-67.9);  transparentWallsList.push(cubeH21BB);
+        var cubeH22BB = createWall(31,Y,-15.5,-79.8);   transparentWallsList.push(cubeH22BB);
 
      
         //Set lights by using the created function above
@@ -561,39 +695,6 @@
         //setDirectionalLight(light2,0,50,-30);
         //setDirectionalLight(light3,20,-30,-10);
         //setDirectionalLight(light4,20,30,-10);
-
-        camera.position.x = 0;              //Set the camera elevation (default value is 0)
-        camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
-
-        function checkCollision(){
-            if(frontballBB.intersectsBox(cubeH1BB) || frontballBB.intersectsBox(cubeH2BB) || frontballBB.intersectsBox(cubeH3BB) || frontballBB.intersectsBox(cubeH4BB) || frontballBB.intersectsBox(cubeH5BB) || frontballBB.intersectsBox(cubeH6BB) || frontballBB.intersectsBox(cubeH7BB) || frontballBB.intersectsBox(cubeH8BB) || frontballBB.intersectsBox(cubeH9BB) || frontballBB.intersectsBox(cubeH10BB) || frontballBB.intersectsBox(cubeH11BB) || frontballBB.intersectsBox(cubeH12BB) || frontballBB.intersectsBox(cubeH13BB) || frontballBB.intersectsBox(cubeH14BB) || frontballBB.intersectsBox(cubeH15BB) || frontballBB.intersectsBox(cubeH16BB) || frontballBB.intersectsBox(cubeH17BB) || frontballBB.intersectsBox(cubeH18BB) || frontballBB.intersectsBox(cubeH19BB) || frontballBB.intersectsBox(cubeH20BB) || frontballBB.intersectsBox(cubeH21BB) || frontballBB.intersectsBox(cubeH22BB)){
-                okToGoFront = 0;
-            }else if(frontballBB.intersectsBox(cubeV1BB) || frontballBB.intersectsBox(cubeV2BB) || frontballBB.intersectsBox(cubeV3BB) || frontballBB.intersectsBox(cubeV4BB) || frontballBB.intersectsBox(cubeV5BB) || frontballBB.intersectsBox(cubeV6BB) || frontballBB.intersectsBox(cubeV7BB) || frontballBB.intersectsBox(cubeV8BB) || frontballBB.intersectsBox(cubeV9BB) || frontballBB.intersectsBox(cubeV10BB) || frontballBB.intersectsBox(cubeV11BB) || frontballBB.intersectsBox(cubeV12BB) || frontballBB.intersectsBox(cubeV13BB) || frontballBB.intersectsBox(cubeV14BB) || frontballBB.intersectsBox(cubeV15BB) || frontballBB.intersectsBox(cubeV16BB) || frontballBB.intersectsBox(cubeV17BB) || frontballBB.intersectsBox(cubeV18BB) || frontballBB.intersectsBox(cubeV19BB) || frontballBB.intersectsBox(cubeV20BB) || frontballBB.intersectsBox(cubeV21BB)){
-                okToGoFront = 0;
-            }else{
-                okToGoFront = 1;
-            }
-            if(backballBB.intersectsBox(cubeH1BB) || backballBB.intersectsBox(cubeH2BB) || backballBB.intersectsBox(cubeH3BB) || backballBB.intersectsBox(cubeH4BB) || backballBB.intersectsBox(cubeH5BB) || backballBB.intersectsBox(cubeH6BB) || backballBB.intersectsBox(cubeH7BB) || backballBB.intersectsBox(cubeH8BB) || backballBB.intersectsBox(cubeH9BB) || backballBB.intersectsBox(cubeH10BB) || backballBB.intersectsBox(cubeH11BB) || backballBB.intersectsBox(cubeH12BB) || backballBB.intersectsBox(cubeH13BB) || backballBB.intersectsBox(cubeH14BB) || backballBB.intersectsBox(cubeH15BB) || backballBB.intersectsBox(cubeH16BB) || backballBB.intersectsBox(cubeH17BB) || backballBB.intersectsBox(cubeH18BB) || backballBB.intersectsBox(cubeH19BB) || backballBB.intersectsBox(cubeH20BB) || backballBB.intersectsBox(cubeH21BB) || backballBB.intersectsBox(cubeH22BB)){
-                okToGoBack = 0;
-            }else if(backballBB.intersectsBox(cubeV1BB) || backballBB.intersectsBox(cubeV2BB) || backballBB.intersectsBox(cubeV3BB) || backballBB.intersectsBox(cubeV4BB) || backballBB.intersectsBox(cubeV5BB) || backballBB.intersectsBox(cubeV6BB) || backballBB.intersectsBox(cubeV7BB) || backballBB.intersectsBox(cubeV8BB) || backballBB.intersectsBox(cubeV9BB) || backballBB.intersectsBox(cubeV10BB) || backballBB.intersectsBox(cubeV11BB) || backballBB.intersectsBox(cubeV12BB) || backballBB.intersectsBox(cubeV13BB) || backballBB.intersectsBox(cubeV14BB) || backballBB.intersectsBox(cubeV15BB) || backballBB.intersectsBox(cubeV16BB) || backballBB.intersectsBox(cubeV17BB) || backballBB.intersectsBox(cubeV18BB) || backballBB.intersectsBox(cubeV19BB) || backballBB.intersectsBox(cubeV20BB) || backballBB.intersectsBox(cubeV21BB)){
-                okToGoBack = 0;
-            }else{
-                okToGoBack = 1;
-            }
-        }
-
-//Rendering
-        var animate = function(){
-            
-            frontballBB.copy(frontCameraBall.geometry.boundingBox).applyMatrix4(frontCameraBall.matrixWorld);
-            backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);
-            if(camera.position.x==0){
-                checkCollision();
-            }
-            renderer.render(scene,camera);
-            requestAnimationFrame(animate);
-        };
-
 
         animate();
 
