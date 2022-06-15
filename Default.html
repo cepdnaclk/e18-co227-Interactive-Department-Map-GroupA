@@ -52,6 +52,7 @@
         var expanded = 0;               //To check whether top right main label has been expanded or not
         var circleCorners = 1;
         var out = 0;
+        var X = 0.52,Y=0.7,R=0.9,S=0.08;
 
 //Database
         //This database is used to load the information about the buildings
@@ -184,6 +185,7 @@
                 blenderBuilding.rotation.z = Math.PI/2;                                      //Set the rotation
                 blenderBuilding.rotation.x = xrotatevalue;
                 blenderBuilding.rotation.y = Math.PI;
+                blenderBuilding.side = THREE.FrontSide;
             });
             return blenderBuilding;
         }
@@ -228,11 +230,19 @@
             return new Promise((resolve) => setTimeout(resolve,miliseconds));
         }
 
+        var okToGoFront = 1, okToGoBack = 1;
+
         async function turnleft(){          //This function turns the camera to left by unit amount
             for(var i =0;i<10;i++){         //Used a loop for smooth movements
                 await sleep(20);                        //Sleep for 20 millieseconds
                 camera.rotation.x += Math.PI/200;       //Rotate the cmaera around x axis by 0.9 degrees to the left
                 angle_x = angle_x + Math.PI/200;        //Update the new camera angle
+                frontCameraBall.rotation.x += Math.PI/200;
+                frontCameraBall.position.y = camera.position.y + (Math.sin(angle_x)*R);
+                frontCameraBall.position.z = camera.position.z - (Math.cos(angle_x)*R);
+                backCameraBall.rotation.x += Math.PI/200;
+                backCameraBall.position.y = camera.position.y - (Math.sin(angle_x)*R);
+                backCameraBall.position.z = camera.position.z + (Math.cos(angle_x)*R);
             }
         }
         async function turnright(){         //This function turns the camera to left by unit amount
@@ -240,7 +250,13 @@
                 await sleep(20);                        //Sleep for 20 millieseconds
                 camera.rotation.x -= Math.PI/200;       //Rotate the camera around x axis by 0.9 degrees to the right
                 angle_x = angle_x - Math.PI/200;        //Update the new camera angle
-            } 
+                frontCameraBall.rotation.x -= Math.PI/200;
+                frontCameraBall.position.y = camera.position.y + (Math.sin(angle_x)*R);
+                frontCameraBall.position.z = camera.position.z - (Math.cos(angle_x)*R);
+                backCameraBall.rotation.x -= Math.PI/200;
+                backCameraBall.position.y = camera.position.y - (Math.sin(angle_x)*R);
+                backCameraBall.position.z = camera.position.z + (Math.cos(angle_x)*R);
+            }
         }
         async function turnup(){            //This function turns the camera to left by unit amount
             for(var i =0;i<10;i++){         //Used a loop for smooth movements
@@ -257,18 +273,30 @@
             }
         }
         async function forward(){           //This function brings the camera to back by unit amount
-            for(var i =0;i<10;i++){         //Used a loop for smooth movements
-                await sleep(20);                                    //Sleep for 20 millieseconds
-                camera.position.y += 2*(Math.sin(angle_x)/20);      //Change the position of camera on y axis towards the facing direction
-                camera.position.z -= 2*(Math.cos(angle_x)/20);      //Change the position of camera on z axis towards the facing direction
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements                                    //Sleep for 20 millieseconds
+                await sleep(20);
+                if(okToGoFront){
+                    camera.position.y += (Math.sin(angle_x)*S);      //Change the position of camera on y axis towards the facing direction
+                    camera.position.z -= (Math.cos(angle_x)*S);      //Change the position of camera on z axis towards the facing direction
+                    frontCameraBall.position.y += (Math.sin(angle_x)*S);
+                    backCameraBall.position.y += (Math.sin(angle_x)*S);
+                    frontCameraBall.position.z -= (Math.cos(angle_x)*S);
+                    backCameraBall.position.z -= (Math.cos(angle_x)*S);
+                }
             }
         }
         async function backward(){          //This function brings the camera to front by unit amount
             for(var i =0;i<10;i++){         //Used a loop for smooth movements
                 await sleep(20);                                    //Sleep for 20 millieseconds
-                camera.position.y -= (Math.sin(angle_x)/20);        //Change the position of camera on y axis towards the facing direction
-                camera.position.z += (Math.cos(angle_x)/20);        //Change the position of camera on z axis towards the facing direction
-            }
+                if(okToGoBack){
+                    camera.position.y -= (Math.sin(angle_x)*0.1);        //Change the position of camera on y axis towards the facing direction
+                    camera.position.z += (Math.cos(angle_x)*0.1);        //Change the position of camera on z axis towards the facing direction
+                    frontCameraBall.position.y -= (Math.sin(angle_x)*S);
+                    backCameraBall.position.y -= (Math.sin(angle_x)*S);
+                    frontCameraBall.position.z += (Math.cos(angle_x)*S);
+                    backCameraBall.position.z += (Math.cos(angle_x)*S);
+                }
+            }    
         }
 
 
@@ -330,18 +358,21 @@
                 document.getElementById("viewButton").innerHTML = "First Person";
                 for(var i=0;i<10;i++){
                     await sleep(20);
-                    camera.position.x=(i+1)*2;
-                    camera.rotation.y = angle_y-(i+1)*((angle_y-Math.PI/8)/10);
-                    
+                    camera.position.x=(i+1)*1;
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-Math.PI/8)/10); 
                 }
+                okToGoBack = 1;
+                okToGoFront = 1;
                 angle_y = Math.PI/8;
             }else{
                 document.getElementById("viewButton").innerHTML = "Third Person";
                 for(var i=0;i<10;i++){
                     await sleep(20);
-                    camera.position.x=20-((i+1)*2);    //8
+                    camera.position.x=10-((i+1)*1);    //8,20
                     camera.rotation.y = angle_y-(i+1)*(angle_y/10);
                 }
+                okToGoBack = 0;
+                okToGoFront = 0;
                 angle_y = 0;
             }
         }
@@ -394,30 +425,26 @@
             }
         }
 
+//Transparent Walls
+        function createWall(y,z,Y,Z){
+            var geometry = new THREE.BoxGeometry(2,y,z);
+            var material = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
+            var cube = new THREE.Mesh(geometry,material);
+            scene.add(cube);
+            cube.position.x = 0; //5
+            cube.position.y = Y;
+            cube.position.z = Z;
+            let cubeBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+            cubeBB.setFromObject(cube);
+            return cubeBB;
+        }
+
         function nowin(){
             out = 0;
         }
         function nowout(){
             out = 1;
-        }
-
-//Rendering
-        var animate = function(){
-            
-            renderer.render(scene,camera);
-            requestAnimationFrame(animate);
-        };
-
-        
-        //Load the blender 3D objects by using the created function above
-        // var blenderBuilding1 = importObject('./blender-objects/blue1.gltf',2,6,-14,Math.PI/2);        //Blue
-        // var blenderBuilding2 = importObject('./blender-objects/yellow2.gltf',1,-6,-13,-Math.PI/2);    //Yellow
-        // var blenderBuilding3 = importObject('./blender-objects/red3.gltf',2,-6,-19.1,-Math.PI/2);     //Red
-        // var blenderBuilding4 = importObject('./blender-objects/green4.gltf',2,6,-24,Math.PI/2);       //Green
-        // var blenderBuilding5 = importObject('./blender-objects/orange5.gltf',0,1.9,-26,Math.PI/2);    //Orange
-        //var blenderBuilding6 = importObject('./blender-objects/pink6.gltf',-5,0,-80,0.5,-Math.PI/2);      //Pink
-        // var blenderBuilding7 = importObject('./blender-objects/floor.gltf',-3.6,0,-18,-Math.PI/2);    //Floor
-        // var blenderBuilding8 = importObject('./blender-objects/wall2.gltf',-4,13,-60,0);    //wall
+        } 
 
         //var blenderBuilding9 = importObject('./without-door-panels/without-door-panels.gltf',-5,0,-80,0,3.28084);    //wall
         var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
@@ -432,11 +459,79 @@
 
         var cube5 = createTransparentObject(5,6.5617,0.2,2.6247,-1.72,-21.2,-51.5);
         var cube6 = createTransparentObject(6,6.5617,0.2,2.6247,-1.72,-20.95,-51.5);
-        // var cube2 = createTransparentObject(2,8.2,4.2,6.2,1,-6,-13);        //Yellow
-        // var cube3 = createTransparentObject(3,10.2,4.2,6.2,2,-6,-19.1);     //Red
-        // var cube4 = createTransparentObject(4,10.2,4.2,6.2,2,6,-24);        //Green
-        // var cube5 = createTransparentObject(5,6.2,4.2,2.2,0,1.9,-26);       //Orange
-        // var cube6 = createTransparentObject(6,8.2,4.2,2.2,1,-6,-26);        //Pink
+
+
+
+        var cubeV1BB = createWall(Y,70,-0.2,-45);
+        var cubeV2BB = createWall(Y,70,-30.8,-45);
+        var cubeV3BB = createWall(Y,2,-22,-67);
+        var cubeV4BB = createWall(Y,2,-19.2,-66.8);
+        var cubeV5BB = createWall(Y,9,-19.2,-75.5);
+        var cubeV6BB = createWall(Y,9.8,-11.2,-75.2);
+        var cubeV7BB = createWall(Y,3.4,-11.2,-65.25);
+        var cubeV8BB = createWall(Y,5.3,-11.2,-57.6);
+        var cubeV9BB = createWall(Y,8.6,-6.1,-61.7);
+        var cubeV10BB = createWall(Y,1.6,-21.1,-54); 
+        var cubeV11BB = createWall(Y,21,-21.1,-39.5);
+        var cubeV12BB = createWall(Y,2.1,-21.1,-25);
+        var cubeV13BB = createWall(Y,10.8,-21.1,-15.4);
+        var cubeV14BB = createWall(Y,11,-26,-25.2);
+        var cubeV15BB = createWall(Y,1,-12.9,-19.8);
+        var cubeV16BB = createWall(Y,5.5,-12.9,-13.2);
+        var cubeV17BB = createWall(Y,0.8,-9.8,-10.3);
+        var cubeV18BB = createWall(Y,11.3,-9.8,-19.75);
+        var cubeV19BB = createWall(Y,10.5,-4.9,-20);
+        var cubeV20BB = createWall(Y,5,-2.45,-17.5);
+        var cubeV21BB = createWall(Y,5,-7.45,-17.5);
+
+        var cubeH1BB = createWall(1,Y,-0.5,-10.2);
+        var cubeH2BB = createWall(27,Y,-17.5,-10.2);
+        var cubeH3BB = createWall(15.7,Y,-7.85,-40.2);
+        var cubeH4BB = createWall(12,Y,-25,-40.2);
+        var cubeH5BB = createWall(1,Y,-0.5,-25.1);
+        var cubeH6BB = createWall(1.6,Y,-4.95,-25.1);
+        var cubeH7BB = createWall(6,Y,-11.85,-25.1);
+        var cubeH8BB = createWall(2.8,Y,-19.5,-25.1);
+        var cubeH9BB = createWall(5,Y,-28.5,-25.4);
+        var cubeH10BB = createWall(10,Y,-5,-14.9);
+        var cubeH11BB = createWall(9.4,Y,-17.5,-20);
+        var cubeH12BB = createWall(1,Y,-21.5,-30.4);
+        var cubeH13BB = createWall(20,Y,-21,-55.1);
+        var cubeH14BB = createWall(1,Y,-0.5,-57.8);
+        var cubeH15BB = createWall(2.5,Y,-5.6,-57.8);
+        var cubeH16BB = createWall(1,Y,-10.5,-57.8);
+        var cubeH17BB = createWall(11,Y,-16.5,-65.8);
+        var cubeH18BB = createWall(6,Y,-3,-65.1);
+        var cubeH19BB = createWall(6.5,Y,-3.25,-70.2);
+        var cubeH20BB = createWall(4,Y,-29,-67.9);
+        var cubeH21BB = createWall(1.6,Y,-22.8,-67.9);
+        var cubeH22BB = createWall(31,Y,-15.5,-79.8);
+
+        //Front cube
+        var frontCameraBall = new THREE.Mesh(
+            new THREE.BoxGeometry(2,0.2,1),
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+        );
+        scene.add(frontCameraBall);
+        frontCameraBall.position.x = 0;
+        frontCameraBall.position.y = 0;
+        frontCameraBall.position.z = -R;
+        let frontballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+        frontballBB.setFromObject(frontCameraBall);
+
+        //Back cube
+        var backCameraBall = new THREE.Mesh(
+            new THREE.BoxGeometry(2,0.2,1),
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+        );
+        scene.add(backCameraBall);
+        backCameraBall.position.x = 0;
+        backCameraBall.position.y = 0;
+        backCameraBall.position.z = R;
+        let backballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+        backballBB.setFromObject(backCameraBall);
+
+
      
         //Set lights by using the created function above
 
@@ -455,14 +550,12 @@
         var light12 = setPointLight(3,-6,-73);
         var light13 = setPointLight(3,-15,-73);
         var light14 = setPointLight(3,-25,-74);
+        //var light15 = setPointLight(1,-15,0);
         
 
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
 
-        //setPointLight(light8,1.5,6,-24);      //Green
-        //setPointLight(light9,1.5,2,-26);      //Orange
-        //setPointLight(light10,1.5,-6,-26);    //Pink
 
         //var lightD1 = setDirectionalLight(20,-10,-40);                                     //Use the function to set the light
         //setDirectionalLight(light2,0,50,-30);
@@ -471,6 +564,36 @@
 
         camera.position.x = 0;              //Set the camera elevation (default value is 0)
         camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
+
+        function checkCollision(){
+            if(frontballBB.intersectsBox(cubeH1BB) || frontballBB.intersectsBox(cubeH2BB) || frontballBB.intersectsBox(cubeH3BB) || frontballBB.intersectsBox(cubeH4BB) || frontballBB.intersectsBox(cubeH5BB) || frontballBB.intersectsBox(cubeH6BB) || frontballBB.intersectsBox(cubeH7BB) || frontballBB.intersectsBox(cubeH8BB) || frontballBB.intersectsBox(cubeH9BB) || frontballBB.intersectsBox(cubeH10BB) || frontballBB.intersectsBox(cubeH11BB) || frontballBB.intersectsBox(cubeH12BB) || frontballBB.intersectsBox(cubeH13BB) || frontballBB.intersectsBox(cubeH14BB) || frontballBB.intersectsBox(cubeH15BB) || frontballBB.intersectsBox(cubeH16BB) || frontballBB.intersectsBox(cubeH17BB) || frontballBB.intersectsBox(cubeH18BB) || frontballBB.intersectsBox(cubeH19BB) || frontballBB.intersectsBox(cubeH20BB) || frontballBB.intersectsBox(cubeH21BB) || frontballBB.intersectsBox(cubeH22BB)){
+                okToGoFront = 0;
+            }else if(frontballBB.intersectsBox(cubeV1BB) || frontballBB.intersectsBox(cubeV2BB) || frontballBB.intersectsBox(cubeV3BB) || frontballBB.intersectsBox(cubeV4BB) || frontballBB.intersectsBox(cubeV5BB) || frontballBB.intersectsBox(cubeV6BB) || frontballBB.intersectsBox(cubeV7BB) || frontballBB.intersectsBox(cubeV8BB) || frontballBB.intersectsBox(cubeV9BB) || frontballBB.intersectsBox(cubeV10BB) || frontballBB.intersectsBox(cubeV11BB) || frontballBB.intersectsBox(cubeV12BB) || frontballBB.intersectsBox(cubeV13BB) || frontballBB.intersectsBox(cubeV14BB) || frontballBB.intersectsBox(cubeV15BB) || frontballBB.intersectsBox(cubeV16BB) || frontballBB.intersectsBox(cubeV17BB) || frontballBB.intersectsBox(cubeV18BB) || frontballBB.intersectsBox(cubeV19BB) || frontballBB.intersectsBox(cubeV20BB) || frontballBB.intersectsBox(cubeV21BB)){
+                okToGoFront = 0;
+            }else{
+                okToGoFront = 1;
+            }
+            if(backballBB.intersectsBox(cubeH1BB) || backballBB.intersectsBox(cubeH2BB) || backballBB.intersectsBox(cubeH3BB) || backballBB.intersectsBox(cubeH4BB) || backballBB.intersectsBox(cubeH5BB) || backballBB.intersectsBox(cubeH6BB) || backballBB.intersectsBox(cubeH7BB) || backballBB.intersectsBox(cubeH8BB) || backballBB.intersectsBox(cubeH9BB) || backballBB.intersectsBox(cubeH10BB) || backballBB.intersectsBox(cubeH11BB) || backballBB.intersectsBox(cubeH12BB) || backballBB.intersectsBox(cubeH13BB) || backballBB.intersectsBox(cubeH14BB) || backballBB.intersectsBox(cubeH15BB) || backballBB.intersectsBox(cubeH16BB) || backballBB.intersectsBox(cubeH17BB) || backballBB.intersectsBox(cubeH18BB) || backballBB.intersectsBox(cubeH19BB) || backballBB.intersectsBox(cubeH20BB) || backballBB.intersectsBox(cubeH21BB) || backballBB.intersectsBox(cubeH22BB)){
+                okToGoBack = 0;
+            }else if(backballBB.intersectsBox(cubeV1BB) || backballBB.intersectsBox(cubeV2BB) || backballBB.intersectsBox(cubeV3BB) || backballBB.intersectsBox(cubeV4BB) || backballBB.intersectsBox(cubeV5BB) || backballBB.intersectsBox(cubeV6BB) || backballBB.intersectsBox(cubeV7BB) || backballBB.intersectsBox(cubeV8BB) || backballBB.intersectsBox(cubeV9BB) || backballBB.intersectsBox(cubeV10BB) || backballBB.intersectsBox(cubeV11BB) || backballBB.intersectsBox(cubeV12BB) || backballBB.intersectsBox(cubeV13BB) || backballBB.intersectsBox(cubeV14BB) || backballBB.intersectsBox(cubeV15BB) || backballBB.intersectsBox(cubeV16BB) || backballBB.intersectsBox(cubeV17BB) || backballBB.intersectsBox(cubeV18BB) || backballBB.intersectsBox(cubeV19BB) || backballBB.intersectsBox(cubeV20BB) || backballBB.intersectsBox(cubeV21BB)){
+                okToGoBack = 0;
+            }else{
+                okToGoBack = 1;
+            }
+        }
+
+//Rendering
+        var animate = function(){
+            
+            frontballBB.copy(frontCameraBall.geometry.boundingBox).applyMatrix4(frontCameraBall.matrixWorld);
+            backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);
+            if(camera.position.x==0){
+                checkCollision();
+            }
+            renderer.render(scene,camera);
+            requestAnimationFrame(animate);
+        };
+
 
         animate();
 
@@ -503,8 +626,8 @@
     <div id="latterPanel" class="latterPanelClass">
         <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
             <div id="searchBar" class="searchBar">
-                <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
-                <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
+                <input id="searchQueryInput" class="searchQueryInput_class" type="text" name="searchQueryInput" placeholder="Search" value="" />
+                <button id="searchQuerySubmit" class="searchQuerySubmit_class" type="submit" name="searchQuerySubmit">
                   <svg style="width:3.4vmin;height:3.4vmin" viewBox="0 0 24 24"><path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
                   </svg>
                 </button>
@@ -515,6 +638,6 @@
     <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
     <button class="viewButtonClass" id="viewButton" onclick="changeView()">Third Person</button>
-
+    <div class="aim"></div>
 </body>
 </html>
