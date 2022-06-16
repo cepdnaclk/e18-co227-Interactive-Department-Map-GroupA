@@ -46,51 +46,51 @@
         //     }
         // }
 
-
-        loadBuildings();
-        var departmentDatabase=[];
+        // loadBuildings();
+        // var departmentDatabase=[];
        
-        function loadBuildings(){
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET','data.php',true);
+        // function loadBuildings(){
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open('GET','data.php',true);
 
-            xhr.onload = function(){
-                if(this.status==200){
+        //     xhr.onload = function(){
+        //         if(this.status==200){
                     
-                    var my_json = JSON.parse(this.responseText);
-                    var data =[];
+        //             var my_json = JSON.parse(this.responseText);
+        //             var data =[];
                    
-                        my_json.forEach((val,index)=>{
-                            if(my_json[index]!==null){
-                                for(var i in my_json[index]) {
-                                        data.push(my_json[index][i]);
-                                }
-                                departmentDatabase.push(data);
-                                data=[];
-                            }	
-                        })
-                         // console.log("...java Script Array... \n"+JSON.stringify(departmentDatabase));
-                        //users = JSON.parse(this.responseText);       
-                }
-            }
-            xhr.send();
-        }
+        //                 my_json.forEach((val,index)=>{
+        //                     if(my_json[index]!==null){
+        //                         for(var i in my_json[index]) {
+        //                                 data.push(my_json[index][i]);
+        //                         }
+        //                         departmentDatabase.push(data);
+        //                         data=[];
+        //                     }	
+        //                 })
+        //                  // console.log("...java Script Array... \n"+JSON.stringify(departmentDatabase));
+        //                 //users = JSON.parse(this.responseText);       
+        //         }
+        //     }
+        //     xhr.send();
+        // }
+
 
         var angle_x=0,angle_y=0;                //Starting rotation values of the camera
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
         var circleCorners = 1;
-        var out = 0;
+        var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
         var X = 0.52,Y=0.7,R=0.9,S=0.08;
         var Floor = 0;
 
 //Database
         //This database is used to load the information about the buildings
-        //var departmentDatabase;
+        var departmentDatabase;
         
         //Data of a particular room can be added to the database as an array
-        /*var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
+        var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
         var building1 = ["Department Office","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
         var building2 = ["HOD's Office","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
         var building3 = ["Conference Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
@@ -115,7 +115,7 @@
         var building22 = ["Entrance Lobby","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
 
         departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14,building15,building16,building17,building18,building19,building20,building21,building22];
-        */
+        
 
         //Scene
         var scene = new THREE.Scene();
@@ -159,7 +159,7 @@
         const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
         function addMouseEvents(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
             domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
-                if(out==0){
+                if(out==0 && camera.position.x==0){
                     if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                             //Decrease the opacity of top right main information label to 0.5 
                         document.getElementById("hint").innerHTML = "Click on the building for more details";
@@ -198,7 +198,7 @@
                 }
             });
             domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
-                if(clicked==0 && out==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                if(clicked==0 && out==0 && camera.position.x==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.8;
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
@@ -206,7 +206,7 @@
                 }
             });    
             domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
-                if(clicked==0 && out==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                if(clicked==0 && out==0 && camera.position.x==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.6;
                     document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[0][1];
@@ -214,7 +214,66 @@
                 }
             }); 
         }
-    
+
+        
+
+        function addMouseEventsForPanels(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
+            domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
+                if(out==0 && camera.position.x!=0){
+                    if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                            //Decrease the opacity of top right main information label to 0.5 
+                        document.getElementById("hint").innerHTML = "Click on the building for more details";
+                        document.getElementById("information").style.height = "40%";
+                        document.getElementById("main_information").style.height = "75%";
+                        document.getElementById("hint").style.height = "7.5%";
+                        document.getElementById("controlLayout").style.height = "20%";
+                        document.getElementById("more_information").style.removeProperty('min-height');
+                        document.getElementById("more_information").style.padding = "0%";
+                        document.getElementById("more_information").style.marginTop = "0%";
+                        document.getElementById("more_information").style.margin = "0%";
+                        document.getElementById("label2").style.fontSize = "0vmin";
+                        document.getElementById("list2").style.fontSize = "0vmin";
+                        cube.material.opacity = 0;
+                        document.getElementById("label3").style.backgroundColor = "#1A5276";
+                        showNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                    }else{                                                                  //If user hasn't clicked earlier
+                            //Decrease the opacity of top right main information label to 0.5
+                        document.getElementById("hint").innerHTML = "More details below ↓";
+                        document.getElementById("information").style.height = "60%";
+                        document.getElementById("main_information").style.height = "50%";
+                        document.getElementById("hint").style.height = "5%";
+                        document.getElementById("controlLayout").style.height = "80%";
+                        document.getElementById("more_information").style.minHeight = "50%";
+                        document.getElementById("more_information").style.padding = "5%";
+                        document.getElementById("more_information").style.marginTop = "2.5%";
+                        document.getElementById("more_information").style.margin = "1.5%";
+                        document.getElementById("label2").style.fontSize = "2.8vmin";
+                        document.getElementById("list2").style.fontSize = "2.15vmin";
+                        cube.material.opacity = 0.6;
+                        document.getElementById("label3").style.backgroundColor = "#5F6A6A";
+                        hideNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 1
+                    }
+                }
+            });
+            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+                if(clicked==0 && out==0 && camera.position.x!=0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    cube.material.opacity = 0.4;
+                    document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
+                    document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
+                    document.getElementById("list2").innerHTML = departmentDatabase[buildingID][2];
+                }
+            });    
+            domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
+                if(clicked==0 && out==0 && camera.position.x!=0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    cube.material.opacity = 0;
+                    document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+                    document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                    document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+                }
+            }); 
+        }
 
 
 //Import Blender Objects
@@ -241,7 +300,7 @@
 //Creating Transparent Objects
         var transparentMaterialArray = [];
         for(var i=0;i<23;i++){
-            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
+            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
         }
         function createTransparentObject(buildingID,horv,yPosition,zPosition){
             if(horv=="h"){
@@ -263,17 +322,17 @@
 
         var transparentMaterialForPanelsArray = [];
         for(var i=0;i<23;i++){
-            transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.45});
+            transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
             var geometry = new THREE.BoxGeometry(0.2,yvalue,zvalue);
             var material = transparentMaterialForPanelsArray[buildingID];
             var cube = new THREE.Mesh(geometry,material);
             scene.add(cube);
-            cube.position.x = 4;
+            cube.position.x = 3.75; //3.75
             cube.position.y = yPosition;
             cube.position.z = zPosition;
-            addMouseEvents(cube,buildingID);
+            addMouseEventsForPanels(cube,buildingID);
             return cube;
         }
 
@@ -423,7 +482,28 @@
 
 //Camera Position
         async function changeView(){
-            if(camera.position.x==0){
+            if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                            //Decrease the opacity of top right main information label to 0.5 
+                        document.getElementById("hint").innerHTML = "Click on the building for more details";
+                        document.getElementById("information").style.height = "40%";
+                        document.getElementById("main_information").style.height = "75%";
+                        document.getElementById("hint").style.height = "7.5%";
+                        document.getElementById("controlLayout").style.height = "20%";
+                        document.getElementById("more_information").style.removeProperty('min-height');
+                        document.getElementById("more_information").style.padding = "0%";
+                        document.getElementById("more_information").style.marginTop = "0%";
+                        document.getElementById("more_information").style.margin = "0%";
+                        document.getElementById("label2").style.fontSize = "0vmin";
+                        document.getElementById("list2").style.fontSize = "0vmin";
+                        document.getElementById("label3").style.backgroundColor = "#1A5276";
+                        showNavigator();
+                        clicked = !clicked;    
+            }
+            if(camera.position.x==0){   //Going up
+                for(var i=0;i<transparentMaterialArray.length;i++){
+                    transparentMaterialArray[i].opacity = 0;
+                    transparentMaterialForPanelsArray[i].opacity = 0;
+                }
                 document.getElementById("viewButton").innerHTML = "First Person";
                 for(var i=0;i<10;i++){
                     await sleep(20);
@@ -433,7 +513,11 @@
                 okToGoBack = 1;
                 okToGoFront = 1;
                 angle_y = Math.PI/8;
-            }else{
+            }else{                      //Going down
+                for(var i=0;i<transparentMaterialArray.length;i++){
+                    transparentMaterialArray[i].opacity = 0.6;
+                    transparentMaterialForPanelsArray[i].opacity = 0;
+                }
                 document.getElementById("viewButton").innerHTML = "Third Person";
                 for(var i=0;i<10;i++){
                     await sleep(20);
@@ -505,6 +589,9 @@
             cube.position.x = 0; //5
             cube.position.y = Y;
             cube.position.z = Z;
+            // domEvents.addEventListener(cube,'mouseover',event => {                          //Click listener (Signals when user has clicked on the building)
+            //     document.getElementById("label").innerHTML = "got is";
+            // });
             let cubeBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
             cubeBB.setFromObject(cube);
             return cubeBB;
@@ -590,9 +677,9 @@
         };
 
 
-        //var blenderBuilding9 = importObject('./floors/without-door-panels.gltf',-5,0,-80,0,3.28084);    //wall
-
         var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
+
+        //var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
         //var blenderBuilding9 = importObject('./floors/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    //wall
 
 
@@ -662,13 +749,35 @@
         var G00_door3 = createTransparentObject(22,"v",-11.6,-61.8);
         var G00_door4 = createTransparentObject(22,"v",-11.6,-68.6);
 
+        var panel06_1 = createTransparentPanel(6,9.31,9.27,-25.944,-35.22);
+        var panel06_2 = createTransparentPanel(6,4.31,4.97,-28.444,-28.1);
 
-        var panel09_1 = createTransparentPanel(9,8,10,-16.9,-15);
+        var panel07_1 = createTransparentPanel(7,9.31,9.44,-25.944,-15.12);
+        var panel07_2 = createTransparentPanel(7,4.31,5.37,-28.444,-22.535);
 
-        var panel12_1 = createTransparentPanel(12,9.2,4.2,-5,-12.5);
+        var panel08_1 = createTransparentPanel(8,20.47,14.805,-10.635,-32.7);
+        
+        var panel09_1 = createTransparentPanel(9,8,9.63,-16.87,-15.2);
 
-        var panel18_1 = createTransparentPanel(18,2.7,14.6,-11.35,-17.65);
+        var panel10_1 = createTransparentPanel(10,4.4,4.975,-2.59,-22.53);
+        
+        var panel11_1 = createTransparentPanel(11,4.56,4.975,-7.27,-22.53);
+
+        var panel12_1 = createTransparentPanel(12,9.2,4.23,-5,-12.5);
+
+        var panel13_1 = createTransparentPanel(13,1.9,4.8,-1.34,-17.44);
+
+        var panel14_1 = createTransparentPanel(14,2.3,4.8,-3.65,-17.44);
+
+        var panel15_1 = createTransparentPanel(15,2.3,4.8,-6.15,-17.44);
+
+        var panel16_1 = createTransparentPanel(16,2.1,4.8,-8.55,-17.44);
+
+        var panel18_1 = createTransparentPanel(18,2.74,14.6,-11.33,-17.65);
         var panel18_2 = createTransparentPanel(18,8.2,4.7,-16.8,-22.6);
+
+        var panel19_1 = createTransparentPanel(19,4.6,9.967,-23.59,-25.22);
+
 
         var transparentWallsList = [];
 
