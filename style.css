@@ -146,7 +146,7 @@ body {
     outline: none;
 } 
   
-  .searchQuerySubmit:hover {
+  .searchQuerySubmit_class:hover {
     cursor: pointer;
   } 
 

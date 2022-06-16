@@ -211,7 +211,7 @@
 //Creating Transparent Objects
         var transparentMaterialArray = [];
         for(var i=0;i<23;i++){
-            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
+            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentObject(buildingID,horv,yPosition,zPosition){
             if(horv=="h"){
@@ -225,6 +225,22 @@
             var cube = new THREE.Mesh(geometry,material);
             scene.add(cube);
             cube.position.x = -1.72;
+            cube.position.y = yPosition;
+            cube.position.z = zPosition;
+            addMouseEvents(cube,buildingID);
+            return cube;
+        }
+
+        var transparentMaterialForPanelsArray = [];
+        for(var i=0;i<23;i++){
+            transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.45});
+        }
+        function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
+            var geometry = new THREE.BoxGeometry(0.2,yvalue,zvalue);
+            var material = transparentMaterialForPanelsArray[buildingID];
+            var cube = new THREE.Mesh(geometry,material);
+            scene.add(cube);
+            cube.position.x = 4;
             cube.position.y = yPosition;
             cube.position.z = zPosition;
             addMouseEvents(cube,buildingID);
@@ -544,18 +560,13 @@
         };
 
 
-        //var blenderBuilding9 = importObject('./without-door-panels/without-door-panels.gltf',-5,0,-80,0,3.28084);    //wall
+        var blenderBuilding9 = importObject('./floors/without-door-panels.gltf',-5,0,-80,0,3.28084);    //wall
 
-        var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
-        //var blenderBuilding9 = importObject('./Floor2/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    //wall
+        //var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
+        //var blenderBuilding9 = importObject('./floors/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    //wall
 
 
         //Creating transparent objects by using the created function above
-        var G00_door1 = createTransparentObject(22,"v",-5.9,-67.7);
-        var G00_door2 = createTransparentObject(22,"h",-8.45,-57.78);
-        var G00_door3 = createTransparentObject(22,"v",-11.6,-61.8);
-        var G00_door4 = createTransparentObject(22,"v",-11.6,-68.6);
-        
         var G01_door1 = createTransparentObject(1,"v",-11.38,-68.6);
         var G01_door2 = createTransparentObject(1,"v",-19.4,-69.45);
 
@@ -564,13 +575,10 @@
 
         var G03_door1 = createTransparentObject(3,"v",-11.38,-61.8);
         var G03_door2 = createTransparentObject(3,"h",-25.35,-68.22);
-        //var G01_door2 = createTransparentObject(1,6.5617,2.6247,0.2,-1.72,-17.35,-40.4);
-        //var G01_door3 = createTransparentObject(1,6.5617,2.6247,0.2,-1.72,-17.35,-40.4);
-        //var G01_door4 = createTransparentObject(1,6.5617,2.6247,0.2,-1.72,-17.35,-40.4);
-        
+
         var G04_door1 = createTransparentObject(4,"h",-17.35,-40.18);
         var G04_door2 = createTransparentObject(4,"v",-21.2,-51.5);
-        var G04_door3 = createTransparentObject(4,"h",-8.45,-58);
+        var G04_door3 = createTransparentObject(4,"h",-8.43,-57.8);
         var G04_door4 = createTransparentObject(4,"h",-2.65,-58.3);
 
         var G05_door1 = createTransparentObject(5,"v",-20.95,-51.5);
@@ -595,8 +603,8 @@
         var GGW_door2 = createTransparentObject(11,"th",-8.68,-19.78);
         var GGW_door3 = createTransparentObject(11,"h",-7.2,-25.12);
         
-        var G11_door1 = createTransparentObject(12,"h",-2.65,-9.9);
-        var G11_door2 = createTransparentObject(12,"v",-10.1,-12.4);
+        var G12_door1 = createTransparentObject(12,"h",-2.65,-9.9);
+        var G12_door2 = createTransparentObject(12,"v",-10.1,-12.4);
 
         var GT1_door1 = createTransparentObject(13,"th",-1.33,-20);
         var GT2_door2 = createTransparentObject(14,"th",-3.55,-20);
@@ -618,6 +626,19 @@
         var GL1_door1 = createTransparentObject(20,"h",-2.65,-57.3);
 
         var GS1_door1 = createTransparentObject(21,"v",-6.12,-67.7);
+
+        var G00_door1 = createTransparentObject(22,"v",-5.9,-67.7);
+        var G00_door2 = createTransparentObject(22,"h",-8.43,-57.58);
+        var G00_door3 = createTransparentObject(22,"v",-11.6,-61.8);
+        var G00_door4 = createTransparentObject(22,"v",-11.6,-68.6);
+
+
+        var panel09_1 = createTransparentPanel(9,8,10,-16.9,-15);
+
+        var panel12_1 = createTransparentPanel(12,9.2,4.2,-5,-12.5);
+
+        var panel18_1 = createTransparentPanel(18,2.7,14.6,-11.35,-17.65);
+        var panel18_2 = createTransparentPanel(18,8.2,4.7,-16.8,-22.6);
 
         var transparentWallsList = [];
 
