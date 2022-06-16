@@ -46,6 +46,36 @@
         //     }
         // }
 
+
+        loadBuildings();
+        var departmentDatabase=[];
+       
+        function loadBuildings(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','data.php',true);
+
+            xhr.onload = function(){
+                if(this.status==200){
+                    
+                    var my_json = JSON.parse(this.responseText);
+                    var data =[];
+                   
+                        my_json.forEach((val,index)=>{
+                            if(my_json[index]!==null){
+                                for(var i in my_json[index]) {
+                                        data.push(my_json[index][i]);
+                                }
+                                departmentDatabase.push(data);
+                                data=[];
+                            }	
+                        })
+                         // console.log("...java Script Array... \n"+JSON.stringify(departmentDatabase));
+                        //users = JSON.parse(this.responseText);       
+                }
+            }
+            xhr.send();
+        }
+
         var angle_x=0,angle_y=0;                //Starting rotation values of the camera
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
@@ -57,10 +87,10 @@
 
 //Database
         //This database is used to load the information about the buildings
-        var departmentDatabase;
+        //var departmentDatabase;
         
         //Data of a particular room can be added to the database as an array
-        var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
+        /*var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
         var building1 = ["Department Office","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
         var building2 = ["HOD's Office","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
         var building3 = ["Conference Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
@@ -85,7 +115,7 @@
         var building22 = ["Entrance Lobby","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
 
         departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14,building15,building16,building17,building18,building19,building20,building21,building22];
-        
+        */
 
         //Scene
         var scene = new THREE.Scene();
@@ -560,9 +590,9 @@
         };
 
 
-        var blenderBuilding9 = importObject('./floors/without-door-panels.gltf',-5,0,-80,0,3.28084);    //wall
+        //var blenderBuilding9 = importObject('./floors/without-door-panels.gltf',-5,0,-80,0,3.28084);    //wall
 
-        //var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
+        var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
         //var blenderBuilding9 = importObject('./floors/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    //wall
 
 
