@@ -526,16 +526,16 @@
             camera.rotation.x %= (Math.PI*2);
             camera.rotation.y %= (Math.PI*2);
             if(Math.abs(angle_x)>Math.PI){
-                angle_x = -(angle_x%Math.PI);
+                angle_x = (angle_x>0)?-(2*Math.PI-angle_x):2*Math.PI+angle_x;
             }
             if(Math.abs(angle_y)>Math.PI){
-                angle_y = -(angle_y%Math.PI);
+                angle_y = (angle_y>0)?-(2*Math.PI-angle_y):2*Math.PI+angle_y;
             }
             if(Math.abs(camera.rotation.x)>Math.PI){
-                camera.rotation.x = -(camera.rotation.x%Math.PI);
+                camera.rotation.x = (camera.rotation.x>0)?-(2*Math.PI-camera.rotation.x):2*Math.PI+camera.rotation.x;
             }
             if(Math.abs(camera.rotation.y)>Math.PI){
-                camera.rotation.y = -(camera.rotation.y%Math.PI);
+                camera.rotation.y = (camera.rotation.y>0)?-(2*Math.PI-camera.rotation.y):2*Math.PI+camera.rotation.y;
             }
         }
 
@@ -590,10 +590,10 @@
                     backCameraBall.position.z = R;
                     frontCameraBall.rotation.x = 0;
                     backCameraBall.rotation.x = 0;
+                    angle_x = 0;
                 }
                 okToGoBack = 0;
                 okToGoFront = 0;
-                angle_x = 0;
                 angle_y = 0;
             }
             ViewMode = "walk";            
@@ -793,9 +793,6 @@
                 case 65:    //Letter a
                     turndown();
                     break;
-                case 87:    //Letter w
-                    changeView();
-                    break;
             }
         }
 
@@ -819,7 +816,7 @@
         //Front cube
         var frontCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(frontCameraBall);
         frontCameraBall.position.x = 0;
@@ -831,7 +828,7 @@
         //Back cube
         var backCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(backCameraBall);
         backCameraBall.position.x = 0;
