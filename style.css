@@ -223,13 +223,24 @@ body {
     position: absolute;
     height: 100%;
     width: 46%;
-    text-align: center;
     right: 0%;
-    font-size: 3vmin;
-    color: #5B2C6F;
     border-color: white;
     border-radius: 0 1.4vmin 1.4vmin 0;
     background-color: white;
+}
+
+.rightTopClass{
+    color: #5B2C6F;
+    margin-left: -15%;
+    text-align: center;
+    font-size: 3vmin;
+}
+
+.rightBottomClass{
+    margin-left: -15%;
+    color: #5B2C6F;
+    text-align: center;
+    font-size: 1.2vmin;
 }
 
 .glass{
