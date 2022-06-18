@@ -2,7 +2,7 @@
 
 ### Installation
 
-1. Download as as Zip or Clone this project
+1. Download as Zip or Clone this project
 2. Move this project to Root Directory
 ```
 Local Disc C: -> wamp64 -> www -> 'this project'
