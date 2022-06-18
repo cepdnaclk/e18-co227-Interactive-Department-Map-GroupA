@@ -325,7 +325,7 @@
             transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
-            var geometry = new THREE.BoxGeometry(0.2,yvalue,zvalue,true);
+            var geometry = new THREE.BoxGeometry(0.2,yvalue,zvalue);
             var material = transparentMaterialForPanelsArray[buildingID];
             var cube = new THREE.Mesh(geometry,material);
             scene.add(cube);
@@ -575,6 +575,7 @@
                     clicked = !clicked;    
                 }
                 for(var i=0;i<transparentMaterialArray.length;i++){
+                    transparentMaterialArray[i].color.set(0x2758E7);
                     transparentMaterialArray[i].opacity = 0.6;
                     transparentMaterialForPanelsArray[i].opacity = 0;
                 }
@@ -637,7 +638,8 @@
                     clicked = !clicked;    
                 }
                 for(var i=0;i<transparentMaterialArray.length;i++){
-                    transparentMaterialArray[i].opacity = 0;
+                    transparentMaterialArray[i].color.set(0x000000);
+                    transparentMaterialArray[i].opacity = 1;
                     transparentMaterialForPanelsArray[i].opacity = 0;
                 }        
                 for(var i=0;i<10;i++){
@@ -690,7 +692,8 @@
                         clicked = !clicked;    
                 }
                 for(var i=0;i<transparentMaterialArray.length;i++){
-                    transparentMaterialArray[i].opacity = 0;
+                    transparentMaterialArray[i].color.set(0x000000);
+                    transparentMaterialArray[i].opacity = 1;
                     transparentMaterialForPanelsArray[i].opacity = 0;
                 }
                 var y = camera.position.y;
@@ -867,7 +870,7 @@
         //Top cube
         var topCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(0.1,0.1,0.1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(topCameraBall);
         topCameraBall.position.x = 3.75;
