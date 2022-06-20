@@ -84,6 +84,9 @@
         var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
         var X = 0.52,Y=0.7,R=0.9,S=0.08;
         var Floor = 0;
+        var initialCamera_X = 0, initialCamera_Y = -3, initialCamera_Z = -54.6;
+        var initialCamera_Xangle = -Math.PI/2;
+        var yR = R, zR = 0;
 
 //Database
         //This database is used to load the information about the buildings
@@ -318,8 +321,10 @@
                 var geometry = new THREE.BoxGeometry(6.5617,2.7,0.2);
             }else if(horv=="v"){
                 var geometry = new THREE.BoxGeometry(6.5617,0.2,2.7);
-            }else if(horv=="th"){
-                var geometry = new THREE.BoxGeometry(6.5617,1.1,0.2);
+            }else if(horv=="vs"){
+                var geometry = new THREE.BoxGeometry(6.5617,0.1,2.7);
+            }else if(horv=="hl"){
+                var geometry = new THREE.BoxGeometry(6.52,2.9,0.2);
             }
             var material = transparentMaterialArray[buildingID]
             var cube = new THREE.Mesh(geometry,material);
@@ -613,24 +618,24 @@ function createWall(y,z,Y,Z){
                 for(var i=0;i<15;i++){
                     await sleep(20);
                     if(ViewMode=="sky"){
-                        camera.position.y = y - (i+1)*((y+3)/15);
-                        camera.position.z = z - (i+1)*((z+54.6)/15);
-                        camera.rotation.x = xr-(i+1)*((xr+Math.PI/2)/15);
+                        camera.position.y = y - (i+1)*((y-initialCamera_Y)/15);
+                        camera.position.z = z - (i+1)*((z-initialCamera_Z)/15);
+                        camera.rotation.x = xr-(i+1)*((xr-initialCamera_Xangle)/15);
 
                     }
                     camera.position.x=x-((i+1)*(x/15));    //8,20
                     camera.rotation.y = angle_y-(i+1)*(angle_y/15);
                 }
                 if(ViewMode=="sky"){
-                    frontCameraBall.position.y = -3-R;
-                    backCameraBall.position.y = -3+R;
-                    topCameraBall.position.y = -3;
-                    frontCameraBall.position.z = -54.6;
-                    backCameraBall.position.z = -54.6;
-                    topCameraBall.position.z = -54.6;
-                    frontCameraBall.rotation.x = -Math.PI/2;
-                    backCameraBall.rotation.x = -Math.PI/2;
-                    angle_x = -Math.PI/2;
+                    frontCameraBall.position.y = initialCamera_Y-yR;
+                    backCameraBall.position.y = initialCamera_Y+yR;
+                    topCameraBall.position.y = initialCamera_Y;
+                    frontCameraBall.position.z = initialCamera_Z-zR;
+                    backCameraBall.position.z = initialCamera_Z+zR;
+                    topCameraBall.position.z = initialCamera_Z;
+                    frontCameraBall.rotation.x = initialCamera_Xangle;
+                    backCameraBall.rotation.x = initialCamera_Xangle;
+                    angle_x = initialCamera_Xangle;
                 }
                 okToGoBack = 0;
                 okToGoFront = 0;
@@ -871,38 +876,38 @@ function createWall(y,z,Y,Z){
         //Front cube
         var frontCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(frontCameraBall);
-        frontCameraBall.position.x = 0;
-        frontCameraBall.position.y = -3+R;
-        frontCameraBall.position.z = -54.6;
-        frontCameraBall.rotation.x = -Math.PI/2;
+        frontCameraBall.position.x = initialCamera_X;
+        frontCameraBall.position.y = initialCamera_Y-yR;
+        frontCameraBall.position.z = initialCamera_Z-zR;
+        frontCameraBall.rotation.x = initialCamera_Xangle;
         let frontballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
         frontballBB.setFromObject(frontCameraBall);
 
         //Back cube
         var backCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(backCameraBall);
-        backCameraBall.position.x = 0;
-        backCameraBall.position.y = -3-R;
-        backCameraBall.position.z = -54.6;
-        backCameraBall.rotation.x -= Math.PI/2;
+        backCameraBall.position.x = initialCamera_X;
+        backCameraBall.position.y = initialCamera_Y+yR;
+        backCameraBall.position.z = initialCamera_Z+zR;
+        backCameraBall.rotation.x = initialCamera_Xangle;
         let backballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
         backballBB.setFromObject(backCameraBall);
 
         //Top cube
         var topCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(0.1,0.1,0.1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(topCameraBall);
         topCameraBall.position.x = 3.75;
-        topCameraBall.position.y = -3;
-        topCameraBall.position.z = -54.6;
+        topCameraBall.position.y = initialCamera_Y;
+        topCameraBall.position.z = initialCamera_Z;
         let topballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
         topballBB.setFromObject(topCameraBall);
 
@@ -969,10 +974,10 @@ function createWall(y,z,Y,Z){
             out = 1;
         } 
 
-        camera.position.x = 0;              //Set the camera elevation (default value is 0)
-        camera.position.y = -3;
-        camera.position.z = -54.6;
-        camera.rotation.x -= Math.PI/2;
+        camera.position.x = initialCamera_X;              //Set the camera elevation (default value is 0)
+        camera.position.y = initialCamera_Y;
+        camera.position.z = initialCamera_Z;
+        camera.rotation.x += initialCamera_Xangle;
         camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
 
 //Rendering
@@ -993,14 +998,14 @@ function createWall(y,z,Y,Z){
         //var blenderBuilding9 = importObject('./floors/ground-floor-final2.gltf',-5,0,-80,0,3.28084);    //wall
 
         //var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
-        var blenderBuilding9 = importObject('./Floor2/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    //wall
+        var blenderBuilding9 = importObject('./Floor2/Floor2_updated.gltf',-5,0,-10,Math.PI,3.28084);    //wall
 
 
         //Creating transparent objects by using the created function above
-        var S01_door1 = createTransparentObject(1,"h",-8.45,-68.45); //a
+        var S01_door1 = createTransparentObject(1,"h",-8.45,-68.41); //a
 
         var S02_door1 = createTransparentObject(2,"v",-10.5,-54.57); //b
-        var S02_door2 = createTransparentObject(2,"h",-16.08,-40.2); //c
+        var S02_door2 = createTransparentObject(2,"h",-18.03,-40.2); //c
         var S02_door3 = createTransparentObject(2,"v",-20.8,-54); //d
 
         var S03_door1 = createTransparentObject(3,"v",-20.58,-54); //d
@@ -1009,7 +1014,7 @@ function createWall(y,z,Y,Z){
         var S04_door2 = createTransparentObject(4,"v",-20.8,-23.25); //f
         var S04_door3 = createTransparentObject(4,"v",-20.8,-27.4); //g
         var S04_door4 = createTransparentObject(4,"v",-20.8,-36.4); //h
-        var S04_door5 = createTransparentObject(4,"h",-16.08,-40.42); //c
+        var S04_door5 = createTransparentObject(4,"h",-18.03,-40.42); //c
         var S04_door6 = createTransparentObject(4,"h",-8.5,-40.42); //i
 
         var S05_door1 = createTransparentObject(8,"v",-20.58,-11.85); //e
@@ -1020,9 +1025,17 @@ function createWall(y,z,Y,Z){
         
         var S08_door1 = createTransparentObject(5,"v",-20.58,-36.4); //h
 
-        var S09_door9 = createTransparentObject(4,"h",-8.5,-40.2); //i
+        var S09_door1 = createTransparentObject(4,"h",-8.5,-40.2); //i
+        var S09_door2 = createTransparentObject(2,"v",-10.72,-54.57); //b
+        var S09_door4 = createTransparentObject(4,"hl",-2.86,-59); //l
 
+        var S11_door1 = createTransparentObject(11,"vs",-4.84,-67.25); //j
+        var S11_door4 = createTransparentObject(11,"h",-8.45,-68.63); //a
+        var S11_door1 = createTransparentObject(11,"vs",-10.35,-64.25); //k
 
+        var S12_door1 = createTransparentObject(11,"vs",-4.96,-67.25); //j
+        
+        var S13_door1 = createTransparentObject(13,"vs",-10.35,-64.25); //k
         // var G05_door1 = createTransparentObject(5,"v",-20.95,-51.6);
 
         // var G06_door1 = createTransparentObject(6,"h",-23.7,-30);
