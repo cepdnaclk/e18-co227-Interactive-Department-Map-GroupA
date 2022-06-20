@@ -84,6 +84,9 @@
         var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
         var X = 0.52,Y=0.7,R=0.9,S=0.08;
         var Floor = 0;
+        var initialCamera_X = 0, initialCamera_Y = 0, initialCamera_Z = 0;
+        var initialCamera_Xangle = 0;
+        var yR = 0, zR = R; 
 
 //Database
         //This database is used to load the information about the buildings
@@ -613,24 +616,24 @@ function createWall(y,z,Y,Z){
                 for(var i=0;i<15;i++){
                     await sleep(20);
                     if(ViewMode=="sky"){
-                        camera.position.y = y - (i+1)*(y/15);
-                        camera.position.z = z - (i+1)*(z/15);
-                        camera.rotation.x = xr-(i+1)*(xr/15);
+                        camera.position.y = y - (i+1)*((y-initialCamera_Y)/15);
+                        camera.position.z = z - (i+1)*((z-initialCamera_Z)/15);
+                        camera.rotation.x = xr-(i+1)*((xr-initialCamera_Xangle)/15);
 
                     }
                     camera.position.x=x-((i+1)*(x/15));    //8,20
                     camera.rotation.y = angle_y-(i+1)*(angle_y/15);
                 }
                 if(ViewMode=="sky"){
-                    frontCameraBall.position.y = 0;
-                    backCameraBall.position.y = 0;
-                    topCameraBall.position.y = 0;
-                    frontCameraBall.position.z = -R;
-                    backCameraBall.position.z = R;
-                    topCameraBall.position.z = 0;
-                    frontCameraBall.rotation.x = 0;
-                    backCameraBall.rotation.x = 0;
-                    angle_x = 0;
+                    frontCameraBall.position.y = initialCamera_Y-yR;
+                    backCameraBall.position.y = initialCamera_Y+yR;
+                    topCameraBall.position.y = initialCamera_Y;
+                    frontCameraBall.position.z = initialCamera_Z-zR;
+                    backCameraBall.position.z = initialCamera_Z+zR;
+                    topCameraBall.position.z = initialCamera_Z;
+                    frontCameraBall.rotation.x = initialCamera_Xangle;
+                    backCameraBall.rotation.x = initialCamera_Xangle;
+                    angle_x = initialCamera_Xangle;
                 }
                 okToGoBack = 0;
                 okToGoFront = 0;
@@ -871,36 +874,38 @@ function createWall(y,z,Y,Z){
         //Front cube
         var frontCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(frontCameraBall);
-        frontCameraBall.position.x = 0;
-        frontCameraBall.position.y = 0;
-        frontCameraBall.position.z = -R;
+        frontCameraBall.position.x = initialCamera_X;
+        frontCameraBall.position.y = initialCamera_Y-yR;
+        frontCameraBall.position.z = initialCamera_Z-zR;
+        frontCameraBall.rotation.x = initialCamera_Xangle;
         let frontballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
         frontballBB.setFromObject(frontCameraBall);
 
         //Back cube
         var backCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(backCameraBall);
-        backCameraBall.position.x = 0;
-        backCameraBall.position.y = 0;
-        backCameraBall.position.z = R;
+        backCameraBall.position.x = initialCamera_X;
+        backCameraBall.position.y = initialCamera_Y+yR;
+        backCameraBall.position.z = initialCamera_Z+zR;
+        backCameraBall.rotation.x = initialCamera_Xangle;
         let backballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
         backballBB.setFromObject(backCameraBall);
 
         //Top cube
         var topCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(0.1,0.1,0.1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(topCameraBall);
         topCameraBall.position.x = 3.75;
-        topCameraBall.position.y = 0;
-        topCameraBall.position.z = 0;
+        topCameraBall.position.y = initialCamera_Y;
+        topCameraBall.position.z = initialCamera_Z;
         let topballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
         topballBB.setFromObject(topCameraBall);
 
@@ -967,8 +972,12 @@ function createWall(y,z,Y,Z){
             out = 1;
         } 
 
-        camera.position.x = 0;              //Set the camera elevation (default value is 0)
+        camera.position.x = initialCamera_X;              //Set the camera elevation (default value is 0)
+        camera.position.y = initialCamera_Y;
+        camera.position.z = initialCamera_Z;
+        camera.rotation.x += initialCamera_Xangle;
         camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
+
 
 //Rendering
         var animate = function(){
