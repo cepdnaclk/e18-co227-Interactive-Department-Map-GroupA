@@ -76,7 +76,6 @@
         // }
 
 
-        var angle_x=0,angle_y=0;                //Starting rotation values of the camera
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
@@ -87,6 +86,7 @@
         var initialCamera_X = 0, initialCamera_Y = 0, initialCamera_Z = 0;
         var initialCamera_Xangle = 0;
         var yR = 0, zR = R; 
+        var angle_x=initialCamera_Xangle,angle_y=0;                //Starting rotation values of the camera
 
 //Database
         //This database is used to load the information about the buildings
@@ -874,7 +874,7 @@ function createWall(y,z,Y,Z){
         //Front cube
         var frontCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(frontCameraBall);
         frontCameraBall.position.x = initialCamera_X;
@@ -887,7 +887,7 @@ function createWall(y,z,Y,Z){
         //Back cube
         var backCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(backCameraBall);
         backCameraBall.position.x = initialCamera_X;
@@ -900,7 +900,7 @@ function createWall(y,z,Y,Z){
         //Top cube
         var topCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(0.1,0.1,0.1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(topCameraBall);
         topCameraBall.position.x = 3.75;
@@ -994,10 +994,7 @@ function createWall(y,z,Y,Z){
         };
 
 
-        var blenderBuilding9 = importObject('./floors/ground-floor-final2.gltf',-5,0,-80,0,3.28084);    //wall
-
-        //var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
-        //var blenderBuilding9 = importObject('./Floor2/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    //wall
+        var blenderBuilding9 = importObject('./floors/FloorG.gltf',-5,0,-80,0,3.28084);    //wall
 
 
         //Creating transparent objects by using the created function above
