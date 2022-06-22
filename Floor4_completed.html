@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>First Floor</title>   <!--Name of the website -->
+    <title>Ground Floor</title>   <!--Name of the website -->
     <link rel="stylesheet" href="style.css"/>   <!--Linking the css file-->
 </head>
 <body>
@@ -9,50 +9,6 @@
     <script src="./js/jquery.js"></script>           <!-- Importing the jquery.js library-->
     <script src="./js/threex.domevents.js"></script> <!-- Importing the threex.domevents.js library-->
     <script src="./js/GLTFLoader.js"></script>       <!-- Importing the GLTFLoader.js library-->
-    <div id="glass" class="glass" onmouseover="nowin()" onmouseleave="nowout()"></div>
-    <div class="name"><strong>IDM</strong></div>
-    <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
-    <div id="information" class="information_class" >                    
-        <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
-            <p1 style="font-size: 3.3vmin;" id="label">Department Building</p1><br><br>
-            <ul id="list" style="list-style-type:square; font-size: 2.15vmin;">                                   <!--Top right main information list-->
-                <li>Welcome to Computer Engineering Department</li>
-                <li>Head of the department is Mr.Rohitha</li>
-                <li>This is a 4 story building</li>
-            </ul>
-        </div>
-        <div id="hint" class="hint_class">Click on the building for more details</div>
-        <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
-            <p2 id="label2" class="label2_class">More information here</p2>          
-            <ul id="list2" class="list2_class" style="list-style-type:square;">                                             <!--Top right more information list-->
-                <li>Welcome to Computer Engineering Department, University of Peradeniya.</li>
-                <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
-                <li>This is a 4 story building which has 4 labs and bla bla bla</li>
-            </ul>
-            <button id="moreButton" class="moreButton_class">More</button>
-        </div>
-    </div>
-    
-    <div id="latterPanel" class="latterPanelClass">
-        <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
-            <div id="searchBar" class="searchBar">
-                <input id="searchQueryInput" class="searchQueryInput_class" type="text" name="searchQueryInput" placeholder="Search" value="" />
-                <button id="searchQuerySubmit" class="searchQuerySubmit_class" type="submit" name="searchQuerySubmit">
-                  <svg style="width:3.4vmin;height:3.4vmin" viewBox="0 0 24 24"><path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
-                  </svg>
-                </button>
-            </div>
-        </div>
-        <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
-    </div>
-    <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
-    <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
-    <div class="viewsButtonClass" id="viewsButton">
-        <button class="leftTopButtonClass" id="leftTopButton" onclick="leftTop()">BIRD</button>
-        <button class="leftBottomButtonClass" id="leftBottomButton" onclick="leftBottom()">DRONE</button>
-        <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
-    </div>
-    <div id="aim" class="aim"></div>
     <script type="text/javascript"> 
     
         // var conn = new ActiveXObject("ADODB.Connection");
@@ -120,6 +76,7 @@
         // }
 
 
+        var angle_x=0,angle_y=0;                //Starting rotation values of the camera
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
@@ -127,11 +84,9 @@
         var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
         var X = 0.52,Y=0.7,R=0.9,S=0.08;
         var Floor = 0;
-        var initialCamera_X = 0, initialCamera_Y = -2.22, initialCamera_Z = -55.27;
-        var initialCamera_Xangle = -Math.PI/2;
-        var yR = R, zR = 0;
-        var angle_x= initialCamera_Xangle,angle_y=0;                //Starting rotation values of the camera
-
+        var initialCamera_X = 0, initialCamera_Y = 0, initialCamera_Z = 0;
+        var initialCamera_Xangle = 0;
+        var yR = 0, zR = R; 
 
 //Database
         //This database is used to load the information about the buildings
@@ -139,22 +94,26 @@
         
         //Data of a particular room can be added to the database as an array
         var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
-        var building1 = ["Technical Offcer's room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building2 = ["Insructors' Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building3 = ["Lecturers' Room 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building4 = ["Lecturers' Room 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building5 = ["Lecturers' Room 3","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building6 = ["Lecturers' Room 4","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building7 = ["Lecturers' Room 5","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building8 = ["Lecturers' Room 6","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building9 = ["Network Engineering Lab","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building10 = ["Corridor","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building11 = ["Main room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building12 = ["Servant Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building13 = ["Lift","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building14 = ["Computer Laboratory","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-
-        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14];
+        var building1 = ["Computer Vision Lab","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building2 = ["Lab1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building3 = ["Lab2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building4 = ["Lab3","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building5 = ["Lab4","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building6 = ["Lecturer room 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building7 = ["Lecturer room 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building8 = ["Washroom","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building9 = ["Computer Lab","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building10 = ["Lecturer room 3","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building11 = ["Lecturer room 4","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building12 = ["Lecturer room 5","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building13 = ["Server room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building14 = ["Instructor's room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building15 = ["Corridor 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building16 = ["Corridor 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building17 = ["Lift","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building18 = ["Stair-case","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        
+        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14,building15,building16,building17,building18];
         
 
         //Scene
@@ -355,13 +314,25 @@
         }
         function createTransparentObject(buildingID,horv,yPosition,zPosition){
             if(horv=="h"){
-                var geometry = new THREE.BoxGeometry(6.5617,2.63,0.2);
+                var geometry = new THREE.BoxGeometry(6.5617,2.6247,0.2);
             }else if(horv=="v"){
-                var geometry = new THREE.BoxGeometry(6.5617,0.2,2.63);
-            }else if(horv=="vs"){
-                var geometry = new THREE.BoxGeometry(6.5617,0.1,2.7);
-            }else if(horv=="hl"){
-                var geometry = new THREE.BoxGeometry(6.54,3,0.2);
+                var geometry = new THREE.BoxGeometry(6.5617,0.2,2.6247);
+            }else if(horv=="th"){
+                var geometry = new THREE.BoxGeometry(6.5617,1.6,0.2);
+            }else if(horv=="tv"){
+                var geometry = new THREE.BoxGeometry(6.5617,0.2,1.6);
+            }
+            else if(horv=="a"){
+                var geometry = new THREE.BoxGeometry(6.5617,0.2,1.6);
+                var material = transparentMaterialArray[buildingID]
+                var cube = new THREE.Mesh(geometry,material);
+                scene.add(cube);
+                cube.position.x = -1.72;
+                cube.position.y = yPosition;
+                cube.position.z = zPosition;
+                cube.rotation.x = Math.PI*0.12;
+                addMouseEvents(cube,buildingID);
+                return cube;
             }
             var material = transparentMaterialArray[buildingID]
             var cube = new THREE.Mesh(geometry,material);
@@ -439,7 +410,7 @@ function createWall(y,z,Y,Z){
         }
 
         function setPointLight(X,Y,Z) {                           //This function set the light
-            var lightId = new THREE.PointLight(0xffffff,0.3); //Soft white light
+            var lightId = new THREE.PointLight(0xffffff,0.2); //Soft white light
             scene.add(lightId);                           //Add light to the scene
             lightId.position.set(X,Y,Z);
             return lightId;
@@ -913,7 +884,7 @@ function createWall(y,z,Y,Z){
         //Front cube
         var frontCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.0})
         );
         scene.add(frontCameraBall);
         frontCameraBall.position.x = initialCamera_X;
@@ -926,7 +897,7 @@ function createWall(y,z,Y,Z){
         //Back cube
         var backCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.0})
         );
         scene.add(backCameraBall);
         backCameraBall.position.x = initialCamera_X;
@@ -939,7 +910,7 @@ function createWall(y,z,Y,Z){
         //Top cube
         var topCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(0.1,0.1,0.1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.0})
         );
         scene.add(topCameraBall);
         topCameraBall.position.x = 3.75;
@@ -1033,131 +1004,154 @@ function createWall(y,z,Y,Z){
         };
 
 
-        var blenderBuilding9 = importObject('./floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);    //wall
-
+        var blenderBuilding9 = importObject('./floors/Floor4_new.gltf',-5,0,-80,0,3.28084);    
 
         //Creating transparent objects by using the created function above
-        var O01_door1 = createTransparentObject(1,"v",-5.06,-73.75); //m
+        var F00_door1 = createTransparentObject(1,"v",-9.27,-76.98);
+        var F00_door2 = createTransparentObject(1,"v",-9.27,-71.82);
+        var F00_door3 = createTransparentObject(1,"v",-9.27,-66.42);
+        var F00_door4 = createTransparentObject(1,"h",-16.52,-63.59);
+        var F00_door5 = createTransparentObject(1,"v",-23.26,-69.62); 
+        var F00_door6 = createTransparentObject(1,"v",-23.26,-75.99); 
+
+        var F01_door1 = createTransparentObject(2,"v",-23.26,-60.24);
+        var F01_door2 = createTransparentObject(2,"h",-16.52,-63.81);
+
+        var F02_door1 = createTransparentObject(3,"v",-23.04,-60.24); 
+
+        var F03_door1 = createTransparentObject(4,"v",-23.04,-69.62); 
         
-        var O02_door1 = createTransparentObject(2,"v",-16.64,-48.2); //n
+        var F04_door1 = createTransparentObject(5,"v",-23.04,-75.99); 
 
-        var O03_door1 = createTransparentObject(3,"v",-20.58,-54); //d
-        var O03_door2 = createTransparentObject(3,"h",-23.6,-47.8); //o
+        var F05_door1 = createTransparentObject(6,"v",-9.49,-76.98);
+
+        var F06_door1 = createTransparentObject(7,"v",-9.49,-71.82);
+
+        var F07_door1 = createTransparentObject(8,"v",-7.48,-33.75);
+        var F07_door2 = createTransparentObject(8,"v",-7.48,-38.05);
+
+        var F08_door1 = createTransparentObject(9,"v",-11.14,-54.14);
+        var F08_door2 = createTransparentObject(9,"v",-11.14,-24.05);
+        var F08_door3 = createTransparentObject(9,"a",-11.875,-19.2); 
+        var F08_door4 = createTransparentObject(9,"h",-17.37,-17.65);
+        var F08_door5 = createTransparentObject(9,"h",-22.6,-17.65); 
+        var F08_door6 = createTransparentObject(9,"h",-28.51,-17.65);
         
-        var O04_door1 = createTransparentObject(4,"h",-23.6,-48.02); //o
-
-        var O05_door1 = createTransparentObject(5,"v",-20.58,-36.4); //h
+        var F09_door1 = createTransparentObject(10,"h",-28.51,-17.87); 
         
-        var O06_door1 = createTransparentObject(6,"v",-20.58,-27.4); //g
+        var F10_door1 = createTransparentObject(11,"h",-22.6,-17.87); 
         
-        var O07_door1 = createTransparentObject(7,"v",-20.58,-23.25); //f
+        var F11_door1 = createTransparentObject(12,"h",-17.37,-17.87);
+       
+        var F12_door1 = createTransparentObject(13,"a",-12.08,-19.3); 
+
+        var F13_door1 = createTransparentObject(14,"v",-11.36,-24.05); 
+        var F13_door2 = createTransparentObject(14,"h",-9.16,-31.85); 
         
-        var O08_door1 = createTransparentObject(8,"v",-20.58,-11.85); //e
+      
+        var FC01_door1 = createTransparentObject(15,"v",-7.26,-38.05);
+        var FC01_door2 = createTransparentObject(15,"v",-7.26,-33.75);
+        var FC01_door3 = createTransparentObject(15,"h",-9.16,-31.63);
+        var FC01_door4 = createTransparentObject(15,"v",-11.36,-54.14);
+        var FC01_door5 = createTransparentObject(15,"th",-7.71,-57.82);
 
-        var O09_door1 = createTransparentObject(9,"v",-20.8,-11.85); //e
-        var O09_door2 = createTransparentObject(9,"v",-20.8,-23.25); //f
-        var O09_door3 = createTransparentObject(9,"v",-20.8,-27.4); //g
-        var O09_door4 = createTransparentObject(9,"v",-20.8,-36.4); //h
-        var O09_door5 = createTransparentObject(9,"h",-18.43,-40.42); //c
-        var O09_door6 = createTransparentObject(9,"h",-8.5,-40.42); //i
+        var FC02_door1 = createTransparentObject(16,"tv",-6.09,-66.64);
+        var FC02_door2 = createTransparentObject(16,"th",-7.71,-57.60);//th-->1.6ft width
+        var FC02_door3 = createTransparentObject(16,"v",-9.49,-66.42);
 
-        var O10_door1 = createTransparentObject(10,"v",-10.5,-54.57); //b
-        var O10_door2 = createTransparentObject(10,"v",-16.42,-48.2); //n
-        var O10_door3 = createTransparentObject(10,"h",-18.43,-40.2); //c
-        var O10_door4 = createTransparentObject(10,"v",-20.8,-54); //d
-
-        var O11_door1 = createTransparentObject(11,"h",-8.5,-40.2); //i
-        var O11_door2 = createTransparentObject(11,"v",-10.72,-54.57); //b
-        var O11_door4 = createTransparentObject(11,"hl",-2.85,-59.2); //l
-
-        var O12_door1 = createTransparentObject(12,"v",-5.06,-67.15); //j
-
-        var O13_door1 = createTransparentObject(13,"hl",-2.85,-58.98); //l
+        var FL_door1 = createTransparentObject(17,"tv",-6.31,-66.64);
         
-        var O14_door1 = createTransparentObject(14,"v",-4.84,-73.75); //m
-        var O14_door2 = createTransparentObject(14,"v",-4.84,-67.15); //j
-
-
         var PanelsList = [];
         var idsOfPanelList = [];
 
-        var panel01_1BB = createTransparentPanel(1,5,11.2,-2.5,-74.45);         PanelsList.push(panel01_1BB);
-
-        var panel02_1BB = createTransparentPanel(2,5.51,10,-13.75,-45.6);       PanelsList.push(panel02_1BB);
         
-        var panel03_1BB = createTransparentPanel(3,10,8.64,-26,-52.28);         PanelsList.push(panel03_1BB);
+         var panel00_01 = createTransparentPanel(1,13.55,15.8,-16.23,-71.7);         PanelsList.push(panel00_01);  
 
-        var panel04_1BB = createTransparentPanel(4,10,7.3,-26,-44.24);          PanelsList.push(panel04_1BB);  
-
-        var panel05_1BB = createTransparentPanel(5,10,6.85,-26,-36.57);         PanelsList.push(panel05_1BB);
-
-        var panel06_1BB = createTransparentPanel(6,10,6.85,-26,-29.08);         PanelsList.push(panel06_1BB);
-
-        var panel07_1BB = createTransparentPanel(7,10,6.85,-26,-21.58);         PanelsList.push(panel07_1BB);
-
-        var panel08_1BB = createTransparentPanel(8,10,7.48,-26,-13.75);         PanelsList.push(panel08_1BB);
+         var panel01_01 = createTransparentPanel(2,13.55,5.7,-16.23,-60.75);         PanelsList.push(panel01_01);
+         var panel01_02 = createTransparentPanel(2,11.57,1.075,-17.2,-57.36);        PanelsList.push(panel01_02);
         
-        var panel09_1BB = createTransparentPanel(9,20.39,30,-10.15,-24.995);    PanelsList.push(panel09_1BB);
-
-        var panel10_1BB = createTransparentPanel(10,9.42,5.95,-15.71,-53.625);  PanelsList.push(panel10_1BB);
-        var panel10_2BB = createTransparentPanel(10,3.86,10.04,-18.49,-45.63);  PanelsList.push(panel10_2BB);
+         var panel02_01 = createTransparentPanel(3,7.348,9.16,-26.925,-61.41);       PanelsList.push(panel02_01);
+         var panel03_01 = createTransparentPanel(4,7.348,6.8,-26.925,-69.59);        PanelsList.push(panel03_01);
+         var panel04_01 = createTransparentPanel(5,7.348,6.41,-26.925,-76.395);      PanelsList.push(panel04_01);
+         var panel05_01 = createTransparentPanel(6,8.83,5.37,-4.8,-76.92);           PanelsList.push(panel05_01);
+         var panel06_01 = createTransparentPanel(7,8.73,5.65,-4.77,-71.22);          PanelsList.push(panel06_01);
+         
+         var panel07_01 = createTransparentPanel(8,6.63,4,-3.715,-38);               PanelsList.push(panel07_01); 
+         var panel07_02 = createTransparentPanel(8,6.63,3.69,-3.715,-33.78);         PanelsList.push(panel07_02);
+         
+         var panel08_01 = createTransparentPanel(9,19.14,35.58,-21.02,-38.8);        PanelsList.push(panel08_01);
+         var panel08_02 = createTransparentPanel(9,17.9,3.125,-21.79,-19.46);        PanelsList.push(panel08_02);
+         
+         var panel09_01 = createTransparentPanel(10,4.8,7.18,-28.18,-14);            PanelsList.push(panel09_01);
+         var panel10_01 = createTransparentPanel(11,5.3,7.18,-22.92,-14);            PanelsList.push(panel10_01);
+         var panel11_01 = createTransparentPanel(12,7.38,7.18,-16.38,-14);           PanelsList.push(panel11_01);
+         
+         var panel12_01 = createTransparentPanel(13,10.67,10.45,-5.725,-15.72);      PanelsList.push(panel12_01);
+         var panel12_02 = createTransparentPanel(13,1.45,7,-11.775,-13.98);       PanelsList.push(panel12_02);
         
-        var panel11_1BB = createTransparentPanel(11,10.4,18,-5.2,-49.6);        PanelsList.push(panel11_1BB);
-    
-        var panel12_1BB = createTransparentPanel(12,5,3.2,-2.5,-67.2);          PanelsList.push(panel12_1BB);
+         var panel13_01 = createTransparentPanel(14,10.65,10.175,-5.725,-26.45);     PanelsList.push(panel13_01);
+         
+         var panelC01_01 = createTransparentPanel(15,10.63,5.58,-5.715,-54.78);      PanelsList.push(panelC01_01);
+         var panelC01_02 = createTransparentPanel(15,3.65,20.04,-9.22,-41.97);       PanelsList.push(panelC01_02);
 
-        var panel13_1BB = createTransparentPanel(13,5.3,5.76,-2.65,-62.12);     PanelsList.push(panel13_1BB);
+         var panelC02_01 = createTransparentPanel(16,2.68,10.12,-7.75,-62.98);       PanelsList.push(panelC02_01);
+       
+         var panelL_01 = createTransparentPanel(17,5.6,2.65,-3.2,-66.695);           PanelsList.push(panelL_01);
+         var panelL_02 = createTransparentPanel(17,5.6,7,-3.2,-61.47);               PanelsList.push(panelL_02);
+        
+         var panelS_01 = createTransparentPanel(18,6.62,11.15,-3.71,-45.98);         PanelsList.push(panelS_01);
+         var transparentWallsList = [];
 
-        var panel14_1BB = createTransparentPanel(14,0.84,14.4,-5.48,-72.8);     PanelsList.push(panel14_1BB);
-        var panel14_2BB = createTransparentPanel(14,25.1,21.3,-18.45,-69.35);   PanelsList.push(panel14_2BB);
-        var panel14_3BB = createTransparentPanel(14,20,1.45,-21,-57.975);       PanelsList.push(panel14_3BB);
+        
+        var cubeV1BB = createWall(Y,70,-0.2,-45);           transparentWallsList.push(cubeV1BB);
+        var cubeV2BB = createWall(Y,70,-30.8,-45);          transparentWallsList.push(cubeV2BB);
+        var cubeV3BB = createWall(Y,7.6,-6.3,-61.6);        transparentWallsList.push(cubeV3BB);
+        var cubeV4BB = createWall(Y,7.5,-9.2,-61.3);        transparentWallsList.push(cubeV4BB);
+        var cubeV5BB = createWall(Y,1.34,-9.25,-79.33);     transparentWallsList.push(cubeV5BB);
+        var cubeV6BB = createWall(Y,26.75,-11.25,-39.125);  transparentWallsList.push(cubeV6BB);
+        var cubeV7BB = createWall(Y,7.18,-12.42,-13.59);    transparentWallsList.push(cubeV7BB);
+        var cubeV8BB = createWall(Y,7.18,-20.02,-13.59);    transparentWallsList.push(cubeV8BB);
+        var cubeV9BB = createWall(Y,7.18,-25.52,-13.59);    transparentWallsList.push(cubeV9BB);
+        var cubeV10BB = createWall(Y,1.88,-9.25,-74.48);    transparentWallsList.push(cubeV10BB);
+        var cubeV11BB = createWall(Y,2.12,-9.25,-69.12);    transparentWallsList.push(cubeV11BB);
+        var cubeV12BB = createWall(Y,2.36,-23.25,-78.82);   transparentWallsList.push(cubeV12BB);
+        var cubeV13BB = createWall(Y,3.08,-23.25,-72.71);   transparentWallsList.push(cubeV13BB);
+        var cubeV14BB = createWall(Y,4.18,-23.25,-65.97);   transparentWallsList.push(cubeV14BB);
+        var cubeV15BB = createWall(Y,1.688,-23.25,-62.756); transparentWallsList.push(cubeV15BB);
+        var cubeV16BB = createWall(Y,1.82,-23.25,-57.68);   transparentWallsList.push(cubeV16BB);
+        var cubeV17BB = createWall(Y,1.468,-11.25,-21.68);  transparentWallsList.push(cubeV17BB);
+        
+         var cubeH1BB = createWall(31,Y,-15.5,-79.8);       transparentWallsList.push(cubeH1BB);
+         var cubeH2BB = createWall(31,Y,-15.5,-10.2);       transparentWallsList.push(cubeH2BB);
+         var cubeH3BB = createWall(9.56,Y,-4.75,-74.29);    transparentWallsList.push(cubeH3BB);
+         var cubeH4BB = createWall(7.94,Y,-26.97,-72.91);   transparentWallsList.push(cubeH4BB);
+         var cubeH5BB = createWall(7.94,Y,-26.97,-65.9);    transparentWallsList.push(cubeH5BB);
+         var cubeH6BB = createWall(19.95,Y,-21,-56.47);     transparentWallsList.push(cubeH6BB);
+         var cubeH7BB = createWall(3.23,Y,-13.925,-17.77);   transparentWallsList.push(cubeH7BB);
+         var cubeH8BB = createWall(9.56,Y,-4.75,-68.29);    transparentWallsList.push(cubeH8BB);
+         var cubeH9BB = createWall(6.4,Y,-3.2,-65.15);      transparentWallsList.push(cubeH9BB);
+         var cubeH10BB = createWall(6.58,Y,-3.29,-57.65);   transparentWallsList.push(cubeH10BB);
+         var cubeH11BB = createWall(2.6,Y,-10.1,-57.55);    transparentWallsList.push(cubeH11BB);
+         var cubeH12BB = createWall(5.8,Y,-11.92,-63.6);    transparentWallsList.push(cubeH12BB)
+         var cubeH13BB = createWall(5.1,Y,-20.68,-63.6);    transparentWallsList.push(cubeH13BB);
+         var cubeH14BB = createWall(7.4,Y,-3.7,-40.28);     transparentWallsList.push(cubeH14BB);
+         var cubeH15BB = createWall(7.4,Y,-3.7,-35.84);     transparentWallsList.push(cubeH15BB);
+         var cubeH16BB = createWall(7.4,Y,-3.7,-31.74);     transparentWallsList.push(cubeH16BB);
+         var cubeH17BB = createWall(11.45,Y,-5.725,-21.17); transparentWallsList.push(cubeH17BB);
+         var cubeH18BB = createWall(1.96,Y,-19.98,-17.77);   transparentWallsList.push(cubeH18BB);
+         var cubeH19BB = createWall(2.62,Y,-25.54,-17.77);   transparentWallsList.push(cubeH18BB);
 
-        var transparentWallsList = [];
-
-        var cubeV1BB = createWall(Y,70,0.3,-45);            transparentWallsList.push(cubeV1BB);
-        var cubeV2BB = createWall(Y,70,-31.3,-45);          transparentWallsList.push(cubeV2BB);
-        var cubeV3BB = createWall(Y,7.4,-5.6,-62.1);        transparentWallsList.push(cubeV3BB);
-        var cubeV4BB = createWall(Y,3.4,-5,-70.35);         transparentWallsList.push(cubeV4BB);
-        var cubeV5BB = createWall(Y,4.4,-5,-77.7);          transparentWallsList.push(cubeV5BB);
-        var cubeV6BB = createWall(Y,12.8,-10.6,-46.5);      transparentWallsList.push(cubeV6BB);
-        var cubeV7BB = createWall(Y,2.4,-10.6,-57.4);       transparentWallsList.push(cubeV7BB);
-        var cubeV8BB = createWall(Y,6.6,-16.6,-43.3);       transparentWallsList.push(cubeV8BB);
-        var cubeV9BB = createWall(Y,1,-16.6,-50.4);         transparentWallsList.push(cubeV9BB);
-        var cubeV10BB = createWall(Y,1.7,-20.7,-56.44);     transparentWallsList.push(cubeV10BB);
-        var cubeV11BB = createWall(Y,14.4,-20.7,-45.2);     transparentWallsList.push(cubeV11BB);
-        var cubeV12BB = createWall(Y,5.7,-20.7,-31.85);     transparentWallsList.push(cubeV12BB);
-        var cubeV13BB = createWall(Y,1,-20.7,-25.35);       transparentWallsList.push(cubeV13BB);
-        var cubeV14BB = createWall(Y,8.1,-20.7,-17.55);     transparentWallsList.push(cubeV14BB);
-        var cubeV15BB = createWall(Y,0.6,-20.7,-10);        transparentWallsList.push(cubeV15BB);
- 
-        var cubeH1BB = createWall(32.3,Y,-15.5,-9.7);       transparentWallsList.push(cubeH1BB);
-        var cubeH2BB = createWall(32.3,Y,-15.5,-80.3);      transparentWallsList.push(cubeH2BB);
-        var cubeH3BB = createWall(5.4,Y,-2.6,-69.2);        transparentWallsList.push(cubeH3BB);
-        var cubeH4BB = createWall(5.4,Y,-2.6,-65.3);        transparentWallsList.push(cubeH4BB);
-        var cubeH5BB = createWall(1.1,Y,-0.6,-58.9);        transparentWallsList.push(cubeH5BB);
-        var cubeH6BB = createWall(2.7,Y,-5.9,-58.7);        transparentWallsList.push(cubeH6BB);
-        var cubeH7BB = createWall(1.8,Y,-10.05,-58.7);      transparentWallsList.push(cubeH7BB);
-        var cubeH8BB = createWall(20.5,Y,-21,-56.9);        transparentWallsList.push(cubeH8BB);
-        var cubeH9BB = createWall(1.5,Y,-21.25,-48);        transparentWallsList.push(cubeH9BB);
-        var cubeH10BB = createWall(5.9,Y,-28.2,-48);        transparentWallsList.push(cubeH10BB);
-        var cubeH11BB = createWall(11,Y,-25.55,-40.35);     transparentWallsList.push(cubeH11BB);
-        var cubeH12BB = createWall(10,Y,-26,-32.85);        transparentWallsList.push(cubeH12BB);
-        var cubeH13BB = createWall(10,Y,-26,-25.3);         transparentWallsList.push(cubeH13BB);
-        var cubeH14BB = createWall(10,Y,-26,-17.8);         transparentWallsList.push(cubeH14BB);
-        var cubeH15BB = createWall(6.15,Y,-13.2,-40.35);    transparentWallsList.push(cubeH15BB);
-        var cubeH16BB = createWall(7,Y,-3.38,-40.35);       transparentWallsList.push(cubeH16BB);
-        var cubeH17BB = createWall(6,Y,-13.7,-50.5);        transparentWallsList.push(cubeH17BB);
-   
-        //var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
+        // var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
 
 
         //Set lights by using the created function above
+
         var light1 = setPointLight(3,-5,-12.5);      //Blue
         var light2 = setPointLight(3,-11.5,-16);     //Yellow
         var light3 = setPointLight(3,-15.5,-23);     //Red
         var light4 = setPointLight(3,-17,-16);
         var light5 = setPointLight(3,-22.5,-25);
-        var light6 = setPointLight(3,-26,-14);
+        var light6 = setPointLight(3,-26,-17);
         var light7 = setPointLight(3,-26,-33);
         var light8 = setPointLight(3,-5,-22.5);
         var light9 = setPointLight(3,-10.5,-32.5);
@@ -1167,28 +1161,68 @@ function createWall(y,z,Y,Z){
         var light12 = setPointLight(3,-6,-73);
         var light13 = setPointLight(3,-15,-73);
         var light14 = setPointLight(3,-25,-74);
-
-
+        //var light15 = setPointLight(1,-15,0);
         
 
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
 
-        document.getElementById("label").innerHTML = departmentDatabase[0][0];
-        document.getElementById("list").innerHTML = departmentDatabase[0][1];
-        document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][0];
-        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+        
 
-        // var dlight1 = setDirectionalLight(10,-30,-80);
-        // var dlight2 = setDirectionalLight(10,30,80);
-        // var dlight3 = setDirectionalLight(10,-30,80);
-        // var dlight4 = setDirectionalLight(10,30,-80);
+
+        //var lightD1 = setDirectionalLight(20,-10,-40);                                     //Use the function to set the light
+        //setDirectionalLight(light2,0,50,-30);
+        //setDirectionalLight(light3,20,-30,-10);
+        //setDirectionalLight(light4,20,30,-10);
 
         animate();
 
     </script>
 
-
+    <div id="glass" class="glass" onmouseover="nowin()" onmouseleave="nowout()"></div>
+    <div class="name"><strong>IDM</strong></div>
+    <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    <div id="information" class="information_class" >                    
+        <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
+            <p1 style="font-size: 3.3vmin;" id="label">Department Building</p1><br><br>
+            <ul id="list" style="list-style-type:square; font-size: 2.15vmin;">                                   <!--Top right main information list-->
+                <li>Welcome to Computer Engineering Department</li>
+                <li>Head of the department is Mr.Rohitha</li>
+                <li>This is a 4 story building</li>
+            </ul>
+        </div>
+        <div id="hint" class="hint_class">Click on the building for more details</div>
+        <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
+            <p2 id="label2" class="label2_class">More information here</p2>          
+            <ul id="list2" class="list2_class" style="list-style-type:square;">                                             <!--Top right more information list-->
+                <li>Welcome to Computer Engineering Department, University of Peradeniya.</li>
+                <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
+                <li>This is a 4 story building which has 4 labs and bla bla bla</li>
+            </ul>
+            <button id="moreButton" class="moreButton_class">More</button>
+        </div>
+    </div>
+    
+    <div id="latterPanel" class="latterPanelClass">
+        <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
+            <div id="searchBar" class="searchBar">
+                <input id="searchQueryInput" class="searchQueryInput_class" type="text" name="searchQueryInput" placeholder="Search" value="" />
+                <button id="searchQuerySubmit" class="searchQuerySubmit_class" type="submit" name="searchQuerySubmit">
+                  <svg style="width:3.4vmin;height:3.4vmin" viewBox="0 0 24 24"><path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                  </svg>
+                </button>
+            </div>
+        </div>
+        <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
+    </div>
+    <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
+    <div class="viewsButtonClass" id="viewsButton">
+        <button class="leftTopButtonClass" id="leftTopButton" onclick="leftTop()">BIRD</button>
+        <button class="leftBottomButtonClass" id="leftBottomButton" onclick="leftBottom()">DRONE</button>
+        <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
+    </div>
+    <div id="aim" class="aim"></div>
 </body>
 </html>
 
