@@ -1110,7 +1110,7 @@ function createWall(y,z,Y,Z){
 
         var panel14_1BB = createTransparentPanel(14,0.84,14.4,-5.48,-72.8);     PanelsList.push(panel14_1BB);
         var panel14_2BB = createTransparentPanel(14,25.1,21.3,-18.45,-69.35);   PanelsList.push(panel14_2BB);
-        var panel14_3BB = createTransparentPanel(14,20,1.45,-21,-57.975); 
+        var panel14_3BB = createTransparentPanel(14,20,1.45,-21,-57.975);       PanelsList.push(panel14_3BB);
 
         var transparentWallsList = [];
 
@@ -1148,7 +1148,7 @@ function createWall(y,z,Y,Z){
         var cubeH16BB = createWall(7,Y,-3.38,-40.35);       transparentWallsList.push(cubeH16BB);
         var cubeH17BB = createWall(6,Y,-13.7,-50.5);        transparentWallsList.push(cubeH17BB);
    
-        var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
+        //var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
 
 
         //Set lights by using the created function above
@@ -1174,7 +1174,11 @@ function createWall(y,z,Y,Z){
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
 
-        
+        document.getElementById("label").innerHTML = departmentDatabase[0][0];
+        document.getElementById("list").innerHTML = departmentDatabase[0][1];
+        document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][0];
+        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+
         // var dlight1 = setDirectionalLight(10,-30,-80);
         // var dlight2 = setDirectionalLight(10,30,80);
         // var dlight3 = setDirectionalLight(10,-30,80);
