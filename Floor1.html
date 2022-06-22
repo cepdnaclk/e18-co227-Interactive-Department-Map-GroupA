@@ -350,7 +350,7 @@
 
 //Creating Transparent Objects
         var transparentMaterialArray = [];
-        for(var i=0;i<23;i++){
+        for(var i=0;i<15;i++){
             transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
         }
         function createTransparentObject(buildingID,horv,yPosition,zPosition){
@@ -362,6 +362,8 @@
                 var geometry = new THREE.BoxGeometry(6.5617,0.1,2.7);
             }else if(horv=="hl"){
                 var geometry = new THREE.BoxGeometry(6.54,3,0.2);
+            }else if(horv=="hss"){
+                var geometry = new THREE.BoxGeometry(7.6,1.9,0.05);
             }
             var material = transparentMaterialArray[buildingID]
             var cube = new THREE.Mesh(geometry,material);
@@ -374,7 +376,7 @@
         }
 
         var transparentMaterialForPanelsArray = [];
-        for(var i=0;i<23;i++){
+        for(var i=0;i<15;i++){
             transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
@@ -457,10 +459,14 @@ function createWall(y,z,Y,Z){
             if(ViewMode=="sky"){
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
                     await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.position.y += 1*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.y += 1*S; 
-                    backCameraBall.position.y += 1*S;
-                    topCameraBall.position.y += 1*S;
+                    camera.position.y += Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y += Math.cos(angle_x)*S; 
+                    backCameraBall.position.y += Math.cos(angle_x)*S;
+                    topCameraBall.position.y += Math.cos(angle_x)*S;
+                    camera.position.z += Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z += Math.sin(angle_x)*S; 
+                    backCameraBall.position.z += Math.sin(angle_x)*S;
+                    topCameraBall.position.z += Math.sin(angle_x)*S;
                 }
             }else{
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
@@ -480,10 +486,14 @@ function createWall(y,z,Y,Z){
             if(ViewMode=="sky"){
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
                     await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.position.y -= 1*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.y -= 1*S; 
-                    backCameraBall.position.y -= 1*S;
-                    topCameraBall.position.y -= 1*S;
+                    camera.position.y -= Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y -= Math.cos(angle_x)*S; 
+                    backCameraBall.position.y -= Math.cos(angle_x)*S;
+                    topCameraBall.position.y -= Math.cos(angle_x)*S;
+                    camera.position.z -= Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z -= Math.sin(angle_x)*S; 
+                    backCameraBall.position.z -= Math.sin(angle_x)*S;
+                    topCameraBall.position.z -= Math.sin(angle_x)*S;
                 }
             }else{
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
@@ -1068,6 +1078,7 @@ function createWall(y,z,Y,Z){
 
         var O11_door1 = createTransparentObject(11,"h",-8.5,-40.2); //i
         var O11_door2 = createTransparentObject(11,"v",-10.72,-54.57); //b
+        var O11_door3 = createTransparentObject(11,"hss",-8.15,-58.53); //z
         var O11_door4 = createTransparentObject(11,"hl",-2.85,-59.2); //l
 
         var O12_door1 = createTransparentObject(12,"v",-5.06,-67.15); //j
@@ -1076,7 +1087,7 @@ function createWall(y,z,Y,Z){
         
         var O14_door1 = createTransparentObject(14,"v",-4.84,-73.75); //m
         var O14_door2 = createTransparentObject(14,"v",-4.84,-67.15); //j
-
+        var O14_door3 = createTransparentObject(14,"hss",-8.15,-58.47); //z
 
         var PanelsList = [];
         var idsOfPanelList = [];

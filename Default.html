@@ -462,10 +462,14 @@ function createWall(y,z,Y,Z){
             if(ViewMode=="sky"){
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
                     await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.position.y += 1*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.y += 1*S; 
-                    backCameraBall.position.y += 1*S;
-                    topCameraBall.position.y += 1*S;
+                    camera.position.y += Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y += Math.cos(angle_x)*S; 
+                    backCameraBall.position.y += Math.cos(angle_x)*S;
+                    topCameraBall.position.y += Math.cos(angle_x)*S;
+                    camera.position.z += Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z += Math.sin(angle_x)*S; 
+                    backCameraBall.position.z += Math.sin(angle_x)*S;
+                    topCameraBall.position.z += Math.sin(angle_x)*S;
                 }
             }else{
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
@@ -485,10 +489,14 @@ function createWall(y,z,Y,Z){
             if(ViewMode=="sky"){
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
                     await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.position.y -= 1*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.y -= 1*S; 
-                    backCameraBall.position.y -= 1*S;
-                    topCameraBall.position.y -= 1*S;
+                    camera.position.y -= Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y -= Math.cos(angle_x)*S; 
+                    backCameraBall.position.y -= Math.cos(angle_x)*S;
+                    topCameraBall.position.y -= Math.cos(angle_x)*S;
+                    camera.position.z -= Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z -= Math.sin(angle_x)*S; 
+                    backCameraBall.position.z -= Math.sin(angle_x)*S;
+                    topCameraBall.position.z -= Math.sin(angle_x)*S;
                 }
             }else{
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements

@@ -119,6 +119,7 @@
         //     xhr.send();
         // }
 
+
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
@@ -131,36 +132,29 @@
         var yR = R, zR = 0;
         var angle_x= initialCamera_Xangle,angle_y=0;                //Starting rotation values of the camera
 
+
 //Database
         //This database is used to load the information about the buildings
         var departmentDatabase;
         
         //Data of a particular room can be added to the database as an array
         var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
-        var building1 = ["Department Office","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building2 = ["HOD's Office","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building3 = ["Conference Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building4 = ["Central Lobby","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building5 = ["Filling Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building6 = ["Staff Common Room 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building7 = ["Staff Common Room 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building8 = ["Open Lab 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building9 = ["Open Lab 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building10 = ["Gents Washrooms","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building11 = ["Ladies Washroom","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building12 = ["ACES Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building13 = ["Mens Washroom 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building14 = ["Mens Washroom 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building15 = ["Ladies Washroom 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building16 = ["Ladies Washroom 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building17 = ["Garden","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building18 = ["Corridor 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building19 = ["Corridor 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building20 = ["Lift","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building21 = ["Servant Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building22 = ["Entrance Lobby","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building1 = ["Technical Offcer's room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building2 = ["Insructors' Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building3 = ["Lecturers' Room 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building4 = ["Lecturers' Room 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building5 = ["Lecturers' Room 3","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building6 = ["Lecturers' Room 4","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building7 = ["Lecturers' Room 5","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building8 = ["Lecturers' Room 6","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building9 = ["Network Engineering Lab","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building10 = ["Corridor","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building11 = ["Main room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building12 = ["Servant Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building13 = ["Lift","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building14 = ["Computer Laboratory","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
 
-        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14,building15,building16,building17,building18,building19,building20,building21,building22];
+        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14];
         
 
         //Scene
@@ -356,18 +350,20 @@
 
 //Creating Transparent Objects
         var transparentMaterialArray = [];
-        for(var i=0;i<23;i++){
+        for(var i=0;i<15;i++){
             transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
         }
         function createTransparentObject(buildingID,horv,yPosition,zPosition){
             if(horv=="h"){
-                var geometry = new THREE.BoxGeometry(6.5617,2.7,0.2);
+                var geometry = new THREE.BoxGeometry(6.5617,2.63,0.2);
             }else if(horv=="v"){
-                var geometry = new THREE.BoxGeometry(6.5617,0.2,2.7);
+                var geometry = new THREE.BoxGeometry(6.5617,0.2,2.63);
             }else if(horv=="vs"){
                 var geometry = new THREE.BoxGeometry(6.5617,0.1,2.7);
             }else if(horv=="hl"){
-                var geometry = new THREE.BoxGeometry(6.52,2.9,0.2);
+                var geometry = new THREE.BoxGeometry(6.54,3,0.2);
+            }else if(horv=="hss"){
+                var geometry = new THREE.BoxGeometry(7.6,1.9,0.05);
             }
             var material = transparentMaterialArray[buildingID]
             var cube = new THREE.Mesh(geometry,material);
@@ -380,7 +376,7 @@
         }
 
         var transparentMaterialForPanelsArray = [];
-        for(var i=0;i<23;i++){
+        for(var i=0;i<15;i++){
             transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
@@ -445,7 +441,7 @@ function createWall(y,z,Y,Z){
         }
 
         function setPointLight(X,Y,Z) {                           //This function set the light
-            var lightId = new THREE.PointLight(0xffffff,0.2); //Soft white light
+            var lightId = new THREE.PointLight(0xffffff,0.3); //Soft white light
             scene.add(lightId);                           //Add light to the scene
             lightId.position.set(X,Y,Z);
             return lightId;
@@ -463,10 +459,14 @@ function createWall(y,z,Y,Z){
             if(ViewMode=="sky"){
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
                     await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.position.y += 1*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.y += 1*S; 
-                    backCameraBall.position.y += 1*S;
-                    topCameraBall.position.y += 1*S;
+                    camera.position.y += Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y += Math.cos(angle_x)*S; 
+                    backCameraBall.position.y += Math.cos(angle_x)*S;
+                    topCameraBall.position.y += Math.cos(angle_x)*S;
+                    camera.position.z += Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z += Math.sin(angle_x)*S; 
+                    backCameraBall.position.z += Math.sin(angle_x)*S;
+                    topCameraBall.position.z += Math.sin(angle_x)*S;
                 }
             }else{
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
@@ -486,10 +486,15 @@ function createWall(y,z,Y,Z){
             if(ViewMode=="sky"){
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
                     await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.position.y -= 1*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.y -= 1*S; 
-                    backCameraBall.position.y -= 1*S;
-                    topCameraBall.position.y -= 1*S;
+                    camera.position.y -= Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y -= Math.cos(angle_x)*S; 
+                    backCameraBall.position.y -= Math.cos(angle_x)*S;
+                    topCameraBall.position.y -= Math.cos(angle_x)*S;
+                    camera.position.z -= Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z -= Math.sin(angle_x)*S; 
+                    backCameraBall.position.z -= Math.sin(angle_x)*S;
+                    topCameraBall.position.z -= Math.sin(angle_x)*S;
+                
                 }
             }else{
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
@@ -713,7 +718,7 @@ function createWall(y,z,Y,Z){
                     clicked = !clicked;    
                 }
                 for(var i=0;i<transparentMaterialArray.length;i++){
-                    //transparentMaterialArray[i].color.set(0x000000);
+                    transparentMaterialArray[i].color.set(0x000000);
                     transparentMaterialArray[i].opacity = 1;
                     transparentMaterialForPanelsArray[i].opacity = 0;
                 }        
@@ -767,7 +772,7 @@ function createWall(y,z,Y,Z){
                         clicked = !clicked;    
                 }
                 for(var i=0;i<transparentMaterialArray.length;i++){
-                    //transparentMaterialArray[i].color.set(0x000000);
+                    transparentMaterialArray[i].color.set(0x000000);
                     transparentMaterialArray[i].opacity = 1;
                     transparentMaterialForPanelsArray[i].opacity = 0;
                 }
@@ -919,7 +924,7 @@ function createWall(y,z,Y,Z){
         //Front cube
         var frontCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(frontCameraBall);
         frontCameraBall.position.x = initialCamera_X;
@@ -932,7 +937,7 @@ function createWall(y,z,Y,Z){
         //Back cube
         var backCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(backCameraBall);
         backCameraBall.position.x = initialCamera_X;
@@ -945,7 +950,7 @@ function createWall(y,z,Y,Z){
         //Top cube
         var topCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(0.1,0.1,0.1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
         );
         scene.add(topCameraBall);
         topCameraBall.position.x = 3.75;
@@ -1023,6 +1028,7 @@ function createWall(y,z,Y,Z){
         camera.rotation.x += initialCamera_Xangle;
         camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
 
+
 //Rendering
         var animate = function(){
             
@@ -1057,23 +1063,25 @@ function createWall(y,z,Y,Z){
         var S04_door5 = createTransparentObject(4,"h",-18.03,-40.42); //c
         var S04_door6 = createTransparentObject(4,"h",-8.5,-40.42); //i
 
-        var S08_door1 = createTransparentObject(8,"v",-20.58,-11.85); //e
-
-        var S07_door1 = createTransparentObject(7,"v",-20.58,-23.25); //f
+        var S05_door1 = createTransparentObject(5,"v",-20.58,-36.4); //h
         
         var S06_door1 = createTransparentObject(6,"v",-20.58,-27.4); //g
         
-        var S05_door1 = createTransparentObject(5,"v",-20.58,-36.4); //h
+        var S07_door1 = createTransparentObject(7,"v",-20.58,-23.25); //f
+        
+        var S08_door1 = createTransparentObject(8,"v",-20.58,-11.85); //e
 
-        var S09_door1 = createTransparentObject(4,"h",-8.5,-40.2); //i
-        var S09_door2 = createTransparentObject(2,"v",-10.72,-54.57); //b
-        var S09_door4 = createTransparentObject(4,"hl",-2.86,-59); //l has to create the other one (inside the lift)
+        var S09_door1 = createTransparentObject(9,"h",-8.5,-40.2); //i
+        var S09_door2 = createTransparentObject(9,"v",-10.72,-54.57); //b
+        var S09_door3 = createTransparentObject(9,"hss",-8.15,-58.53); //z
+        var S09_door4 = createTransparentObject(9,"hl",-2.86,-59); //l has to create the other one (inside the lift)
 
         var S11_door1 = createTransparentObject(11,"vs",-4.84,-67.25); //j
+        var S11_door3 = createTransparentObject(11,"hss",-8.15,-58.47); //z
         var S11_door3 = createTransparentObject(11,"vs",-10.35,-64.25); //k
         var S11_door4 = createTransparentObject(11,"h",-8.45,-68.63); //a
 
-        var S12_door1 = createTransparentObject(11,"vs",-4.96,-67.25); //j
+        var S12_door1 = createTransparentObject(12,"vs",-4.96,-67.25); //j
         
         var S13_door1 = createTransparentObject(13,"vs",-10.35,-64.25); //k
 
@@ -1081,100 +1089,83 @@ function createWall(y,z,Y,Z){
         var PanelsList = [];
         var idsOfPanelList = [];
 
-        // var panel04_1BB = createTransparentPanel(4,10.56,2.6,-5.68,-56.25);         PanelsList.push(panel04_1BB);  
-        // var panel04_2BB = createTransparentPanel(4,20.47,14.69,-10.635,-47.605);    PanelsList.push(panel04_2BB);
+        // var panel01_1BB = createTransparentPanel(1,5,11.2,-2.5,-74.45);         PanelsList.push(panel01_1BB);
 
-        // var panel05_1BB = createTransparentPanel(5,9.31,14.6,-25.944,-47.56);       PanelsList.push(panel05_1BB);
-
-        // var panel06_1BB = createTransparentPanel(6,9.31,9.27,-25.944,-35.22);       PanelsList.push(panel06_1BB);
-        // var panel06_2BB = createTransparentPanel(6,4.31,4.97,-28.444,-28.1);        PanelsList.push(panel06_2BB);
-
-        // var panel07_1BB = createTransparentPanel(7,9.31,9.44,-25.944,-15.12);       PanelsList.push(panel07_1BB);
-        // var panel07_2BB = createTransparentPanel(7,4.31,5.37,-28.444,-22.535);      PanelsList.push(panel07_2BB);
-
-        // var panel08_1BB = createTransparentPanel(8,20.47,14.805,-10.635,-32.7);     PanelsList.push(panel08_1BB);
+        // var panel02_1BB = createTransparentPanel(2,5.51,10,-13.75,-45.6);       PanelsList.push(panel02_1BB);
         
-        // var panel09_1BB = createTransparentPanel(9,8,9.63,-16.87,-15.2);            PanelsList.push(panel09_1BB);
+        // var panel03_1BB = createTransparentPanel(3,10,8.64,-26,-52.28);         PanelsList.push(panel03_1BB);
 
-        // var panel10_1BB = createTransparentPanel(10,4.4,4.975,-2.59,-22.53);        PanelsList.push(panel10_1BB);
+        // var panel04_1BB = createTransparentPanel(4,10,7.3,-26,-44.24);          PanelsList.push(panel04_1BB);  
+
+        // var panel05_1BB = createTransparentPanel(5,10,6.85,-26,-36.57);         PanelsList.push(panel05_1BB);
+
+        // var panel06_1BB = createTransparentPanel(6,10,6.85,-26,-29.08);         PanelsList.push(panel06_1BB);
+
+        // var panel07_1BB = createTransparentPanel(7,10,6.85,-26,-21.58);         PanelsList.push(panel07_1BB);
+
+        // var panel08_1BB = createTransparentPanel(8,10,7.48,-26,-13.75);         PanelsList.push(panel08_1BB);
         
-        // var panel11_1BB = createTransparentPanel(11,4.56,4.975,-7.27,-22.53);       PanelsList.push(panel11_1BB);
+        // var panel09_1BB = createTransparentPanel(9,20.39,30,-10.15,-24.995);    PanelsList.push(panel09_1BB);
+
+        // var panel10_1BB = createTransparentPanel(10,9.42,5.95,-15.71,-53.625);  PanelsList.push(panel10_1BB);
+        // var panel10_2BB = createTransparentPanel(10,3.86,10.04,-18.49,-45.63);  PanelsList.push(panel10_2BB);
+        
+        // var panel11_1BB = createTransparentPanel(11,10.4,18,-5.2,-49.6);        PanelsList.push(panel11_1BB);
     
-        // var panel12_1BB = createTransparentPanel(12,9.2,4.23,-5,-12.5);             PanelsList.push(panel12_1BB);
+        // var panel12_1BB = createTransparentPanel(12,5,3.2,-2.5,-67.2);          PanelsList.push(panel12_1BB);
 
-        // var panel13_1BB = createTransparentPanel(13,1.9,4.8,-1.34,-17.44);          PanelsList.push(panel13_1BB);
+        // var panel13_1BB = createTransparentPanel(13,5.3,5.76,-2.65,-62.12);     PanelsList.push(panel13_1BB);
 
-        // var panel14_1BB = createTransparentPanel(14,2.3,4.8,-3.65,-17.44);          PanelsList.push(panel14_1BB);
-
-        // var panel15_1BB = createTransparentPanel(15,2.3,4.8,-6.15,-17.44);          PanelsList.push(panel15_1BB);
-
-        // var panel16_1BB = createTransparentPanel(16,2.1,4.8,-8.55,-17.44);          PanelsList.push(panel16_1BB);
-
-        // var panel18_1BB = createTransparentPanel(18,2.74,14.6,-11.33,-17.65);       PanelsList.push(panel18_1BB);
-        // var panel18_2BB = createTransparentPanel(18,8.2,4.7,-16.8,-22.6);           PanelsList.push(panel18_2BB);
-
-        // var panel19_1BB = createTransparentPanel(19,4.6,9.967,-23.59,-25.22);       PanelsList.push(panel19_1BB);
-
+        // var panel14_1BB = createTransparentPanel(14,0.84,14.4,-5.48,-72.8);     PanelsList.push(panel14_1BB);
+        // var panel14_2BB = createTransparentPanel(14,25.1,21.3,-18.45,-69.35);   PanelsList.push(panel14_2BB);
+        // var panel14_3BB = createTransparentPanel(14,20,1.45,-21,-57.975);       PanelsList.push(panel14_3BB);
 
         var transparentWallsList = [];
 
-        // var cubeV1BB = createWall(Y,63.3,-0.2,-41.65);  transparentWallsList.push(cubeV1BB);
-        // var cubeV2BB = createWall(Y,3.04,-0.2,-78.46);  transparentWallsList.push(cubeV2BB);
-        // var cubeV3BB = createWall(Y,70,-30.8,-45);      transparentWallsList.push(cubeV3BB);
-        // var cubeV4BB = createWall(Y,2,-22,-67);         transparentWallsList.push(cubeV4BB);
-        // var cubeV5BB = createWall(Y,2,-19.2,-66.8);     transparentWallsList.push(cubeV5BB);
-        // var cubeV6BB = createWall(Y,9,-19.2,-75.5);     transparentWallsList.push(cubeV6BB);
-        // var cubeV7BB = createWall(Y,9.8,-11.2,-75.2);   transparentWallsList.push(cubeV7BB);
-        // var cubeV8BB = createWall(Y,3.4,-11.2,-65.25);  transparentWallsList.push(cubeV8BB);
-        // var cubeV9BB = createWall(Y,5.3,-11.2,-57.6);   transparentWallsList.push(cubeV9BB);
-        // var cubeV10BB = createWall(Y,8.6,-6.1,-61.7);   transparentWallsList.push(cubeV10BB);
-        // var cubeV11BB = createWall(Y,1.6,-21.1,-54);    transparentWallsList.push(cubeV11BB);
-        // var cubeV12BB = createWall(Y,21,-21.1,-39.5);   transparentWallsList.push(cubeV12BB);
-        // var cubeV13BB = createWall(Y,2.1,-21.1,-25);    transparentWallsList.push(cubeV13BB);
-        // var cubeV14BB = createWall(Y,10.8,-21.1,-15.4); transparentWallsList.push(cubeV14BB);
-        // var cubeV15BB = createWall(Y,11,-26,-25.2);     transparentWallsList.push(cubeV15BB);
-        // var cubeV16BB = createWall(Y,1,-12.9,-19.8);    transparentWallsList.push(cubeV16BB);
-        // var cubeV17BB = createWall(Y,5.5,-12.9,-13.2);  transparentWallsList.push(cubeV17BB);
-        // var cubeV18BB = createWall(Y,0.8,-9.8,-10.3);   transparentWallsList.push(cubeV18BB);
-        // var cubeV19BB = createWall(Y,11.3,-9.8,-19.75); transparentWallsList.push(cubeV19BB);
-        // var cubeV20BB = createWall(Y,10.5,-4.9,-20);    transparentWallsList.push(cubeV20BB);
-        // var cubeV21BB = createWall(Y,5,-2.45,-17.5);    transparentWallsList.push(cubeV21BB);
-        // var cubeV22BB = createWall(Y,5,-7.45,-17.5);    transparentWallsList.push(cubeV22BB);
-
-        // var cubeH1BB = createWall(1,Y,-0.5,-10.2);      transparentWallsList.push(cubeH1BB);
-        // var cubeH2BB = createWall(27,Y,-17.5,-10.2);    transparentWallsList.push(cubeH2BB);
-        // var cubeH3BB = createWall(15.7,Y,-7.85,-40.2);  transparentWallsList.push(cubeH3BB);
-        // var cubeH4BB = createWall(12,Y,-25,-40.2);      transparentWallsList.push(cubeH4BB);
-        // var cubeH5BB = createWall(1,Y,-0.5,-25.1);      transparentWallsList.push(cubeH5BB);
-        // var cubeH6BB = createWall(1.6,Y,-4.95,-25.1);   transparentWallsList.push(cubeH6BB);
-        // var cubeH7BB = createWall(6,Y,-11.85,-25.1);    transparentWallsList.push(cubeH7BB);
-        // var cubeH8BB = createWall(2.8,Y,-19.5,-25.1);   transparentWallsList.push(cubeH8BB);
-        // var cubeH9BB = createWall(5,Y,-28.5,-25.4);     transparentWallsList.push(cubeH9BB);
-        // var cubeH10BB = createWall(10,Y,-5,-14.9);      transparentWallsList.push(cubeH10BB);
-        // var cubeH11BB = createWall(9.4,Y,-17.5,-20);    transparentWallsList.push(cubeH11BB);
-        // var cubeH12BB = createWall(1,Y,-21.5,-30.4);    transparentWallsList.push(cubeH12BB);
-        // var cubeH13BB = createWall(20,Y,-21,-55.1);     transparentWallsList.push(cubeH13BB);
-        // var cubeH14BB = createWall(1,Y,-0.5,-57.8);     transparentWallsList.push(cubeH14BB);
-        // var cubeH15BB = createWall(2.5,Y,-5.6,-57.8);   transparentWallsList.push(cubeH15BB);
-        // var cubeH16BB = createWall(1,Y,-10.5,-57.8);    transparentWallsList.push(cubeH16BB);
-        // var cubeH17BB = createWall(11,Y,-16.5,-65.8);   transparentWallsList.push(cubeH17BB);
-        // var cubeH18BB = createWall(6,Y,-3,-65.1);       transparentWallsList.push(cubeH18BB);
-        // var cubeH19BB = createWall(6.5,Y,-3.25,-70.2);  transparentWallsList.push(cubeH19BB);
-        // var cubeH20BB = createWall(4,Y,-29,-67.9);      transparentWallsList.push(cubeH20BB);
-        // var cubeH21BB = createWall(1.6,Y,-22.8,-67.9);  transparentWallsList.push(cubeH21BB);
-        // var cubeH22BB = createWall(31,Y,-15.5,-79.8);   transparentWallsList.push(cubeH22BB);
-
+        // var cubeV1BB = createWall(Y,70,0.3,-45);            transparentWallsList.push(cubeV1BB);
+        // var cubeV2BB = createWall(Y,70,-31.3,-45);          transparentWallsList.push(cubeV2BB);
+        // var cubeV3BB = createWall(Y,7.4,-5.6,-62.1);        transparentWallsList.push(cubeV3BB);
+        // var cubeV4BB = createWall(Y,3.4,-5,-70.35);         transparentWallsList.push(cubeV4BB);
+        // var cubeV5BB = createWall(Y,4.4,-5,-77.7);          transparentWallsList.push(cubeV5BB);
+        // var cubeV6BB = createWall(Y,12.8,-10.6,-46.5);      transparentWallsList.push(cubeV6BB);
+        // var cubeV7BB = createWall(Y,2.4,-10.6,-57.4);       transparentWallsList.push(cubeV7BB);
+        // var cubeV8BB = createWall(Y,6.6,-16.6,-43.3);       transparentWallsList.push(cubeV8BB);
+        // var cubeV9BB = createWall(Y,1,-16.6,-50.4);         transparentWallsList.push(cubeV9BB);
+        // var cubeV10BB = createWall(Y,1.7,-20.7,-56.44);     transparentWallsList.push(cubeV10BB);
+        // var cubeV11BB = createWall(Y,14.4,-20.7,-45.2);     transparentWallsList.push(cubeV11BB);
+        // var cubeV12BB = createWall(Y,5.7,-20.7,-31.85);     transparentWallsList.push(cubeV12BB);
+        // var cubeV13BB = createWall(Y,1,-20.7,-25.35);       transparentWallsList.push(cubeV13BB);
+        // var cubeV14BB = createWall(Y,8.1,-20.7,-17.55);     transparentWallsList.push(cubeV14BB);
+        // var cubeV15BB = createWall(Y,0.6,-20.7,-10);        transparentWallsList.push(cubeV15BB);
+ 
+        // var cubeH1BB = createWall(32.3,Y,-15.5,-9.7);       transparentWallsList.push(cubeH1BB);
+        // var cubeH2BB = createWall(32.3,Y,-15.5,-80.3);      transparentWallsList.push(cubeH2BB);
+        // var cubeH3BB = createWall(5.4,Y,-2.6,-69.2);        transparentWallsList.push(cubeH3BB);
+        // var cubeH4BB = createWall(5.4,Y,-2.6,-65.3);        transparentWallsList.push(cubeH4BB);
+        // var cubeH5BB = createWall(1.1,Y,-0.6,-58.9);        transparentWallsList.push(cubeH5BB);
+        // var cubeH6BB = createWall(2.7,Y,-5.9,-58.7);        transparentWallsList.push(cubeH6BB);
+        // var cubeH7BB = createWall(1.8,Y,-10.05,-58.7);      transparentWallsList.push(cubeH7BB);
+        // var cubeH8BB = createWall(20.5,Y,-21,-56.9);        transparentWallsList.push(cubeH8BB);
+        // var cubeH9BB = createWall(1.5,Y,-21.25,-48);        transparentWallsList.push(cubeH9BB);
+        // var cubeH10BB = createWall(5.9,Y,-28.2,-48);        transparentWallsList.push(cubeH10BB);
+        // var cubeH11BB = createWall(11,Y,-25.55,-40.35);     transparentWallsList.push(cubeH11BB);
+        // var cubeH12BB = createWall(10,Y,-26,-32.85);        transparentWallsList.push(cubeH12BB);
+        // var cubeH13BB = createWall(10,Y,-26,-25.3);         transparentWallsList.push(cubeH13BB);
+        // var cubeH14BB = createWall(10,Y,-26,-17.8);         transparentWallsList.push(cubeH14BB);
+        // var cubeH15BB = createWall(6.15,Y,-13.2,-40.35);    transparentWallsList.push(cubeH15BB);
+        // var cubeH16BB = createWall(7,Y,-3.38,-40.35);       transparentWallsList.push(cubeH16BB);
+        // var cubeH17BB = createWall(6,Y,-13.7,-50.5);        transparentWallsList.push(cubeH17BB);
+   
         //var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
 
 
         //Set lights by using the created function above
-
         var light1 = setPointLight(3,-5,-12.5);      //Blue
         var light2 = setPointLight(3,-11.5,-16);     //Yellow
         var light3 = setPointLight(3,-15.5,-23);     //Red
         var light4 = setPointLight(3,-17,-16);
         var light5 = setPointLight(3,-22.5,-25);
-        var light6 = setPointLight(3,-26,-17);
+        var light6 = setPointLight(3,-26,-14);
         var light7 = setPointLight(3,-26,-33);
         var light8 = setPointLight(3,-5,-22.5);
         var light9 = setPointLight(3,-10.5,-32.5);
@@ -1184,7 +1175,8 @@ function createWall(y,z,Y,Z){
         var light12 = setPointLight(3,-6,-73);
         var light13 = setPointLight(3,-15,-73);
         var light14 = setPointLight(3,-25,-74);
-        //var light15 = setPointLight(1,-15,0);
+
+
         
 
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
@@ -1195,15 +1187,16 @@ function createWall(y,z,Y,Z){
         document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][0];
         document.getElementById("list2").innerHTML = departmentDatabase[0][2];
 
-
-        //var lightD1 = setDirectionalLight(20,-10,-40);                                     //Use the function to set the light
-        //setDirectionalLight(light2,0,50,-30);
-        //setDirectionalLight(light3,20,-30,-10);
-        //setDirectionalLight(light4,20,30,-10);
+        // var dlight1 = setDirectionalLight(10,-30,-80);
+        // var dlight2 = setDirectionalLight(10,30,80);
+        // var dlight3 = setDirectionalLight(10,-30,80);
+        // var dlight4 = setDirectionalLight(10,30,-80);
 
         animate();
 
     </script>
+
+
 </body>
 </html>
 
