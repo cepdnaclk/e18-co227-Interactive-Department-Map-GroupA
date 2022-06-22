@@ -351,7 +351,7 @@
 
 //Creating Transparent Objects
         var transparentMaterialArray = [];
-        for(var i=0;i<23;i++){
+        for(var i=0;i<17;i++){
             transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
         }
         function createTransparentObject(buildingID,horv,yPosition,zPosition){
@@ -375,7 +375,7 @@
         }
 
         var transparentMaterialForPanelsArray = [];
-        for(var i=0;i<23;i++){
+        for(var i=0;i<17;i++){
             transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
@@ -458,10 +458,14 @@ function createWall(y,z,Y,Z){
             if(ViewMode=="sky"){
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
                     await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.position.y += 1*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.y += 1*S; 
-                    backCameraBall.position.y += 1*S;
-                    topCameraBall.position.y += 1*S;
+                    camera.position.y += Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y += Math.cos(angle_x)*S; 
+                    backCameraBall.position.y += Math.cos(angle_x)*S;
+                    topCameraBall.position.y += Math.cos(angle_x)*S;
+                    camera.position.z += Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z += Math.sin(angle_x)*S; 
+                    backCameraBall.position.z += Math.sin(angle_x)*S;
+                    topCameraBall.position.z += Math.sin(angle_x)*S;
                 }
             }else{
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
@@ -481,10 +485,14 @@ function createWall(y,z,Y,Z){
             if(ViewMode=="sky"){
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
                     await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.position.y -= 1*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.y -= 1*S; 
-                    backCameraBall.position.y -= 1*S;
-                    topCameraBall.position.y -= 1*S;
+                    camera.position.y -= Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y -= Math.cos(angle_x)*S; 
+                    backCameraBall.position.y -= Math.cos(angle_x)*S;
+                    topCameraBall.position.y -= Math.cos(angle_x)*S;
+                    camera.position.z -= Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z -= Math.sin(angle_x)*S; 
+                    backCameraBall.position.z -= Math.sin(angle_x)*S;
+                    topCameraBall.position.z -= Math.sin(angle_x)*S;
                 }
             }else{
                 for(var i =0;i<10;i++){         //Used a loop for smooth movements
@@ -1168,21 +1176,25 @@ function createWall(y,z,Y,Z){
 
 
         //Set lights by using the created function above
-        var light1 = setPointLight(3,-5,-12.5);      //Blue
-        var light2 = setPointLight(3,-11.5,-16);     //Yellow
-        var light3 = setPointLight(3,-15.5,-23);     //Red
-        var light4 = setPointLight(3,-17,-16);
-        var light5 = setPointLight(3,-22.5,-25);
-        var light6 = setPointLight(3,-26,-14);
-        var light7 = setPointLight(3,-26,-33);
+        var light1 = setPointLight(3,-5,-8);      //Blue
+        var light2 = setPointLight(3,-5,-16);     //Yellow
+        var light3 = setPointLight(3,-5,-26);     //Red
+        var light4 = setPointLight(3,-5,-22.5);
+        var light5 = setPointLight(3,-5,-39);
+        var light6 = setPointLight(3,-21,-25);
+        var light7 = setPointLight(3,-21,-35);
         var light8 = setPointLight(3,-5,-22.5);
-        var light9 = setPointLight(3,-10.5,-32.5);
-        var light10 = setPointLight(3,-26,-47.5);
-        var light11 = setPointLight(3,-14,-47.5);
-        var light11 = setPointLight(3,-21,-59);
-        var light12 = setPointLight(3,-6,-73);
-        var light13 = setPointLight(3,-15,-73);
-        var light14 = setPointLight(3,-25,-74);
+        var light9 = setPointLight(3,-3,-51);
+        var light10 = setPointLight(3,-2.5,-57);
+        var light11 = setPointLight(3,-2.5,-64);
+        var light11 = setPointLight(3,-10,-67);
+        var light12 = setPointLight(3,-20,-67);
+        var light13 = setPointLight(3,-28,-66);
+        var light14 = setPointLight(3,-28,-57.5);
+        var light14 = setPointLight(3,-28,-50);
+        var light14 = setPointLight(3,-16,-52);
+        var light14 = setPointLight(3,-11,-56);
+        var light14 = setPointLight(3,-22,-56);
 
 
         
