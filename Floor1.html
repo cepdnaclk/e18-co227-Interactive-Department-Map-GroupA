@@ -309,7 +309,7 @@
                     }
                 }
             });
-            domEvents.addEventListener(cube,'mouseover',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
                 if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.4;
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
@@ -1163,24 +1163,42 @@ function createWall(y,z,Y,Z){
 
 
         //Set lights by using the created function above
-        var light1 = setPointLight(3,-5,-12.5);      //Blue
-        var light2 = setPointLight(3,-11.5,-16);     //Yellow
-        var light3 = setPointLight(3,-15.5,-23);     //Red
-        var light4 = setPointLight(3,-17,-16);
-        var light5 = setPointLight(3,-22.5,-25);
-        var light6 = setPointLight(3,-26,-14);
-        var light7 = setPointLight(3,-26,-33);
-        var light8 = setPointLight(3,-5,-22.5);
-        var light9 = setPointLight(3,-10.5,-32.5);
-        var light10 = setPointLight(3,-26,-47.5);
-        var light11 = setPointLight(3,-14,-47.5);
-        var light11 = setPointLight(3,-21,-59);
-        var light12 = setPointLight(3,-6,-73);
-        var light13 = setPointLight(3,-15,-73);
-        var light14 = setPointLight(3,-25,-74);
+        // var light1 = setPointLight(3,-5,-12.5);      //Blue
+        // var light2 = setPointLight(3,-11.5,-16);     //Yellow
+        // var light3 = setPointLight(3,-15.5,-23);     //Red
+        // var light4 = setPointLight(3,-17,-16);
+        // var light5 = setPointLight(3,-22.5,-25);
+        // var light6 = setPointLight(3,-26,-14);
+        // var light7 = setPointLight(3,-26,-33);
+        // var light8 = setPointLight(3,-5,-22.5);
+        // var light9 = setPointLight(3,-10.5,-32.5);
+        // var light10 = setPointLight(3,-26,-47.5);
+        // var light11 = setPointLight(3,-14,-47.5);
+        // var light11 = setPointLight(3,-21,-59);
+        // var light12 = setPointLight(3,-6,-73);
+        // var light13 = setPointLight(3,-15,-73);
+        // var light14 = setPointLight(3,-25,-74);
 
+        var light18 = setPointLight(3,5,-20);
+        var light18 = setPointLight(3,5,-30);
+        var light18 = setPointLight(3,5,-40);
+        var light18 = setPointLight(3,5,-50);
+        var light18 = setPointLight(3,5,-60);
+        var light18 = setPointLight(3,5,-70);
 
+        var light18 = setPointLight(3,-35,-20);
+        var light18 = setPointLight(3,-35,-30);
+        var light18 = setPointLight(3,-35,-40);
+        var light18 = setPointLight(3,-35,-50);
+        var light18 = setPointLight(3,-35,-60);
+        var light18 = setPointLight(3,-35,-70);
+
+        var light18 = setPointLight(3,-6-5);
+        var light18 = setPointLight(3,-12-5);
+        var light18 = setPointLight(3,-18-5);
+        var light18 = setPointLight(3,-24-5);
         
+        var light18 = setPointLight(3,-6,-85);        
 
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );

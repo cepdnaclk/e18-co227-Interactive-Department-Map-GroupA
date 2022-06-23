@@ -268,7 +268,7 @@
                     }
                 }
             });
-            domEvents.addEventListener(cube,'mouseover',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
                 if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.4;
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
