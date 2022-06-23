@@ -9,6 +9,50 @@
     <script src="./js/jquery.js"></script>           <!-- Importing the jquery.js library-->
     <script src="./js/threex.domevents.js"></script> <!-- Importing the threex.domevents.js library-->
     <script src="./js/GLTFLoader.js"></script>       <!-- Importing the GLTFLoader.js library-->
+    <div id="glass" class="glass" onmouseover="nowin()" onmouseleave="nowout()"></div>
+    <div class="name"><strong>IDM</strong></div>
+    <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    <div id="information" class="information_class" >                    
+        <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
+            <p1 style="font-size: 3.3vmin;" id="label">Department Building</p1><br><br>
+            <ul id="list" style="list-style-type:square; font-size: 2.15vmin;">                                   <!--Top right main information list-->
+                <li>Welcome to Computer Engineering Department</li>
+                <li>Head of the department is Mr.Rohitha</li>
+                <li>This is a 4 story building</li>
+            </ul>
+        </div>
+        <div id="hint" class="hint_class">Click on the building for more details</div>
+        <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
+            <p2 id="label2" class="label2_class">More information here</p2>          
+            <ul id="list2" class="list2_class" style="list-style-type:square;">                                             <!--Top right more information list-->
+                <li>Welcome to Computer Engineering Department, University of Peradeniya.</li>
+                <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
+                <li>This is a 4 story building which has 4 labs and bla bla bla</li>
+            </ul>
+            <button id="moreButton" class="moreButton_class">More</button>
+        </div>
+    </div>
+    
+    <div id="latterPanel" class="latterPanelClass">
+        <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
+            <div id="searchBar" class="searchBar">
+                <input id="searchQueryInput" class="searchQueryInput_class" type="text" name="searchQueryInput" placeholder="Search" value="" />
+                <button id="searchQuerySubmit" class="searchQuerySubmit_class" type="submit" name="searchQuerySubmit">
+                  <svg style="width:3.4vmin;height:3.4vmin" viewBox="0 0 24 24"><path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                  </svg>
+                </button>
+            </div>
+        </div>
+        <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
+    </div>
+    <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
+    <div class="viewsButtonClass" id="viewsButton">
+        <button class="leftTopButtonClass" id="leftTopButton" onclick="leftTop()">BIRD</button>
+        <button class="leftBottomButtonClass" id="leftBottomButton" onclick="leftBottom()">DRONE</button>
+        <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
+    </div>
+    <div id="aim" class="aim"></div>
     <script type="text/javascript"> 
     
         // var conn = new ActiveXObject("ADODB.Connection");
@@ -76,7 +120,6 @@
         // }
 
 
-        var angle_x=0,angle_y=0;                //Starting rotation values of the camera
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
@@ -84,12 +127,16 @@
         var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
         var X = 0.52,Y=0.7,R=0.9,S=0.08;
         var Floor = 0;
+        var initialCamera_X = 0, initialCamera_Y = 0, initialCamera_Z = 0;
+        var initialCamera_Xangle = 0;
+        var yR = 0, zR = R; 
+        var angle_x=initialCamera_Xangle,angle_y=0;                //Starting rotation values of the camera
 
 //Database
         //This database is used to load the information about the buildings
         var departmentDatabase;
         
-        // //Data of a particular room can be added to the database as an array
+        //Data of a particular room can be added to the database as an array
         var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
         var building1 = ["Computer Vision Lab","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
         var building2 = ["Lab1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
@@ -108,13 +155,9 @@
         var building15 = ["Corridor 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
         var building16 = ["Corridor 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
         var building17 = ["Lift","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        // var building18 = ["Corridor 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        // var building19 = ["Corridor 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        // var building20 = ["Lift","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        // var building21 = ["Servant Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        // var building22 = ["Entrance Lobby","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building18 = ["Stair-case","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
 
-        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14,building15,building16,building17];
+        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14,building15,building16,building17,building18];
         
 
         //Scene
@@ -159,7 +202,7 @@
         const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
         function addMouseEvents(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
             domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
-                if(out==0 && camera.position.x==0){
+                if(out==0 && ViewMode=="walk"){
                     if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                             //Decrease the opacity of top right main information label to 0.5 
                         document.getElementById("hint").innerHTML = "Click on the building for more details";
@@ -197,8 +240,8 @@
                     }
                 }
             });
-            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
-                if(clicked==0 && out==0 && camera.position.x==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+            domEvents.addEventListener(cube,'mouseover',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.8;
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
@@ -206,7 +249,7 @@
                 }
             });    
             domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
-                if(clicked==0 && out==0 && camera.position.x==0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.6;
                     document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[0][1];
@@ -215,11 +258,23 @@
             }); 
         }
 
+        function addMouseEventsForWalls(cube,buildingID){                                      //This function sets particular mouse event listeners to building objects
+            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    
+                }
+            }); 
+            domEvents.addEventListener(cube,'mouseout',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    
+                }
+            }); 
+        }
         
 
         function addMouseEventsForPanels(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
             domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
-                if(out==0 && camera.position.x!=0){
+                if(out==0 && ViewMode!="walk"){
                     if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                             //Decrease the opacity of top right main information label to 0.5 
                         document.getElementById("hint").innerHTML = "Click on the building for more details";
@@ -258,7 +313,7 @@
                 }
             });
             domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
-                if(clicked==0 && out==0 && camera.position.x!=0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.4;
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
@@ -266,7 +321,7 @@
                 }
             });    
             domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
-                if(clicked==0 && out==0 && camera.position.x!=0){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0;
                     document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                     document.getElementById("list").innerHTML = departmentDatabase[0][1];
@@ -274,7 +329,6 @@
                 }
             }); 
         }
-
 
 //Import Blender Objects
         let buildingloader = new THREE.GLTFLoader();    //Create a loader to load the objects
@@ -299,9 +353,8 @@
 
 //Creating Transparent Objects
         var transparentMaterialArray = [];
-        for(var i=0;i<23;i++){
-            //transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
-            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x00FF, opacity:1});
+        for(var i=0;i<19;i++){
+            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
         }
         function createTransparentObject(buildingID,horv,yPosition,zPosition){
             if(horv=="h"){
@@ -336,7 +389,7 @@
         }
 
         var transparentMaterialForPanelsArray = [];
-        for(var i=0;i<23;i++){
+        for(var i=0;i<19;i++){
             transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
@@ -348,7 +401,47 @@
             cube.position.y = yPosition;
             cube.position.z = zPosition;
             addMouseEventsForPanels(cube,buildingID);
-            return cube;
+            idsOfPanelList.push(buildingID);
+            let cubeBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+            cubeBB.setFromObject(cube);
+            return cubeBB;
+        }
+
+//Transparent Walls
+function createWall(y,z,Y,Z){
+            var geometry = new THREE.BoxGeometry(7.5,y,z);
+            var material = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
+            var cube = new THREE.Mesh(geometry,material);
+            scene.add(cube);
+            cube.position.x = -0.6; //5
+            cube.position.y = Y;
+            cube.position.z = Z;
+            addMouseEventsForWalls(cube);
+            let cubeBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+            cubeBB.setFromObject(cube);
+            return cubeBB;
+        }
+
+
+//Creating Navigating Bars
+        //Creating Transparent Objects
+        var NavigatingMaterialArray = [];
+        for(var i=0;i<5;i++){
+            NavigatingMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xE91747 , transparent:false, opacity:1});
+        }
+        function createNavigatingBars(buildingID,horv,length,yPosition,zPosition){
+            if(horv=="h"){
+                var geometry5 = new THREE.BoxGeometry(0.2,length,0.5);
+            }else if(horv=="v"){
+                var geometry5 = new THREE.BoxGeometry(0.2,0.5,length);
+            }
+            var material5 = NavigatingMaterialArray[buildingID];
+            var cube5 = new THREE.Mesh(geometry5,material5);
+            scene.add(cube5);
+            cube5.position.x = -4.5;
+            cube5.position.y = yPosition;
+            cube5.position.z = zPosition;
+            return cube5;
         }
 
 
@@ -376,29 +469,57 @@
         var okToGoFront = 1, okToGoBack = 1;
 
         async function turnleft(){          //This function turns the camera to left by unit amount
-            for(var i =0;i<10;i++){         //Used a loop for smooth movements
-                await sleep(20);                        //Sleep for 20 millieseconds
-                camera.rotation.x += Math.PI/200;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                angle_x = angle_x + Math.PI/200;        //Update the new camera angle
-                frontCameraBall.rotation.x += Math.PI/200;
-                frontCameraBall.position.y = camera.position.y + (Math.sin(angle_x)*R);
-                frontCameraBall.position.z = camera.position.z - (Math.cos(angle_x)*R);
-                backCameraBall.rotation.x += Math.PI/200;
-                backCameraBall.position.y = camera.position.y - (Math.sin(angle_x)*R);
-                backCameraBall.position.z = camera.position.z + (Math.cos(angle_x)*R);
+            if(ViewMode=="sky"){
+                for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                    await sleep(20);                        //Sleep for 20 millieseconds
+                    camera.position.y += Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y += Math.cos(angle_x)*S; 
+                    backCameraBall.position.y += Math.cos(angle_x)*S;
+                    topCameraBall.position.y += Math.cos(angle_x)*S;
+                    camera.position.z += Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z += Math.sin(angle_x)*S; 
+                    backCameraBall.position.z += Math.sin(angle_x)*S;
+                    topCameraBall.position.z += Math.sin(angle_x)*S;
+                }
+            }else{
+                for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                    await sleep(20);                        //Sleep for 20 millieseconds
+                    camera.rotation.x += Math.PI/200;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    angle_x = angle_x + Math.PI/200;        //Update the new camera angle
+                    frontCameraBall.rotation.x += Math.PI/200;
+                    frontCameraBall.position.y = camera.position.y + (Math.sin(angle_x)*R);
+                    frontCameraBall.position.z = camera.position.z - (Math.cos(angle_x)*R);
+                    backCameraBall.rotation.x += Math.PI/200;
+                    backCameraBall.position.y = camera.position.y - (Math.sin(angle_x)*R);
+                    backCameraBall.position.z = camera.position.z + (Math.cos(angle_x)*R);
+                }
             }
         }
         async function turnright(){         //This function turns the camera to left by unit amount
-            for(var i =0;i<10;i++){         //Used a loop for smooth movements
-                await sleep(20);                        //Sleep for 20 millieseconds
-                camera.rotation.x -= Math.PI/200;       //Rotate the camera around x axis by 0.9 degrees to the right
-                angle_x = angle_x - Math.PI/200;        //Update the new camera angle
-                frontCameraBall.rotation.x -= Math.PI/200;
-                frontCameraBall.position.y = camera.position.y + (Math.sin(angle_x)*R);
-                frontCameraBall.position.z = camera.position.z - (Math.cos(angle_x)*R);
-                backCameraBall.rotation.x -= Math.PI/200;
-                backCameraBall.position.y = camera.position.y - (Math.sin(angle_x)*R);
-                backCameraBall.position.z = camera.position.z + (Math.cos(angle_x)*R);
+            if(ViewMode=="sky"){
+                for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                    await sleep(20);                        //Sleep for 20 millieseconds
+                    camera.position.y -= Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y -= Math.cos(angle_x)*S; 
+                    backCameraBall.position.y -= Math.cos(angle_x)*S;
+                    topCameraBall.position.y -= Math.cos(angle_x)*S;
+                    camera.position.z -= Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z -= Math.sin(angle_x)*S; 
+                    backCameraBall.position.z -= Math.sin(angle_x)*S;
+                    topCameraBall.position.z -= Math.sin(angle_x)*S;
+                }
+            }else{
+                for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                    await sleep(20);                        //Sleep for 20 millieseconds
+                    camera.rotation.x -= Math.PI/200;       //Rotate the camera around x axis by 0.9 degrees to the right
+                    angle_x = angle_x - Math.PI/200;        //Update the new camera angle
+                    frontCameraBall.rotation.x -= Math.PI/200;
+                    frontCameraBall.position.y = camera.position.y + (Math.sin(angle_x)*R);
+                    frontCameraBall.position.z = camera.position.z - (Math.cos(angle_x)*R);
+                    backCameraBall.rotation.x -= Math.PI/200;
+                    backCameraBall.position.y = camera.position.y - (Math.sin(angle_x)*R);
+                    backCameraBall.position.z = camera.position.z + (Math.cos(angle_x)*R);
+                }
             }
         }
         async function turnup(){            //This function turns the camera to left by unit amount
@@ -423,8 +544,10 @@
                     camera.position.z -= (Math.cos(angle_x)*S);      //Change the position of camera on z axis towards the facing direction
                     frontCameraBall.position.y += (Math.sin(angle_x)*S);
                     backCameraBall.position.y += (Math.sin(angle_x)*S);
+                    topCameraBall.position.y += (Math.sin(angle_x)*S);
                     frontCameraBall.position.z -= (Math.cos(angle_x)*S);
                     backCameraBall.position.z -= (Math.cos(angle_x)*S);
+                    topCameraBall.position.z -= (Math.cos(angle_x)*S);
                 }
             }
         }
@@ -432,12 +555,14 @@
             for(var i =0;i<10;i++){         //Used a loop for smooth movements
                 await sleep(20);                                    //Sleep for 20 millieseconds
                 if(okToGoBack){
-                    camera.position.y -= (Math.sin(angle_x)*0.1);        //Change the position of camera on y axis towards the facing direction
-                    camera.position.z += (Math.cos(angle_x)*0.1);        //Change the position of camera on z axis towards the facing direction
+                    camera.position.y -= (Math.sin(angle_x)*S);        //Change the position of camera on y axis towards the facing direction
+                    camera.position.z += (Math.cos(angle_x)*S);        //Change the position of camera on z axis towards the facing direction
                     frontCameraBall.position.y -= (Math.sin(angle_x)*S);
                     backCameraBall.position.y -= (Math.sin(angle_x)*S);
+                    topCameraBall.position.y -= (Math.sin(angle_x)*S);
                     frontCameraBall.position.z += (Math.cos(angle_x)*S);
                     backCameraBall.position.z += (Math.cos(angle_x)*S);
+                    topCameraBall.position.z += (Math.cos(angle_x)*S);
                 }
             }    
         }
@@ -495,9 +620,153 @@
                 }
         }
 
+//Maintain angles
+        function updateAngles(){
+            angle_x %= (Math.PI*2); 
+            angle_y %= (Math.PI*2);
+            camera.rotation.x %= (Math.PI*2);
+            camera.rotation.y %= (Math.PI*2);
+            if(Math.abs(angle_x)>Math.PI){
+                angle_x = (angle_x>0)?-(2*Math.PI-angle_x):2*Math.PI+angle_x;
+            }
+            if(Math.abs(angle_y)>Math.PI){
+                angle_y = (angle_y>0)?-(2*Math.PI-angle_y):2*Math.PI+angle_y;
+            }
+            if(Math.abs(camera.rotation.x)>Math.PI){
+                camera.rotation.x = (camera.rotation.x>0)?-(2*Math.PI-camera.rotation.x):2*Math.PI+camera.rotation.x;
+            }
+            if(Math.abs(camera.rotation.y)>Math.PI){
+                camera.rotation.y = (camera.rotation.y>0)?-(2*Math.PI-camera.rotation.y):2*Math.PI+camera.rotation.y;
+            }
+        }
+
 //Camera Position
-        async function changeView(){
-            if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+        var ViewMode = "walk";
+        async function switchtoWALK(){
+            updateAngles();
+            document.getElementById("rightTop").innerHTML = "W";
+            document.getElementById("rightBottom").innerHTML = "WALK";
+            document.getElementById("leftTopButton").innerHTML = "BIRD";
+            document.getElementById("leftBottomButton").innerHTML = "DRONE";
+            if(ViewMode=="sky" || ViewMode=="drone"){
+                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                    //Decrease the opacity of top right main information label to 0.5 
+                    document.getElementById("hint").innerHTML = "Click on the building for more details";
+                    document.getElementById("information").style.height = "40%";
+                    document.getElementById("main_information").style.height = "75%";
+                    document.getElementById("hint").style.height = "7.5%";
+                    document.getElementById("controlLayout").style.height = "20%";
+                    document.getElementById("more_information").style.removeProperty('min-height');
+                    document.getElementById("more_information").style.padding = "0%";
+                    document.getElementById("more_information").style.marginTop = "0%";
+                    document.getElementById("more_information").style.margin = "0%";
+                    document.getElementById("label2").style.fontSize = "0vmin";
+                    document.getElementById("list2").style.fontSize = "0vmin";
+                    document.getElementById("label3").style.backgroundColor = "#1A5276";
+                    showNavigator();
+                    clicked = !clicked;    
+                }
+                for(var i=0;i<transparentMaterialArray.length;i++){
+                    transparentMaterialArray[i].color.set(0x2758E7);
+                    transparentMaterialArray[i].opacity = 0.6;
+                    transparentMaterialForPanelsArray[i].opacity = 0;
+                }
+                var y  = camera.position.y;
+                var z = camera.position.z;
+                var x = camera.position.x;
+                var xr = camera.rotation.x;
+                for(var i=0;i<15;i++){
+                    await sleep(20);
+                    if(ViewMode=="sky"){
+                        camera.position.y = y - (i+1)*((y-initialCamera_Y)/15);
+                        camera.position.z = z - (i+1)*((z-initialCamera_Z)/15);
+                        camera.rotation.x = xr-(i+1)*((xr-initialCamera_Xangle)/15);
+
+                    }
+                    camera.position.x=x-((i+1)*(x/15));    //8,20
+                    camera.rotation.y = angle_y-(i+1)*(angle_y/15);
+                }
+                if(ViewMode=="sky"){
+                    frontCameraBall.position.y = initialCamera_Y-yR;
+                    backCameraBall.position.y = initialCamera_Y+yR;
+                    topCameraBall.position.y = initialCamera_Y;
+                    frontCameraBall.position.z = initialCamera_Z-zR;
+                    backCameraBall.position.z = initialCamera_Z+zR;
+                    topCameraBall.position.z = initialCamera_Z;
+                    frontCameraBall.rotation.x = initialCamera_Xangle;
+                    backCameraBall.rotation.x = initialCamera_Xangle;
+                    angle_x = initialCamera_Xangle;
+                }
+                okToGoBack = 0;
+                okToGoFront = 0;
+                angle_y = 0;
+            }
+            lastpanel = -1;
+            ViewMode = "walk";            
+        }
+
+        async function switchtoDRONE(){
+            updateAngles();
+            document.getElementById("rightTop").innerHTML = "D";
+            document.getElementById("rightBottom").innerHTML = "DRONE";
+            document.getElementById("leftTopButton").innerHTML = "BIRD";
+            document.getElementById("leftBottomButton").innerHTML = "WALK";
+            if(ViewMode=="walk"){
+                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                    //Decrease the opacity of top right main information label to 0.5 
+                    document.getElementById("hint").innerHTML = "Click on the building for more details";
+                    document.getElementById("information").style.height = "40%";
+                    document.getElementById("main_information").style.height = "75%";
+                    document.getElementById("hint").style.height = "7.5%";
+                    document.getElementById("controlLayout").style.height = "20%";
+                    document.getElementById("more_information").style.removeProperty('min-height');
+                    document.getElementById("more_information").style.padding = "0%";
+                    document.getElementById("more_information").style.marginTop = "0%";
+                    document.getElementById("more_information").style.margin = "0%";
+                    document.getElementById("label2").style.fontSize = "0vmin";
+                    document.getElementById("list2").style.fontSize = "0vmin";
+                    document.getElementById("label3").style.backgroundColor = "#1A5276";
+                    showNavigator();
+                    clicked = !clicked;    
+                }
+                for(var i=0;i<transparentMaterialArray.length;i++){
+                    transparentMaterialArray[i].color.set(0x000000);
+                    transparentMaterialArray[i].opacity = 1;
+                    transparentMaterialForPanelsArray[i].opacity = 0;
+                }        
+                for(var i=0;i<10;i++){
+                    await sleep(20);
+                    camera.position.x=(i+1)*1;
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-Math.PI/8)/10); 
+                }
+                okToGoBack = 1;
+                okToGoFront = 1;
+                angle_y = Math.PI/8;
+            }else if(ViewMode=="sky"){
+                for(var i=0;i<20;i++){
+                    await sleep(20);
+                    camera.position.x = 40 -(i+1)*1.5;
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/8))/20); 
+                }
+                okToGoBack = 1;
+                okToGoFront = 1;
+                angle_y = Math.PI/8;
+            }
+            departmentDatabase[0] = building0;
+            document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+            document.getElementById("list").innerHTML = departmentDatabase[0][1];
+            document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+            ViewMode = "drone";
+        }
+
+        async function switchtoSKY(){
+            updateAngles();
+            document.getElementById("rightTop").innerHTML = "B";
+            document.getElementById("rightBottom").innerHTML = "BIRD";
+            document.getElementById("leftTopButton").innerHTML = "DRONE";
+            document.getElementById("leftBottomButton").innerHTML = "WALK";
+            if(ViewMode=="walk"){   //Going up
+                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                             //Decrease the opacity of top right main information label to 0.5 
                         document.getElementById("hint").innerHTML = "Click on the building for more details";
                         document.getElementById("information").style.height = "40%";
@@ -513,35 +782,92 @@
                         document.getElementById("label3").style.backgroundColor = "#1A5276";
                         showNavigator();
                         clicked = !clicked;    
-            }
-            if(camera.position.x==0){   //Going up
+                }
                 for(var i=0;i<transparentMaterialArray.length;i++){
-                    transparentMaterialArray[i].opacity = 0;
+                    transparentMaterialArray[i].color.set(0x000000);
+                    transparentMaterialArray[i].opacity = 1;
                     transparentMaterialForPanelsArray[i].opacity = 0;
                 }
-                document.getElementById("viewButton").innerHTML = "First Person";
-                for(var i=0;i<10;i++){
+                var y = camera.position.y;
+                var z = camera.position.z;
+                var xr = camera.rotation.x;
+                for(var i=0;i<20;i++){
                     await sleep(20);
-                    camera.position.x=(i+1)*1;
-                    camera.rotation.y = angle_y-(i+1)*((angle_y-Math.PI/8)/10); 
+                    camera.position.x=(i+1)*2;
+                    camera.position.y = y - (i+1)*(y/20+1);
+                    camera.position.z = z - (i+1)*(z/20+2.25);
+                    camera.rotation.x = xr - (i+1)*(xr/20);
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/2))/20); 
                 }
+                frontCameraBall.position.y = -20; 
+                backCameraBall.position.y = -20;
+                topCameraBall.position.y = -20;
+                frontCameraBall.position.z = -45-R;
+                backCameraBall.position.z = -45+R;
+                topCameraBall.position.z = -45;
+                frontCameraBall.rotation.x = 0;
+                backCameraBall.rotation.x = 0;
                 okToGoBack = 1;
                 okToGoFront = 1;
-                angle_y = Math.PI/8;
-            }else{                      //Going down
-                for(var i=0;i<transparentMaterialArray.length;i++){
-                    transparentMaterialArray[i].opacity = 0.6;
-                    transparentMaterialForPanelsArray[i].opacity = 0;
-                }
-                document.getElementById("viewButton").innerHTML = "Third Person";
-                for(var i=0;i<10;i++){
+                angle_y = Math.PI/2;
+                angle_x = 0;
+            }else if(ViewMode=="drone"){
+                var y = camera.position.y;
+                var z = camera.position.z;
+                var xr = camera.rotation.x;
+                for(var i=0;i<20;i++){
                     await sleep(20);
-                    camera.position.x=10-((i+1)*1);    //8,20
-                    camera.rotation.y = angle_y-(i+1)*(angle_y/10);
+                    camera.position.x = 10 +(i+1)*1.5;
+                    camera.position.y = y - (i+1)*(y/20+1);
+                    camera.position.z = z - (i+1)*(z/20+2.25);
+                    camera.rotation.x = xr - (i+1)*(xr/20);
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/2))/20); 
                 }
-                okToGoBack = 0;
-                okToGoFront = 0;
-                angle_y = 0;
+                frontCameraBall.position.y = -20; 
+                backCameraBall.position.y = -20;
+                topCameraBall.position.y = -20;
+                frontCameraBall.position.z = -45-R;
+                backCameraBall.position.z = -45+R;
+                topCameraBall.position.z = -45;
+                frontCameraBall.rotation.x = 0;
+                backCameraBall.rotation.x = 0;
+                okToGoBack = 1;
+                okToGoFront = 1;
+                angle_y = Math.PI/2;
+                angle_x = 0;
+            }
+            departmentDatabase[0] = building0;
+            document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+            document.getElementById("list").innerHTML = departmentDatabase[0][1];
+            document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+            ViewMode = "sky";
+        }
+
+        function leftTop(){
+            switch(ViewMode){
+                case "walk":
+                    switchtoSKY();    
+                    break;
+                case "sky":
+                    switchtoDRONE();
+                    break;
+                case "drone":
+                    switchtoSKY();    
+                    break;
+            }
+        }
+
+        function leftBottom(){
+            switch(ViewMode){
+                case "walk":
+                    switchtoDRONE();    
+                    break;
+                case "sky":
+                    switchtoWALK();    
+                    break;
+                case "drone":
+                    switchtoWALK();    
+                    break;
             }
         }
 
@@ -590,26 +916,21 @@
                     turndown();
                     break;
                 case 87:    //Letter w
-                    changeView();
+                    if(ViewMode=="sky" || ViewMode=="drone"){
+                        switchtoWALK();
+                    }
                     break;
-            }
+                case 68:    //Letter d
+                    if(ViewMode=="sky" || ViewMode=="walk"){
+                        switchtoDRONE();
+                    }
+                    break;
+                case 66:    //Letter b
+                    if(ViewMode=="drone" || ViewMode=="walk"){
+                        switchtoSKY();
+                    }
+                    break;
         }
-
-//Transparent Walls
-        function createWall(y,z,Y,Z){
-            var geometry = new THREE.BoxGeometry(2,y,z);
-            var material = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
-            var cube = new THREE.Mesh(geometry,material);
-            scene.add(cube);
-            cube.position.x = 0; //5
-            cube.position.y = Y;
-            cube.position.z = Z;
-            // domEvents.addEventListener(cube,'mouseover',event => {                          //Click listener (Signals when user has clicked on the building)
-            //     document.getElementById("label").innerHTML = "got is";
-            // });
-            let cubeBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
-            cubeBB.setFromObject(cube);
-            return cubeBB;
         }
 
         //Front cube
@@ -618,9 +939,10 @@
             new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(frontCameraBall);
-        frontCameraBall.position.x = 0;
-        frontCameraBall.position.y = 0;
-        frontCameraBall.position.z = -R;
+        frontCameraBall.position.x = initialCamera_X;
+        frontCameraBall.position.y = initialCamera_Y-yR;
+        frontCameraBall.position.z = initialCamera_Z-zR;
+        frontCameraBall.rotation.x = initialCamera_Xangle;
         let frontballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
         frontballBB.setFromObject(frontCameraBall);
 
@@ -630,16 +952,29 @@
             new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(backCameraBall);
-        backCameraBall.position.x = 0;
-        backCameraBall.position.y = 0;
-        backCameraBall.position.z = R;
+        backCameraBall.position.x = initialCamera_X;
+        backCameraBall.position.y = initialCamera_Y+yR;
+        backCameraBall.position.z = initialCamera_Z+zR;
+        backCameraBall.rotation.x = initialCamera_Xangle;
         let backballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
         backballBB.setFromObject(backCameraBall);
+
+        //Top cube
+        var topCameraBall = new THREE.Mesh(
+            new THREE.BoxGeometry(0.1,0.1,0.1),
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+        );
+        scene.add(topCameraBall);
+        topCameraBall.position.x = 3.75;
+        topCameraBall.position.y = initialCamera_Y;
+        topCameraBall.position.z = initialCamera_Z;
+        let topballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+        topballBB.setFromObject(topCameraBall);
 
 
         function checkfrontIntersection(){
             var sum=0;
-            for(var i=0;i<43;i++){
+            for(var i=0;i<transparentWallsList.length;i++){
                 if(frontballBB.intersectsBox(transparentWallsList[i])){
                     return 1;
                 } 
@@ -648,7 +983,7 @@
         }
         function checkbackIntersection(){
             var sum=0;
-            for(var i=0;i<43;i++){
+            for(var i=0;i<transparentWallsList.length;i++){
                 if(backballBB.intersectsBox(transparentWallsList[i])){
                     return 1;
                 } 
@@ -669,6 +1004,29 @@
             }
         }
 
+        var lastpanel = -1;
+        function checkRoom(){
+            for(var i=0;i<PanelsList.length;i++){
+                if(topballBB.intersectsBox(PanelsList[i])){
+                    if((!clicked) && (i!=lastpanel)){
+                        departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]];    
+                        document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+                        document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+                        lastpanel = i;
+                    }        
+                    return 0;
+                }
+            }
+            if(departmentDatabase[0] != building0){
+                departmentDatabase[0] = building0;
+                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+                document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+            }
+            
+        }
+
         function nowin(){
             out = 0;
         }
@@ -676,15 +1034,21 @@
             out = 1;
         } 
 
-        camera.position.x = 0;              //Set the camera elevation (default value is 0)
+        camera.position.x = initialCamera_X;              //Set the camera elevation (default value is 0)
+        camera.position.y = initialCamera_Y;
+        camera.position.z = initialCamera_Z;
+        camera.rotation.x += initialCamera_Xangle;
         camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
+
 
 //Rendering
         var animate = function(){
             
             frontballBB.copy(frontCameraBall.geometry.boundingBox).applyMatrix4(frontCameraBall.matrixWorld);
             backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);
-            if(camera.position.x==0){
+            topballBB.copy(topCameraBall.geometry.boundingBox).applyMatrix4(topCameraBall.matrixWorld);
+            if(ViewMode=="walk"){
+                checkRoom();
                 checkCollision();
             }
             renderer.render(scene,camera);
@@ -694,21 +1058,21 @@
 
         var blenderBuilding9 = importObject('./floors/Floor4.gltf',-5,0,-80,0,3.28084);    //wall
 
-        //var blenderBuilding9 = importObject('./floors/ground-floor-updated.gltf',-5,0,-80,0,3.28084);    //wall
-        //var blenderBuilding9 = importObject('./Floor2/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    //wall
-
 
         //Creating transparent objects by using the created function above
-
-        var F00_door1 = createTransparentObject(1,"v",-9.27,-76.98);
+       var F00_door1 = createTransparentObject(1,"v",-9.27,-76.98);
         var F00_door2 = createTransparentObject(1,"v",-9.27,-71.82);
-        var F00_door3 = createTransparentObject(1,"v",-9.49,-66.42);
+        var F00_door3 = createTransparentObject(1,"v",-9.27,-66.42);
         var F00_door4 = createTransparentObject(1,"h",-16.52,-63.59);
         var F00_door5 = createTransparentObject(1,"v",-23.26,-69.62); 
         var F00_door6 = createTransparentObject(1,"v",-23.26,-75.99); 
 
+
+
         var F01_door1 = createTransparentObject(2,"v",-23.26,-60.24);
         var F01_door2 = createTransparentObject(2,"h",-16.52,-63.81);
+
+
 
         var F02_door1 = createTransparentObject(3,"v",-23.04,-60.24); 
 
@@ -718,10 +1082,15 @@
 
         var F05_door1 = createTransparentObject(6,"v",-9.49,-76.98);
 
+
+
+
+
         var F06_door1 = createTransparentObject(7,"v",-9.49,-71.82);
 
         var F07_door1 = createTransparentObject(8,"v",-7.48,-33.75);
         var F07_door2 = createTransparentObject(8,"v",-7.48,-38.05);
+
 
         var F08_door1 = createTransparentObject(9,"v",-11.14,-54.14);
         var F08_door2 = createTransparentObject(9,"v",-11.14,-24.05);
@@ -731,16 +1100,27 @@
         var F08_door6 = createTransparentObject(9,"h",-28.51,-17.65);
         
         var F09_door1 = createTransparentObject(10,"h",-28.51,-17.87); 
+
         
         var F10_door1 = createTransparentObject(11,"h",-22.6,-17.87); 
+
+
+
         
         var F11_door1 = createTransparentObject(12,"h",-17.37,-17.87);
+
        
         var F12_door1 = createTransparentObject(13,"a",-12.08,-19.3); 
 
+
+
+
         var F13_door1 = createTransparentObject(14,"v",-11.36,-24.05); 
         var F13_door2 = createTransparentObject(14,"h",-9.16,-31.85); 
+
+
         
+
       
         var FC01_door1 = createTransparentObject(15,"v",-7.26,-38.05);
         var FC01_door2 = createTransparentObject(15,"v",-7.26,-33.75);
@@ -750,93 +1130,129 @@
 
         var FC02_door1 = createTransparentObject(16,"tv",-6.09,-66.64);
         var FC02_door2 = createTransparentObject(16,"th",-7.71,-57.60);//th-->1.6ft width
-        var FC02_door3 = createTransparentObject(16,"v",-9.27,-66.42);
+        var FC02_door3 = createTransparentObject(16,"v",-9.49,-66.42);
+
+
 
         var FL_door1 = createTransparentObject(17,"tv",-6.31,-66.64);
-      
-        var panel04_1 = createTransparentPanel(4,10.56,2.6,-5.68,-56.25);
-        var panel04_2 = createTransparentPanel(4,20.47,14.69,-10.635,-47.605);
-
-        var panel05_1 = createTransparentPanel(5,9.31,14.6,-25.944,-47.56);
-
-        var panel06_1 = createTransparentPanel(6,9.31,9.27,-25.944,-35.22);
-        var panel06_2 = createTransparentPanel(6,4.31,4.97,-28.444,-28.1);
-
-        var panel07_1 = createTransparentPanel(7,9.31,9.44,-25.944,-15.12);
-        var panel07_2 = createTransparentPanel(7,4.31,5.37,-28.444,-22.535);
-
-        var panel08_1 = createTransparentPanel(8,20.47,14.805,-10.635,-32.7);
         
-        var panel09_1 = createTransparentPanel(9,8,9.63,-16.87,-15.2);
+        var PanelsList = [];
+        var idsOfPanelList = [];
 
-        var panel10_1 = createTransparentPanel(10,4.4,4.975,-2.59,-22.53);
+
+
+
+
+
+
+
+
+
+
         
-        var panel11_1 = createTransparentPanel(11,4.56,4.975,-7.27,-22.53);
-
-        var panel12_1 = createTransparentPanel(12,9.2,4.23,-5,-12.5);
-
-        var panel13_1 = createTransparentPanel(13,1.9,4.8,-1.34,-17.44);
-
-        var panel14_1 = createTransparentPanel(14,2.3,4.8,-3.65,-17.44);
-
-        var panel15_1 = createTransparentPanel(15,2.3,4.8,-6.15,-17.44);
-
-        var panel16_1 = createTransparentPanel(16,2.1,4.8,-8.55,-17.44);
-
-        var panel18_1 = createTransparentPanel(18,2.74,14.6,-11.33,-17.65);
-        var panel18_2 = createTransparentPanel(18,8.2,4.7,-16.8,-22.6);
-
-        var panel19_1 = createTransparentPanel(19,4.6,9.967,-23.59,-25.22);
+         var panel00_01 = createTransparentPanel(1,13.55,15.8,-16.23,-71.7);         PanelsList.push(panel00_01);  
 
 
-        var transparentWallsList = [];
 
-        var cubeV1BB = createWall(Y,70,-0.2,-45);       transparentWallsList.push(cubeV1BB);
-        var cubeV2BB = createWall(Y,70,-30.8,-45);      transparentWallsList.push(cubeV2BB);
-        var cubeV3BB = createWall(Y,2,-22,-67);         transparentWallsList.push(cubeV3BB);
-        var cubeV4BB = createWall(Y,2,-19.2,-66.8);     transparentWallsList.push(cubeV4BB);
-        var cubeV5BB = createWall(Y,9,-19.2,-75.5);     transparentWallsList.push(cubeV5BB);
-        var cubeV6BB = createWall(Y,9.8,-11.2,-75.2);   transparentWallsList.push(cubeV6BB);
-        var cubeV7BB = createWall(Y,3.4,-11.2,-65.25);  transparentWallsList.push(cubeV7BB);
-        var cubeV8BB = createWall(Y,5.3,-11.2,-57.6);   transparentWallsList.push(cubeV8BB);
-        var cubeV9BB = createWall(Y,8.6,-6.1,-61.7);    transparentWallsList.push(cubeV9BB);
-        var cubeV10BB = createWall(Y,1.6,-21.1,-54);    transparentWallsList.push(cubeV10BB);
-        var cubeV11BB = createWall(Y,21,-21.1,-39.5);   transparentWallsList.push(cubeV11BB);
-        var cubeV12BB = createWall(Y,2.1,-21.1,-25);    transparentWallsList.push(cubeV12BB);
-        var cubeV13BB = createWall(Y,10.8,-21.1,-15.4); transparentWallsList.push(cubeV13BB);
-        var cubeV14BB = createWall(Y,11,-26,-25.2);     transparentWallsList.push(cubeV14BB);
-        var cubeV15BB = createWall(Y,1,-12.9,-19.8);    transparentWallsList.push(cubeV15BB);
-        var cubeV16BB = createWall(Y,5.5,-12.9,-13.2);  transparentWallsList.push(cubeV16BB);
-        var cubeV17BB = createWall(Y,0.8,-9.8,-10.3);   transparentWallsList.push(cubeV17BB);
-        var cubeV18BB = createWall(Y,11.3,-9.8,-19.75); transparentWallsList.push(cubeV18BB);
-        var cubeV19BB = createWall(Y,10.5,-4.9,-20);    transparentWallsList.push(cubeV19BB);
-        var cubeV20BB = createWall(Y,5,-2.45,-17.5);    transparentWallsList.push(cubeV20BB);
-        var cubeV21BB = createWall(Y,5,-7.45,-17.5);    transparentWallsList.push(cubeV21BB);
+         var panel01_01 = createTransparentPanel(2,13.55,5.7,-16.23,-60.75);         PanelsList.push(panel01_01);
+         var panel01_02 = createTransparentPanel(2,11.57,1.075,-17.2,-57.36);        PanelsList.push(panel01_02);
+        
+         var panel02_01 = createTransparentPanel(3,7.348,9.16,-26.925,-61.41);       PanelsList.push(panel02_01);
+         var panel03_01 = createTransparentPanel(4,7.348,6.8,-26.925,-69.59);        PanelsList.push(panel03_01);
+         var panel04_01 = createTransparentPanel(5,7.348,6.41,-26.925,-76.395);      PanelsList.push(panel04_01);
+         var panel05_01 = createTransparentPanel(6,8.83,5.37,-4.8,-76.92);           PanelsList.push(panel05_01);
+         var panel06_01 = createTransparentPanel(7,8.73,5.65,-4.77,-71.22);          PanelsList.push(panel06_01);
+         
+         var panel07_01 = createTransparentPanel(8,6.63,4,-3.715,-38);               PanelsList.push(panel07_01); 
+         var panel07_02 = createTransparentPanel(8,6.63,3.69,-3.715,-33.78);         PanelsList.push(panel07_02);
+         
+         var panel08_01 = createTransparentPanel(9,19.14,35.58,-21.02,-38.8);        PanelsList.push(panel08_01);
+         var panel08_02 = createTransparentPanel(9,17.9,3.125,-21.79,-19.46);        PanelsList.push(panel08_02);
+         
+         var panel09_01 = createTransparentPanel(10,4.8,7.18,-28.18,-14);            PanelsList.push(panel09_01);
+         var panel10_01 = createTransparentPanel(11,5.3,7.18,-22.92,-14);            PanelsList.push(panel10_01);
+         var panel11_01 = createTransparentPanel(12,7.38,7.18,-16.38,-14);           PanelsList.push(panel11_01);
+         
+         var panel12_01 = createTransparentPanel(13,10.67,10.45,-5.725,-15.72);      PanelsList.push(panel12_01);
+         var panel12_02 = createTransparentPanel(13,1.45,7,-11.775,-13.98);       PanelsList.push(panel12_02);
+        
+         var panel13_01 = createTransparentPanel(14,10.65,10.175,-5.725,-26.45);     PanelsList.push(panel13_01);
+         
+         var panelC01_01 = createTransparentPanel(15,10.63,5.58,-5.715,-54.78);      PanelsList.push(panelC01_01);
+         var panelC01_02 = createTransparentPanel(15,3.65,20.04,-9.22,-41.97);       PanelsList.push(panelC01_02);
 
-        var cubeH1BB = createWall(1,Y,-0.5,-10.2);      transparentWallsList.push(cubeH1BB);
-        var cubeH2BB = createWall(27,Y,-17.5,-10.2);    transparentWallsList.push(cubeH2BB);
-        var cubeH3BB = createWall(15.7,Y,-7.85,-40.2);  transparentWallsList.push(cubeH3BB);
-        var cubeH4BB = createWall(12,Y,-25,-40.2);      transparentWallsList.push(cubeH4BB);
-        var cubeH5BB = createWall(1,Y,-0.5,-25.1);      transparentWallsList.push(cubeH5BB);
-        var cubeH6BB = createWall(1.6,Y,-4.95,-25.1);   transparentWallsList.push(cubeH6BB);
-        var cubeH7BB = createWall(6,Y,-11.85,-25.1);    transparentWallsList.push(cubeH7BB);
-        var cubeH8BB = createWall(2.8,Y,-19.5,-25.1);   transparentWallsList.push(cubeH8BB);
-        var cubeH9BB = createWall(5,Y,-28.5,-25.4);     transparentWallsList.push(cubeH9BB);
-        var cubeH10BB = createWall(10,Y,-5,-14.9);      transparentWallsList.push(cubeH10BB);
-        var cubeH11BB = createWall(9.4,Y,-17.5,-20);    transparentWallsList.push(cubeH11BB);
-        var cubeH12BB = createWall(1,Y,-21.5,-30.4);    transparentWallsList.push(cubeH12BB);
-        var cubeH13BB = createWall(20,Y,-21,-55.1);     transparentWallsList.push(cubeH13BB);
-        var cubeH14BB = createWall(1,Y,-0.5,-57.8);     transparentWallsList.push(cubeH14BB);
-        var cubeH15BB = createWall(2.5,Y,-5.6,-57.8);   transparentWallsList.push(cubeH15BB);
-        var cubeH16BB = createWall(1,Y,-10.5,-57.8);    transparentWallsList.push(cubeH16BB);
-        var cubeH17BB = createWall(11,Y,-16.5,-65.8);   transparentWallsList.push(cubeH17BB);
-        var cubeH18BB = createWall(6,Y,-3,-65.1);       transparentWallsList.push(cubeH18BB);
-        var cubeH19BB = createWall(6.5,Y,-3.25,-70.2);  transparentWallsList.push(cubeH19BB);
-        var cubeH20BB = createWall(4,Y,-29,-67.9);      transparentWallsList.push(cubeH20BB);
-        var cubeH21BB = createWall(1.6,Y,-22.8,-67.9);  transparentWallsList.push(cubeH21BB);
-        var cubeH22BB = createWall(31,Y,-15.5,-79.8);   transparentWallsList.push(cubeH22BB);
+         var panelC02_01 = createTransparentPanel(16,2.68,10.12,-7.75,-62.98);       PanelsList.push(panelC02_01);
+       
+         var panelL_01 = createTransparentPanel(17,5.6,2.65,-3.2,-66.695);           PanelsList.push(panelL_01);
+         var panelL_02 = createTransparentPanel(17,5.6,7,-3.2,-61.47);               PanelsList.push(panelL_02);
+        
+         var panelS_01 = createTransparentPanel(18,6.62,11.15,-3.71,-45.98);         PanelsList.push(panelS_01);
+         var transparentWallsList = [];
 
-     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        var cubeV1BB = createWall(Y,70,-0.2,-45);           transparentWallsList.push(cubeV1BB);
+        var cubeV2BB = createWall(Y,70,-30.8,-45);          transparentWallsList.push(cubeV2BB);
+        var cubeV3BB = createWall(Y,7.6,-6.3,-61.6);        transparentWallsList.push(cubeV3BB);
+        var cubeV4BB = createWall(Y,7.5,-9.2,-61.3);        transparentWallsList.push(cubeV4BB);
+        var cubeV5BB = createWall(Y,1.34,-9.25,-79.33);     transparentWallsList.push(cubeV5BB);
+        var cubeV6BB = createWall(Y,26.75,-11.25,-39.125);  transparentWallsList.push(cubeV6BB);
+        var cubeV7BB = createWall(Y,7.18,-12.42,-13.59);    transparentWallsList.push(cubeV7BB);
+        var cubeV8BB = createWall(Y,7.18,-20.02,-13.59);    transparentWallsList.push(cubeV8BB);
+        var cubeV9BB = createWall(Y,7.18,-25.52,-13.59);    transparentWallsList.push(cubeV9BB);
+        var cubeV10BB = createWall(Y,1.88,-9.25,-74.48);    transparentWallsList.push(cubeV10BB);
+        var cubeV11BB = createWall(Y,2.12,-9.25,-69.12);    transparentWallsList.push(cubeV11BB);
+        var cubeV12BB = createWall(Y,2.36,-23.25,-78.82);   transparentWallsList.push(cubeV12BB);
+        var cubeV13BB = createWall(Y,3.08,-23.25,-72.71);   transparentWallsList.push(cubeV13BB);
+        var cubeV14BB = createWall(Y,4.18,-23.25,-65.97);   transparentWallsList.push(cubeV14BB);
+        var cubeV15BB = createWall(Y,1.688,-23.25,-62.756); transparentWallsList.push(cubeV15BB);
+        var cubeV16BB = createWall(Y,1.82,-23.25,-57.68);   transparentWallsList.push(cubeV16BB);
+        var cubeV17BB = createWall(Y,1.468,-11.25,-21.68);  transparentWallsList.push(cubeV17BB);
+        
+         var cubeH1BB = createWall(31,Y,-15.5,-79.8);       transparentWallsList.push(cubeH1BB);
+         var cubeH2BB = createWall(31,Y,-15.5,-10.2);       transparentWallsList.push(cubeH2BB);
+         var cubeH3BB = createWall(9.56,Y,-4.75,-74.29);    transparentWallsList.push(cubeH3BB);
+         var cubeH4BB = createWall(7.94,Y,-26.97,-72.91);   transparentWallsList.push(cubeH4BB);
+         var cubeH5BB = createWall(7.94,Y,-26.97,-65.9);    transparentWallsList.push(cubeH5BB);
+         var cubeH6BB = createWall(19.95,Y,-21,-56.47);     transparentWallsList.push(cubeH6BB);
+         var cubeH7BB = createWall(3.23,Y,-13.925,-17.77);   transparentWallsList.push(cubeH7BB);
+         var cubeH8BB = createWall(9.56,Y,-4.75,-68.29);    transparentWallsList.push(cubeH8BB);
+         var cubeH9BB = createWall(6.4,Y,-3.2,-65.15);      transparentWallsList.push(cubeH9BB);
+         var cubeH10BB = createWall(6.58,Y,-3.29,-57.65);   transparentWallsList.push(cubeH10BB);
+         var cubeH11BB = createWall(2.6,Y,-10.1,-57.55);    transparentWallsList.push(cubeH11BB);
+         var cubeH12BB = createWall(5.8,Y,-11.92,-63.6);    transparentWallsList.push(cubeH12BB)
+         var cubeH13BB = createWall(5.1,Y,-20.68,-63.6);    transparentWallsList.push(cubeH13BB);
+         var cubeH14BB = createWall(7.4,Y,-3.7,-40.28);     transparentWallsList.push(cubeH14BB);
+         var cubeH15BB = createWall(7.4,Y,-3.7,-35.84);     transparentWallsList.push(cubeH15BB);
+         var cubeH16BB = createWall(7.4,Y,-3.7,-31.74);     transparentWallsList.push(cubeH16BB);
+         var cubeH17BB = createWall(11.45,Y,-5.725,-21.17); transparentWallsList.push(cubeH17BB);
+         var cubeH18BB = createWall(1.96,Y,-19.98,-17.77);   transparentWallsList.push(cubeH18BB);
+         var cubeH19BB = createWall(2.62,Y,-25.54,-17.77);   transparentWallsList.push(cubeH18BB);
+
+        // var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
+
+
         //Set lights by using the created function above
 
         var light1 = setPointLight(3,-5,-12.5);      //Blue
@@ -861,6 +1277,11 @@
         scene.add( lightt );
 
 
+        document.getElementById("label").innerHTML = departmentDatabase[0][0];
+        document.getElementById("list").innerHTML = departmentDatabase[0][1];
+        document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][0];
+        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+
         //var lightD1 = setDirectionalLight(20,-10,-40);                                     //Use the function to set the light
         //setDirectionalLight(light2,0,50,-30);
         //setDirectionalLight(light3,20,-30,-10);
@@ -869,46 +1290,6 @@
         animate();
 
     </script>
-
-    <div id="glass" class="glass" onmouseover="nowin()" onmouseleave="nowout()"></div>
-    <div class="name"><strong>IDM</strong></div>
-    <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
-    <div id="information" class="information_class" >                    
-        <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
-            <p1 style="font-size: 3.3vmin;" id="label">Department Building</p1><br><br>
-            <ul id="list" style="list-style-type:square; font-size: 2.15vmin;">                                   <!--Top right main information list-->
-                <li>Welcome to Computer Engineering Department</li>
-                <li>Head of the department is Mr.Rohitha</li>
-                <li>This is a 4 story building</li>
-            </ul>
-        </div>
-        <div id="hint" class="hint_class">Click on the building for more details</div>
-        <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
-            <p2 id="label2" class="label2_class">More information here</p2>          
-            <ul id="list2" class="list2_class" style="list-style-type:square;">                                             <!--Top right more information list-->
-                <li>Welcome to Computer Engineering Department, University of Peradeniya.</li>
-                <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
-                <li>This is a 4 story building which has 4 labs and bla bla bla</li>
-            </ul>
-            <button id="moreButton" class="moreButton_class">More</button>
-        </div>
-    </div>
-    
-    <div id="latterPanel" class="latterPanelClass">
-        <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
-            <div id="searchBar" class="searchBar">
-                <input id="searchQueryInput" class="searchQueryInput_class" type="text" name="searchQueryInput" placeholder="Search" value="" />
-                <button id="searchQuerySubmit" class="searchQuerySubmit_class" type="submit" name="searchQuerySubmit">
-                  <svg style="width:3.4vmin;height:3.4vmin" viewBox="0 0 24 24"><path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
-                  </svg>
-                </button>
-            </div>
-        </div>
-        <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
-    </div>
-    <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
-    <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
-    <button class="viewButtonClass" id="viewButton" onclick="changeView()">Third Person</button>
-    <div class="aim"></div>
 </body>
 </html>
+
