@@ -309,7 +309,7 @@
                     }
                 }
             });
-            domEvents.addEventListener(cube,'mouseover',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
                 if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.4;
                     document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
@@ -350,7 +350,7 @@
 
 //Creating Transparent Objects
         var transparentMaterialArray = [];
-        for(var i=0;i<15;i++){
+        for(var i=0;i<14;i++){
             transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
         }
         function createTransparentObject(buildingID,horv,yPosition,zPosition){
@@ -376,7 +376,7 @@
         }
 
         var transparentMaterialForPanelsArray = [];
-        for(var i=0;i<15;i++){
+        for(var i=0;i<14;i++){
             transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
@@ -384,7 +384,7 @@
             var material = transparentMaterialForPanelsArray[buildingID];
             var cube = new THREE.Mesh(geometry,material);
             scene.add(cube);
-            cube.position.x = 3.75; //3.75
+            cube.position.x = 4; //3.75
             cube.position.y = yPosition;
             cube.position.z = zPosition;
             addMouseEventsForPanels(cube,buildingID);
@@ -924,7 +924,7 @@ function createWall(y,z,Y,Z){
         //Front cube
         var frontCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(frontCameraBall);
         frontCameraBall.position.x = initialCamera_X;
@@ -937,7 +937,7 @@ function createWall(y,z,Y,Z){
         //Back cube
         var backCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(backCameraBall);
         backCameraBall.position.x = initialCamera_X;
@@ -950,7 +950,7 @@ function createWall(y,z,Y,Z){
         //Top cube
         var topCameraBall = new THREE.Mesh(
             new THREE.BoxGeometry(0.1,0.1,0.1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6})
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(topCameraBall);
         topCameraBall.position.x = 3.75;
@@ -1089,36 +1089,33 @@ function createWall(y,z,Y,Z){
         var PanelsList = [];
         var idsOfPanelList = [];
 
-        // var panel01_1BB = createTransparentPanel(1,5,11.2,-2.5,-74.45);         PanelsList.push(panel01_1BB);
+        var panel01_1BB = createTransparentPanel(1,10.35,11.15,-5.175,-74.425);     PanelsList.push(panel01_1BB);
 
-        // var panel02_1BB = createTransparentPanel(2,5.51,10,-13.75,-45.6);       PanelsList.push(panel02_1BB);
+        var panel02_1BB = createTransparentPanel(2,9.4,16,-15.7,-48.6);             PanelsList.push(panel02_1BB);
         
-        // var panel03_1BB = createTransparentPanel(3,10,8.64,-26,-52.28);         PanelsList.push(panel03_1BB);
+        var panel03_1BB = createTransparentPanel(3,10,16,-26,-48.6);                PanelsList.push(panel03_1BB);
 
-        // var panel04_1BB = createTransparentPanel(4,10,7.3,-26,-44.24);          PanelsList.push(panel04_1BB);  
+        var panel04_1BB = createTransparentPanel(4,20.4,30,-10.2,-25);              PanelsList.push(panel04_1BB);  
 
-        // var panel05_1BB = createTransparentPanel(5,10,6.85,-26,-36.57);         PanelsList.push(panel05_1BB);
+        var panel05_1BB = createTransparentPanel(5,10,6.85,-26,-36.57);             PanelsList.push(panel05_1BB);
 
-        // var panel06_1BB = createTransparentPanel(6,10,6.85,-26,-29.08);         PanelsList.push(panel06_1BB);
+        var panel06_1BB = createTransparentPanel(6,10,6.85,-26,-29.08);             PanelsList.push(panel06_1BB);
 
-        // var panel07_1BB = createTransparentPanel(7,10,6.85,-26,-21.58);         PanelsList.push(panel07_1BB);
+        var panel07_1BB = createTransparentPanel(7,10,6.85,-26,-21.58);             PanelsList.push(panel07_1BB);
 
-        // var panel08_1BB = createTransparentPanel(8,10,7.48,-26,-13.75);         PanelsList.push(panel08_1BB);
+        var panel08_1BB = createTransparentPanel(8,10,7.48,-26,-13.75);             PanelsList.push(panel08_1BB);
         
-        // var panel09_1BB = createTransparentPanel(9,20.39,30,-10.15,-24.995);    PanelsList.push(panel09_1BB);
+        var panel09_1BB = createTransparentPanel(9,10.4,18,-5.2,-49.6);             PanelsList.push(panel09_1BB);
 
-        // var panel10_1BB = createTransparentPanel(10,9.42,5.95,-15.71,-53.625);  PanelsList.push(panel10_1BB);
-        // var panel10_2BB = createTransparentPanel(10,3.86,10.04,-18.49,-45.63);  PanelsList.push(panel10_2BB);
-        
-        // var panel11_1BB = createTransparentPanel(11,10.4,18,-5.2,-49.6);        PanelsList.push(panel11_1BB);
+        var panel10_1BB = createTransparentPanel(10,5.3,5.76,-2.65,-62.12);         PanelsList.push(panel10_1BB);
     
-        // var panel12_1BB = createTransparentPanel(12,5,3.2,-2.5,-67.2);          PanelsList.push(panel12_1BB);
+        var panel11_1BB = createTransparentPanel(11,0.94,3.2,-5.44,-67.2);          PanelsList.push(panel11_1BB);
+        var panel11_2BB = createTransparentPanel(11,4.43,10.1,-8.13,-63.75);        PanelsList.push(panel11_2BB);
 
-        // var panel13_1BB = createTransparentPanel(13,5.3,5.76,-2.65,-62.12);     PanelsList.push(panel13_1BB);
-
-        // var panel14_1BB = createTransparentPanel(14,0.84,14.4,-5.48,-72.8);     PanelsList.push(panel14_1BB);
-        // var panel14_2BB = createTransparentPanel(14,25.1,21.3,-18.45,-69.35);   PanelsList.push(panel14_2BB);
-        // var panel14_3BB = createTransparentPanel(14,20,1.45,-21,-57.975);       PanelsList.push(panel14_3BB);
+        var panel12_1BB = createTransparentPanel(12,4.9,3.2,-2.45,-67.2);           PanelsList.push(panel12_1BB);
+        
+        var panel13_1BB = createTransparentPanel(13,20.6,21.4,-20.7,-69.3);         PanelsList.push(panel13_1BB);
+        var panel13_2BB = createTransparentPanel(13,20,1.35,-21,-57.925);           PanelsList.push(panel13_2BB);
 
         var transparentWallsList = [];
 
@@ -1160,21 +1157,28 @@ function createWall(y,z,Y,Z){
 
 
         //Set lights by using the created function above
-        var light1 = setPointLight(3,-5,-12.5);      //Blue
-        var light2 = setPointLight(3,-11.5,-16);     //Yellow
-        var light3 = setPointLight(3,-15.5,-23);     //Red
-        var light4 = setPointLight(3,-17,-16);
-        var light5 = setPointLight(3,-22.5,-25);
-        var light6 = setPointLight(3,-26,-14);
-        var light7 = setPointLight(3,-26,-33);
-        var light8 = setPointLight(3,-5,-22.5);
-        var light9 = setPointLight(3,-10.5,-32.5);
-        var light10 = setPointLight(3,-26,-47.5);
-        var light11 = setPointLight(3,-14,-47.5);
-        var light11 = setPointLight(3,-21,-59);
-        var light12 = setPointLight(3,-6,-73);
-        var light13 = setPointLight(3,-15,-73);
-        var light14 = setPointLight(3,-25,-74);
+
+        var light18 = setPointLight(3,5,-20);
+        var light18 = setPointLight(3,5,-30);
+        var light18 = setPointLight(3,5,-40);
+        var light18 = setPointLight(3,5,-50);
+        var light18 = setPointLight(3,5,-60);
+        var light18 = setPointLight(3,5,-70);
+
+        var light18 = setPointLight(3,-35,-20);
+        var light18 = setPointLight(3,-35,-30);
+        var light18 = setPointLight(3,-35,-40);
+        var light18 = setPointLight(3,-35,-50);
+        var light18 = setPointLight(3,-35,-60);
+        var light18 = setPointLight(3,-35,-70);
+
+        var light18 = setPointLight(3,-6-10);
+        var light18 = setPointLight(3,-12-20);
+        
+        var light18 = setPointLight(3,-10,-85);
+        var light18 = setPointLight(3,-20,-85);
+
+
 
 
         
