@@ -202,6 +202,13 @@
                 if(out==0 && ViewMode=="walk"){
                     if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                             //Decrease the opacity of top right main information label to 0.5 
+                        if(expanded){      
+                            document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                            document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                            document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                            document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                            expanded = 0;           //Set the expanded flag to 0
+                        }
                         document.getElementById("hint").innerHTML = "Click on the building for more details";
                         document.getElementById("information").style.height = "40%";
                         document.getElementById("main_information").style.height = "75%";
@@ -274,6 +281,13 @@
                 if(out==0 && ViewMode!="walk"){
                     if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                             //Decrease the opacity of top right main information label to 0.5 
+                        if(expanded){      
+                            document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                            document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                            document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                            document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                            expanded = 0;           //Set the expanded flag to 0
+                        }
                         document.getElementById("hint").innerHTML = "Click on the building for more details";
                         document.getElementById("information").style.height = "40%";
                         document.getElementById("main_information").style.height = "75%";
@@ -628,7 +642,7 @@ function createWall(y,z,Y,Z){
         }
 
 //Camera Position
-        var ViewMode = "walk";
+var ViewMode = "walk";
         async function switchtoWALK(){
             updateAngles();
             document.getElementById("rightTop").innerHTML = "W";
@@ -638,6 +652,13 @@ function createWall(y,z,Y,Z){
             if(ViewMode=="sky" || ViewMode=="drone"){
                 if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                     //Decrease the opacity of top right main information label to 0.5 
+                    if(expanded){      
+                        document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                        document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                        document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                        document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                        expanded = 0;           //Set the expanded flag to 0
+                    }
                     document.getElementById("hint").innerHTML = "Click on the building for more details";
                     document.getElementById("information").style.height = "40%";
                     document.getElementById("main_information").style.height = "75%";
@@ -699,8 +720,16 @@ function createWall(y,z,Y,Z){
             document.getElementById("leftTopButton").innerHTML = "BIRD";
             document.getElementById("leftBottomButton").innerHTML = "WALK";
             if(ViewMode=="walk"){
+                departmentDatabase[0] = building0;
                 if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                     //Decrease the opacity of top right main information label to 0.5 
+                    if(expanded){      
+                        document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                        document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                        document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                        document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                        expanded = 0;           //Set the expanded flag to 0
+                    }
                     document.getElementById("hint").innerHTML = "Click on the building for more details";
                     document.getElementById("information").style.height = "40%";
                     document.getElementById("main_information").style.height = "75%";
@@ -729,7 +758,11 @@ function createWall(y,z,Y,Z){
                 okToGoBack = 1;
                 okToGoFront = 1;
                 angle_y = Math.PI/8;
+                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+                document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
             }else if(ViewMode=="sky"){
+                departmentDatabase[0] = building0;
                 for(var i=0;i<20;i++){
                     await sleep(20);
                     camera.position.x = 40 -(i+1)*1.5;
@@ -739,10 +772,6 @@ function createWall(y,z,Y,Z){
                 okToGoFront = 1;
                 angle_y = Math.PI/8;
             }
-            departmentDatabase[0] = building0;
-            document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-            document.getElementById("list").innerHTML = departmentDatabase[0][1];
-            document.getElementById("list2").innerHTML = departmentDatabase[0][2];
             ViewMode = "drone";
         }
 
@@ -753,22 +782,30 @@ function createWall(y,z,Y,Z){
             document.getElementById("leftTopButton").innerHTML = "DRONE";
             document.getElementById("leftBottomButton").innerHTML = "WALK";
             if(ViewMode=="walk"){   //Going up
+                departmentDatabase[0] = building0;
                 if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                             //Decrease the opacity of top right main information label to 0.5 
-                        document.getElementById("hint").innerHTML = "Click on the building for more details";
-                        document.getElementById("information").style.height = "40%";
-                        document.getElementById("main_information").style.height = "75%";
-                        document.getElementById("hint").style.height = "7.5%";
-                        document.getElementById("controlLayout").style.height = "20%";
-                        document.getElementById("more_information").style.removeProperty('min-height');
-                        document.getElementById("more_information").style.padding = "0%";
-                        document.getElementById("more_information").style.marginTop = "0%";
-                        document.getElementById("more_information").style.margin = "0%";
-                        document.getElementById("label2").style.fontSize = "0vmin";
-                        document.getElementById("list2").style.fontSize = "0vmin";
-                        document.getElementById("label3").style.backgroundColor = "#1A5276";
-                        showNavigator();
-                        clicked = !clicked;    
+                    if(expanded){      
+                        document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                        document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                        document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                        document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                        expanded = 0;           //Set the expanded flag to 0
+                    }
+                    document.getElementById("hint").innerHTML = "Click on the building for more details";
+                    document.getElementById("information").style.height = "40%";
+                    document.getElementById("main_information").style.height = "75%";
+                    document.getElementById("hint").style.height = "7.5%";
+                    document.getElementById("controlLayout").style.height = "20%";
+                    document.getElementById("more_information").style.removeProperty('min-height');
+                    document.getElementById("more_information").style.padding = "0%";
+                    document.getElementById("more_information").style.marginTop = "0%";
+                    document.getElementById("more_information").style.margin = "0%";
+                    document.getElementById("label2").style.fontSize = "0vmin";
+                    document.getElementById("list2").style.fontSize = "0vmin";
+                    document.getElementById("label3").style.backgroundColor = "#1A5276";
+                    showNavigator();
+                    clicked = !clicked;    
                 }
                 for(var i=0;i<transparentMaterialArray.length;i++){
                     transparentMaterialArray[i].color.set(0x000000);
@@ -798,7 +835,11 @@ function createWall(y,z,Y,Z){
                 okToGoFront = 1;
                 angle_y = Math.PI/2;
                 angle_x = 0;
+                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+                document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
             }else if(ViewMode=="drone"){
+                departmentDatabase[0] = building0;
                 var y = camera.position.y;
                 var z = camera.position.z;
                 var xr = camera.rotation.x;
@@ -823,10 +864,6 @@ function createWall(y,z,Y,Z){
                 angle_y = Math.PI/2;
                 angle_x = 0;
             }
-            departmentDatabase[0] = building0;
-            document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-            document.getElementById("list").innerHTML = departmentDatabase[0][1];
-            document.getElementById("list2").innerHTML = departmentDatabase[0][2];
             ViewMode = "sky";
         }
 
@@ -1028,7 +1065,7 @@ function createWall(y,z,Y,Z){
         camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
 
 
-//Rendering
+//Rendering2
         var animate = function(){
             
             frontballBB.copy(frontCameraBall.geometry.boundingBox).applyMatrix4(frontCameraBall.matrixWorld);
@@ -1043,8 +1080,8 @@ function createWall(y,z,Y,Z){
         };
 
 
-        var blenderBuilding9 = importObject('./floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);    //wall
-
+        //var blenderBuilding9 = importObject('./floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);    
+        var blenderBuilding9 = importObject('./floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);    
 
         //Creating transparent objects by using the created function above
         var O01_door1 = createTransparentObject(1,"v",-5.06,-73.75); //m
@@ -1140,6 +1177,9 @@ function createWall(y,z,Y,Z){
         var cubeV13BB = createWall(Y,1,-20.7,-25.35);       transparentWallsList.push(cubeV13BB);
         var cubeV14BB = createWall(Y,8.1,-20.7,-17.55);     transparentWallsList.push(cubeV14BB);
         var cubeV15BB = createWall(Y,0.6,-20.7,-10);        transparentWallsList.push(cubeV15BB);
+        var cubeV16BB = createWall(Y,9,-3.3,-48);           transparentWallsList.push(cubeV16BB);
+        var cubeV17BB = createWall(0.4,7,-6.3,-44);         transparentWallsList.push(cubeV17BB);
+
  
         var cubeH1BB = createWall(32.3,Y,-15.5,-9.7);       transparentWallsList.push(cubeH1BB);
         var cubeH2BB = createWall(32.3,Y,-15.5,-80.3);      transparentWallsList.push(cubeH2BB);
@@ -1158,6 +1198,9 @@ function createWall(y,z,Y,Z){
         var cubeH15BB = createWall(6.15,Y,-13.2,-40.35);    transparentWallsList.push(cubeH15BB);
         var cubeH16BB = createWall(7,Y,-3.38,-40.35);       transparentWallsList.push(cubeH16BB);
         var cubeH17BB = createWall(6,Y,-13.7,-50.5);        transparentWallsList.push(cubeH17BB);
+        var cubeH18BB = createWall(4,Y,-1.7,-52.5);         transparentWallsList.push(cubeH18BB);
+        var cubeH19BB = createWall(3,Y,-5,-46);             transparentWallsList.push(cubeH19BB);
+
    
         //var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
 
