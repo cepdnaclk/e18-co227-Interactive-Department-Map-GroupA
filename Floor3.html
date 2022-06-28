@@ -993,7 +993,7 @@ var ViewMode = "walk";
             new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(topCameraBall);
-        topCameraBall.position.x = 3.85;
+        topCameraBall.position.x = 3.8;
         topCameraBall.position.y = initialCamera_Y;
         topCameraBall.position.z = initialCamera_Z;
         let topballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
@@ -1218,60 +1218,35 @@ var ViewMode = "walk";
 
         //var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
 
-
         //Set lights by using the created function above
-        // var light1 = setPointLight(3,-5,-8);      //Blue
-        // var light2 = setPointLight(3,-5,-16);     //Yellow
-        // var light3 = setPointLight(3,-5,-26);     //Red
-        // var light4 = setPointLight(3,-5,-22.5);
-        // var light5 = setPointLight(3,-5,-39);
-        // var light6 = setPointLight(3,-21,-25);
-        // var light7 = setPointLight(3,-21,-35);
-        // var light8 = setPointLight(3,-5,-22.5);
-        // var light9 = setPointLight(3,-3,-51);
-        // var light10 = setPointLight(3,-2.5,-57);
-        // var light11 = setPointLight(3,-2.5,-64);
-        // var light11 = setPointLight(3,-10,-67);
-        // var light12 = setPointLight(3,-20,-67);
-        // var light13 = setPointLight(3,-28,-66);
-        // var light14 = setPointLight(3,-28,-57.5);
-        // var light15 = setPointLight(3,-28,-50);
-        // var light16 = setPointLight(3,-16,-52);
-        // var light17 = setPointLight(3,-11,-56);
-        // var light18 = setPointLight(3,-22,-56);
+        var light01 = setPointLight(3,5,-10);
+        var light02 = setPointLight(3,5,-20);
+        var light03 = setPointLight(3,5,-30);
+        var light04 = setPointLight(3,5,-40);
+        var light05 = setPointLight(3,5,-48);
+        var light06 = setPointLight(3,5,-54);
+        var light07 = setPointLight(3,5,-60);
+        var light08 = setPointLight(3,5,-66);
 
-        var light18 = setPointLight(3,5,-10);
-        var light18 = setPointLight(3,5,-20);
-        var light18 = setPointLight(3,5,-30);
-        var light18 = setPointLight(3,5,-40);
-        var light18 = setPointLight(3,5,-48);
-        var light18 = setPointLight(3,5,-54);
-        var light18 = setPointLight(3,5,-60);
-        var light18 = setPointLight(3,5,-66);
+        var light09 = setPointLight(3,-35,-10);
+        var light10 = setPointLight(3,-35,-20);
+        var light11 = setPointLight(3,-35,-30);
+        var light12 = setPointLight(3,-35,-40);
+        var light13 = setPointLight(3,-35,-48);
+        var light14 = setPointLight(3,-35,-54);
+        var light15 = setPointLight(3,-35,-60);
+        var light16 = setPointLight(3,-35,-66);
 
-        var light18 = setPointLight(3,-35,-10);
-        var light18 = setPointLight(3,-35,-20);
-        var light18 = setPointLight(3,-35,-30);
-        var light18 = setPointLight(3,-35,-40);
-        var light18 = setPointLight(3,-35,-48);
-        var light18 = setPointLight(3,-35,-54);
-        var light18 = setPointLight(3,-35,-60);
-        var light18 = setPointLight(3,-35,-66);
-
-        var light18 = setPointLight(3,-6,5);
+        var light17 = setPointLight(3,-6,5);
         var light18 = setPointLight(3,-12,5);
-        var light18 = setPointLight(3,-18,5);
-        var light18 = setPointLight(3,-24,5);
+        var light19 = setPointLight(3,-18,5);
+        var light20 = setPointLight(3,-24,5);
         
-        var light18 = setPointLight(3,-6,-75);
-        var light18 = setPointLight(3,-12,-75);
-        var light18 = setPointLight(3,-18,-75);
-        var light18 = setPointLight(3,-24,-75);
+        var light21 = setPointLight(3,-6,-75);
+        var light22 = setPointLight(3,-12,-75);
+        var light23 = setPointLight(3,-18,-75);
+        var light24 = setPointLight(3,-24,-75);
     
-
-
-        
-
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
 
@@ -1279,11 +1254,6 @@ var ViewMode = "walk";
         document.getElementById("list").innerHTML = departmentDatabase[0][1];
         document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][0];
         document.getElementById("list2").innerHTML = departmentDatabase[0][2];
-
-        // var dlight1 = setDirectionalLight(10,-30,-80);
-        // var dlight2 = setDirectionalLight(10,30,80);
-        // var dlight3 = setDirectionalLight(10,-30,80);
-        // var dlight4 = setDirectionalLight(10,30,-80);
 
         animate();
 
