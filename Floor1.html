@@ -378,7 +378,7 @@
             }else if(horv=="hl"){
                 var geometry = new THREE.BoxGeometry(6.54,3,0.2);
             }else if(horv=="hss"){
-                var geometry = new THREE.BoxGeometry(7.6,1.9,0.05);
+                var geometry = new THREE.BoxGeometry(7.6,1.95,0.05);
             }
             var material = transparentMaterialArray[buildingID]
             var cube = new THREE.Mesh(geometry,material);
@@ -1232,21 +1232,25 @@ var ViewMode = "walk";
         var light18 = setPointLight(3,5,-40);
         var light18 = setPointLight(3,5,-50);
         var light18 = setPointLight(3,5,-60);
-        var light18 = setPointLight(3,5,-70);
+        var light18 = setPointLight(3,5,-66);
+        var light18 = setPointLight(3,5,-72);
+        var light18 = setPointLight(3,5,-78);
 
         var light18 = setPointLight(3,-35,-20);
         var light18 = setPointLight(3,-35,-30);
         var light18 = setPointLight(3,-35,-40);
         var light18 = setPointLight(3,-35,-50);
         var light18 = setPointLight(3,-35,-60);
-        var light18 = setPointLight(3,-35,-70);
+        var light18 = setPointLight(3,-35,-68);
+        var light18 = setPointLight(3,-35,-76);
 
-        var light18 = setPointLight(3,-6-5);
-        var light18 = setPointLight(3,-12-5);
-        var light18 = setPointLight(3,-18-5);
-        var light18 = setPointLight(3,-24-5);
+        var light18 = setPointLight(3,-6,-5);
+        var light18 = setPointLight(3,-12,-5);
+        var light18 = setPointLight(3,-18,-5);
+        var light18 = setPointLight(3,-24,-5);
         
-        var light18 = setPointLight(3,-6,-85);        
+        var light18 = setPointLight(3,-3,-85);
+        var light18 = setPointLight(3,-9,-85);        
 
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
