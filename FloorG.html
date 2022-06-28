@@ -395,7 +395,7 @@
 
         var transparentMaterialForPanelsArray = [];
         for(var i=0;i<23;i++){
-            transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
+            transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:false, opacity:0.8});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
             var geometry = new THREE.BoxGeometry(0.01,yvalue,zvalue);
@@ -1096,10 +1096,10 @@ function createWall(y,z,Y,Z){
         var G01_door2 = createTransparentObject(1,"v",-19.25,-69.45);
 
         var G02_door1 = createTransparentObject(2,"v",-19.03,-69.45);
-        var G02_door2 = createTransparentObject(2,"h",-25.35,-67.78);
+        var G02_door2 = createTransparentObject(2,"h",-23.74,-67.78);
 
         var G03_door1 = createTransparentObject(3,"v",-11.15,-61.9);
-        var G03_door2 = createTransparentObject(3,"h",-25.35,-68);
+        var G03_door2 = createTransparentObject(3,"h",-23.74,-68);
 
         var G04_door1 = createTransparentObject(4,"h",-17.35,-39.98);
         var G04_door2 = createTransparentObject(4,"v",-21.2,-51.6);
@@ -1118,7 +1118,7 @@ function createWall(y,z,Y,Z){
         var G08_door4 = createTransparentObject(8,"v",-21.2,-27.6);
         var G08_door5 = createTransparentObject(8,"h",-17.35,-40.20);
 
-        var G09_door1 = createTransparentObject(9,"v",-12.68,-17.57);
+        //var G09_door1 = createTransparentObject(9,"v",-12.68,-17.57);
 
         var GBW_door1 = createTransparentObject(10,"th",-1.33,-19.78);
         var GBW_door2 = createTransparentObject(10,"th",-3.55,-19.78);
@@ -1140,7 +1140,7 @@ function createWall(y,z,Y,Z){
         var GBG_door2 = createTransparentObject(17,"h",-2.65,-10.37);
 
         var GC1_door1 = createTransparentObject(18,"v",-9.71,-12.43);
-        var GC1_door2 = createTransparentObject(18,"v",-12.90,-17.57);
+        //var GC1_door2 = createTransparentObject(18,"v",-12.90,-17.57);
         var GC1_door3 = createTransparentObject(18,"v",-21.2,-22.3);
         var GC1_door4 = createTransparentObject(18,"h",-16.51,-25.22);
 
@@ -1176,7 +1176,8 @@ function createWall(y,z,Y,Z){
 
         var panel08_1BB = createTransparentPanel(8,20.47,14.805,-10.635,-32.7);     PanelsList.push(panel08_1BB);
         
-        var panel09_1BB = createTransparentPanel(9,8,9.63,-16.87,-15.2);            PanelsList.push(panel09_1BB);
+        //var panel09_1BB = createTransparentPanel(9,8,9.63,-16.87,-15.2);            PanelsList.push(panel09_1BB);
+        var panel09_1BB = createTransparentPanel(9,11,14.55,-15.5,-17.6);            PanelsList.push(panel09_1BB);
 
         var panel10_1BB = createTransparentPanel(10,4.4,4.975,-2.59,-22.53);        PanelsList.push(panel10_1BB);
         
@@ -1192,8 +1193,8 @@ function createWall(y,z,Y,Z){
 
         var panel16_1BB = createTransparentPanel(16,2.1,4.8,-8.55,-17.44);          PanelsList.push(panel16_1BB);
 
-        var panel18_1BB = createTransparentPanel(18,2.74,14.6,-11.33,-17.65);       PanelsList.push(panel18_1BB);
-        var panel18_2BB = createTransparentPanel(18,8.2,4.7,-16.8,-22.6);           PanelsList.push(panel18_2BB);
+       // var panel18_1BB = createTransparentPanel(18,2.74,14.6,-11.33,-17.65);       PanelsList.push(panel18_1BB);
+       // var panel18_2BB = createTransparentPanel(18,8.2,4.7,-16.8,-22.6);           PanelsList.push(panel18_2BB);
 
         var panel19_1BB = createTransparentPanel(19,4.6,9.967,-23.59,-25.22);       PanelsList.push(panel19_1BB);
 
@@ -1215,8 +1216,8 @@ function createWall(y,z,Y,Z){
         var cubeV13BB = createWall(Y,2.1,-21.1,-25);    transparentWallsList.push(cubeV13BB);
         var cubeV14BB = createWall(Y,10.8,-21.1,-15.4); transparentWallsList.push(cubeV14BB);
         var cubeV15BB = createWall(Y,11,-26,-25.2);     transparentWallsList.push(cubeV15BB);
-        var cubeV16BB = createWall(Y,1,-12.9,-19.8);    transparentWallsList.push(cubeV16BB);
-        var cubeV17BB = createWall(Y,5.5,-12.9,-13.2);  transparentWallsList.push(cubeV17BB);
+        //var cubeV16BB = createWall(Y,1,-12.9,-19.8);    transparentWallsList.push(cubeV16BB);
+       // var cubeV17BB = createWall(Y,5.5,-12.9,-13.2);  transparentWallsList.push(cubeV17BB);
         var cubeV18BB = createWall(Y,0.8,-9.8,-10.3);   transparentWallsList.push(cubeV18BB);
         var cubeV19BB = createWall(Y,11.3,-9.8,-19.75); transparentWallsList.push(cubeV19BB);
         var cubeV20BB = createWall(Y,10.5,-4.9,-20);    transparentWallsList.push(cubeV20BB);
@@ -1235,7 +1236,7 @@ function createWall(y,z,Y,Z){
         var cubeH8BB = createWall(2.8,Y,-19.5,-25.1);   transparentWallsList.push(cubeH8BB);
         var cubeH9BB = createWall(5,Y,-28.5,-25.4);     transparentWallsList.push(cubeH9BB);
         var cubeH10BB = createWall(10,Y,-5,-14.9);      transparentWallsList.push(cubeH10BB);
-        var cubeH11BB = createWall(9.4,Y,-17.5,-20);    transparentWallsList.push(cubeH11BB);
+        //var cubeH11BB = createWall(9.4,Y,-17.5,-20);    transparentWallsList.push(cubeH11BB);
         var cubeH12BB = createWall(1,Y,-21.5,-30.4);    transparentWallsList.push(cubeH12BB);
         var cubeH13BB = createWall(20,Y,-21,-55.1);     transparentWallsList.push(cubeH13BB);
         var cubeH14BB = createWall(1,Y,-0.5,-57.8);     transparentWallsList.push(cubeH14BB);
@@ -1244,8 +1245,8 @@ function createWall(y,z,Y,Z){
         var cubeH17BB = createWall(11,Y,-16.5,-65.8);   transparentWallsList.push(cubeH17BB);
         var cubeH18BB = createWall(6,Y,-3,-65.1);       transparentWallsList.push(cubeH18BB);
         var cubeH19BB = createWall(6.5,Y,-3.25,-70.2);  transparentWallsList.push(cubeH19BB);
-        var cubeH20BB = createWall(4,Y,-29,-67.9);      transparentWallsList.push(cubeH20BB);
-        var cubeH21BB = createWall(1.6,Y,-22.8,-67.9);  transparentWallsList.push(cubeH21BB);
+        var cubeH20BB = createWall(5.5,Y,-28.25,-67.9);      transparentWallsList.push(cubeH20BB);
+       // var cubeH21BB = createWall(1.6,Y,-22.8,-67.9);  transparentWallsList.push(cubeH21BB);
         var cubeH22BB = createWall(31,Y,-15.5,-79.8);   transparentWallsList.push(cubeH22BB);
         var cubeH23BB = createWall(4,Y,-2,-51.5);       transparentWallsList.push(cubeH23BB);
         var cubeH24BB = createWall(3,Y,-5.7,-44);       transparentWallsList.push(cubeH24BB);
