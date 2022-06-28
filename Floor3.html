@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="shortcut icon" href="#">
     <title>Third Floor</title>   <!--Name of the website -->
     <link rel="stylesheet" href="style.css"/>   <!--Linking the css file-->
 </head>
@@ -164,7 +165,7 @@
         var camera = new THREE.PerspectiveCamera(85,window.innerWidth/(window.innerHeight*1.5));
         //Renderer
         var renderer = new THREE.WebGLRenderer({antilias:true});
-        renderer.setSize(window.innerWidth*0.991,window.innerHeight*0.978);      
+        renderer.setSize(window.innerWidth-14,window.innerHeight-17);      
         $('body').append(renderer.domElement);    
         
         
@@ -818,16 +819,16 @@ var ViewMode = "walk";
                     await sleep(20);
                     camera.position.x=(i+1)*2;
                     camera.position.y = y - (i+1)*(y/20+1);
-                    camera.position.z = z - (i+1)*(z/20+2.25);
+                    camera.position.z = z - (i+1)*(z/20+1.8);
                     camera.rotation.x = xr - (i+1)*(xr/20);
                     camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/2))/20); 
                 }
                 frontCameraBall.position.y = -20; 
                 backCameraBall.position.y = -20;
                 topCameraBall.position.y = -20;
-                frontCameraBall.position.z = -45-R;
-                backCameraBall.position.z = -45+R;
-                topCameraBall.position.z = -45;
+                frontCameraBall.position.z = -36-R;
+                backCameraBall.position.z = -36+R;
+                topCameraBall.position.z = -36;
                 frontCameraBall.rotation.x = 0;
                 backCameraBall.rotation.x = 0;
                 okToGoBack = 1;
@@ -846,16 +847,16 @@ var ViewMode = "walk";
                     await sleep(20);
                     camera.position.x = 10 +(i+1)*1.5;
                     camera.position.y = y - (i+1)*(y/20+1);
-                    camera.position.z = z - (i+1)*(z/20+2.25);
+                    camera.position.z = z - (i+1)*(z/20+1.8);
                     camera.rotation.x = xr - (i+1)*(xr/20);
-                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/2))/20); 
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/2))/20);  
                 }
                 frontCameraBall.position.y = -20; 
                 backCameraBall.position.y = -20;
                 topCameraBall.position.y = -20;
-                frontCameraBall.position.z = -45-R;
-                backCameraBall.position.z = -45+R;
-                topCameraBall.position.z = -45;
+                frontCameraBall.position.z = -36-R;
+                backCameraBall.position.z = -36+R;
+                topCameraBall.position.z = -36;
                 frontCameraBall.rotation.x = 0;
                 backCameraBall.rotation.x = 0;
                 okToGoBack = 1;
@@ -1070,7 +1071,7 @@ var ViewMode = "walk";
 
 //Rendering
         var animate = function(){
-            
+            renderer.setSize(window.innerWidth-14,window.innerHeight-17);      
             frontballBB.copy(frontCameraBall.geometry.boundingBox).applyMatrix4(frontCameraBall.matrixWorld);
             backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);
             topballBB.copy(topCameraBall.geometry.boundingBox).applyMatrix4(topCameraBall.matrixWorld);
