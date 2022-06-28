@@ -997,7 +997,7 @@ function createWall(y,z,Y,Z){
             new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(topCameraBall);
-        topCameraBall.position.x = 3.85;
+        topCameraBall.position.x = 3.8;
         topCameraBall.position.y = initialCamera_Y;
         topCameraBall.position.z = initialCamera_Z;
         let topballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
@@ -1163,13 +1163,13 @@ function createWall(y,z,Y,Z){
         var PanelsList = [];
         var idsOfPanelList = [];
 
-        var panel01_1BB = createTransparentPanel(1,7.63,13.56,-15.34,-72.785);         PanelsList.push(panel01_1BB);  
+        var panel01_1BB = createTransparentPanel(1,7.63,13.56,-15.34,-72.785);      PanelsList.push(panel01_1BB);  
         
-        var panel02_1BB = createTransparentPanel(2,2.64,13.63,-20.595,-72.785);         PanelsList.push(panel02_1BB);  
-        var panel02_2BB = createTransparentPanel(2,8.7,11.63,-26.265,-73.785);         PanelsList.push(panel02_2BB);  
+        var panel02_1BB = createTransparentPanel(2,2.64,13.63,-20.595,-72.785);     PanelsList.push(panel02_1BB);  
+        var panel02_2BB = createTransparentPanel(2,8.7,11.63,-26.265,-73.785);      PanelsList.push(panel02_2BB);  
         
-        var panel03_1BB = createTransparentPanel(3,8.6,12.55,-26.265,-61.495);         PanelsList.push(panel03_1BB);  
-        var panel03_2BB = createTransparentPanel(3,10.7,10.4,-16.8,-60.55);         PanelsList.push(panel03_2BB);  
+        var panel03_1BB = createTransparentPanel(3,8.6,12.55,-26.265,-61.495);      PanelsList.push(panel03_1BB);  
+        var panel03_2BB = createTransparentPanel(3,10.57,10.46,-16.68,-60.53);      PanelsList.push(panel03_2BB);  
         
         var panel04_1BB = createTransparentPanel(4,10.56,2.6,-5.68,-56.25);         PanelsList.push(panel04_1BB);  
         var panel04_2BB = createTransparentPanel(4,20.47,14.69,-10.635,-47.605);    PanelsList.push(panel04_2BB);
@@ -1184,8 +1184,8 @@ function createWall(y,z,Y,Z){
 
         var panel08_1BB = createTransparentPanel(8,20.47,14.805,-10.635,-32.7);     PanelsList.push(panel08_1BB);
         
-        //var panel09_1BB = createTransparentPanel(9,8,9.63,-16.87,-15.2);            PanelsList.push(panel09_1BB);
-        var panel09_1BB = createTransparentPanel(9,11,14.55,-15.5,-17.6);            PanelsList.push(panel09_1BB);
+        //var panel09_1BB = createTransparentPanel(9,8,9.63,-16.87,-15.2);              PanelsList.push(panel09_1BB);
+        var panel09_1BB = createTransparentPanel(9,11,14.55,-15.5,-17.6);           PanelsList.push(panel09_1BB);
 
         var panel10_1BB = createTransparentPanel(10,4.4,4.975,-2.59,-22.53);        PanelsList.push(panel10_1BB);
         
@@ -1206,14 +1206,14 @@ function createWall(y,z,Y,Z){
 
         var panel19_1BB = createTransparentPanel(19,4.6,9.967,-23.59,-25.22);       PanelsList.push(panel19_1BB);
         
-        var panel20_1BB = createTransparentPanel(20,5.6,7,-3.2,-61.47);       PanelsList.push(panel20_1BB);
+        var panel20_1BB = createTransparentPanel(20,5.6,7,-3.2,-61.47);             PanelsList.push(panel20_1BB);
         
-        var panel21_1BB = createTransparentPanel(21,5.6,4.6,-3.2,-67.67);       PanelsList.push(panel21_1BB);
+        var panel21_1BB = createTransparentPanel(21,5.6,4.6,-3.2,-67.67);           PanelsList.push(panel21_1BB);
        
-        var panel22_1BB = createTransparentPanel(22,10.75,9.2,-5.775,-75);       PanelsList.push(panel22_1BB);
-        var panel22_2BB = createTransparentPanel(22,4.8,12.8,-8.65,-64.1);       PanelsList.push(panel22_2BB);
+        var panel22_1BB = createTransparentPanel(22,10.75,9.2,-5.775,-75);          PanelsList.push(panel22_1BB);
+        var panel22_2BB = createTransparentPanel(22,4.8,12.8,-8.67,-64);            PanelsList.push(panel22_2BB);
 
-
+        
         var transparentWallsList = [];
 
         var cubeV1BB = createWall(Y,63.3,-0.2,-41.65);  transparentWallsList.push(cubeV1BB);
@@ -1260,7 +1260,7 @@ function createWall(y,z,Y,Z){
         var cubeH17BB = createWall(11,Y,-16.5,-65.8);   transparentWallsList.push(cubeH17BB);
         var cubeH18BB = createWall(6,Y,-3,-65.1);       transparentWallsList.push(cubeH18BB);
         var cubeH19BB = createWall(6.5,Y,-3.25,-70.2);  transparentWallsList.push(cubeH19BB);
-        var cubeH20BB = createWall(5.5,Y,-28.25,-67.9);      transparentWallsList.push(cubeH20BB);
+        var cubeH20BB = createWall(5.5,Y,-28.25,-67.9); transparentWallsList.push(cubeH20BB);
        // var cubeH21BB = createWall(1.6,Y,-22.8,-67.9);  transparentWallsList.push(cubeH21BB);
         var cubeH22BB = createWall(31,Y,-15.5,-79.8);   transparentWallsList.push(cubeH22BB);
         var cubeH23BB = createWall(4,Y,-2,-51.5);       transparentWallsList.push(cubeH23BB);
@@ -1271,23 +1271,35 @@ function createWall(y,z,Y,Z){
 
         //Set lights by using the created function above
 
-        var light1 = setPointLight(3,-5,-12.5);      //Blue
-        var light2 = setPointLight(3,-11.5,-16);     //Yellow
-        var light3 = setPointLight(3,-15.5,-23);     //Red
-        var light4 = setPointLight(3,-17,-16);
-        var light5 = setPointLight(3,-22.5,-25);
-        var light6 = setPointLight(3,-26,-17);
-        var light7 = setPointLight(3,-26,-33);
-        var light8 = setPointLight(3,-5,-22.5);
-        var light9 = setPointLight(3,-10.5,-32.5);
-        var light10 = setPointLight(3,-26,-47.5);
-        var light11 = setPointLight(3,-14,-47.5);
-        var light11 = setPointLight(3,-21,-59);
-        var light12 = setPointLight(3,-6,-73);
-        var light13 = setPointLight(3,-15,-73);
-        var light14 = setPointLight(3,-25,-74);
-        //var light15 = setPointLight(1,-15,0);
+        var light01 = setPointLight(3,5,-13);
+        var light02 = setPointLight(3,5,-18);
+        var light03 = setPointLight(3,5,-24);
+        var light04 = setPointLight(3,5,-30);
+        var light05 = setPointLight(3,5,-40);
+        var light06 = setPointLight(3,5,-48);
+        var light07 = setPointLight(3,5,-54);
+        var light08 = setPointLight(3,5,-60);
+        var light09 = setPointLight(3,5,-66);
+
+        var light10 = setPointLight(3,-35,-13);
+        var light11 = setPointLight(3,-35,-18);
+        var light12 = setPointLight(3,-35,-24);
+        var light13 = setPointLight(3,-35,-30);
+        var light14 = setPointLight(3,-35,-40);
+        var light15 = setPointLight(3,-35,-48);
+        var light16 = setPointLight(3,-35,-54);
+        var light17 = setPointLight(3,-35,-60);
+        var light18 = setPointLight(3,-35,-66);
+
+        var light19 = setPointLight(3,-6,5);
+        var light20 = setPointLight(3,-12,5);
+        var light21 = setPointLight(3,-18,5);
+        var light22 = setPointLight(3,-24,5);
         
+        var light23 = setPointLight(3,-6,-75);
+        var light24 = setPointLight(3,-12,-75);
+        var light25 = setPointLight(3,-18,-75);
+        var light26 = setPointLight(3,-24,-75);
 
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
@@ -1296,11 +1308,6 @@ function createWall(y,z,Y,Z){
         document.getElementById("list").innerHTML = departmentDatabase[0][1];
         document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][0];
         document.getElementById("list2").innerHTML = departmentDatabase[0][2];
-
-        //var lightD1 = setDirectionalLight(20,-10,-40);                                     //Use the function to set the light
-        //setDirectionalLight(light2,0,50,-30);
-        //setDirectionalLight(light3,20,-30,-10);
-        //setDirectionalLight(light4,20,30,-10);
 
         animate();
 
