@@ -164,7 +164,7 @@
         var camera = new THREE.PerspectiveCamera(85,window.innerWidth/(window.innerHeight*1.5));
         //Renderer
         var renderer = new THREE.WebGLRenderer({antilias:true});
-        renderer.setSize(window.innerWidth*0.991,window.innerHeight*0.978);      
+        renderer.setSize(window.innerWidth-14,window.innerHeight-17);    
         $('body').append(renderer.domElement);    
         
         
@@ -378,7 +378,7 @@
             }else if(horv=="hl"){
                 var geometry = new THREE.BoxGeometry(6.54,3,0.2);
             }else if(horv=="hss"){
-                var geometry = new THREE.BoxGeometry(7.6,1.9,0.05);
+                var geometry = new THREE.BoxGeometry(7.6,1.95,0.05);
             }
             var material = transparentMaterialArray[buildingID]
             var cube = new THREE.Mesh(geometry,material);
@@ -395,11 +395,11 @@
             transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
-            var geometry = new THREE.BoxGeometry(0.2,yvalue,zvalue);
+            var geometry = new THREE.BoxGeometry(0.01,yvalue,zvalue);
             var material = transparentMaterialForPanelsArray[buildingID];
             var cube = new THREE.Mesh(geometry,material);
             scene.add(cube);
-            cube.position.x = 3.75; //3.75
+            cube.position.x = 3.85; //3.75
             cube.position.y = yPosition;
             cube.position.z = zPosition;
             addMouseEventsForPanels(cube,buildingID);
@@ -994,7 +994,7 @@ var ViewMode = "walk";
             new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(topCameraBall);
-        topCameraBall.position.x = 3.75;
+        topCameraBall.position.x = 3.85;
         topCameraBall.position.y = initialCamera_Y;
         topCameraBall.position.z = initialCamera_Z;
         let topballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
@@ -1072,7 +1072,7 @@ var ViewMode = "walk";
 
 //Rendering2
         var animate = function(){
-            
+            renderer.setSize(window.innerWidth-14,window.innerHeight-17);
             frontballBB.copy(frontCameraBall.geometry.boundingBox).applyMatrix4(frontCameraBall.matrixWorld);
             backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);
             topballBB.copy(topCameraBall.geometry.boundingBox).applyMatrix4(topCameraBall.matrixWorld);
@@ -1232,21 +1232,25 @@ var ViewMode = "walk";
         var light18 = setPointLight(3,5,-40);
         var light18 = setPointLight(3,5,-50);
         var light18 = setPointLight(3,5,-60);
-        var light18 = setPointLight(3,5,-70);
+        var light18 = setPointLight(3,5,-66);
+        var light18 = setPointLight(3,5,-72);
+        var light18 = setPointLight(3,5,-78);
 
         var light18 = setPointLight(3,-35,-20);
         var light18 = setPointLight(3,-35,-30);
         var light18 = setPointLight(3,-35,-40);
         var light18 = setPointLight(3,-35,-50);
         var light18 = setPointLight(3,-35,-60);
-        var light18 = setPointLight(3,-35,-70);
+        var light18 = setPointLight(3,-35,-68);
+        var light18 = setPointLight(3,-35,-76);
 
-        var light18 = setPointLight(3,-6-5);
-        var light18 = setPointLight(3,-12-5);
-        var light18 = setPointLight(3,-18-5);
-        var light18 = setPointLight(3,-24-5);
+        var light18 = setPointLight(3,-6,-5);
+        var light18 = setPointLight(3,-12,-5);
+        var light18 = setPointLight(3,-18,-5);
+        var light18 = setPointLight(3,-24,-5);
         
-        var light18 = setPointLight(3,-6,-85);        
+        var light18 = setPointLight(3,-3,-85);
+        var light18 = setPointLight(3,-9,-85);        
 
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
