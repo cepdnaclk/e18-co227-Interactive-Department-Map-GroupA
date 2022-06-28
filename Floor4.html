@@ -1105,27 +1105,20 @@ var ViewMode = "walk";
         //Creating transparent objects by using the created function above
 
 
-        //var F01_door1 = createTransparentObject(1,"v",-23.26,-60.24);
-        //var F01_door2 = createTransparentObject(1,"h",-16.52,-63.81);
-        var F01_door2 = createTransparentObject(1,"h",-16.52,-61.98);
+        
+        var F01_door1 = createTransparentObject(1,"h",-16.52,-61.98);
 
-        //var F02_door1 = createTransparentObject(2,"v",-23.04,-60.24); 
         var F02_door1 = createTransparentObject(2,"v",-23.04,-64.4); 
 
-        //var F03_door1 = createTransparentObject(3,"v",-23.04,-69.62); 
         var F03_door1 = createTransparentObject(3,"v",-23.04,-71.33); 
         
-        //var F04_door1 = createTransparentObject(4,"v",-23.04,-75.99); 
         var F04_door1 = createTransparentObject(4,"v",-23.04,-78); 
         
         var F05_door1 = createTransparentObject(5,"v",-9.27,-76.98);
         var F05_door2 = createTransparentObject(5,"v",-9.27,-71.82);
         var F05_door3 = createTransparentObject(5,"v",-9.27,-66.42);
-        //var F05_door4 = createTransparentObject(5,"h",-16.52,-63.59);
         var F05_door4 = createTransparentObject(5,"h",-16.52,-61.76);
-        //var F05_door5 = createTransparentObject(5,"v",-23.26,-69.62); 
         var F05_door5 = createTransparentObject(5,"v",-23.26,-71.33); 
-        //var F05_door6 = createTransparentObject(5,"v",-23.26,-75.99); 
         var F05_door6 = createTransparentObject(5,"v",-23.26,-78); 
         var F05_door7 = createTransparentObject(5,"v",-23.26,-64.4); 
 
@@ -1164,7 +1157,7 @@ var ViewMode = "walk";
         var F19_door1 = createTransparentObject(19,"tv",-6.31,-66.64);
         
         var F20_door1 = createTransparentObject(20,"tv",-6.09,-66.64);
-        var F20_door2 = createTransparentObject(20,"th",-7.71,-57.60);//th-->1.6ft width
+        var F20_door2 = createTransparentObject(20,"th",-7.71,-57.60);
         var F20_door3 = createTransparentObject(20,"v",-9.49,-66.42);
         
 
@@ -1172,7 +1165,6 @@ var ViewMode = "walk";
         var idsOfPanelList = [];
         
         
-        //var panel01_01 = createTransparentPanel(1,13.55,5.7,-16.23,-60.75);         PanelsList.push(panel01_01);
         var panel01_01 = createTransparentPanel(1,13.55,3.7,-16.23,-59.75);         PanelsList.push(panel01_01);
         var panel01_02 = createTransparentPanel(1,11.57,1.075,-17.2,-57.36);        PanelsList.push(panel01_02);
         
@@ -1182,7 +1174,6 @@ var ViewMode = "walk";
         
         var panel04_01 = createTransparentPanel(4,7.348,6.41,-26.925,-76.395);      PanelsList.push(panel04_01);
         
-        //var panel05_01 = createTransparentPanel(5,13.55,15.8,-16.23,-71.7);         PanelsList.push(panel05_01);  
         var panel05_01 = createTransparentPanel(5,13.55,17.8,-16.23,-70.7);         PanelsList.push(panel05_01);  
         
         var panel06_01 = createTransparentPanel(6,8.83,5.37,-4.8,-76.92);           PanelsList.push(panel06_01);
@@ -1239,16 +1230,9 @@ var ViewMode = "walk";
         var cubeV12BB = createWall(Y,3.38,-23.25,-74.8);   transparentWallsList.push(cubeV12BB);
         var cubeV13BB = createWall(Y,3.5,-23.25,-67.8);   transparentWallsList.push(cubeV13BB);
         var cubeV14BB = createWall(Y,5.8,-23.25,-59.7);   transparentWallsList.push(cubeV14BB);
-        // var cubeV15BB = createWall(Y,1.688,-23.25,-62.756); transparentWallsList.push(cubeV15BB);
-        // var cubeV16BB = createWall(Y,1.82,-23.25,-57.68);   transparentWallsList.push(cubeV16BB);
-        // var cubeV12BB = createWall(Y,2.36,-23.25,-78.82);   transparentWallsList.push(cubeV12BB);
-        // var cubeV13BB = createWall(Y,3.08,-23.25,-72.71);   transparentWallsList.push(cubeV13BB);
-        // var cubeV14BB = createWall(Y,4.18,-23.25,-65.97);   transparentWallsList.push(cubeV14BB);
-        // var cubeV15BB = createWall(Y,1.688,-23.25,-62.756); transparentWallsList.push(cubeV15BB);
-        // var cubeV16BB = createWall(Y,1.82,-23.25,-57.68);   transparentWallsList.push(cubeV16BB);
-        var cubeV17BB = createWall(Y,1.468,-11.25,-21.68);  transparentWallsList.push(cubeV17BB);
-        var cubeV18BB = createWall(Y,9,-3.6,-47.2);         transparentWallsList.push(cubeV18BB);
-        var cubeV19BB = createWall(0.4,7,-7.2,-43.5);       transparentWallsList.push(cubeV19BB);
+        var cubeV15BB = createWall(Y,1.468,-11.25,-21.68);  transparentWallsList.push(cubeV15BB);
+        var cubeV16BB = createWall(Y,9,-3.6,-47.2);         transparentWallsList.push(cubeV16BB);
+        var cubeV17BB = createWall(0.4,7,-7.2,-43.5);       transparentWallsList.push(cubeV17BB);
         
         var cubeH1BB = createWall(31,Y,-15.5,-79.8);        transparentWallsList.push(cubeH1BB);
         var cubeH2BB = createWall(31,Y,-15.5,-10.2);        transparentWallsList.push(cubeH2BB);
@@ -1261,8 +1245,6 @@ var ViewMode = "walk";
         var cubeH9BB = createWall(6.4,Y,-3.2,-65.15);       transparentWallsList.push(cubeH9BB);
         var cubeH10BB = createWall(6.58,Y,-3.29,-57.65);    transparentWallsList.push(cubeH10BB);
         var cubeH11BB = createWall(2.6,Y,-10.1,-57.55);     transparentWallsList.push(cubeH11BB);
-        //var cubeH12BB = createWall(5.8,Y,-11.92,-63.6);     transparentWallsList.push(cubeH12BB);
-        //var cubeH13BB = createWall(5.1,Y,-20.68,-63.6);     transparentWallsList.push(cubeH13BB);
         var cubeH12BB = createWall(5.8,Y,-11.92,-61.6);     transparentWallsList.push(cubeH12BB);
         var cubeH13BB = createWall(5.1,Y,-20.68,-61.6);     transparentWallsList.push(cubeH13BB);
         var cubeH14BB = createWall(7.4,Y,-3.7,-40.28);      transparentWallsList.push(cubeH14BB);
