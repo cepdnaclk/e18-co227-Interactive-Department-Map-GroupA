@@ -164,7 +164,7 @@
         var camera = new THREE.PerspectiveCamera(85,window.innerWidth/(window.innerHeight*1.5));
         //Renderer
         var renderer = new THREE.WebGLRenderer({antilias:true});
-        renderer.setSize(window.innerWidth*0.991,window.innerHeight*0.978);      
+        renderer.setSize(window.innerWidth-14,window.innerHeight-17);    
         $('body').append(renderer.domElement);    
         
         
@@ -1072,7 +1072,7 @@ var ViewMode = "walk";
 
 //Rendering2
         var animate = function(){
-            
+            renderer.setSize(window.innerWidth-14,window.innerHeight-17);
             frontballBB.copy(frontCameraBall.geometry.boundingBox).applyMatrix4(frontCameraBall.matrixWorld);
             backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);
             topballBB.copy(topCameraBall.geometry.boundingBox).applyMatrix4(topCameraBall.matrixWorld);
