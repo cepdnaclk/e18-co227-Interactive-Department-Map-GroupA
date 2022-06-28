@@ -4,10 +4,10 @@ body {
   
 .information_class {
     position: absolute;
-    top: 1%;
-    right: 0.5%;
+    top: 1.1vmin;
+    right: 1vmin;
     height: 40%;
-    width: 19.5%;
+    width: 40.1vmin;
 }
 
 .main_information_class{
@@ -71,19 +71,19 @@ body {
 
 .controlLayout_class{
     position: absolute;
-    top: 1%;
-    right: 0.5%;
+    top: 1.1vmin;
+    right: 1vmin;
     height: 20%;
-    width: 19.5%;
+    width: 40.1vmin;
     opacity: 0;
 }
  
 .controlLayoutColoured{
     position: absolute;
-    top: 1.1%;
-    right: 0.5%;
+    top: 1.1vmin;
+    right: 1vmin;
     height: 97.8%;
-    width: 19.5%;
+    width: 40.1vmin;
     opacity: 0.2;
     background-color: black;
 }
@@ -91,9 +91,9 @@ body {
 .latterPanelClass {
     position: absolute;
     bottom: 11%;
-    right: 0.5%;
+    right: 1vmin;
     height: 48%;
-    width: 19.5%;
+    width: 40.1vmin;
     opacity: 1;
 }
 
