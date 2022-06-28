@@ -395,7 +395,7 @@
 
         var transparentMaterialForPanelsArray = [];
         for(var i=0;i<23;i++){
-            transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:false, opacity:0.8});
+            transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
             var geometry = new THREE.BoxGeometry(0.01,yvalue,zvalue);
@@ -1163,6 +1163,14 @@ function createWall(y,z,Y,Z){
         var PanelsList = [];
         var idsOfPanelList = [];
 
+        var panel01_1BB = createTransparentPanel(1,7.63,13.56,-15.34,-72.785);         PanelsList.push(panel01_1BB);  
+        
+        var panel02_1BB = createTransparentPanel(2,2.64,13.63,-20.595,-72.785);         PanelsList.push(panel02_1BB);  
+        var panel02_2BB = createTransparentPanel(2,8.7,11.63,-26.265,-73.785);         PanelsList.push(panel02_2BB);  
+        
+        var panel03_1BB = createTransparentPanel(3,8.6,12.55,-26.265,-61.495);         PanelsList.push(panel03_1BB);  
+        var panel03_2BB = createTransparentPanel(3,10.7,10.4,-16.8,-60.55);         PanelsList.push(panel03_2BB);  
+        
         var panel04_1BB = createTransparentPanel(4,10.56,2.6,-5.68,-56.25);         PanelsList.push(panel04_1BB);  
         var panel04_2BB = createTransparentPanel(4,20.47,14.69,-10.635,-47.605);    PanelsList.push(panel04_2BB);
 
@@ -1197,6 +1205,13 @@ function createWall(y,z,Y,Z){
        // var panel18_2BB = createTransparentPanel(18,8.2,4.7,-16.8,-22.6);           PanelsList.push(panel18_2BB);
 
         var panel19_1BB = createTransparentPanel(19,4.6,9.967,-23.59,-25.22);       PanelsList.push(panel19_1BB);
+        
+        var panel20_1BB = createTransparentPanel(20,5.6,7,-3.2,-61.47);       PanelsList.push(panel20_1BB);
+        
+        var panel21_1BB = createTransparentPanel(21,5.6,4.6,-3.2,-67.67);       PanelsList.push(panel21_1BB);
+       
+        var panel22_1BB = createTransparentPanel(22,10.75,9.2,-5.775,-75);       PanelsList.push(panel22_1BB);
+        var panel22_2BB = createTransparentPanel(22,4.8,12.8,-8.65,-64.1);       PanelsList.push(panel22_2BB);
 
 
         var transparentWallsList = [];
