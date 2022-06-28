@@ -170,14 +170,14 @@ body {
 .changeCorners_class{
     position: absolute;
     height: 4.1%;
-    width: 3%;
+    width: 6.7vmin;
     font-size: 1.32vmin;
     border-radius: 1.65vmin;
     background-image: conic-gradient(#9B59B6 0deg, #9B59B6 90deg, #633974 90deg, #633974 180deg, #633974 180deg, #633974 270deg, #9B59B6 270deg);
     color: white;
     border-width: 0vmin;
-    bottom: 5.7%;
-    right: 16.3%;
+    bottom: 5.7vmin;
+    right: 33vmin;
 }
 
 .changeCorners_class:active {
@@ -187,13 +187,14 @@ body {
 .viewsButtonClass{
     position: absolute;
     height: 7.7%;
-    width: 6%;
+    width: 12.2vmin;
     border-width: 0vmin;
-    bottom: 2.1%;
-    right: 1.2%;
+    bottom: 2.1vmin;
+    right: 2.5vmin;
 }
 
 .leftTopButtonClass{
+    padding: 0;
     position: absolute;
     height: 48%;
     width: 50%;
@@ -207,6 +208,7 @@ body {
     background-color: #5B2C6F;
 }
 .leftBottomButtonClass{
+    padding: 0;
     position: absolute;
     height: 48%;
     width: 50%;
@@ -220,6 +222,7 @@ body {
     background-color: #5B2C6F;
 }
 .RightButtonClass{
+    padding: 0;
     position: absolute;
     height: 100%;
     width: 46%;
@@ -230,6 +233,7 @@ body {
 }
 
 .rightTopClass{
+    padding: 0;
     color: #5B2C6F;
     margin-left: -15%;
     text-align: center;
@@ -237,6 +241,7 @@ body {
 }
 
 .rightBottomClass{
+    padding: 0;
     margin-left: -15%;
     color: #5B2C6F;
     text-align: center;
@@ -253,12 +258,12 @@ body {
 
 .name{
     position: absolute;
-    left: 0.5%;
-    top: 1.1%;
+    left: 1.1vmin;
+    top: 1.1vmin;
     padding-top: 0.2%;
     font-size: 2.4vmin;
     border-radius: 0 0 1vmin ; 
-    width: 3%;
+    width: 6vmin;
     height: 3%;
     text-align: center;
     background-color: red;
