@@ -11,7 +11,7 @@
     <script src="./js/threex.domevents.js"></script> <!-- Importing the threex.domevents.js library-->
     <script src="./js/GLTFLoader.js"></script>       <!-- Importing the GLTFLoader.js library-->
     <div id="glass" class="glass" onmouseover="nowin()" onmouseleave="nowout()"></div>
-    <div class="name"><strong>IDM</strong></div>
+    <img src="images/logo.png">
     <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="information" class="information_class" >                    
         <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
@@ -1162,43 +1162,46 @@ function createWall(y,z,Y,Z){
         var G08_door4 = createTransparentObject(8,"v",-21.2,-27.6);
         var G08_door5 = createTransparentObject(8,"h",-17.35,-40.20);
 
-        var G09_door1 = createTransparentObject(9,"v",-9.71,-12.43);
-        var G09_door2 = createTransparentObject(9,"v",-21.2,-22.3);
-        var G09_door3 = createTransparentObject(9,"h",-16.51,-25.22);
+        //var G09_door1 = createTransparentObject(9,"v",-12.68,-17.57);
 
-        var G10_door1 = createTransparentObject(10,"th",-1.33,-19.78);
-        var G10_door2 = createTransparentObject(10,"th",-3.55,-19.78);
-        var G10_door3 = createTransparentObject(10,"h",-2.6,-25.3);//
+        var GBW_door1 = createTransparentObject(10,"th",-1.33,-19.78);
+        var GBW_door2 = createTransparentObject(10,"th",-3.55,-19.78);
+        var GBW_door6 = createTransparentObject(10,"h",-2.6,-25.3);//
         
-        var G11_door1 = createTransparentObject(11,"th",-6.12,-19.78);
-        var G11_door2 = createTransparentObject(11,"th",-8.68,-19.78);
-        var G11_door3 = createTransparentObject(11,"h",-7.2,-25.3);//
+        var GGW_door1 = createTransparentObject(11,"th",-6.12,-19.78);
+        var GGW_door2 = createTransparentObject(11,"th",-8.68,-19.78);
+        var GGW_door3 = createTransparentObject(11,"h",-7.2,-25.3);//
         
-        var G12_door1 = createTransparentObject(12,"h",-2.65,-10.15);
-        var G12_door2 = createTransparentObject(12,"v",-9.93,-12.43);
+        var G11_door1 = createTransparentObject(12,"h",-2.65,-10.15);
+        var G11_door2 = createTransparentObject(12,"v",-9.93,-12.43);
 
-        var G13_door1 = createTransparentObject(13,"th",-1.33,-20);
-        var G14_door2 = createTransparentObject(14,"th",-3.55,-20);
-        var G15_door3 = createTransparentObject(15,"th",-6.12,-20);
-        var G16_door4 = createTransparentObject(16,"th",-8.68,-20);
+        var GT1_door1 = createTransparentObject(13,"th",-1.33,-20);
+        var GT2_door2 = createTransparentObject(14,"th",-3.55,-20);
+        var GT3_door3 = createTransparentObject(15,"th",-6.12,-20);
+        var GT4_door4 = createTransparentObject(16,"th",-8.68,-20);
 
-        var G17_door1 = createTransparentObject(17,"v",-0.32,-75.11);
-        var G17_door2 = createTransparentObject(17,"h",-2.65,-10.37);
+        var GBG_door1 = createTransparentObject(17,"v",-0.32,-75.11);
+        var GBG_door2 = createTransparentObject(17,"h",-2.65,-10.37);
 
-        var G19_door1 = createTransparentObject(19,"v",-20.98,-27.6);
-        var G19_door2 = createTransparentObject(19,"v",-20.98,-22.3);
-        var G19_door3 = createTransparentObject(19,"h",-23.89,-19.61);
-        var G19_door4 = createTransparentObject(19,"h",-23.7,-30.22);
+        var GC1_door1 = createTransparentObject(18,"v",-9.71,-12.43);
+        //var GC1_door2 = createTransparentObject(18,"v",-12.90,-17.57);
+        var GC1_door3 = createTransparentObject(18,"v",-21.2,-22.3);
+        var GC1_door4 = createTransparentObject(18,"h",-16.51,-25.22);
 
-        var G20_door1 = createTransparentObject(20,"h",-2.65,-57.3);
+        var GC2_door1 = createTransparentObject(19,"v",-20.98,-27.6);
+        var GC2_door2 = createTransparentObject(19,"v",-20.98,-22.3);
+        var GC2_door3 = createTransparentObject(19,"h",-23.89,-19.61);
+        var GC2_door4 = createTransparentObject(19,"h",-23.7,-30.22);
 
-        var G21_door1 = createTransparentObject(21,"v",-6.29,-67.7);
+        var GL1_door1 = createTransparentObject(20,"h",-2.65,-57.3);
 
-        var G22_door1 = createTransparentObject(22,"v",-0.1,-75.11);
-        var G22_door2 = createTransparentObject(22,"v",-6.07,-67.7);
-        var G22_door3 = createTransparentObject(22,"h",-8.43,-57.48);
-        var G22_door4 = createTransparentObject(22,"v",-11.37,-61.9);
-        var G22_door5 = createTransparentObject(22,"v",-11.37,-68.63);
+        var GS1_door1 = createTransparentObject(21,"v",-6.29,-67.7);
+
+        var G00_door1 = createTransparentObject(22,"v",-0.1,-75.11);
+        var G00_door2 = createTransparentObject(22,"v",-6.07,-67.7);
+        var G00_door3 = createTransparentObject(22,"h",-8.43,-57.48);
+        var G00_door4 = createTransparentObject(22,"v",-11.37,-61.9);
+        var G00_door5 = createTransparentObject(22,"v",-11.37,-68.63);
 
 
         var PanelsList = [];
