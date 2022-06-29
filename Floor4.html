@@ -127,7 +127,7 @@
         var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
         var X = 0.52,Y=0.7,R=0.9,S=0.08;
         var Floor = 0;
-        var initialCamera_X = 0, initialCamera_Y = -3.064, initialCamera_Z = -53.747;
+        var initialCamera_X = 0, initialCamera_Y = -2.08, initialCamera_Z = -54.57;
         var initialCamera_Xangle = -Math.PI/2;
         var yR = 0, zR = R; 
         var angle_x=initialCamera_Xangle,angle_y=0;                //Starting rotation values of the camera
@@ -267,6 +267,50 @@
         }
 
         function addMouseEventsForWalls(cube,buildingID){                                      //This function sets particular mouse event listeners to building objects
+            domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
+                if(out==0 && ViewMode=="walk"){
+                    if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                            //Decrease the opacity of top right main information label to 0.5 
+                        if(expanded){      
+                            document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                            document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                            document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                            document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                            expanded = 0;           //Set the expanded flag to 0
+                        }
+                        document.getElementById("hint").innerHTML = "Click on the building for more details";
+                        document.getElementById("information").style.height = "40%";
+                        document.getElementById("main_information").style.height = "75%";
+                        document.getElementById("hint").style.height = "7.5%";
+                        document.getElementById("controlLayout").style.height = "20%";
+                        document.getElementById("more_information").style.removeProperty('min-height');
+                        document.getElementById("more_information").style.padding = "0%";
+                        document.getElementById("more_information").style.marginTop = "0%";
+                        document.getElementById("more_information").style.margin = "0%";
+                        document.getElementById("label2").style.fontSize = "0vmin";
+                        document.getElementById("list2").style.fontSize = "0vmin";
+                        document.getElementById("label3").style.backgroundColor = "#1A5276";
+                        showNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                    }else{                                                                  //If user hasn't clicked earlier
+                            //Decrease the opacity of top right main information label to 0.5
+                        document.getElementById("hint").innerHTML = "More details below ↓";
+                        document.getElementById("information").style.height = "60%";
+                        document.getElementById("main_information").style.height = "50%";
+                        document.getElementById("hint").style.height = "5%";
+                        document.getElementById("controlLayout").style.height = "80%";
+                        document.getElementById("more_information").style.minHeight = "50%";
+                        document.getElementById("more_information").style.padding = "5%";
+                        document.getElementById("more_information").style.marginTop = "2.5%";
+                        document.getElementById("more_information").style.margin = "1.5%";
+                        document.getElementById("label2").style.fontSize = "2.8vmin";
+                        document.getElementById("list2").style.fontSize = "2.15vmin";
+                        document.getElementById("label3").style.backgroundColor = "#5F6A6A";
+                        hideNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 1
+                    }
+                }
+            });
             domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
                 if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     
@@ -424,11 +468,11 @@
 
 //Transparent Walls
 function createWall(y,z,Y,Z){
-            var geometry = new THREE.BoxGeometry(7.5,y,z); 
+            var geometry = new THREE.BoxGeometry(8.3,y,z); 
             var material = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
             var cube = new THREE.Mesh(geometry,material);
             scene.add(cube);
-            cube.position.x = -0.6; //5
+            cube.position.x = -0.7; //5
             cube.position.y = Y;
             cube.position.z = Z;
             addMouseEventsForWalls(cube);
@@ -911,7 +955,6 @@ var ViewMode = "walk";
 
 //Corner Controls
         function changeCorners(){
-            camera.rotation.x -= Math.PI/2;
             if(circleCorners==1){
                 circleCorners = 0;
                 document.getElementById("changeCorners").innerHTML = "Circle Corners";
@@ -982,7 +1025,7 @@ var ViewMode = "walk";
             new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(frontCameraBall);
-        frontCameraBall.position.x = initialCamera_X;
+        frontCameraBall.position.x = initialCamera_X+3.2;
         frontCameraBall.position.y = initialCamera_Y-yR;
         frontCameraBall.position.z = initialCamera_Z-zR;
         frontCameraBall.rotation.x = initialCamera_Xangle;
@@ -1264,7 +1307,8 @@ var ViewMode = "walk";
         // var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
 
         //Set lights by using the created function above
-        var light01 = setPointLight(3,5,-10);
+        var light00 = setPointLight(3,5,-6);
+        var light01 = setPointLight(3,5,-12);
         var light02 = setPointLight(3,5,-20);
         var light03 = setPointLight(3,5,-30);
         var light04 = setPointLight(3,5,-40);
@@ -1273,7 +1317,8 @@ var ViewMode = "walk";
         var light07 = setPointLight(3,5,-60);
         var light08 = setPointLight(3,5,-66);
 
-        var light09 = setPointLight(3,-35,-10);
+        var light25 = setPointLight(3,-35,-6);
+        var light09 = setPointLight(3,-35,-12);
         var light10 = setPointLight(3,-35,-20);
         var light11 = setPointLight(3,-35,-30);
         var light12 = setPointLight(3,-35,-40);
