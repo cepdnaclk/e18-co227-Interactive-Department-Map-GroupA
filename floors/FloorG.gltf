@@ -1852,9 +1852,9 @@
             "name" : "wall-color",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.2635014057159424,
-                    0.6499842405319214,
-                    0.47461971640586853,
+                    0.04652145132422447,
+                    0.27381715178489685,
+                    0.18375632166862488,
                     1
                 ],
                 "metallicFactor" : 0,
@@ -1910,26 +1910,12 @@
         },
         {
             "doubleSided" : true,
-            "name" : "Grey",
-            "pbrMetallicRoughness" : {
-                "baseColorFactor" : [
-                    0.5840778350830078,
-                    0.5840781331062317,
-                    0.5840785503387451,
-                    1
-                ],
-                "metallicFactor" : 0,
-                "roughnessFactor" : 0.5
-            }
-        },
-        {
-            "doubleSided" : true,
             "name" : "ash",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.2956894636154175,
-                    0.2956894636154175,
-                    0.2956894636154175,
+                    0.20790281891822815,
+                    0.20790281891822815,
+                    0.20790281891822815,
                     1
                 ],
                 "metallicFactor" : 0,
@@ -3070,7 +3056,7 @@
                         "TEXCOORD_0" : 302
                     },
                     "indices" : 303,
-                    "material" : 12
+                    "material" : 11
                 },
                 {
                     "attributes" : {
@@ -3079,7 +3065,7 @@
                         "TEXCOORD_0" : 306
                     },
                     "indices" : 307,
-                    "material" : 12
+                    "material" : 11
                 }
             ]
         },
@@ -3167,7 +3153,7 @@
                         "TEXCOORD_0" : 330
                     },
                     "indices" : 331,
-                    "material" : 13
+                    "material" : 12
                 },
                 {
                     "attributes" : {
@@ -3176,7 +3162,7 @@
                         "TEXCOORD_0" : 334
                     },
                     "indices" : 335,
-                    "material" : 14
+                    "material" : 13
                 }
             ]
         },
@@ -3387,7 +3373,7 @@
                         "TEXCOORD_0" : 393
                     },
                     "indices" : 394,
-                    "material" : 13
+                    "material" : 12
                 }
             ]
         },
@@ -3520,7 +3506,7 @@
                         "TEXCOORD_0" : 430
                     },
                     "indices" : 431,
-                    "material" : 12
+                    "material" : 11
                 }
             ]
         },
@@ -3690,7 +3676,7 @@
                         "TEXCOORD_0" : 478
                     },
                     "indices" : 479,
-                    "material" : 13
+                    "material" : 12
                 },
                 {
                     "attributes" : {
