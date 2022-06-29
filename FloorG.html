@@ -458,11 +458,11 @@
 
 //Transparent Walls
 function createWall(y,z,Y,Z){
-            var geometry = new THREE.BoxGeometry(7.5,y,z);
+            var geometry = new THREE.BoxGeometry(8.3,y,z);
             var material = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
             var cube = new THREE.Mesh(geometry,material);
             scene.add(cube);
-            cube.position.x = -0.6; //5
+            cube.position.x = -0.7; //5
             cube.position.y = Y;
             cube.position.z = Z;
             addMouseEventsForWalls(cube);
@@ -1015,7 +1015,7 @@ function createWall(y,z,Y,Z){
             new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(frontCameraBall);
-        frontCameraBall.position.x = initialCamera_X;
+        frontCameraBall.position.x = initialCamera_X+3.2;
         frontCameraBall.position.y = initialCamera_Y-yR;
         frontCameraBall.position.z = initialCamera_Z-zR;
         frontCameraBall.rotation.x = initialCamera_Xangle;
@@ -1312,6 +1312,7 @@ function createWall(y,z,Y,Z){
 
         //Set lights by using the created function above
 
+        var light01 = setPointLight(3,5,-5);
         var light01 = setPointLight(3,5,-13);
         var light02 = setPointLight(3,5,-18);
         var light03 = setPointLight(3,5,-24);
