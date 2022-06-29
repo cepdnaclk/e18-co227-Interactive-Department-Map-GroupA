@@ -80,7 +80,7 @@
         //         var reader = new ActiveXObject("ADODB.Recordset");
         //         var strQuery = "SELECT * FROM USERS";
         //         reader.Open(strQuery,conn);
-        //         reader.MoveFirst();
+        //         reader.MoveSecond();
         //         while(!reader.eof){
         //             reader.fields(0);
         //             reader.fields(1);
@@ -140,19 +140,19 @@
         
         //Data of a particular room can be added to the database as an array
         var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li><li>This is Floor 2</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
-        var building1 = ["Technical Offcer's room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building2 = ["Insructors' Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building3 = ["Industrial Automation Lab","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building4 = ["Discussion Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building5 = ["Lecturers' Room 1","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building6 = ["Lecturers' Room 2","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building7 = ["Lecturers' Room 3","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building8 = ["Lecturers' Room 4","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building9 = ["Main Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building10 = ["Lift","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building11 = ["Corridor","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building12 = ["Servant Room","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
-        var building13 = ["Electronics Laboratory","<li>abcd</li><li>klmn</li><li>pqrs</li>","<li>aksfbkf rgeag</li><li>wef wegega wgg</li><li>wgGWG GAREGEAG WQEFWQ</li><li>wge wgweg ehrg asd</li>"];
+        var building1 = ["Technical Offcer's room","<li>2-01</li><li>Private</li><li>Staff</li>","<li>This is Second floor</li><li>This is Technical officer's room</li><li>Used by Technical officer and assistant</li>"];
+        var building2 = ["Insructors'/PG students' Room","<li>2-02</li><li>Public</li><li>Staff</li>","<li>This is Second floor</li><li>This is Instructors'/PG students' room</li><li>There is working space and storage</li>"];
+        var building3 = ["Industrial Automation Lab","<li>2-03</li><li>Public</li><li>Student</li>","<li>This is Second floor</li><li>This is industrial automation lab</li><li>used for lab activities</li>"];
+        var building4 = ["Discussion Room","<li>2-04</li><li>Public</li><li>Student and staff</li>","<li>This is Second floor</li><li>This is Discussion room</li><li>This room is used to discuss projects, labs, assignments etc</li>"];
+        var building5 = ["Lecturer's Room","<li>2-05</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>"];
+        var building6 = ["Lecturer's Room","<li>2-06</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>"];
+        var building7 = ["Lecturer's Room","<li>2-07</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>"];
+        var building8 = ["Lecturer's Room","<li>2-08</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>"];
+        var building9 = ["Main room","<li>Second floor</li><li>Public</li><li>This is for public use</li>","<li>This is Second floor</li><li>You can access the lift or the staircase to enter any floor from this room</li>"];
+        var building10 = ["Lift","<li>Public</li><li>Second Floor</li>","<li>This is for Public use</li><li>This is in Second Floor</li><li>Can be used to enter to any floor</li>"];
+        var building11 = ["Corridor","<li>Second floor</li><li>Public</li><li>This for public use</li>","<li>This is Second floor</li><li>Can be used to walk between 1-09,1-03,1-04,1-02 and main room</li>"];
+        var building12 = ["Servant Room","<li>Private</li><li>Second Floor</li>","<li>For the use of Servants</li><li>This is a public room</li><li>This is in Second Floor</li>"];
+        var building13 = ["Electronics Laboratory","<li>2-00</li><li>Public</li><li>Student</li>","<li>This is Second floor</li><li>This is electronic laboratory</li><li>Capacity - 60 students</li><li>There is 30 computers, oscilloscopes and power supplies</li><li>To be used for Digital Design, Embedded Systems and other courses</li>"];
         
         departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13];
         
