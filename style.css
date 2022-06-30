@@ -259,12 +259,12 @@ body {
 
 img {
     position: absolute;
-    border:4px solid #ddd;
-    border-radius: 30px;
+    border:0.5vmin solid #ddd;
+    border-radius: 1vmin;
     left: 1.1vmin;
     top: 1.1vmin;
-    width: 200px;
-    height : 200px;
+    width: 8vmin;
+    height : 8vmin;
   }
 
 .aim{
