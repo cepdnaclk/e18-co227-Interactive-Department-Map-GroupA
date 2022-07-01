@@ -471,7 +471,7 @@ function createWall(y,z,Y,Z){
 //Creating Navigating Bars
         //Creating Transparent Objects
         var NavigatingMaterialArray = [];
-        for(var i=0;i<5;i++){
+        for(var i=0;i<20;i++){
             NavigatingMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xE91747 , transparent:false, opacity:1});
         }
         function createNavigatingBars(buildingID,horv,length,yPosition,zPosition){
@@ -1007,7 +1007,7 @@ var ViewMode = "walk";
 
         //Front cube
         var frontCameraBall = new THREE.Mesh(
-            new THREE.BoxGeometry(2,0.2,1),
+            new THREE.BoxGeometry(1,0.2,1),
             new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(frontCameraBall);
@@ -1259,7 +1259,8 @@ var ViewMode = "walk";
         var cubeH20BB = createWall(3,Y,-5.6,-36);           transparentWallsList.push(cubeH20BB);
            
 
-        //var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
+        //var bar0 = createNavigatingBars(0,"v",5,-3,-57.35);
+
 
         //Set lights by using the created function above
         var light01 = setPointLight(3,5,-10);

@@ -139,21 +139,21 @@
         var departmentDatabase;
         
         //Data of a particular room can be added to the database as an array
-        var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li><li>This is Floor 1</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
-        var building1 = ["Technical Offcer's room","<li>1-01</li><li>Private</li><li>Staff</li>","<li>Room ID is 1-01</li><li>This is First floor</li><li>This is Technical officer's room</li><li>Used by Technical officer and assistant</li>"];
-        var building2 = ["Insructors' Room","<li>1-02</li><li>Public</li><li>Staff</li>","<li>Room ID is 1-02</li><li>This is First floor</li><li>This is Instructors'/PG students' room</li><li>There is working space and storage</li>"];
-        var building3 = ["Lecturer's Room 1","<li>1-03</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-03</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>"];
-        var building4 = ["Lecturer's Room 2","<li>1-04</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-04</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>"];
-        var building5 = ["Lecturer's Room 3","<li>1-05</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-05</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>"];
-        var building6 = ["Lecturer's Room 4","<li>1-06</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-06</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>"];
-        var building7 = ["Lecturer's Room 5","<li>1-07</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-07</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>"];
-        var building8 = ["Lecturer's Room 6","<li>1-08</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-08</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>"];
-        var building9 = ["Network Engineering Lab","<li>1-09</li><li>Public</li><li>Student</li>","<li>Room ID is 1-09</li><li>This is First floor</li><li>This is Network engineering Lab</li><li>Capacity - 30 students</li><li>Can be used for lab activities</li>"];
-        var building10 = ["Corridor","<li>First floor</li><li>Public</li><li>This for public use</li>","<li>This is First floor</li><li>Can be used to walk between Lecturers' Room 1, 2, Instructors' Room and the Main room</li>"];
-        var building11 = ["Main room","<li>First floor</li><li>Public</li><li>This is for public use</li>","<li>This is First floor</li><li>You can access the lift or the staircase to enter any floor from this room</li>"];
-        var building12 = ["Servant Room","<li>Private</li><li>First Floor</li>","<li>For the use of Servants</li><li>This is a public room</li><li>This is in First Floor</li>"];
-        var building13 = ["Lift","<li>Public</li><li>First Floor</li>","<li>This is for Public use</li><li>This is in First Floor</li><li>Can be used to enter to any floor</li>"];
-        var building14 = ["Computer Laboratory 2","<li>1-00</li><li>Public</li><li>Student</li>","<li>Room ID is 1-00</li><li>This is First floor</li><li>This is lab room 2</li><li>Capacity - 64 students</li><li>There is 2 built in projectors and screens</li><li>Can be used for lab activities</li>"];
+        var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li><li>This is Floor 1</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>",[]];
+        var building1 = ["Technical Offcer's room","<li>1-01</li><li>Private</li><li>Staff</li>","<li>Room ID is 1-01</li><li>This is First floor</li><li>This is Technical officer's room</li><li>Used by Technical officer and assistant</li>",[1,2,3,5]];
+        var building2 = ["Insructors' Room","<li>1-02</li><li>Public</li><li>Staff</li>","<li>Room ID is 1-02</li><li>This is First floor</li><li>This is Instructors'/PG students' room</li><li>There is working space and storage</li>",[1,6,7,10]];
+        var building3 = ["Lecturer's Room 1","<li>1-03</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-03</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,6,7,8]];
+        var building4 = ["Lecturer's Room 2","<li>1-04</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-04</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,6,7,8,9]];
+        var building5 = ["Lecturer's Room 3","<li>1-05</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-05</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,11,12]];
+        var building6 = ["Lecturer's Room 4","<li>1-06</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-06</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,11,13,14]];
+        var building7 = ["Lecturer's Room 5","<li>1-07</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-07</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,11,13,15,16]];
+        var building8 = ["Lecturer's Room 6","<li>1-08</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-08</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,11,13,15,17]];
+        var building9 = ["Network Engineering Lab","<li>1-09</li><li>Public</li><li>Student</li>","<li>Room ID is 1-09</li><li>This is First floor</li><li>This is Network engineering Lab</li><li>Capacity - 30 students</li><li>Can be used for lab activities</li>",[1,11]];
+        var building10 = ["Corridor","<li>First floor</li><li>Public</li><li>This for public use</li>","<li>This is First floor</li><li>Can be used to walk between Lecturers' Room 1, 2, Instructors' Room and the Main room</li>",[1,6]];
+        var building11 = ["Main room","<li>First floor</li><li>Public</li><li>This is for public use</li>","<li>This is First floor</li><li>You can access the lift or the staircase to enter any floor from this room</li>",[]];
+        var building12 = ["Servant Room","<li>Private</li><li>First Floor</li>","<li>For the use of Servants</li><li>This is a public room</li><li>This is in First Floor</li>",[1,2,3,4]];
+        var building13 = ["Lift","<li>Public</li><li>First Floor</li>","<li>This is for Public use</li><li>This is in First Floor</li><li>Can be used to enter to any floor</li>",[0]];
+        var building14 = ["Computer Laboratory 2","<li>1-00</li><li>Public</li><li>Student</li>","<li>Room ID is 1-00</li><li>This is First floor</li><li>This is lab room 2</li><li>Capacity - 64 students</li><li>There is 2 built in projectors and screens</li><li>Can be used for lab activities</li>",[1,2]];
 
         departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14];
         
@@ -333,6 +333,9 @@
                             document.getElementById("hint").style.backgroundColor = "#0B5345";  
                             expanded = 0;           //Set the expanded flag to 0
                         }
+                        for(var i=0;i<NavigatingMaterialArray.length;i++){
+                            NavigatingMaterialArray[i].opacity = 0;
+                        }
                         document.getElementById("hint").innerHTML = "Click on the building for more details";
                         document.getElementById("information").style.height = "40%";
                         document.getElementById("main_information").style.height = "75%";
@@ -350,6 +353,11 @@
                         clicked = !clicked;                                                 //change the 'clicked' flag to 0
                     }else{                                                                  //If user hasn't clicked earlier
                             //Decrease the opacity of top right main information label to 0.5
+                        
+                        for(var i=0;i<departmentDatabase[buildingID][3].length;i++){
+                            NavigatingMaterialArray[departmentDatabase[buildingID][3][i]].opacity = 1;
+                        }
+
                         document.getElementById("hint").innerHTML = "More details below ↓";
                         document.getElementById("information").style.height = "60%";
                         document.getElementById("main_information").style.height = "50%";
@@ -472,8 +480,8 @@ function createWall(y,z,Y,Z){
 //Creating Navigating Bars
         //Creating Transparent Objects
         var NavigatingMaterialArray = [];
-        for(var i=0;i<5;i++){
-            NavigatingMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xE91747 , transparent:false, opacity:1});
+        for(var i=0;i<18;i++){
+            NavigatingMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xE91747 , transparent:true, opacity:0});
         }
         function createNavigatingBars(buildingID,horv,length,yPosition,zPosition){
             if(horv=="h"){
@@ -484,7 +492,7 @@ function createWall(y,z,Y,Z){
             var material5 = NavigatingMaterialArray[buildingID];
             var cube5 = new THREE.Mesh(geometry5,material5);
             scene.add(cube5);
-            cube5.position.x = -4.5;
+            cube5.position.x = 4.5;    //-4.5
             cube5.position.y = yPosition;
             cube5.position.z = zPosition;
             return cube5;
@@ -1008,7 +1016,7 @@ var ViewMode = "walk";
 
         //Front cube
         var frontCameraBall = new THREE.Mesh(
-            new THREE.BoxGeometry(2,0.2,1),
+            new THREE.BoxGeometry(1,0.2,1),
             new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
         );
         scene.add(frontCameraBall);
@@ -1250,7 +1258,29 @@ var ViewMode = "walk";
         var cubeH18BB = createWall(4,Y,-1.7,-52.5);         transparentWallsList.push(cubeH18BB);
         var cubeH19BB = createWall(3,Y,-5,-46);             transparentWallsList.push(cubeH19BB);
    
-        //var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
+        var bar0 = createNavigatingBars(0,"v",6,-2.9,-57.35);
+        var bar1 = createNavigatingBars(1,"h",5,-5.4,-54.6);
+        var bar2 = createNavigatingBars(2,"v",6,-8.15,-57.35);
+        var bar3 = createNavigatingBars(3,"v",7,-8.15,-63.85);
+        var bar4 = createNavigatingBars(4,"h",4,-5.9,-67.1);
+        var bar5 = createNavigatingBars(5,"v",6.75,-8.15,-70.725);
+        var bar6 = createNavigatingBars(5,"h",4,-5.9,-73.85);
+        var bar7 = createNavigatingBars(6,"h",4.5,-10.15,-54.6);
+        var bar8 = createNavigatingBars(7,"h",6,-15.4,-54.6);
+        var bar9 = createNavigatingBars(7,"v",0.7,-18.15,-54);
+        var bar10 = createNavigatingBars(8,"h",4,-20.4,-53.9);
+        var bar11 = createNavigatingBars(9,"h",1,-22.9,-53.9);
+        var bar12 = createNavigatingBars(9,"v",8,-23.65,-50.15);
+        var bar13 = createNavigatingBars(10,"v",6,-18.15,-50.65);
+        var bar14 = createNavigatingBars(10,"h",2.6,-16.6,-47.9);
+        var bar15 = createNavigatingBars(11,"v",18.5,-8.15,-45.6);
+        var bar16 = createNavigatingBars(12,"h",14,-14.9,-36.35);
+        var bar17 = createNavigatingBars(13,"v",9,-8.15,-31.85);
+        var bar18 = createNavigatingBars(14,"h",14,-14.9,-27.4);
+        var bar19 = createNavigatingBars(15,"v",4,-8.15,-25.35);
+        var bar20 = createNavigatingBars(16,"h",14,-14.9,-23.2);
+        var bar21 = createNavigatingBars(17,"v",11.4,-8.15,-17.65);
+        var bar22 = createNavigatingBars(17,"h",14,-14.9,-11.85);
 
         //Set lights by using the created function above
         var light01 = setPointLight(3,5,-20);
