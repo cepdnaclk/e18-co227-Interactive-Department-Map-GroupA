@@ -127,7 +127,7 @@
         var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
         var X = 0.52,Y=0.7,R=0.9,S=0.08;
         var Floor = 0;
-        var initialCamera_X = 0, initialCamera_Y = -2.08, initialCamera_Z = -54.57;
+        var initialCamera_X = 0, initialCamera_Y = -3, initialCamera_Z = -54.2;
         var initialCamera_Xangle = -Math.PI/2;
         var yR = 0, zR = R; 
         var angle_x=initialCamera_Xangle,angle_y=0;                //Starting rotation values of the camera
@@ -138,26 +138,26 @@
         
         //Data of a particular room can be added to the database as an array
         var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li><li>This is Floor 4</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
-        var building1 = ["Incubation Centre 1","<li>4-01</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-01</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>"];
-        var building2 = ["Incubation Centre 2","<li>4-02</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-02</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>"];
-        var building3 = ["Incubation Centre 3","<li>4-03</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-03</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>"];
-        var building4 = ["Incubation Centre 4","<li>4-04</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-04</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>"];
-        var building5 = ["Computer Vision Lab","<li>4-00</li><li>This is the ESCAL Computer Vision</li><li>Fourth Floor</li><li>Lab</li>","<li>Room ID is 4-00</li><li>This is in Fourth Floor</li><li>This is a lab room</li>"];
-        var building6 = ["Lecturer Room 1","<li>4-05</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-05</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>"];
-        var building7 = ["Lecturer Room 2","<li>4-06</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-06</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>"];
-        var building8 = ["Computer Lab","<li>4-08</li><li>Fourth Floor</li><li>Lab</li>","<li>Room ID is 4-08</li><li>There is capacity for 70 students</li><li>This is in Fourth Floor</li><li>This is a Lab Room</li>"];
-        var building9 = ["Lecturer Room 3","<li>4-09</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-09</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>"];
-        var building10 = ["Lecturer Room 4","<li>4-10</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-10</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>"];
-        var building11 = ["Lecturer Room 5","<li>4-11</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-11</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>"];
-        var building12 = ["Server room","<li>Private</li><li>Fourth Floor</li>","<li>This is a private room</li><li>This is in Fourth Floor</li>"];
-        var building13 = ["Instructors' Room","<li>4-13</li><li>Fourth Floor</li><li>Private</li>","<li>Room ID is 4-13</li><li>This is in Fourth Floor</li><li>This is a Private Room</li><li>This is also the PD Students'Room</li></li>There is working space and storage here<li>"];
-        var building14 = ["Ladies Washroom","<li>Public</li><li>For Ladies</li><li>Fourth Floor</li>","<li>This is for Public use</li><li>For use of Ladies</li><li>This is in Fourth Floor</li>"];
-        var building15 = ["Gents Washroom","<li>Public</li><li>For Gents</li><li>Fourth Floor</li>","<li>This is for Public use</li><li>For use of Gents</li><li>This is in Fourth Floor</li>"];
-        var building16 = ["Stair-case","<li>Public</li><li>Foutth Floor</li>","<li>This is for Public use</li><li>This is in Fourth Floor</li><li>Can be used to go to Third Floor</li>"];
-        var building17 = ["Corridor 1","<li>Public</li><li>Fourth Floor</li><li>Six doors</li>","<li>This is a Public Area</li><li>This is in Fourth Floor</li><li>Can be used enter to the Washrooms</li><li>Can be used enter to the Instructors' Room</li><li>Can be used enter to the Computer Lab</li><li>Can be used enter to the Corridor 2</li><li>Can be used enter to the Lift</li>"];
-        var building18 = ["Lift","<li>Public</li><li>Fourth Floor</li>","<li>This is for the public use</li><li>This is in Fourth Floor</li><li>Can be used to go to any floor</li>"];
-        var building19 = ["Servant Room","<li>Private</li><li>Fourth Floor</li>","<li>This is a private room</li><li>This is in Fourth Floor</li>"];
-        var building20 = ["Corridor 2","<li>Public</li><li>Fourth Floor</li><li>Three doors</li>","<li>This is a Public Area</li><li>This is in Fourth Floor</li><li>Can be used enter to the Servant Room</li><li>Can be used enter to the Corridor 1</li><li>Can be used enter to the Computer Vision Lab</li>"];
+        var building1 = ["Incubation Centre 1","<li>4-01</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-01</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>",[1,3,4,5,7,12,13]];
+        var building2 = ["Incubation Centre 2","<li>4-02</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-02</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>",[1,3,4,5,7,12,14,15]];
+        var building3 = ["Incubation Centre 3","<li>4-03</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-03</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>",[1,3,4,5,7,12,14,17,18]];
+        var building4 = ["Incubation Centre 4","<li>4-04</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-04</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>",[1,3,4,5,7,12,14,17,19]];
+        var building5 = ["Computer Vision Lab","<li>4-00</li><li>This is the ESCAL Computer Vision</li><li>Fourth Floor</li><li>Lab</li>","<li>Room ID is 4-00</li><li>This is in Fourth Floor</li><li>This is a lab room</li>",[1,3,4,5,7]];
+        var building6 = ["Lecturer Room 1","<li>4-05</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-05</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>",[1,3,4,5,7,8,10]];
+        var building7 = ["Lecturer Room 2","<li>4-06</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-06</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>",[1,3,4,5,7,8,9]];
+        var building8 = ["Computer Lab","<li>4-08</li><li>Fourth Floor</li><li>Lab</li>","<li>Room ID is 4-08</li><li>There is capacity for 70 students</li><li>This is in Fourth Floor</li><li>This is a Lab Room</li>",[1,3,21,27]];
+        var building9 = ["Lecturer Room 3","<li>4-09</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-09</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>",[1,3,21,27,28,30,32,34]];
+        var building10 = ["Lecturer Room 4","<li>4-10</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-10</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>",[1,3,21,27,28,30,32,33]];
+        var building11 = ["Lecturer Room 5","<li>4-11</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-11</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>",[1,3,21,27,28,30,31]];
+        var building12 = ["Server room","<li>Private</li><li>Fourth Floor</li>","<li>This is a private room</li><li>This is in Fourth Floor</li>",[1,3,21,27,28,29]];
+        var building13 = ["Instructors' Room","<li>4-13</li><li>Fourth Floor</li><li>Private</li>","<li>Room ID is 4-13</li><li>This is in Fourth Floor</li><li>This is a Private Room</li><li>This is also the PD Students'Room</li></li>There is working space and storage here<li>",[1,3,21,22,24,26]];
+        var building14 = ["Ladies Washroom","<li>Public</li><li>For Ladies</li><li>Fourth Floor</li>","<li>This is for Public use</li><li>For use of Ladies</li><li>This is in Fourth Floor</li>",[1,3,21,22,24,25]];
+        var building15 = ["Gents Washroom","<li>Public</li><li>For Gents</li><li>Fourth Floor</li>","<li>This is for Public use</li><li>For use of Gents</li><li>This is in Fourth Floor</li>",[1,3,21,22,23]];
+        var building16 = ["Stair-case","<li>Public</li><li>Foutth Floor</li>","<li>This is for Public use</li><li>This is in Fourth Floor</li><li>Can be used to go to Third Floor</li>",[1,2]];
+        var building17 = ["Corridor 1","<li>Public</li><li>Fourth Floor</li><li>Six doors</li>","<li>This is a Public Area</li><li>This is in Fourth Floor</li><li>Can be used enter to the Washrooms</li><li>Can be used enter to the Instructors' Room</li><li>Can be used enter to the Computer Lab</li><li>Can be used enter to the Corridor 2</li><li>Can be used enter to the Lift</li>",[1]];
+        var building18 = ["Lift","<li>Public</li><li>Fourth Floor</li>","<li>This is for the public use</li><li>This is in Fourth Floor</li><li>Can be used to go to any floor</li>",[1,0]];
+        var building19 = ["Servant Room","<li>Private</li><li>Fourth Floor</li>","<li>This is a private room</li><li>This is in Fourth Floor</li>",[1,3,4,5,6]];
+        var building20 = ["Corridor 2","<li>Public</li><li>Fourth Floor</li><li>Three doors</li>","<li>This is a Public Area</li><li>This is in Fourth Floor</li><li>Can be used enter to the Servant Room</li><li>Can be used enter to the Corridor 1</li><li>Can be used enter to the Computer Vision Lab</li>",[1,3,4]];
 
         departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14,building15,building16,building17,building18,building19,building20];
         
@@ -336,6 +336,9 @@
                             document.getElementById("hint").style.backgroundColor = "#0B5345";  
                             expanded = 0;           //Set the expanded flag to 0
                         }
+                        for(var i=0;i<NavigatingMaterialArray.length;i++){
+                            NavigatingMaterialArray[i].opacity = 0;
+                        }
                         document.getElementById("hint").innerHTML = "Click on the building for more details";
                         document.getElementById("information").style.height = "40%";
                         document.getElementById("main_information").style.height = "75%";
@@ -353,6 +356,9 @@
                         clicked = !clicked;                                                 //change the 'clicked' flag to 0
                     }else{                                                                  //If user hasn't clicked earlier
                             //Decrease the opacity of top right main information label to 0.5
+                        for(var i=0;i<departmentDatabase[buildingID][3].length;i++){
+                            NavigatingMaterialArray[departmentDatabase[buildingID][3][i]].opacity = 1;
+                        }    
                         document.getElementById("hint").innerHTML = "More details below ↓";
                         document.getElementById("information").style.height = "60%";
                         document.getElementById("main_information").style.height = "50%";
@@ -485,8 +491,8 @@ function createWall(y,z,Y,Z){
 //Creating Navigating Bars
         //Creating Transparent Objects
         var NavigatingMaterialArray = [];
-        for(var i=0;i<5;i++){
-            NavigatingMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xE91747 , transparent:false, opacity:1});
+        for(var i=0;i<35;i++){
+            NavigatingMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xE91747 , transparent:true, opacity:0});
         }
         function createNavigatingBars(buildingID,horv,length,yPosition,zPosition){
             if(horv=="h"){
@@ -1300,7 +1306,42 @@ var ViewMode = "walk";
         var cubeH21BB = createWall(3.3,Y,-2.2,-51.5);       transparentWallsList.push(cubeH21BB);
         var cubeH22BB = createWall(3,Y,-5.6,-45);           transparentWallsList.push(cubeH22BB);
 
-        // var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
+        var bar0 = createNavigatingBars(0,"v",4.5,-3,-56.7);
+        var bar1 = createNavigatingBars(1,"v",0.5,-3,-54.2);
+        var bar2 = createNavigatingBars(2,"v",2,-3,-52.95);
+        var bar3 = createNavigatingBars(3,"h",4.7,-5.6,-54.2);
+        var bar4 = createNavigatingBars(4,"v",4.5,-7.7,-56.7);
+        var bar5 = createNavigatingBars(5,"v",7.8,-7.7,-62.85);
+        var bar6 = createNavigatingBars(6,"h",2.5,-6.2,-66.5);
+        var bar7 = createNavigatingBars(7,"h",3,-9.45,-66.5);
+        var bar8 = createNavigatingBars(8,"v",5.4,-10.7,-69.45);
+        var bar9 = createNavigatingBars(9,"h",2,-9.45,-71.9);
+        var bar10 = createNavigatingBars(10,"v",5.4,-10.7,-74.85);
+        var bar11 = createNavigatingBars(10,"h",2,-9.45,-77.3);
+        var bar12 = createNavigatingBars(12,"h",5.9,-13.9,-66.5);
+        var bar13 = createNavigatingBars(13,"v",6.5,-16.6,-63);
+        var bar14 = createNavigatingBars(14,"h",4,-18.85,-66.5);
+        var bar15 = createNavigatingBars(15,"v",2.5,-20.6,-65);
+        var bar16 = createNavigatingBars(15,"h",3.5,-22.6,-64);
+        var bar17 = createNavigatingBars(17,"v",4.9,-20.6,-69.2);
+        var bar18 = createNavigatingBars(18,"h",3.5,-22.6,-71.4);
+        var bar19 = createNavigatingBars(19,"v",6.6,-20.6,-74.95);
+        var bar20 = createNavigatingBars(19,"h",3.5,-22.6,-78);
+        var bar21 = createNavigatingBars(21,"h",1.5,-8.7,-54.2);
+        var bar22 = createNavigatingBars(22,"v",16.3,-9.2,-45.8);
+        var bar23 = createNavigatingBars(23,"h",3,-7.45,-37.9);
+        var bar24 = createNavigatingBars(24,"v",4.4,-9.2,-35.45);
+        var bar25 = createNavigatingBars(25,"h",3,-7.45,-33.5);
+        var bar26 = createNavigatingBars(26,"v",3,-9.2,-31.8);
+        var bar27 = createNavigatingBars(27,"h",3.5,-11.2,-54.2);
+        var bar28 = createNavigatingBars(28,"v",35.3,-13.2,-36.8);
+        var bar29 = createNavigatingBars(29,"h",2.6,-11.65,-19.4);
+        var bar30 = createNavigatingBars(30,"h",4.2,-15.55,-19.4);
+        var bar31 = createNavigatingBars(31,"v",2.5,-17.4,-17.9);
+        var bar32 = createNavigatingBars(32,"h",5.2,-20.25,-19.4);
+        var bar33 = createNavigatingBars(33,"v",2.5,-22.6,-17.9);
+        var bar34 = createNavigatingBars(34,"h",6,-25.85,-19.4);
+        var bar35 = createNavigatingBars(34,"v",2.5,-28.6,-17.9);
 
         //Set lights by using the created function above
         var light00 = setPointLight(3,5,-6);
