@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="#">
+    <title>Ground Floor</title>   <!--Name of the website -->
+    <link rel="stylesheet" href="style.css"/>   <!--Linking the css file-->
+</head>
+<body>
+    <script src="./js/three.js"></script>            <!-- Importing the three.js library-->
+    <script src="./js/jquery.js"></script>           <!-- Importing the jquery.js library-->
+    <script src="./js/threex.domevents.js"></script> <!-- Importing the threex.domevents.js library-->
+    <script src="./js/GLTFLoader.js"></script>       <!-- Importing the GLTFLoader.js library-->
+    <div id="glass" class="glass" onmouseover="nowin()" onmouseleave="nowout()"></div>
+    <img src="images/logo.png">
+    <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    <div id="information" class="information_class" >                    
+        <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
+            <p1 style="font-size: 3.3vmin;" id="label">Department Building</p1><br><br>
+            <ul id="list" style="list-style-type:square; font-size: 2.15vmin;">                                   <!--Top right main information list-->
+                <li>Welcome to Computer Engineering Department</li>
+                <li>Head of the department is Mr.Rohitha</li>
+                <li>This is a 4 story building</li>
+            </ul>
+        </div>
+        <div id="hint" class="hint_class">Click on the building for more details</div>
+        <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
+            <p2 id="label2" class="label2_class">More information here</p2>          
+            <ul id="list2" class="list2_class" style="list-style-type:square;">                                             <!--Top right more information list-->
+                <li> Welcome to Computer Engineering Department, University of Peradeniya.</li>
+                <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
+                <li>This is a 4 story building which has 4 labs and bla bla bla</li>
+            </ul>
+            <button id="moreButton" class="moreButton_class">More</button>
+        </div>
+    </div>
+    
+    <div id="latterPanel" class="latterPanelClass">
+        <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
+            <div id="searchBar" class="searchBar">
+                <input id="searchQueryInput" class="searchQueryInput_class" type="text" name="searchQueryInput" placeholder="Search" value="" />
+                <button id="searchQuerySubmit" class="searchQuerySubmit_class" type="submit" name="searchQuerySubmit">
+                  <svg style="width:3.4vmin;height:3.4vmin" viewBox="0 0 24 24"><path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                  </svg>
+                </button>
+            </div>
+        </div>
+        <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
+    </div>
+    <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
+    <div class="viewsButtonClass" id="viewsButton">
+        <button class="leftTopButtonClass" id="leftTopButton" onclick="leftTop()">BIRD</button>
+        <button class="leftBottomButtonClass" id="leftBottomButton" onclick="leftBottom()">DRONE</button>
+        <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
+    </div>
+    <div id="aim" class="aim"></div>
+    <script type="text/javascript"> 
+    
+        
+        loadBuildings();
+        var departmentDatabase=[];
+        var my_json={};
+    
+        function loadBuildings(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','dept_Gfloor.json',true);
+
+            xhr.onload = function(){
+                if(this.status==200){
+
+                    
+                     my_json = JSON.parse(this.responseText);
+
+                    
+                    var data =[];
+
+                   
+                        my_json.forEach((val,index)=>{
+                            if(my_json[index]!==null){
+                                for(var i in my_json[index]) {
+                                        data.push(my_json[index][i]);
+                                }
+                                departmentDatabase.push(data);
+                                data=[];
+                            }	
+                        })
+                        console.log(departmentDatabase);
+                           
+                }
+            }
+            xhr.send();
+            
+        }
+
+
+        var clicked = 0;                //To check whether a building has been clicked or not
+        var expanding = 0;              //To check if top right labels are expanding or not
+        var expanded = 0;               //To check whether top right main label has been expanded or not
+        var circleCorners = 1;
+        var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
+        var X = 0.52,Y=0.7,R=0.9,S=0.08;
+        var Floor = 0;
+        var initialCamera_X = 0, initialCamera_Y = -2.7, initialCamera_Z = -3.5;
+        var initialCamera_Xangle = 0;
+        var yR = 0, zR = R; 
+        var angle_x=initialCamera_Xangle,angle_y=0;                //Starting rotation values of the camera
+
+        var building0 = [0,"Department Building","Welcome to Computer Engineering Department","Head of the department is Prof.Roshan Ragel","This is a 4 story building","This is Ground Floor","University of Peradeniya"];
+        
+
+        //Scene
+        var scene = new THREE.Scene();
+        //Camera
+        var camera = new THREE.PerspectiveCamera(85,window.innerWidth/(window.innerHeight*1.5));
+        //Renderer
+        var renderer = new THREE.WebGLRenderer({antilias:true});
+        renderer.setSize(window.innerWidth-14,window.innerHeight-17);     
+        $('body').append(renderer.domElement);    
+        
+        
+//Creating Backgroud
+        //Import images to the cube
+        let materialArray = [];
+        let texture_ft = new THREE.TextureLoader().load('./images/4.png');
+        let texture_bk = new THREE.TextureLoader().load('./images/5.png');
+        let texture_up = new THREE.TextureLoader().load('./images/2.png');
+        let texture_dn = new THREE.TextureLoader().load('./images/6.png');
+        let texture_rt = new THREE.TextureLoader().load('./images/3.png');
+        let texture_lf = new THREE.TextureLoader().load('./images/1.png');
+
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_ft}));
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_bk}));
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_up}));
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_dn}));
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_rt}));
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture_lf}));
+
+        for(let i=0;i<6;i++){
+            materialArray[i].side = THREE.BackSide;
+        }
+
+        let skyboxGeo = new THREE.BoxGeometry(1500,250,1500);       //Creats the backgroud cube
+        let skybox = new THREE.Mesh(skyboxGeo, materialArray);
+        scene.add(skybox);
+        skybox.rotation.z -= Math.PI/2;         //Set the position of the cube
+        skybox.position.set(119,0,0);
+
+
+//Mouse Event Listeners
+        const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
+        function addMouseEvents(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
+            domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
+                if(out==0 && ViewMode=="walk"){
+                    if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                            //Decrease the opacity of top right main information label to 0.5 
+                        if(expanded){      
+                            document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                            document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                            document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                            document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                            expanded = 0;           //Set the expanded flag to 0
+                        }
+                        document.getElementById("hint").innerHTML = "Click on the building for more details";
+                        document.getElementById("information").style.height = "40%";
+                        document.getElementById("main_information").style.height = "75%";
+                        document.getElementById("hint").style.height = "7.5%";
+                        document.getElementById("controlLayout").style.height = "20%";
+                        document.getElementById("more_information").style.removeProperty('min-height');
+                        document.getElementById("more_information").style.padding = "0%";
+                        document.getElementById("more_information").style.marginTop = "0%";
+                        document.getElementById("more_information").style.margin = "0%";
+                        document.getElementById("label2").style.fontSize = "0vmin";
+                        document.getElementById("list2").style.fontSize = "0vmin";
+                        cube.material.opacity = 0.6;
+                        document.getElementById("label3").style.backgroundColor = "#1A5276";
+                        showNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                    }else{                                                                  //If user hasn't clicked earlier
+                            //Decrease the opacity of top right main information label to 0.5
+                        document.getElementById("hint").innerHTML = "More details below ↓";
+                        document.getElementById("information").style.height = "60%";
+                        document.getElementById("main_information").style.height = "50%";
+                        document.getElementById("hint").style.height = "5%";
+                        document.getElementById("controlLayout").style.height = "80%";
+                        document.getElementById("more_information").style.minHeight = "50%";
+                        document.getElementById("more_information").style.padding = "5%";
+                        document.getElementById("more_information").style.marginTop = "2.5%";
+                        document.getElementById("more_information").style.margin = "1.5%";
+                        document.getElementById("label2").style.fontSize = "2.8vmin";
+                        document.getElementById("list2").style.fontSize = "2.15vmin";
+                        cube.material.opacity = 0.9;
+                        document.getElementById("label3").style.backgroundColor = "#5F6A6A";
+                        hideNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 1
+                    }
+                }
+            });
+            domEvents.addEventListener(cube,'mouseover',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    cube.material.opacity = 0.8;
+                    print2(buildingID);
+                    //    document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];   
+                    //   //Update the particular information about the building appearing on the top right labels
+                  
+                    // document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
+                    // document.getElementById("list2").innerHTML = departmentDatabase[buildingID][2];
+                }
+            });    
+            domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
+                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    cube.material.opacity = 0.6;
+                    print1();
+                    // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+                    // document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                    // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+                }
+            }); 
+        }
+
+        function addMouseEventsForWalls(cube,buildingID){                                      //This function sets particular mouse event listeners to building objects
+            domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
+                if(out==0 && ViewMode=="walk"){
+                    if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                            //Decrease the opacity of top right main information label to 0.5 
+                        if(expanded){      
+                            document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                            document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                            document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                            document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                            expanded = 0;           //Set the expanded flag to 0
+                        }
+                        document.getElementById("hint").innerHTML = "Click on the building for more details";
+                        document.getElementById("information").style.height = "40%";
+                        document.getElementById("main_information").style.height = "75%";
+                        document.getElementById("hint").style.height = "7.5%";
+                        document.getElementById("controlLayout").style.height = "20%";
+                        document.getElementById("more_information").style.removeProperty('min-height');
+                        document.getElementById("more_information").style.padding = "0%";
+                        document.getElementById("more_information").style.marginTop = "0%";
+                        document.getElementById("more_information").style.margin = "0%";
+                        document.getElementById("label2").style.fontSize = "0vmin";
+                        document.getElementById("list2").style.fontSize = "0vmin";
+                        document.getElementById("label3").style.backgroundColor = "#1A5276";
+                        showNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                    }else{                                                                  //If user hasn't clicked earlier
+                            //Decrease the opacity of top right main information label to 0.5
+                        document.getElementById("hint").innerHTML = "More details below ↓";
+                        document.getElementById("information").style.height = "60%";
+                        document.getElementById("main_information").style.height = "50%";
+                        document.getElementById("hint").style.height = "5%";
+                        document.getElementById("controlLayout").style.height = "80%";
+                        document.getElementById("more_information").style.minHeight = "50%";
+                        document.getElementById("more_information").style.padding = "5%";
+                        document.getElementById("more_information").style.marginTop = "2.5%";
+                        document.getElementById("more_information").style.margin = "1.5%";
+                        document.getElementById("label2").style.fontSize = "2.8vmin";
+                        document.getElementById("list2").style.fontSize = "2.15vmin";
+                        document.getElementById("label3").style.backgroundColor = "#5F6A6A";
+                        hideNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 1
+                    }
+                }
+            });
+            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    
+                }
+            }); 
+            domEvents.addEventListener(cube,'mouseout',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    
+                }
+            }); 
+        }
+        
+
+        function addMouseEventsForPanels(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
+            domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
+                if(out==0 && ViewMode!="walk"){
+                    if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                            //Decrease the opacity of top right main information label to 0.5 
+                        if(expanded){      
+                            document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                            document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                            document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                            document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                            expanded = 0;           //Set the expanded flag to 0
+                        }
+                        document.getElementById("hint").innerHTML = "Click on the building for more details";
+                        document.getElementById("information").style.height = "40%";
+                        document.getElementById("main_information").style.height = "75%";
+                        document.getElementById("hint").style.height = "7.5%";
+                        document.getElementById("controlLayout").style.height = "20%";
+                        document.getElementById("more_information").style.removeProperty('min-height');
+                        document.getElementById("more_information").style.padding = "0%";
+                        document.getElementById("more_information").style.marginTop = "0%";
+                        document.getElementById("more_information").style.margin = "0%";
+                        document.getElementById("label2").style.fontSize = "0vmin";
+                        document.getElementById("list2").style.fontSize = "0vmin";
+                        cube.material.opacity = 0;
+                        document.getElementById("label3").style.backgroundColor = "#1A5276";
+                        showNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                    }else{                                                                  //If user hasn't clicked earlier
+                            //Decrease the opacity of top right main information label to 0.5
+                        document.getElementById("hint").innerHTML = "More details below ↓";
+                        document.getElementById("information").style.height = "60%";
+                        document.getElementById("main_information").style.height = "50%";
+                        document.getElementById("hint").style.height = "5%";
+                        document.getElementById("controlLayout").style.height = "80%";
+                        document.getElementById("more_information").style.minHeight = "50%";
+                        document.getElementById("more_information").style.padding = "5%";
+                        document.getElementById("more_information").style.marginTop = "2.5%";
+                        document.getElementById("more_information").style.margin = "1.5%";
+                        document.getElementById("label2").style.fontSize = "2.8vmin";
+                        document.getElementById("list2").style.fontSize = "2.15vmin";
+                        cube.material.opacity = 0.6;
+                        document.getElementById("label3").style.backgroundColor = "#5F6A6A";
+                        hideNavigator();
+                        clicked = !clicked;                                                 //change the 'clicked' flag to 1
+                    }
+                }
+            });
+            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
+                if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    cube.material.opacity = 0.4;
+                    print2(buildingID);
+                    // document.getElementById("label").innerHTML = departmentDatabase[buildingID][0]; 
+                    // document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
+                    // document.getElementById("list2").innerHTML = departmentDatabase[buildingID][2];
+                }
+            });    
+            domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
+                if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+                    cube.material.opacity = 0;
+                    print1();
+                    // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+                    // document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                    // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+                }
+            }); 
+        }
+
+//Import Blender Objects
+        let buildingloader = new THREE.GLTFLoader();    //Create a loader to load the objects
+
+        function importObject(location,xValue,yValue,zValue,xrotatevalue,scale=1){   //This function imports the blender object, sets the position, angle and adds to the scene
+            var blenderBuilding;
+            buildingloader.load(location,(gltf) => {
+                blenderBuilding = gltf.scene;
+                blenderBuilding.scale.set(scale,scale,scale);                                            //Set the scale of the object
+                scene.add(blenderBuilding);                                                  //Add to the scene
+                blenderBuilding.position.x = xValue;                                         //Set the position
+                blenderBuilding.position.y = yValue;
+                blenderBuilding.position.z = zValue;
+                blenderBuilding.rotation.z = Math.PI/2;                                      //Set the rotation
+                blenderBuilding.rotation.x = xrotatevalue;
+                blenderBuilding.rotation.y = Math.PI;
+                blenderBuilding.side = THREE.FrontSide;
+            });
+            return blenderBuilding;
+        }
+        
+
+//Creating Transparent Objects
+        var transparentMaterialArray = [];
+        for(var i=0;i<16;i++){
+            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
+        }
+        function createTransparentObject(buildingID,horv,yPosition,zPosition){
+            if(horv=="h"){
+                var geometry = new THREE.BoxGeometry(6.5617,2.63,0.2);
+            }else if(horv=="v"){
+                var geometry = new THREE.BoxGeometry(6.5617,0.2,2.63);
+            }else if(horv=="th"){
+                var geometry = new THREE.BoxGeometry(6.5617,1.1,0.2);
+            }
+            var material = transparentMaterialArray[buildingID]
+            var cube = new THREE.Mesh(geometry,material);
+            scene.add(cube);
+            cube.position.x = -1.72;
+            cube.position.y = yPosition;
+            cube.position.z = zPosition;
+            addMouseEvents(cube,buildingID);
+            return cube;
+        }
+
+        var transparentMaterialForPanelsArray = [];
+        for(var i=0;i<16;i++){
+            transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
+        }
+        function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
+            var geometry = new THREE.BoxGeometry(0.01,yvalue,zvalue);
+            var material = transparentMaterialForPanelsArray[buildingID];
+            var cube = new THREE.Mesh(geometry,material);
+            scene.add(cube);
+            cube.position.x = 3.85; //3.75
+            cube.position.y = yPosition;
+            cube.position.z = zPosition;
+            addMouseEventsForPanels(cube,buildingID);
+            idsOfPanelList.push(buildingID);
+            let cubeBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+            cubeBB.setFromObject(cube);
+            return cubeBB;
+        }
+
+//Transparent Walls
+function createWall(y,z,Y,Z){
+            var geometry = new THREE.BoxGeometry(8.3,y,z);
+            var material = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
+            var cube = new THREE.Mesh(geometry,material);
+            scene.add(cube);
+            cube.position.x = -0.7; //5
+            cube.position.y = Y;
+            cube.position.z = Z;
+            addMouseEventsForWalls(cube);
+            let cubeBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+            cubeBB.setFromObject(cube);
+            return cubeBB;
+        }
+
+
+//Creating Navigating Bars
+        //Creating Transparent Objects
+        var NavigatingMaterialArray = [];
+        for(var i=0;i<5;i++){
+            NavigatingMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xE91747 , transparent:false, opacity:1});
+        }
+        function createNavigatingBars(buildingID,horv,length,yPosition,zPosition){
+            if(horv=="h"){
+                var geometry5 = new THREE.BoxGeometry(0.001,length,0.5);
+            }else if(horv=="v"){
+                var geometry5 = new THREE.BoxGeometry(0.001,0.5,length);
+            }
+            var material5 = NavigatingMaterialArray[buildingID];
+            var cube5 = new THREE.Mesh(geometry5,material5);
+            scene.add(cube5);
+            cube5.position.x = -4.95;
+            cube5.position.y = yPosition;
+            cube5.position.z = zPosition;
+            return cube5;
+        }
+
+
+//Set Lights
+        function setDirectionalLight(X,Y,Z) {                           //This function set the light
+            var lightId = new THREE.DirectionalLight(0xffffff,0.2); //Soft white light
+            scene.add(lightId);                           //Add light to the scene
+            lightId.position.set(X,Y,Z);
+            return lightId;
+        }
+
+        function setPointLight(X,Y,Z) {                           //This function set the light
+            var lightId = new THREE.PointLight(0xffffff,0.2); //Soft white light
+            scene.add(lightId);                           //Add light to the scene
+            lightId.position.set(X,Y,Z);
+            return lightId;
+        }
+
+
+//Controls
+        async function sleep(miliseconds){  //This function sleeps for particular time 
+            return new Promise((resolve) => setTimeout(resolve,miliseconds));
+        }
+
+        var okToGoFront = 1, okToGoBack = 1;
+
+        async function turnleft(){          //This function turns the camera to left by unit amount
+            if(ViewMode=="sky"){
+                for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                    await sleep(20);                        //Sleep for 20 millieseconds
+                    camera.position.y += Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y += Math.cos(angle_x)*S; 
+                    backCameraBall.position.y += Math.cos(angle_x)*S;
+                    topCameraBall.position.y += Math.cos(angle_x)*S;
+                    camera.position.z += Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z += Math.sin(angle_x)*S; 
+                    backCameraBall.position.z += Math.sin(angle_x)*S;
+                    topCameraBall.position.z += Math.sin(angle_x)*S;
+                }
+            }else{
+                for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                    await sleep(20);                        //Sleep for 20 millieseconds
+                    camera.rotation.x += Math.PI/200;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    angle_x = angle_x + Math.PI/200;        //Update the new camera angle
+                    frontCameraBall.rotation.x += Math.PI/200;
+                    frontCameraBall.position.y = camera.position.y + (Math.sin(angle_x)*R);
+                    frontCameraBall.position.z = camera.position.z - (Math.cos(angle_x)*R);
+                    backCameraBall.rotation.x += Math.PI/200;
+                    backCameraBall.position.y = camera.position.y - (Math.sin(angle_x)*R);
+                    backCameraBall.position.z = camera.position.z + (Math.cos(angle_x)*R);
+                }
+            }
+        }
+        async function turnright(){         //This function turns the camera to left by unit amount
+            if(ViewMode=="sky"){
+                for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                    await sleep(20);                        //Sleep for 20 millieseconds
+                    camera.position.y -= Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.y -= Math.cos(angle_x)*S; 
+                    backCameraBall.position.y -= Math.cos(angle_x)*S;
+                    topCameraBall.position.y -= Math.cos(angle_x)*S;
+                    camera.position.z -= Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
+                    frontCameraBall.position.z -= Math.sin(angle_x)*S; 
+                    backCameraBall.position.z -= Math.sin(angle_x)*S;
+                    topCameraBall.position.z -= Math.sin(angle_x)*S;
+                }
+            }else{
+                for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                    await sleep(20);                        //Sleep for 20 millieseconds
+                    camera.rotation.x -= Math.PI/200;       //Rotate the camera around x axis by 0.9 degrees to the right
+                    angle_x = angle_x - Math.PI/200;        //Update the new camera angle
+                    frontCameraBall.rotation.x -= Math.PI/200;
+                    frontCameraBall.position.y = camera.position.y + (Math.sin(angle_x)*R);
+                    frontCameraBall.position.z = camera.position.z - (Math.cos(angle_x)*R);
+                    backCameraBall.rotation.x -= Math.PI/200;
+                    backCameraBall.position.y = camera.position.y - (Math.sin(angle_x)*R);
+                    backCameraBall.position.z = camera.position.z + (Math.cos(angle_x)*R);
+                }
+            }
+        }
+        async function turnup(){            //This function turns the camera to left by unit amount
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                await sleep(20);                        //Sleep for 20 millieseconds
+                camera.rotation.y -= Math.PI/200;       //Rotate the cmaera around y axis by 0.9 degrees to the up 
+                angle_y = angle_y - Math.PI/200;        //Update the new camera angle
+            }
+        }
+        async function turndown(){          //This function turns the camera to left by unit amount
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                await sleep(20);                        //Sleep for 20 millieseconds
+                camera.rotation.y += Math.PI/200;       //Rotate the camera around y axis by 0.9 degrees to the down
+                angle_y = angle_y + Math.PI/200;        //Update the new camera angle
+            }
+        }
+        async function forward(){           //This function brings the camera to back by unit amount
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements                                    //Sleep for 20 millieseconds
+                await sleep(20);
+                if(okToGoFront){
+                    camera.position.y += (Math.sin(angle_x)*S);      //Change the position of camera on y axis towards the facing direction
+                    camera.position.z -= (Math.cos(angle_x)*S);      //Change the position of camera on z axis towards the facing direction
+                    frontCameraBall.position.y += (Math.sin(angle_x)*S);
+                    backCameraBall.position.y += (Math.sin(angle_x)*S);
+                    topCameraBall.position.y += (Math.sin(angle_x)*S);
+                    frontCameraBall.position.z -= (Math.cos(angle_x)*S);
+                    backCameraBall.position.z -= (Math.cos(angle_x)*S);
+                    topCameraBall.position.z -= (Math.cos(angle_x)*S);
+                }
+            }
+        }
+        async function backward(){          //This function brings the camera to front by unit amount
+            for(var i =0;i<10;i++){         //Used a loop for smooth movements
+                await sleep(20);                                    //Sleep for 20 millieseconds
+                if(okToGoBack){
+                    camera.position.y -= (Math.sin(angle_x)*S);        //Change the position of camera on y axis towards the facing direction
+                    camera.position.z += (Math.cos(angle_x)*S);        //Change the position of camera on z axis towards the facing direction
+                    frontCameraBall.position.y -= (Math.sin(angle_x)*S);
+                    backCameraBall.position.y -= (Math.sin(angle_x)*S);
+                    topCameraBall.position.y -= (Math.sin(angle_x)*S);
+                    frontCameraBall.position.z += (Math.cos(angle_x)*S);
+                    backCameraBall.position.z += (Math.cos(angle_x)*S);
+                    topCameraBall.position.z += (Math.cos(angle_x)*S);
+                }
+            }    
+        }
+
+
+//Information Panel movements
+        async function showInformation(){               //This function shrinks the top right main information label and makes the more information label appear
+            if(clicked&&(!expanding)&&(!expanded)){     //If a building is clicked, labels are not expanding currently and more information label is dissappeared
+                expanding=1;                            //set the expanding flag to 1
+                document.getElementById("label2").innerHTML = "More information about "+document.getElementById("label").innerHTML;     //set the second label
+                for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+                    await sleep(20);                    //Sleep for 20 millieseconds
+                    document.getElementById("list").style.opacity = 1-(0.1*(i+1));                  //dissappears the main information list
+                    document.getElementById("more_information").style.opacity = 0.09*(i+1);         //Shows the more information label
+                    document.getElementById("main_information").style.height = 50-4.4*(i+1)+"%";   //Shrinks the main information label
+                }
+                document.getElementById("hint").style.backgroundColor = "#21618C";
+                expanding=0;        //set the expanding flag to 0
+                expanded = 1;       //Set the expanded flag to 1
+            }
+        }
+
+        async function hideInformation(){               //This function expands the top right main information label and makes the more information label dissappear
+            if(clicked&&(!expanding)&&expanded){        //If a building is clicked, labels are not expanding currently and more information label is appeared
+                expanding=1;                            //set the expanding flag to 1
+                document.getElementById("list").style.opacity = 1;      //Shows the main information list
+                for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+                    await sleep(20);                    //Sleep for 20 millieseconds
+                    document.getElementById("more_information").style.opacity = 0.9-0.09*(i+1);     //Dissappears the more information label
+                    document.getElementById("main_information").style.height = 6+4.4*(i+1)+"%";    //Expands the main information label
+                }
+                document.getElementById("hint").style.backgroundColor = "#0B5345";
+                expanding=0;            //set the expanding flag to 0
+                expanded = 0;           //Set the expanded flag to 0
+            }
+        }
+
+//Latter Panel movements
+        async function hideNavigator(){
+            for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+                    await sleep(20);                    //Sleep for 20 millieseconds
+                    document.getElementById("navigator").style.height = 93 - (i+1)*8.6 + "%";     //Dissappears the more information label
+                    document.getElementById("navigator").style.opacity = 0.9 - (i+1)*0.07;
+                    document.getElementById("main_information").style.opacity = 0.6 + (i+1)*0.04;
+                }
+            document.getElementById("searchBar").style.opacity = 0;
+        }
+        async function showNavigator(){
+            document.getElementById("searchBar").style.opacity = 1;
+            for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+                    await sleep(20);                    //Sleep for 20 millieseconds
+                    document.getElementById("navigator").style.height = 7 + (i+1)*8.6 + "%";     //Dissappears the more information label
+                    document.getElementById("navigator").style.opacity = 0.2 + (i+1)*0.07;
+                    document.getElementById("main_information").style.opacity = 1 - (i+1)*0.04;
+                }
+        }
+
+//Maintain angles
+        function updateAngles(){
+            angle_x %= (Math.PI*2); 
+            angle_y %= (Math.PI*2);
+            camera.rotation.x %= (Math.PI*2);
+            camera.rotation.y %= (Math.PI*2);
+            if(Math.abs(angle_x)>Math.PI){
+                angle_x = (angle_x>0)?-(2*Math.PI-angle_x):2*Math.PI+angle_x;
+            }
+            if(Math.abs(angle_y)>Math.PI){
+                angle_y = (angle_y>0)?-(2*Math.PI-angle_y):2*Math.PI+angle_y;
+            }
+            if(Math.abs(camera.rotation.x)>Math.PI){
+                camera.rotation.x = (camera.rotation.x>0)?-(2*Math.PI-camera.rotation.x):2*Math.PI+camera.rotation.x;
+            }
+            if(Math.abs(camera.rotation.y)>Math.PI){
+                camera.rotation.y = (camera.rotation.y>0)?-(2*Math.PI-camera.rotation.y):2*Math.PI+camera.rotation.y;
+            }
+        }
+
+//Camera Position
+        var ViewMode = "walk";
+        async function switchtoWALK(){
+            updateAngles();
+            document.getElementById("rightTop").innerHTML = "W";
+            document.getElementById("rightBottom").innerHTML = "WALK";
+            document.getElementById("leftTopButton").innerHTML = "BIRD";
+            document.getElementById("leftBottomButton").innerHTML = "DRONE";
+            if(ViewMode=="sky" || ViewMode=="drone"){
+                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                    //Decrease the opacity of top right main information label to 0.5 
+                    if(expanded){      
+                        document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                        document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                        document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                        document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                        expanded = 0;           //Set the expanded flag to 0
+                    }
+                    document.getElementById("hint").innerHTML = "Click on the building for more details";
+                    document.getElementById("information").style.height = "40%";
+                    document.getElementById("main_information").style.height = "75%";
+                    document.getElementById("hint").style.height = "7.5%";
+                    document.getElementById("controlLayout").style.height = "20%";
+                    document.getElementById("more_information").style.removeProperty('min-height');
+                    document.getElementById("more_information").style.padding = "0%";
+                    document.getElementById("more_information").style.marginTop = "0%";
+                    document.getElementById("more_information").style.margin = "0%";
+                    document.getElementById("label2").style.fontSize = "0vmin";
+                    document.getElementById("list2").style.fontSize = "0vmin";
+                    document.getElementById("label3").style.backgroundColor = "#1A5276";
+                    showNavigator();
+                    clicked = !clicked;    
+                }
+                for(var i=0;i<transparentMaterialArray.length;i++){
+                    transparentMaterialArray[i].color.set(0x2758E7);
+                    transparentMaterialArray[i].opacity = 0.6;
+                    transparentMaterialForPanelsArray[i].opacity = 0;
+                }
+                var y  = camera.position.y;
+                var z = camera.position.z;
+                var x = camera.position.x;
+                var xr = camera.rotation.x;
+                for(var i=0;i<15;i++){
+                    await sleep(20);
+                    if(ViewMode=="sky"){
+                        camera.position.y = y - (i+1)*((y-initialCamera_Y)/15);
+                        camera.position.z = z - (i+1)*((z-initialCamera_Z)/15);
+                        camera.rotation.x = xr-(i+1)*((xr-initialCamera_Xangle)/15);
+
+                    }
+                    camera.position.x=x-((i+1)*(x/15));    //8,20
+                    camera.rotation.y = angle_y-(i+1)*(angle_y/15);
+                }
+                if(ViewMode=="sky"){
+                    frontCameraBall.position.y = initialCamera_Y-yR;
+                    backCameraBall.position.y = initialCamera_Y+yR;
+                    topCameraBall.position.y = initialCamera_Y;
+                    frontCameraBall.position.z = initialCamera_Z-zR;
+                    backCameraBall.position.z = initialCamera_Z+zR;
+                    topCameraBall.position.z = initialCamera_Z;
+                    frontCameraBall.rotation.x = initialCamera_Xangle;
+                    backCameraBall.rotation.x = initialCamera_Xangle;
+                    angle_x = initialCamera_Xangle;
+                }
+                okToGoBack = 0;
+                okToGoFront = 0;
+                angle_y = 0;
+            }
+            lastpanel = -1;
+            ViewMode = "walk";            
+        }
+
+        async function switchtoDRONE(){
+            updateAngles();
+            document.getElementById("rightTop").innerHTML = "D";
+            document.getElementById("rightBottom").innerHTML = "DRONE";
+            document.getElementById("leftTopButton").innerHTML = "BIRD";
+            document.getElementById("leftBottomButton").innerHTML = "WALK";
+            if(ViewMode=="walk"){
+                departmentDatabase[0] = building0;
+                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                    //Decrease the opacity of top right main information label to 0.5 
+                    if(expanded){      
+                        document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                        document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                        document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                        document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                        expanded = 0;           //Set the expanded flag to 0
+                    }
+                    document.getElementById("hint").innerHTML = "Click on the building for more details";
+                    document.getElementById("information").style.height = "40%";
+                    document.getElementById("main_information").style.height = "75%";
+                    document.getElementById("hint").style.height = "7.5%";
+                    document.getElementById("controlLayout").style.height = "20%";
+                    document.getElementById("more_information").style.removeProperty('min-height');
+                    document.getElementById("more_information").style.padding = "0%";
+                    document.getElementById("more_information").style.marginTop = "0%";
+                    document.getElementById("more_information").style.margin = "0%";
+                    document.getElementById("label2").style.fontSize = "0vmin";
+                    document.getElementById("list2").style.fontSize = "0vmin";
+                    document.getElementById("label3").style.backgroundColor = "#1A5276";
+                    showNavigator();
+                    clicked = !clicked;    
+                }
+                for(var i=0;i<transparentMaterialArray.length;i++){
+                    transparentMaterialArray[i].color.set(0x000000);
+                    transparentMaterialArray[i].opacity = 1;
+                    transparentMaterialForPanelsArray[i].opacity = 0;
+                }        
+                for(var i=0;i<10;i++){
+                    await sleep(20);
+                    camera.position.x=(i+1)*1;
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-Math.PI/8)/10); 
+                }
+                okToGoBack = 1;
+                okToGoFront = 1;
+                angle_y = Math.PI/8;
+                print1();
+                // document.getElementById("label").innerHTML = departmentDatabase[0][0];  
+                // document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+            }else if(ViewMode=="sky"){
+                departmentDatabase[0] = building0;
+                for(var i=0;i<20;i++){
+                    await sleep(20);
+                    camera.position.x = 40 -(i+1)*1.5;
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/8))/20); 
+                }
+                okToGoBack = 1;
+                okToGoFront = 1;
+                angle_y = Math.PI/8;
+            }
+            ViewMode = "drone";
+        }
+
+        async function switchtoSKY(){
+            updateAngles();
+            document.getElementById("rightTop").innerHTML = "B";
+            document.getElementById("rightBottom").innerHTML = "BIRD";
+            document.getElementById("leftTopButton").innerHTML = "DRONE";
+            document.getElementById("leftBottomButton").innerHTML = "WALK";
+            if(ViewMode=="walk"){   //Going up
+                departmentDatabase[0] = building0;
+console.log(departmentDatabase[0]);     
+                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
+                            //Decrease the opacity of top right main information label to 0.5 
+                    if(expanded){      
+                        document.getElementById("list").style.opacity = 1;      //Shows the main information list       
+                        document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
+                        document.getElementById("main_information").style.height = "50%";    //Expands the main information label
+                        document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                        expanded = 0;           //Set the expanded flag to 0
+                    }
+                    document.getElementById("hint").innerHTML = "Click on the building for more details";
+                    document.getElementById("information").style.height = "40%";
+                    document.getElementById("main_information").style.height = "75%";
+                    document.getElementById("hint").style.height = "7.5%";
+                    document.getElementById("controlLayout").style.height = "20%";
+                    document.getElementById("more_information").style.removeProperty('min-height');
+                    document.getElementById("more_information").style.padding = "0%";
+                    document.getElementById("more_information").style.marginTop = "0%";
+                    document.getElementById("more_information").style.margin = "0%";
+                    document.getElementById("label2").style.fontSize = "0vmin";
+                    document.getElementById("list2").style.fontSize = "0vmin";
+                    document.getElementById("label3").style.backgroundColor = "#1A5276";
+                    showNavigator();
+                    clicked = !clicked;    
+                }
+                for(var i=0;i<transparentMaterialArray.length;i++){
+                    transparentMaterialArray[i].color.set(0x000000);
+                    transparentMaterialArray[i].opacity = 1;
+                    transparentMaterialForPanelsArray[i].opacity = 0;
+                }
+                var y = camera.position.y;
+                var z = camera.position.z;
+                var xr = camera.rotation.x;
+                for(var i=0;i<20;i++){
+                    await sleep(20);
+                    camera.position.x=(i+1)*2;
+                    camera.position.y = y - (i+1)*(y/20+1);
+                    camera.position.z = z - (i+1)*(z/20+2.25);
+                    camera.rotation.x = xr - (i+1)*(xr/20);
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/2))/20); 
+                }
+                frontCameraBall.position.y = -20; 
+                backCameraBall.position.y = -20;
+                topCameraBall.position.y = -20;
+                frontCameraBall.position.z = -45-R;
+                backCameraBall.position.z = -45+R;
+                topCameraBall.position.z = -45;
+                frontCameraBall.rotation.x = 0;
+                backCameraBall.rotation.x = 0;
+                okToGoBack = 1;
+                okToGoFront = 1;
+                angle_y = Math.PI/2;
+                angle_x = 0;
+                print1();
+                // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+                // document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+            }else if(ViewMode=="drone"){
+                departmentDatabase[0] = building0;
+                var y = camera.position.y;
+                var z = camera.position.z;
+                var xr = camera.rotation.x;
+                for(var i=0;i<20;i++){
+                    await sleep(20);
+                    camera.position.x = 10 +(i+1)*1.5;
+                    camera.position.y = y - (i+1)*(y/20+1);
+                    camera.position.z = z - (i+1)*(z/20+2.25);
+                    camera.rotation.x = xr - (i+1)*(xr/20);
+                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/2))/20); 
+                }
+                frontCameraBall.position.y = -20; 
+                backCameraBall.position.y = -20;
+                topCameraBall.position.y = -20;
+                frontCameraBall.position.z = -45-R;
+                backCameraBall.position.z = -45+R;
+                topCameraBall.position.z = -45;
+                frontCameraBall.rotation.x = 0;
+                backCameraBall.rotation.x = 0;
+                okToGoBack = 1;
+                okToGoFront = 1;
+                angle_y = Math.PI/2;
+                angle_x = 0;
+            }
+            ViewMode = "sky";
+        }
+
+        function leftTop(){
+            switch(ViewMode){
+                case "walk":
+                    switchtoSKY();    
+                    break;
+                case "sky":
+                    switchtoDRONE();
+                    break;
+                case "drone":
+                    switchtoSKY();    
+                    break;
+            }
+        }
+
+        function leftBottom(){
+            switch(ViewMode){
+                case "walk":
+                    switchtoDRONE();    
+                    break;
+                case "sky":
+                    switchtoWALK();    
+                    break;
+                case "drone":
+                    switchtoWALK();    
+                    break;
+            }
+        }
+
+//Corner Controls
+        function changeCorners(){
+            if(circleCorners==1){
+                circleCorners = 0;
+                document.getElementById("changeCorners").innerHTML = "Circle Corners";
+                document.getElementById("main_information").style.borderRadius = "0vmin";
+                document.getElementById("hint").style.borderRadius = "0vmin";
+                document.getElementById("more_information").style.borderRadius = "0vmin";
+                document.getElementById("navigator").style.borderRadius = "0vmin";
+                document.getElementById("changeCorners").style.borderRadius = "0vmin";
+                document.getElementById("RightButton").style.borderRadius = "0vmin";
+                document.getElementById("leftTopButton").style.borderRadius = "0vmin";
+                document.getElementById("leftBottomButton").style.borderRadius = "0vmin";
+            }else{
+                circleCorners = 1;
+                document.getElementById("changeCorners").innerHTML = "Square Corners";
+                document.getElementById("main_information").style.borderRadius = "3.5vmin 3.5vmin 0vmin 0vmin";
+                document.getElementById("hint").style.borderRadius = "0vmin 0vmin 3.5vmin 3.5vmin";
+                document.getElementById("more_information").style.borderRadius = "3.5vmin";
+                document.getElementById("navigator").style.borderRadius = "3.5vmin 3.5vmin 0vmin 0vmin";
+                document.getElementById("changeCorners").style.borderRadius = "1.65vmin";
+                document.getElementById("RightButton").style.borderRadius = "0 1.4vmin 1.4vmin 0";
+                document.getElementById("leftTopButton").style.borderRadius = "1.4vmin 0 0 0";
+                document.getElementById("leftBottomButton").style.borderRadius = "0 0 0 1.4vmin";
+            }
+        }
+
+//Key Controls
+        document.onkeydown = function(event){   //Set event listeners for key presses
+            switch (event.keyCode){
+                case 37:    //arrow left
+                    turnleft();
+                    break;
+                case 38:    //Aroow up
+                    forward();
+                    break;
+                case 39:    //Arrow right
+                    turnright();
+                    break;
+                case 40:    //Arrow down
+                    backward();
+                    break;
+                case 83:    //Letter s
+                    turnup();
+                    break;
+                case 65:    //Letter a
+                    turndown();
+                    break;
+                case 87:    //Letter w
+                    if(ViewMode=="sky" || ViewMode=="drone"){
+                        switchtoWALK();
+                    }
+                    break;
+                case 68:    //Letter d
+                    if(ViewMode=="sky" || ViewMode=="walk"){
+                        switchtoDRONE();
+                    }
+                    break;
+                case 66:    //Letter b
+                    if(ViewMode=="drone" || ViewMode=="walk"){
+                        switchtoSKY();
+                    }
+                    break;
+        }
+        }
+
+        //Front cube
+        var frontCameraBall = new THREE.Mesh(
+            new THREE.BoxGeometry(1,0.2,1),
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+        );
+        scene.add(frontCameraBall);
+        frontCameraBall.position.x = initialCamera_X+3.2;
+        frontCameraBall.position.y = initialCamera_Y-yR;
+        frontCameraBall.position.z = initialCamera_Z-zR;
+        frontCameraBall.rotation.x = initialCamera_Xangle;
+        let frontballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+        frontballBB.setFromObject(frontCameraBall);
+
+        //Back cube
+        var backCameraBall = new THREE.Mesh(
+            new THREE.BoxGeometry(2,0.2,1),
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+        );
+        scene.add(backCameraBall);
+        backCameraBall.position.x = initialCamera_X;
+        backCameraBall.position.y = initialCamera_Y+yR;
+        backCameraBall.position.z = initialCamera_Z+zR;
+        backCameraBall.rotation.x = initialCamera_Xangle;
+        let backballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+        backballBB.setFromObject(backCameraBall);
+
+        //Top cube
+        var topCameraBall = new THREE.Mesh(
+            new THREE.BoxGeometry(0.1,0.1,0.1),
+            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
+        );
+        scene.add(topCameraBall);
+        topCameraBall.position.x = 3.8;
+        topCameraBall.position.y = initialCamera_Y;
+        topCameraBall.position.z = initialCamera_Z;
+        let topballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
+        topballBB.setFromObject(topCameraBall);
+
+
+        function checkfrontIntersection(){
+            var sum=0;
+            for(var i=0;i<transparentWallsList.length;i++){
+                if(frontballBB.intersectsBox(transparentWallsList[i])){
+                    return 1;
+                } 
+            }
+            return 0;
+        }
+        function checkbackIntersection(){
+            var sum=0;
+            for(var i=0;i<transparentWallsList.length;i++){
+                if(backballBB.intersectsBox(transparentWallsList[i])){
+                    return 1;
+                } 
+            }
+            return 0;
+        }
+
+        function checkCollision(){
+            if(checkfrontIntersection()){
+                okToGoFront = 0;
+            }else{
+                okToGoFront = 1;
+            }
+            if(checkbackIntersection()){
+                okToGoBack = 0;
+            }else{
+                okToGoBack = 1;
+            }
+        }
+
+        var lastpanel = -1;
+        function checkRoom(){
+            for(var i=0;i<PanelsList.length;i++){
+                if(topballBB.intersectsBox(PanelsList[i])){
+                    if((!clicked) && (i!=lastpanel)){
+                        departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]];   
+                        print1(); 
+                //         document.getElementById("label").innerHTML = departmentDatabase[0][0]                             //Update the default information about the department on the top right labels
+                //         document.getElementById("list").innerHTML = '<ul>'+'<li>'+my_json[0].email+'</li>'+'<li>'+departmentDatabase[0][2]+'</li>'+'</ul>';
+                //         document.getElementById("list2").innerHTML = '<ul>'+'<li>'+departmentDatabase[0][1]+'</li>'+'<li>'+departmentDatabase[0][2]+'</li>'+'</ul>';
+                //    
+                lastpanel = i;
+                    }        
+                    return 0;
+                }
+            }
+            if(departmentDatabase[0] != building0){
+                departmentDatabase[0] = building0;
+                print1();
+                // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+                // document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+            }
+            
+        }
+
+        function nowin(){
+            out = 0;
+        }
+        function nowout(){
+            out = 1;
+        } 
+
+        camera.position.x = initialCamera_X;              //Set the camera elevation (default value is 0)
+        camera.position.y = initialCamera_Y;
+        camera.position.z = initialCamera_Z;
+        camera.rotation.x += initialCamera_Xangle;
+        camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
+
+
+//Rendering
+        var animate = function(){
+            renderer.setSize(window.innerWidth-14,window.innerHeight-17);
+            frontballBB.copy(frontCameraBall.geometry.boundingBox).applyMatrix4(frontCameraBall.matrixWorld);
+            backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);
+            topballBB.copy(topCameraBall.geometry.boundingBox).applyMatrix4(topCameraBall.matrixWorld);
+            if(ViewMode=="walk"){
+                checkRoom();
+                checkCollision();
+            }
+            renderer.render(scene,camera);
+            requestAnimationFrame(animate);
+        };
+
+        //print1();
+        function print1(){
+			   document.getElementById("label").innerHTML = departmentDatabase[0][1];                             //Update the default information about the department on the top right labels
+                document.getElementById("list").innerHTML = '<ul>'+'<li>'+'Capacity  : '+departmentDatabase[0][2]+'</li>'+'<li>'+'lecturer  : '+departmentDatabase[0][3]+'</li>'+'</ul|>';
+                document.getElementById("list2").innerHTML =  '<ul>'+'<li>'+'features  : '+departmentDatabase[0][4]+'</li>'+'<li>'+'staff  : '+departmentDatabase[0][5]+'</li>'+'<li>'+'Accessibility  : '+departmentDatabase[0][6]+'</li>'+'<li>'+'Deatils  : '+departmentDatabase[0][7]+'</li>'+'<li>'+'Tags  : '+departmentDatabase[0][8]+'</li>'+'<li>'+'Link  : '+departmentDatabase[0][9]+'</li>'+'</ul>';
+		   }
+			   
+        function print2(buildingID){
+        document.getElementById("label").innerHTML = departmentDatabase[buildingID][1];                             //Update the default information about the department on the top right labels
+        document.getElementById("list").innerHTML = '<ul>'+'<li>'+'Capacity  : '+departmentDatabase[buildingID][2]+'</li>'+'<li>'+'lecturer  : '+departmentDatabase[buildingID][3]+'</li>'+'</ul|>';
+        document.getElementById("list2").innerHTML =  '<ul>'+'<li>'+'features  : '+departmentDatabase[buildingID][4]+'</li>'+'<li>'+'staff  : '+departmentDatabase[buildingID][5]+'</li>'+'<li>'+'Accessibility  : '+departmentDatabase[buildingID][6]+'</li>'+'<li>'+'Deatils  : '+departmentDatabase[buildingID][7]+'</li>'+'<li>'+'Tags  : '+departmentDatabase[buildingID][8]+'</li>'+'<li>'+'Link  : '+departmentDatabase[buildingID][9]+'</li>'+'</ul>';
+		   }
+
+        var blenderBuilding9 = importObject('./floors/FloorG.gltf',-5,0,-80,0,3.28084);    //wall
+       // var blenderBuilding10 = importObject('./assets/G_Assets.gltf',-5,0,-80,0,3.28084);    //wall
+
+
+        //Creating transparent objects by using the created function above
+        var G01_door1 = createTransparentObject(1,"v",-11.15,-68.63);//
+        var G01_door2 = createTransparentObject(1,"v",-19.25,-69.45);
+
+        var G02_door1 = createTransparentObject(2,"v",-19.03,-69.45);
+        var G02_door2 = createTransparentObject(2,"h",-23.74,-67.78);
+
+        var G03_door1 = createTransparentObject(3,"v",-11.15,-61.9);
+        var G03_door2 = createTransparentObject(3,"h",-23.74,-68);
+
+        var G04_door1 = createTransparentObject(4,"h",-17.35,-39.98);
+        var G04_door2 = createTransparentObject(4,"v",-21.2,-51.6);
+        var G04_door3 = createTransparentObject(4,"h",-8.43,-57.7);
+        var G04_door4 = createTransparentObject(4,"h",-2.65,-58.3);
+
+        var G05_door1 = createTransparentObject(5,"v",-20.95,-51.6);
+
+        var G06_door1 = createTransparentObject(6,"h",-23.7,-30);
+
+        var G07_door1 = createTransparentObject(7,"h",-23.89,-19.83);
+
+        var G08_door1 = createTransparentObject(8,"h",-2.6,-25.08);//
+        var G08_door2 = createTransparentObject(8,"h",-7.2,-25.08);//
+        var G08_door3 = createTransparentObject(8,"h",-16.51,-25);
+        var G08_door4 = createTransparentObject(8,"v",-21.2,-27.6);
+        var G08_door5 = createTransparentObject(8,"h",-17.35,-40.20);
+
+        //var G09_door1 = createTransparentObject(9,"v",-12.68,-17.57);
+
+        var GBW_door1 = createTransparentObject(10,"th",-1.33,-19.78);
+        var GBW_door2 = createTransparentObject(10,"th",-3.55,-19.78);
+        var GBW_door6 = createTransparentObject(10,"h",-2.6,-25.3);//
+        
+        var GGW_door1 = createTransparentObject(10,"th",-6.12,-19.78);
+        var GGW_door2 = createTransparentObject(10,"th",-8.68,-19.78);
+        var GGW_door3 = createTransparentObject(10,"h",-7.2,-25.3);//
+        
+        var G11_door1 = createTransparentObject(12,"h",-2.65,-10.15);
+        var G11_door2 = createTransparentObject(12,"v",-9.93,-12.43);
+
+        var GT1_door1 = createTransparentObject(10,"th",-1.33,-20);
+        var GT2_door2 = createTransparentObject(10,"th",-3.55,-20);
+        var GT3_door3 = createTransparentObject(10,"th",-6.12,-20);
+        var GT4_door4 = createTransparentObject(10,"th",-8.68,-20);
+
+        var GBG_door1 = createTransparentObject(0,"v",-0.32,-75.11);
+        var GBG_door2 = createTransparentObject(0,"h",-2.65,-10.37);
+
+        var GC1_door1 = createTransparentObject(13,"v",-9.71,-12.43);
+        //var GC1_door2 = createTransparentObject(18,"v",-12.90,-17.57);
+        var GC1_door3 = createTransparentObject(13,"v",-21.2,-22.3);
+        var GC1_door4 = createTransparentObject(13,"h",-16.51,-25.22);
+
+        var GC2_door1 = createTransparentObject(14,"v",-20.98,-27.6);
+        var GC2_door2 = createTransparentObject(14,"v",-20.98,-22.3);
+        var GC2_door3 = createTransparentObject(14,"h",-23.89,-19.61);
+        var GC2_door4 = createTransparentObject(14,"h",-23.7,-30.22);
+
+        var GL1_door1 = createTransparentObject(15,"h",-2.65,-57.3);
+
+        var GS1_door1 = createTransparentObject(16,"v",-6.29,-67.7);
+
+        var G00_door1 = createTransparentObject(11,"v",-0.1,-75.11);
+        var G00_door2 = createTransparentObject(11,"v",-6.07,-67.7);
+        var G00_door3 = createTransparentObject(11,"h",-8.43,-57.48);
+        var G00_door4 = createTransparentObject(11,"v",-11.37,-61.9);
+        var G00_door5 = createTransparentObject(11,"v",-11.37,-68.63);
+
+
+        var PanelsList = [];
+        var idsOfPanelList = [];
+
+        var panel01_1BB = createTransparentPanel(1,7.63,13.56,-15.34,-72.785);      PanelsList.push(panel01_1BB);  
+        
+        var panel02_1BB = createTransparentPanel(2,2.64,13.63,-20.595,-72.785);     PanelsList.push(panel02_1BB);  
+        var panel02_2BB = createTransparentPanel(2,8.7,11.63,-26.265,-73.785);      PanelsList.push(panel02_2BB);  
+        
+        var panel03_1BB = createTransparentPanel(3,8.6,12.55,-26.265,-61.495);      PanelsList.push(panel03_1BB);  
+        var panel03_2BB = createTransparentPanel(3,10.57,10.46,-16.68,-60.53);      PanelsList.push(panel03_2BB);  
+        
+        var panel04_1BB = createTransparentPanel(4,10.56,2.6,-5.68,-56.25);         PanelsList.push(panel04_1BB);  
+        var panel04_2BB = createTransparentPanel(4,20.47,14.69,-10.635,-47.605);    PanelsList.push(panel04_2BB);
+
+        var panel05_1BB = createTransparentPanel(5,9.31,14.6,-25.944,-47.56);       PanelsList.push(panel05_1BB);
+
+        var panel06_1BB = createTransparentPanel(6,9.31,9.27,-25.944,-35.22);       PanelsList.push(panel06_1BB);
+        var panel06_2BB = createTransparentPanel(6,4.31,4.97,-28.444,-28.1);        PanelsList.push(panel06_2BB);
+
+        var panel07_1BB = createTransparentPanel(7,9.31,9.44,-25.944,-15.12);       PanelsList.push(panel07_1BB);
+        var panel07_2BB = createTransparentPanel(7,4.31,5.37,-28.444,-22.535);      PanelsList.push(panel07_2BB);
+
+        var panel08_1BB = createTransparentPanel(8,20.47,14.805,-10.635,-32.7);     PanelsList.push(panel08_1BB);
+        
+        //var panel09_1BB = createTransparentPanel(9,8,9.63,-16.87,-15.2);              PanelsList.push(panel09_1BB);
+        var panel09_1BB = createTransparentPanel(9,11,14.55,-15.5,-17.6);           PanelsList.push(panel09_1BB);
+
+        var panel10_1BB = createTransparentPanel(10,4.4,4.975,-2.59,-22.53);        PanelsList.push(panel10_1BB);
+        
+        var panel11_1BB = createTransparentPanel(10,4.56,4.975,-7.27,-22.53);       PanelsList.push(panel11_1BB);
+    
+        var panel12_1BB = createTransparentPanel(12,9.2,4.23,-5,-12.5);             PanelsList.push(panel12_1BB);
+
+        var panel13_1BB = createTransparentPanel(10,1.9,4.8,-1.34,-17.44);          PanelsList.push(panel13_1BB);
+
+        var panel14_1BB = createTransparentPanel(10,2.3,4.8,-3.65,-17.44);          PanelsList.push(panel14_1BB);
+
+        var panel15_1BB = createTransparentPanel(10,2.3,4.8,-6.15,-17.44);          PanelsList.push(panel15_1BB);
+
+        var panel16_1BB = createTransparentPanel(10,2.1,4.8,-8.55,-17.44);          PanelsList.push(panel16_1BB);
+
+       // var panel18_1BB = createTransparentPanel(18,2.74,14.6,-11.33,-17.65);       PanelsList.push(panel18_1BB);
+       // var panel18_2BB = createTransparentPanel(18,8.2,4.7,-16.8,-22.6);           PanelsList.push(panel18_2BB);
+
+        var panel19_1BB = createTransparentPanel(14,4.6,9.967,-23.59,-25.22);       PanelsList.push(panel19_1BB);
+        
+        var panel20_1BB = createTransparentPanel(15,5.6,7,-3.2,-61.47);             PanelsList.push(panel20_1BB);
+        
+        var panel21_1BB = createTransparentPanel(16,5.6,4.6,-3.2,-67.67);           PanelsList.push(panel21_1BB);
+       
+        var panel22_1BB = createTransparentPanel(11,10.75,9.2,-5.775,-75);          PanelsList.push(panel22_1BB);
+        var panel22_2BB = createTransparentPanel(11,4.8,12.8,-8.67,-64);            PanelsList.push(panel22_2BB);
+
+        
+        var transparentWallsList = [];
+
+        var cubeV1BB = createWall(Y,63.3,-0.2,-41.65);  transparentWallsList.push(cubeV1BB);
+        var cubeV2BB = createWall(Y,3.04,-0.2,-78.46);  transparentWallsList.push(cubeV2BB);
+        var cubeV3BB = createWall(Y,70,-30.8,-45);      transparentWallsList.push(cubeV3BB);
+        var cubeV4BB = createWall(Y,2,-22,-67);         transparentWallsList.push(cubeV4BB);
+        var cubeV5BB = createWall(Y,2,-19.2,-66.8);     transparentWallsList.push(cubeV5BB);
+        var cubeV6BB = createWall(Y,9,-19.2,-75.5);     transparentWallsList.push(cubeV6BB);
+        var cubeV7BB = createWall(Y,9.8,-11.2,-75.2);   transparentWallsList.push(cubeV7BB);
+        var cubeV8BB = createWall(Y,3.4,-11.2,-65.25);  transparentWallsList.push(cubeV8BB);
+        var cubeV9BB = createWall(Y,5.3,-11.2,-57.6);   transparentWallsList.push(cubeV9BB);
+        var cubeV10BB = createWall(Y,8.6,-6.1,-61.7);   transparentWallsList.push(cubeV10BB);
+        var cubeV11BB = createWall(Y,1.6,-21.1,-54);    transparentWallsList.push(cubeV11BB);
+        var cubeV12BB = createWall(Y,21,-21.1,-39.5);   transparentWallsList.push(cubeV12BB);
+        var cubeV13BB = createWall(Y,2.1,-21.1,-25);    transparentWallsList.push(cubeV13BB);
+        var cubeV14BB = createWall(Y,10.8,-21.1,-15.4); transparentWallsList.push(cubeV14BB);
+        var cubeV15BB = createWall(Y,11,-26,-25.2);     transparentWallsList.push(cubeV15BB);
+        //var cubeV16BB = createWall(Y,1,-12.9,-19.8);    transparentWallsList.push(cubeV16BB);
+       // var cubeV17BB = createWall(Y,5.5,-12.9,-13.2);  transparentWallsList.push(cubeV17BB);
+        var cubeV18BB = createWall(Y,0.8,-9.8,-10.3);   transparentWallsList.push(cubeV18BB);
+        var cubeV19BB = createWall(Y,11.3,-9.8,-19.75); transparentWallsList.push(cubeV19BB);
+        var cubeV20BB = createWall(Y,10.5,-4.9,-20);    transparentWallsList.push(cubeV20BB);
+        var cubeV21BB = createWall(Y,5,-2.45,-17.5);    transparentWallsList.push(cubeV21BB);
+        var cubeV22BB = createWall(Y,5,-7.45,-17.5);    transparentWallsList.push(cubeV22BB);
+        var cubeV23BB = createWall(Y,9,-3.6,-47);       transparentWallsList.push(cubeV23BB);
+        var cubeV24BB = createWall(Y,9,-7.5,-44);       transparentWallsList.push(cubeV24BB);
+
+        var cubeH1BB = createWall(1,Y,-0.5,-10.2);      transparentWallsList.push(cubeH1BB);
+        var cubeH2BB = createWall(27,Y,-17.5,-10.2);    transparentWallsList.push(cubeH2BB);
+        var cubeH3BB = createWall(15.7,Y,-7.85,-40.2);  transparentWallsList.push(cubeH3BB);
+        var cubeH4BB = createWall(12,Y,-25,-40.2);      transparentWallsList.push(cubeH4BB);
+        var cubeH5BB = createWall(1,Y,-0.5,-25.1);      transparentWallsList.push(cubeH5BB);
+        var cubeH6BB = createWall(1.6,Y,-4.95,-25.1);   transparentWallsList.push(cubeH6BB);
+        var cubeH7BB = createWall(6,Y,-11.85,-25.1);    transparentWallsList.push(cubeH7BB);
+        var cubeH8BB = createWall(2.8,Y,-19.5,-25.1);   transparentWallsList.push(cubeH8BB);
+        var cubeH9BB = createWall(5,Y,-28.5,-25.4);     transparentWallsList.push(cubeH9BB);
+        var cubeH10BB = createWall(10,Y,-5,-14.9);      transparentWallsList.push(cubeH10BB);
+        //var cubeH11BB = createWall(9.4,Y,-17.5,-20);    transparentWallsList.push(cubeH11BB);
+        var cubeH12BB = createWall(1,Y,-21.5,-30.4);    transparentWallsList.push(cubeH12BB);
+        var cubeH13BB = createWall(20,Y,-21,-55.1);     transparentWallsList.push(cubeH13BB);
+        var cubeH14BB = createWall(1,Y,-0.5,-57.8);     transparentWallsList.push(cubeH14BB);
+        var cubeH15BB = createWall(2.5,Y,-5.6,-57.8);   transparentWallsList.push(cubeH15BB);
+        var cubeH16BB = createWall(1,Y,-10.5,-57.8);    transparentWallsList.push(cubeH16BB);
+        var cubeH17BB = createWall(11,Y,-16.5,-65.8);   transparentWallsList.push(cubeH17BB);
+        var cubeH18BB = createWall(6,Y,-3,-65.1);       transparentWallsList.push(cubeH18BB);
+        var cubeH19BB = createWall(6.5,Y,-3.25,-70.2);  transparentWallsList.push(cubeH19BB);
+        var cubeH20BB = createWall(5.5,Y,-28.25,-67.9); transparentWallsList.push(cubeH20BB);
+       // var cubeH21BB = createWall(1.6,Y,-22.8,-67.9);  transparentWallsList.push(cubeH21BB);
+        var cubeH22BB = createWall(31,Y,-15.5,-79.8);   transparentWallsList.push(cubeH22BB);
+        var cubeH23BB = createWall(4,Y,-2,-51.5);       transparentWallsList.push(cubeH23BB);
+        var cubeH24BB = createWall(3,Y,-5.7,-44);       transparentWallsList.push(cubeH24BB);
+
+        //var bar1 = createNavigatingBars(1,"v",20,-17.5,-32);
+
+
+        //Set lights by using the created function above
+
+        var light01 = setPointLight(3,5,-5);
+        var light01 = setPointLight(3,5,-13);
+        var light02 = setPointLight(3,5,-18);
+        var light03 = setPointLight(3,5,-24);
+        var light04 = setPointLight(3,5,-30);
+        var light05 = setPointLight(3,5,-40);
+        var light06 = setPointLight(3,5,-48);
+        var light07 = setPointLight(3,5,-54);
+        var light08 = setPointLight(3,5,-60);
+        var light09 = setPointLight(3,5,-66);
+
+        var light10 = setPointLight(3,-35,-13);
+        var light11 = setPointLight(3,-35,-18);
+        var light12 = setPointLight(3,-35,-24);
+        var light13 = setPointLight(3,-35,-30);
+        var light14 = setPointLight(3,-35,-40);
+        var light15 = setPointLight(3,-35,-48);
+        var light16 = setPointLight(3,-35,-54);
+        var light17 = setPointLight(3,-35,-60);
+        var light18 = setPointLight(3,-35,-66);
+
+        var light19 = setPointLight(3,-6,5);
+        var light20 = setPointLight(3,-12,5);
+        var light21 = setPointLight(3,-18,5);
+        var light22 = setPointLight(3,-24,5);
+        
+        var light23 = setPointLight(3,-6,-75);
+        var light24 = setPointLight(3,-12,-75);
+        var light25 = setPointLight(3,-18,-75);
+        var light26 = setPointLight(3,-24,-75);
+
+        const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
+        scene.add( lightt );
+
+          // document.getElementById("label").innerHTML = departmentDatabase[0][0];
+        // //console.log(departmentDatabase[0]);
+        // document.getElementById("list").innerHTML = departmentDatabase[1][0];
+         //document.getElementById("label2").innerHTML = "More information about" + departmentDatabase[0][1];
+        // document.getElementById("list2").innerHTML = departmentDatabase[0][1];
+
+        animate();
+
+    </script>
+</body>
+</html>
+
