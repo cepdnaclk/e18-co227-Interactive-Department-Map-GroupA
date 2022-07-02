@@ -1,0 +1,200 @@
+[
+{
+    "id":1,
+    "name" :"Department Office",
+    "capacity": "more",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG",
+    "more":"none",
+    "tags":"public",
+    "link":"none"
+},
+{
+    "id":2,
+    "name" :"HoD Office",
+    "capacity": "1",
+    "lecturer":"Prof. Ragel",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG",
+    "more":"none",
+    "tags":"private, staff",
+    "link":"none"
+},
+{
+    "id":3,
+    "name" :"Conference Room",
+    "capacity": "more",
+    "lecturer":"none",
+    "features":"Smart Display,Conference Camera, Conference Mic",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"none",
+    "tags":"public",
+    "link":"https://ce.pdn.ac.lk/facilities/conference-room/"
+   
+},
+{
+    "id":4,
+    "name" :"Central Lobby",
+    "capacity": "more",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"transit area",
+    "tags":"public",
+    "link":"none"
+},
+{
+    "id":5,
+    "name" :"Filing Room & Storage",
+    "capacity": "more",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO",
+    "more":"none",
+    "tags":"none",
+    "link":"none"
+},
+{
+    "id":6,
+    "name" :"Staff Common-Room 1 ",
+    "capacity": "more",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO",
+    "more":"Currently used by TOs",
+    "tags":"staff",
+    "link":"none"
+    
+},
+{
+    "id":7,
+    "name" :"Staff Common Room 2 ",
+    "capacity": "more",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO",
+    "more":"to be used for lunch, tea andother informal gatherings.",
+    "tags":"staff",
+    "link":"none"
+},
+{
+    "id":8,
+    "name" :"Open Lab-1",
+    "capacity": "30-40",
+    "lecturer":"none",
+    "features":"Whiteboards and facilities for using laptops",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"To be used by students for group-work, 'tech-talks', etc..After Hours access through G11 .",
+    "tags":"lab",
+    "link":"https://ce.pdn.ac.lk/facilities/open-lab"
+},
+{
+    "id":9,
+    "name" :"Open Lab-2",
+    "capacity": "5-10",
+    "lecturer":"none",
+    "features":"Lobby with Sofa ",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"none",
+    "tags":"lab",
+    "link":"https://ce.pdn.ac.lk/facilities/open-lab"
+   
+},
+{
+    "id":10,
+    "name" :"Washrooms ",
+    "capacity": "-",
+    "lecturer":"none",
+    "features":"Lobby with Sofa ",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"none",
+    "tags":"lab",
+    "link":"none"
+   
+},
+{
+    "id":11,
+    "name" :"Entrance Lobby",
+    "capacity": "more",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG",
+    "more":"none",
+    "tags":"public",
+    "link":"none"
+   
+},
+{
+    "id":12,
+    "name" :"Open lab Entr.Lobby",
+    "capacity": "none",
+    "lecturer":"none",
+    "features":"Lobby with Sofa ",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"Providing after hours access to G-08 and G-09",
+    "tags":"none",
+    "link":"https://ce.pdn.ac.lk/facilities/open-lab"
+   
+},
+{
+    "id":13,
+    "name" :"Corridor-1",
+    "capacity": "none",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"none",
+    "tags":"none",
+    "link":"none"
+},
+{
+    "id":14,
+    "name" :"Corridor-2",
+    "capacity": "none",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"none",
+    "tags":"none",
+    "link":"none"
+},
+{
+    "id":15,
+    "name" :"Lift",
+    "capacity": "none",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"none",
+    "tags":"none",
+    "link":"none"
+},
+{
+    "id":16,
+    "name" :"Operator room",
+    "capacity": "none",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"none",
+    "tags":"none",
+    "link":"none"
+}
+]
