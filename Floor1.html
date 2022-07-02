@@ -485,14 +485,14 @@ function createWall(y,z,Y,Z){
         }
         function createNavigatingBars(buildingID,horv,length,yPosition,zPosition){
             if(horv=="h"){
-                var geometry5 = new THREE.BoxGeometry(0.2,length,0.5);
+                var geometry5 = new THREE.BoxGeometry(0.001,length,0.5);
             }else if(horv=="v"){
-                var geometry5 = new THREE.BoxGeometry(0.2,0.5,length);
+                var geometry5 = new THREE.BoxGeometry(0.001,0.5,length);
             }
             var material5 = NavigatingMaterialArray[buildingID];
             var cube5 = new THREE.Mesh(geometry5,material5);
             scene.add(cube5);
-            cube5.position.x = 4.5;    //-4.5
+            cube5.position.x = -4.95;    //-4.5
             cube5.position.y = yPosition;
             cube5.position.z = zPosition;
             return cube5;
