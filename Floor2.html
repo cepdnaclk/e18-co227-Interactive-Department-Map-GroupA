@@ -43,6 +43,23 @@
                   </svg>
                 </button>
             </div>
+            <div id="roomListContainer" class="roomListContainer_class">
+                <div id="roomList" class="roomList_class">
+                    <div id="navigatingItem1" class="items" onclick="showPath(1)">Technical Offcer's room</div>
+                    <div id="navigatingItem2" class="items" onclick="showPath(2)">Insructors' Room</div>
+                    <div id="navigatingItem3" class="items" onclick="showPath(3)">Industrial Automation Lab</div>
+                    <div id="navigatingItem4" class="items" onclick="showPath(4)">Discussion Room</div>
+                    <div id="navigatingItem5" class="items" onclick="showPath(5)">Lecturer's Room 1</div>
+                    <div id="navigatingItem6" class="items" onclick="showPath(6)">Lecturer's Room 2</div>
+                    <div id="navigatingItem7" class="items" onclick="showPath(7)">Lecturer's Room 3</div>
+                    <div id="navigatingItem8" class="items" onclick="showPath(8)">Lecturer's Room 4</div>
+                    <div id="navigatingItem9" class="items" onclick="showPath(9)">Main room</div>
+                    <div id="navigatingItem10" class="items" onclick="showPath(10)">Lift</div>
+                    <div id="navigatingItem11" class="items" onclick="showPath(11)">Corridor</div>
+                    <div id="navigatingItem12" class="items" onclick="showPath(12)">Servant Room</div>
+                    <div id="navigatingItem13" class="items" onclick="showPath(13)">Electronics Laboratory</div>
+                </div>
+            </div>
         </div>
         <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
     </div>
@@ -55,71 +72,6 @@
     </div>
     <div id="aim" class="aim"></div>
     <script type="text/javascript"> 
-    
-        // var conn = new ActiveXObject("ADODB.Connection");
-        // var conn_str = "";
-        // var db_Host = "";
-        // var db_User = "";
-        // var db_Password = "";
-        // var db_Provider = "";
-        // var db_Default = "";
-
-        // function Show_Data(){
-        //     db_Host = "RUCHIRA"
-        //     db_User = "root"
-        //     db_Password = ""
-        //     db_Provider = "SQLOLEDB"
-        //     db_Default = "ex"
-        //     conn_str = "Provider=" + db_Provider+";Data Source="+db_Host+"; User Id="+db_User+"; password="+db_Password+"; initial Catalog="+db_Default;
-        //     show_data_from_database();
-        // }
-
-        // function show_data_from_database(){
-        //     try{
-        //         conn.Open(conn_str);
-        //         var reader = new ActiveXObject("ADODB.Recordset");
-        //         var strQuery = "SELECT * FROM USERS";
-        //         reader.Open(strQuery,conn);
-        //         reader.MoveSecond();
-        //         while(!reader.eof){
-        //             reader.fields(0);
-        //             reader.fields(1);
-        //             reader.movenext();
-        //         }
-        //     }catch(e){
-        //         alert("Error");
-        //     }
-        // }
-
-        // loadBuildings();
-        // var departmentDatabase=[];
-       
-        // function loadBuildings(){
-        //     var xhr = new XMLHttpRequest();
-        //     xhr.open('GET','data.php',true);
-
-        //     xhr.onload = function(){
-        //         if(this.status==200){
-                    
-        //             var my_json = JSON.parse(this.responseText);
-        //             var data =[];
-                   
-        //                 my_json.forEach((val,index)=>{
-        //                     if(my_json[index]!==null){
-        //                         for(var i in my_json[index]) {
-        //                                 data.push(my_json[index][i]);
-        //                         }
-        //                         departmentDatabase.push(data);
-        //                         data=[];
-        //                     }	
-        //                 })
-        //                  // console.log("...java Script Array... \n"+JSON.stringify(departmentDatabase));
-        //                 //users = JSON.parse(this.responseText);       
-        //         }
-        //     }
-        //     xhr.send();
-        // }
-
 
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
@@ -144,10 +96,10 @@
         var building2 = ["Insructors'/PG students' Room","<li>2-02</li><li>Public</li><li>Staff</li>","<li>This is Second floor</li><li>This is Instructors'/PG students' room</li><li>There is working space and storage</li>",[1,2,3,9]];
         var building3 = ["Industrial Automation Lab","<li>2-03</li><li>Public</li><li>Student</li>","<li>This is Second floor</li><li>This is industrial automation lab</li><li>used for lab activities</li>",[1,2,3,9,10]];
         var building4 = ["Discussion Room","<li>2-04</li><li>Public</li><li>Student and staff</li>","<li>This is Second floor</li><li>This is Discussion room</li><li>This room is used to discuss projects, labs, assignments etc</li>",[1,2,3,11]];
-        var building5 = ["Lecturer's Room","<li>2-05</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,12]];
-        var building6 = ["Lecturer's Room","<li>2-06</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,13,14]];
-        var building7 = ["Lecturer's Room","<li>2-07</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,13,15,16]];
-        var building8 = ["Lecturer's Room","<li>2-08</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,13,15,17]];
+        var building5 = ["Lecturer's Room 1","<li>2-05</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,12]];
+        var building6 = ["Lecturer's Room 2","<li>2-06</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,13,14]];
+        var building7 = ["Lecturer's Room 3","<li>2-07</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,13,15,16]];
+        var building8 = ["Lecturer's Room 4","<li>2-08</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,13,15,17]];
         var building9 = ["Main room","<li>Second floor</li><li>Public</li><li>This is for public use</li>","<li>This is Second floor</li><li>You can access the lift or the staircase to enter any floor from this room</li>",[1]];
         var building10 = ["Lift","<li>Public</li><li>Second Floor</li>","<li>This is for Public use</li><li>This is in Second Floor</li><li>Can be used to enter to any floor</li>",[1,0]];
         var building11 = ["Corridor","<li>Second floor</li><li>Public</li><li>This for public use</li>","<li>This is Second floor</li><li>Can be used to walk between 1-09,1-03,1-04,1-02 and main room</li>",[1,2,3,4]];
@@ -332,9 +284,6 @@
                             document.getElementById("hint").style.backgroundColor = "#0B5345";  
                             expanded = 0;           //Set the expanded flag to 0
                         }    
-                        for(var i=0;i<NavigatingMaterialArray.length;i++){
-                            NavigatingMaterialArray[i].opacity = 0;
-                        }
                         document.getElementById("hint").innerHTML = "Click on the building for more details";
                         document.getElementById("information").style.height = "40%";
                         document.getElementById("main_information").style.height = "75%";
@@ -352,9 +301,6 @@
                         clicked = !clicked;                                                 //change the 'clicked' flag to 0
                     }else{                                                                  //If user hasn't clicked earlier
                         //Decrease the opacity of top right main information label to 0.5
-                        for(var i=0;i<departmentDatabase[buildingID][3].length;i++){
-                            NavigatingMaterialArray[departmentDatabase[buildingID][3][i]].opacity = 1;
-                        }
                         document.getElementById("hint").innerHTML = "More details below ↓";
                         document.getElementById("information").style.height = "60%";
                         document.getElementById("main_information").style.height = "50%";
@@ -478,18 +424,18 @@ function createWall(y,z,Y,Z){
         //Creating Transparent Objects
         var NavigatingMaterialArray = [];
         for(var i=0;i<19;i++){
-            NavigatingMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xE91747 , transparent:true, opacity:0});
+            NavigatingMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x58DF54 , transparent:true, opacity:0});
         }
         function createNavigatingBars(buildingID,horv,length,yPosition,zPosition){
             if(horv=="h"){
-                var geometry5 = new THREE.BoxGeometry(0.2,length,0.5);
+                var geometry5 = new THREE.BoxGeometry(0.001,length,0.5);
             }else if(horv=="v"){
-                var geometry5 = new THREE.BoxGeometry(0.2,0.5,length);
+                var geometry5 = new THREE.BoxGeometry(0.001,0.5,length);
             }
             var material5 = NavigatingMaterialArray[buildingID];
             var cube5 = new THREE.Mesh(geometry5,material5);
             scene.add(cube5);
-            cube5.position.x = -4.5;
+            cube5.position.x = -4.95;
             cube5.position.y = yPosition;
             cube5.position.z = zPosition;
             return cube5;
@@ -660,9 +606,11 @@ function createWall(y,z,Y,Z){
                     document.getElementById("navigator").style.opacity = 0.9 - (i+1)*0.07;
                     document.getElementById("main_information").style.opacity = 0.6 + (i+1)*0.04;
                 }
+            document.getElementById("roomList").style.height = "0";
             document.getElementById("searchBar").style.opacity = 0;
         }
         async function showNavigator(){
+            document.getElementById("roomList").style.height = "100%";
             document.getElementById("searchBar").style.opacity = 1;
             for(var i =0;i<10;i++){                 //Used a loop for smooth animations
                     await sleep(20);                    //Sleep for 20 millieseconds
@@ -971,6 +919,27 @@ var ViewMode = "walk";
                 document.getElementById("leftTopButton").style.borderRadius = "1.4vmin 0 0 0";
                 document.getElementById("leftBottomButton").style.borderRadius = "0 0 0 1.4vmin";
             }
+        }
+
+        var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13"];
+        var itemSelected = 0;
+        function showPath(buildingID){
+            if(itemSelected){
+                for(var i=0;i<navigatingItemList.length;i++){
+                    document.getElementById(navigatingItemList[i]).style.color = "#616160";    
+                }
+                for(var i=0;i<NavigatingMaterialArray.length;i++){
+                    NavigatingMaterialArray[i].opacity = 0;
+                }
+            }else{
+                for(var i=0;i<navigatingItemList.length;i++){
+                    document.getElementById(navigatingItemList[i]).style.color = i==buildingID-1?"#000000":"#BBBBBB";    
+                }
+                for(var i=0;i<departmentDatabase[buildingID][3].length;i++){
+                    NavigatingMaterialArray[departmentDatabase[buildingID][3][i]].opacity = 1;
+                }
+            }    
+            itemSelected = !itemSelected;
         }
 
 //Key Controls

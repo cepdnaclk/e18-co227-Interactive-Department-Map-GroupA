@@ -115,7 +115,7 @@ body {
 .searchBar {
     width: 101%;
     margin-top: 3.5%;
-    margin-bottom: 2%;
+    margin-bottom: 5%;
     height: 10%;
     display: flex;
     flex-direction: row;
@@ -147,6 +147,45 @@ body {
 } 
   
   .searchQuerySubmit_class:hover {
+    cursor: pointer;
+  } 
+
+.roomListContainer_class{
+    margin-left: 2%;
+    width: 98%;
+    height: 81%;
+    overflow: hidden;
+}
+
+.roomList_class{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.items{
+    padding-left: 2.5%;
+    width: 100%;
+    height: 10%;
+    margin-bottom: 1%;
+    color: #616160;
+}
+
+.roomList_class::-webkit-scrollbar {
+    width: 1vmin;
+  }
+   
+  .roomList_class::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 1vmin white;
+  }
+   
+  .roomList_class::-webkit-scrollbar-thumb {
+    background-color: #E1E1E1;
+    border-radius: 1vmin;
+  }
+
+  .items:hover {
     cursor: pointer;
   } 
 
