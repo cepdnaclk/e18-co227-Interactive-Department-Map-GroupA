@@ -107,7 +107,7 @@
 
         var building0 = [0,"Department Building","Welcome to Computer Engineering Department","Head of the department is Prof.Roshan Ragel","This is a 4 story building","This is Ground Floor","University of Peradeniya"];
         
-
+        departmentDatabase[0] = building0;
         //Scene
         var scene = new THREE.Scene();
         //Camera
@@ -1088,16 +1088,16 @@ console.log(departmentDatabase[0]);
 
         //print1();
         function print1(){
-			   document.getElementById("label").innerHTML = departmentDatabase[0][1];                             //Update the default information about the department on the top right labels
-                document.getElementById("list").innerHTML = '<ul>'+'<li>'+'Capacity  : '+departmentDatabase[0][2]+'</li>'+'<li>'+'lecturer  : '+departmentDatabase[0][3]+'</li>'+'</ul|>';
-                document.getElementById("list2").innerHTML =  '<ul>'+'<li>'+'features  : '+departmentDatabase[0][4]+'</li>'+'<li>'+'staff  : '+departmentDatabase[0][5]+'</li>'+'<li>'+'Accessibility  : '+departmentDatabase[0][6]+'</li>'+'<li>'+'Deatils  : '+departmentDatabase[0][7]+'</li>'+'<li>'+'Tags  : '+departmentDatabase[0][8]+'</li>'+'<li>'+'Link  : '+departmentDatabase[0][9]+'</li>'+'</ul>';
-		   }
+			document.getElementById("label").innerHTML = departmentDatabase[0][1];                             //Update the default information about the department on the top right labels
+            document.getElementById("list").innerHTML = '<li>'+'Capacity  : '+departmentDatabase[0][2]+'</li>'+'<li>'+'lecturer  : '+departmentDatabase[0][3]+'</li>';
+            document.getElementById("list2").innerHTML =  '<li>'+'features  : '+departmentDatabase[0][4]+'</li>'+'<li>'+'staff  : '+departmentDatabase[0][5]+'</li>'+'<li>'+'Accessibility  : '+departmentDatabase[0][6]+'</li>'+'<li>'+'Deatils  : '+departmentDatabase[0][7]+'</li>'+'<li>'+'Tags  : '+departmentDatabase[0][8]+'</li>'+'<li>'+'Link  : '+departmentDatabase[0][9]+'</li>';
+		}
 			   
         function print2(buildingID){
-        document.getElementById("label").innerHTML = departmentDatabase[buildingID][1];                             //Update the default information about the department on the top right labels
-        document.getElementById("list").innerHTML = '<ul>'+'<li>'+'Capacity  : '+departmentDatabase[buildingID][2]+'</li>'+'<li>'+'lecturer  : '+departmentDatabase[buildingID][3]+'</li>'+'</ul|>';
-        document.getElementById("list2").innerHTML =  '<ul>'+'<li>'+'features  : '+departmentDatabase[buildingID][4]+'</li>'+'<li>'+'staff  : '+departmentDatabase[buildingID][5]+'</li>'+'<li>'+'Accessibility  : '+departmentDatabase[buildingID][6]+'</li>'+'<li>'+'Deatils  : '+departmentDatabase[buildingID][7]+'</li>'+'<li>'+'Tags  : '+departmentDatabase[buildingID][8]+'</li>'+'<li>'+'Link  : '+departmentDatabase[buildingID][9]+'</li>'+'</ul>';
-		   }
+            document.getElementById("label").innerHTML = departmentDatabase[buildingID][1];                             //Update the default information about the department on the top right labels
+            document.getElementById("list").innerHTML = '<li>'+'Capacity  : '+departmentDatabase[buildingID][2]+'</li>'+'<li>'+'lecturer  : '+departmentDatabase[buildingID][3]+'</li>';
+            document.getElementById("list2").innerHTML =  '<li>'+'features  : '+departmentDatabase[buildingID][4]+'</li>'+'<li>'+'staff  : '+departmentDatabase[buildingID][5]+'</li>'+'<li>'+'Accessibility  : '+departmentDatabase[buildingID][6]+'</li>'+'<li>'+'Deatils  : '+departmentDatabase[buildingID][7]+'</li>'+'<li>'+'Tags  : '+departmentDatabase[buildingID][8]+'</li>'+'<li>'+'Link  : '+departmentDatabase[buildingID][9]+'</li>';
+		}
 
         var blenderBuilding9 = importObject('./floors/FloorG.gltf',-5,0,-80,0,3.28084);    //wall
        // var blenderBuilding10 = importObject('./assets/G_Assets.gltf',-5,0,-80,0,3.28084);    //wall
@@ -1317,11 +1317,11 @@ console.log(departmentDatabase[0]);
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
 
-          // document.getElementById("label").innerHTML = departmentDatabase[0][0];
+        document.getElementById("label").innerHTML = departmentDatabase[0][1];
         // //console.log(departmentDatabase[0]);
-        // document.getElementById("list").innerHTML = departmentDatabase[1][0];
+        document.getElementById("list").innerHTML = departmentDatabase[0][2];
          //document.getElementById("label2").innerHTML = "More information about" + departmentDatabase[0][1];
-        // document.getElementById("list2").innerHTML = departmentDatabase[0][1];
+        // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
 
         animate();
 
