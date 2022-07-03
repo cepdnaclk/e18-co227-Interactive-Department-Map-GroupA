@@ -68,7 +68,11 @@ body {
     right: 10%;
     bottom: 5%;
 }
-
+#btnLink{
+    border-radius: 1.25vmin;
+    background-color: #4a9599;
+    color: white;
+}
 .controlLayout_class{
     position: absolute;
     top: 1.1vmin;
@@ -316,3 +320,10 @@ img {
     border-radius: 0.5vmin;
 }
 
+
+ul {
+   
+    padding: 5%;
+    list-style-image: url(images/bullet2.png);
+    
+  }
