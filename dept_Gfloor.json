@@ -112,7 +112,7 @@
 },
 {
     "id":10,
-    "name" :"Washrooms ",
+    "name" :"Gents Washrooms ",
     "capacity": "-",
     "lecturer":"none",
     "features":"Lobby with Sofa ",
@@ -125,17 +125,18 @@
 },
 {
     "id":11,
-    "name" :"Entrance Lobby",
-    "capacity": "more",
+    "name" :"Ladies Washrooms ",
+    "capacity": "-",
     "lecturer":"none",
-    "features":"none",
+    "features":"Lobby with Sofa ",
     "staff":"none",
-    "accessibility":"S,I,TO,UG,PG",
+    "accessibility":"S,I,TO,UG,PG,O",
     "more":"none",
-    "tags":"public",
+    "tags":"lab",
     "link":"none"
    
 },
+
 {
     "id":12,
     "name" :"Open lab Entr.Lobby",
@@ -151,7 +152,7 @@
 },
 {
     "id":13,
-    "name" :"Corridor-1",
+    "name" :"Garden",
     "capacity": "none",
     "lecturer":"none",
     "features":"none",
@@ -163,7 +164,7 @@
 },
 {
     "id":14,
-    "name" :"Corridor-2",
+    "name" :"Corridor-1",
     "capacity": "none",
     "lecturer":"none",
     "features":"none",
@@ -175,7 +176,7 @@
 },
 {
     "id":15,
-    "name" :"Lift",
+    "name" :"Corridor-2",
     "capacity": "none",
     "lecturer":"none",
     "features":"none",
@@ -187,6 +188,18 @@
 },
 {
     "id":16,
+    "name" :"Lift",
+    "capacity": "none",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"none",
+    "tags":"none",
+    "link":"none"
+},
+{
+    "id":17,
     "name" :"Operator room",
     "capacity": "none",
     "lecturer":"none",
@@ -196,5 +209,19 @@
     "more":"none",
     "tags":"none",
     "link":"none"
+},
+
+{
+    "id":18,
+    "name" :"Entrance Lobby",
+    "capacity": "more",
+    "lecturer":"none",
+    "features":"none",
+    "staff":"none",
+    "accessibility":"S,I,TO,UG,PG",
+    "more":"none",
+    "tags":"public",
+    "link":"none"
+   
 }
 ]
