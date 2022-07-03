@@ -947,8 +947,10 @@ var ViewMode = "walk";
             for(var i=0;i<navigatingItemList.length;i++){       //Update the navigating Item list according to the new buildingID list
                     document.getElementById(navigatingItemList[i]).innerHTML = buildingIDList[i][0];    
             }
-            for(var i=0;i<navigatingItemList.length;i++){       //Highlight the earlier highlighed item
-                document.getElementById(navigatingItemList[i]).style.color = buildingIDList[i][1] ==lastID?"#000000":"#BBBBBB";    
+            if(itemSelected){
+                for(var i=0;i<navigatingItemList.length;i++){       //Highlight the earlier highlighed item
+                    document.getElementById(navigatingItemList[i]).style.color = buildingIDList[i][1] ==lastID?"#000000":"#BBBBBB";    
+                }
             }
         });
 
