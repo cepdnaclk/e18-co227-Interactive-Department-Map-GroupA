@@ -51,8 +51,13 @@ body {
     font-size: 0vmin;
 }
 
+.list_class{
+    padding-left: 15%;
+}
+
 .list2_class{
     font-size: 0vmin;
+    padding-left: 15%;
     padding-right: 5%;
     padding-bottom: 10%;
 }
@@ -169,6 +174,7 @@ body {
     width: 100%;
     height: 10%;
     margin-bottom: 1%;
+    font-size: 2.1vmin; 
     color: #616160;
 }
 
@@ -188,6 +194,11 @@ body {
   .items:hover {
     cursor: pointer;
   } 
+
+  .items:active {
+    transform: translateY(0.22vmin);
+}
+
 
 .label3_class{
     background-color: #1A5276;
