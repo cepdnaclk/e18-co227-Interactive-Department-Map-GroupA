@@ -1,227 +1,189 @@
 [
 {
+    "category":2,
     "id":1,
     "name" :"Department Office",
-    "capacity": "more",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG",
-    "more":"none",
+    "more":"This belongs to GFloor",
     "tags":"public",
-    "link":"none"
+    "incharge":"Mr.ABC",
+    "contact":"none"
 },
 {
+    "category":2,
     "id":2,
     "name" :"HoD Office",
-    "capacity": "1",
-    "lecturer":"Prof. Ragel",
-    "features":"none",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG",
-    "more":"none",
+    "more":"This is the room of the Head of the Department",
     "tags":"private, staff",
-    "link":"none"
-},
-{
-    "id":3,
-    "name" :"Conference Room",
-    "capacity": "more",
-    "lecturer":"none",
-    "features":"Smart Display,Conference Camera, Conference Mic",
-    "staff":"none",
-    "accessibility":"S,I,TO,UG,PG,O",
-    "more":"none",
-    "tags":"public",
-    "link":"https://ce.pdn.ac.lk/facilities/conference-room/"
-   
-},
-{
-    "id":4,
-    "name" :"Central Lobby",
-    "capacity": "more",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
-    "accessibility":"S,I,TO,UG,PG,O",
-    "more":"transit area",
-    "tags":"public",
-    "link":"none"
-},
-{
-    "id":5,
-    "name" :"Filing Room & Storage",
-    "capacity": "more",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
-    "accessibility":"S,I,TO",
-    "more":"none",
-    "tags":"none",
-    "link":"none"
-},
-{
-    "id":6,
-    "name" :"Staff Common-Room 1 ",
-    "capacity": "more",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
-    "accessibility":"S,I,TO",
-    "more":"Currently used by TOs",
-    "tags":"staff",
-    "link":"none"
+    "incharge":"Prof.Ragel",
+    "contact":"none"
     
 },
 {
+    "category":1,
+    "id":3,
+    "name" :"Conference Room",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"This belongs to GFloor",
+    "tags":"public",
+    "capacity": "more",
+    "staff":"none",
+    "features":"Smart Display,Conference Camera, Conference Mic",
+    "contact":"https://ce.pdn.ac.lk/facilities/conference-room/"
+   
+},
+{
+    "category":3,
+    "id":4,
+    "name" :"Central Lobby",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"This is a transit area",
+    "tags":"public",
+    "features":"It has library and museaum"
+    
+},
+{
+    "category":3,
+    "id":5,
+    "name" :"Filing Room & Storage",
+    "accessibility":"TO",
+    "more":"This belongs to GFloor",
+    "tags":"authorized",
+    "features":"It has Storage area"
+    
+},
+{
+    "category":3,
+    "id":6,
+    "name" :"Staff Common-Room 1 ",
+    "accessibility":"S,I,TO",
+    "more":"Currently used by TOs",
+    "tags":"staff",
+    "features":"It has facilities for gatherings"
+    
+},
+{
+    "category":3,
     "id":7,
     "name" :"Staff Common Room 2 ",
-    "capacity": "more",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
     "accessibility":"S,I,TO",
-    "more":"to be used for lunch, tea andother informal gatherings.",
+    "more":"to be used for lunch, tea and other informal gatherings.",
     "tags":"staff",
-    "link":"none"
+    "contact":"none",
+    "features":"It has facilities for gatherings"
+
 },
 {
+    "category":1,
     "id":8,
     "name" :"Open Lab-1",
-    "capacity": "30-40",
-    "lecturer":"none",
-    "features":"Whiteboards and facilities for using laptops",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG,O",
-    "more":"To be used by students for group-work, 'tech-talks', etc..After Hours access through G11 .",
+    "more":"This is used by students for group-work, 'tech-talks', etc..After Hours access through G11 .",
     "tags":"lab",
-    "link":"https://ce.pdn.ac.lk/facilities/open-lab"
+    "capacity": "30-40",
+    "staff":"none",
+    "features":"Whiteboards and facilities for using laptops",
+    "contact":"https://ce.pdn.ac.lk/facilities/open-lab"
 },
 {
+    "category":1,
     "id":9,
     "name" :"Open Lab-2",
-    "capacity": "5-10",
-    "lecturer":"none",
-    "features":"Lobby with Sofa ",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG,O",
-    "more":"none",
+    "more":"This belongs to GFloor",
     "tags":"lab",
-    "link":"https://ce.pdn.ac.lk/facilities/open-lab"
+    "capacity": "5-10",
+    "staff":"none",
+    "features":"Sofa and some seating arrangements",
+    "contact":"https://ce.pdn.ac.lk/facilities/open-lab"
    
 },
 {
+    "category":3,
     "id":10,
     "name" :"Gents Washrooms ",
-    "capacity": "-",
-    "lecturer":"none",
-    "features":"Lobby with Sofa ",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG,O",
-    "more":"none",
-    "tags":"lab",
-    "link":"none"
+    "more":"This belongs to GFloor",
+    "tags":"public",
+    "features":"This belongs to GFloor"
+    
    
 },
 {
+    "category":3,
     "id":11,
     "name" :"Ladies Washrooms ",
-    "capacity": "-",
-    "lecturer":"none",
-    "features":"Lobby with Sofa ",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG,O",
-    "more":"none",
-    "tags":"lab",
-    "link":"none"
-   
+    "more":"This belongs to GFloor",
+    "tags":"public",
+    "features":"This belongs to GFloor"
 },
 
 {
+    "category":3,
     "id":12,
     "name" :"Open lab Entr.Lobby",
-    "capacity": "none",
-    "lecturer":"none",
-    "features":"Lobby with Sofa ",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG,O",
     "more":"Providing after hours access to G-08 and G-09",
-    "tags":"none",
-    "link":"https://ce.pdn.ac.lk/facilities/open-lab"
+    "tags":"public",
+    "features":"This belongs to GFloor"
    
 },
 {
+    "category":3,
     "id":13,
     "name" :"Garden",
-    "capacity": "none",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG,O",
-    "more":"none",
-    "tags":"none",
-    "link":"none"
+    "more":"This is the outside area of the Dept",
+    "tags":"public",
+    "features":"This is the outside area of the Dept"
 },
 {
+    "category":3,
     "id":14,
     "name" :"Corridor-1",
-    "capacity": "none",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG,O",
-    "more":"none",
+    "more":"This belongs to GFloor",
     "tags":"none",
-    "link":"none"
+    "features":"This is the outside area of the Dept"
 },
 {
+    "category":3,
     "id":15,
     "name" :"Corridor-2",
-    "capacity": "none",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG,O",
-    "more":"none",
-    "tags":"none",
-    "link":"none"
+    "more":"This connects 4 rooms ;Open-lab1,open-lab2,staff common room1,staffcommon room2",
+    "tags":"public",
+    "features":"This belongs to GFloor"
 },
 {
+    "category":3,
     "id":16,
     "name" :"Lift",
-    "capacity": "none",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
     "accessibility":"S,I,TO,UG,PG,O",
-    "more":"none",
-    "tags":"none",
-    "link":"none"
+    "more":"Can be used to enter any floor",
+    "tags":"public",
+    "features":"This belongs to GFloor"
 },
 {
+    "category":3,
     "id":17,
-    "name" :"Operator room",
-    "capacity": "none",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
+    "name" :"Operator-room",
     "accessibility":"S,I,TO,UG,PG,O",
-    "more":"none",
-    "tags":"none",
-    "link":"none"
+    "more":"This belongs to GFloor",
+    "tags":"authorized",
+    "features":"This belongs to GFloor"
 },
 
 {
+    "category":3,
     "id":18,
     "name" :"Entrance Lobby",
-    "capacity": "more",
-    "lecturer":"none",
-    "features":"none",
-    "staff":"none",
-    "accessibility":"S,I,TO,UG,PG",
-    "more":"none",
+    "accessibility":"S,I,TO,UG,PG,O",
+    "more":"This is the entrance area",
     "tags":"public",
-    "link":"none"
+    "features":"This belongs to GFloor"
    
 }
 ]
