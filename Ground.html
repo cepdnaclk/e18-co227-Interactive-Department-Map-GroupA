@@ -106,8 +106,8 @@
         var angle_x=initialCamera_Xangle,angle_y=0;                //Starting rotation values of the camera
 
         var building0 = [0,"Department Building","Welcome to Computer Engineering Department","Head of the department is Prof.Roshan Ragel","This is a 4 story building","This is Ground Floor","University of Peradeniya"];
-        
-        departmentDatabase[0] = building0;
+        departmentDatabase.push(building0);
+
         //Scene
         var scene = new THREE.Scene();
         //Camera
@@ -365,7 +365,7 @@
 
 //Creating Transparent Objects
         var transparentMaterialArray = [];
-        for(var i=0;i<16;i++){
+        for(var i=0;i<19;i++){
             transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
         }
         function createTransparentObject(buildingID,horv,yPosition,zPosition){
@@ -387,7 +387,7 @@
         }
 
         var transparentMaterialForPanelsArray = [];
-        for(var i=0;i<16;i++){
+        for(var i=0;i<19;i++){
             transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
         }
         function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
@@ -1088,16 +1088,16 @@ console.log(departmentDatabase[0]);
 
         //print1();
         function print1(){
-			document.getElementById("label").innerHTML = departmentDatabase[0][1];                             //Update the default information about the department on the top right labels
-            document.getElementById("list").innerHTML = '<li>'+'Capacity  : '+departmentDatabase[0][2]+'</li>'+'<li>'+'lecturer  : '+departmentDatabase[0][3]+'</li>';
-            document.getElementById("list2").innerHTML =  '<li>'+'features  : '+departmentDatabase[0][4]+'</li>'+'<li>'+'staff  : '+departmentDatabase[0][5]+'</li>'+'<li>'+'Accessibility  : '+departmentDatabase[0][6]+'</li>'+'<li>'+'Deatils  : '+departmentDatabase[0][7]+'</li>'+'<li>'+'Tags  : '+departmentDatabase[0][8]+'</li>'+'<li>'+'Link  : '+departmentDatabase[0][9]+'</li>';
-		}
+			   document.getElementById("label").innerHTML = departmentDatabase[0][1];                             //Update the default information about the department on the top right labels
+                document.getElementById("list").innerHTML = '<li>'+departmentDatabase[0][2]+'</li>'+'<li>'+departmentDatabase[0][3]+'</li>';
+                document.getElementById("list2").innerHTML = '<li>'+departmentDatabase[0][4]+'</li>'+'<li>'+departmentDatabase[0][5]+'</li>'+'<li>'+departmentDatabase[0][6]+'</li>'+'<li>'+departmentDatabase[0][7]+'</li>'+'<li>'+departmentDatabase[0][8]+'</li>'+'<li>'+departmentDatabase[0][9]+'</li>';
+		   }
 			   
         function print2(buildingID){
-            document.getElementById("label").innerHTML = departmentDatabase[buildingID][1];                             //Update the default information about the department on the top right labels
-            document.getElementById("list").innerHTML = '<li>'+'Capacity  : '+departmentDatabase[buildingID][2]+'</li>'+'<li>'+'lecturer  : '+departmentDatabase[buildingID][3]+'</li>';
-            document.getElementById("list2").innerHTML =  '<li>'+'features  : '+departmentDatabase[buildingID][4]+'</li>'+'<li>'+'staff  : '+departmentDatabase[buildingID][5]+'</li>'+'<li>'+'Accessibility  : '+departmentDatabase[buildingID][6]+'</li>'+'<li>'+'Deatils  : '+departmentDatabase[buildingID][7]+'</li>'+'<li>'+'Tags  : '+departmentDatabase[buildingID][8]+'</li>'+'<li>'+'Link  : '+departmentDatabase[buildingID][9]+'</li>';
-		}
+        document.getElementById("label").innerHTML = departmentDatabase[buildingID][1];                             //Update the default information about the department on the top right labels
+        document.getElementById("list").innerHTML = '<li>'+'Capacity  : '+departmentDatabase[buildingID][2]+'</li>'+'<li>'+'lecturer  : '+departmentDatabase[buildingID][3]+'</li>';
+        document.getElementById("list2").innerHTML =  '<li>'+'features  : '+departmentDatabase[buildingID][4]+'</li>'+'<li>'+'staff  : '+departmentDatabase[buildingID][5]+'</li>'+'<li>'+'Accessibility  : '+departmentDatabase[buildingID][6]+'</li>'+'<li>'+'Deatils  : '+departmentDatabase[buildingID][7]+'</li>'+'<li>'+'Tags  : '+departmentDatabase[buildingID][8]+'</li>'+'<li>'+'Link  : '+departmentDatabase[buildingID][9]+'</li>';
+		   }
 
         var blenderBuilding9 = importObject('./floors/FloorG.gltf',-5,0,-80,0,3.28084);    //wall
        // var blenderBuilding10 = importObject('./assets/G_Assets.gltf',-5,0,-80,0,3.28084);    //wall
@@ -1136,40 +1136,40 @@ console.log(departmentDatabase[0]);
         var GBW_door2 = createTransparentObject(10,"th",-3.55,-19.78);
         var GBW_door6 = createTransparentObject(10,"h",-2.6,-25.3);//
         
-        var GGW_door1 = createTransparentObject(10,"th",-6.12,-19.78);
-        var GGW_door2 = createTransparentObject(10,"th",-8.68,-19.78);
-        var GGW_door3 = createTransparentObject(10,"h",-7.2,-25.3);//
+        var GGW_door1 = createTransparentObject(11,"th",-6.12,-19.78);
+        var GGW_door2 = createTransparentObject(11,"th",-8.68,-19.78);
+        var GGW_door3 = createTransparentObject(11,"h",-7.2,-25.3);//
         
         var G11_door1 = createTransparentObject(12,"h",-2.65,-10.15);
         var G11_door2 = createTransparentObject(12,"v",-9.93,-12.43);
 
         var GT1_door1 = createTransparentObject(10,"th",-1.33,-20);
         var GT2_door2 = createTransparentObject(10,"th",-3.55,-20);
-        var GT3_door3 = createTransparentObject(10,"th",-6.12,-20);
-        var GT4_door4 = createTransparentObject(10,"th",-8.68,-20);
+        var GT3_door3 = createTransparentObject(11,"th",-6.12,-20);
+        var GT4_door4 = createTransparentObject(11,"th",-8.68,-20);
 
-        var GBG_door1 = createTransparentObject(0,"v",-0.32,-75.11);
-        var GBG_door2 = createTransparentObject(0,"h",-2.65,-10.37);
+        var GBG_door1 = createTransparentObject(13,"v",-0.32,-75.11);
+        var GBG_door2 = createTransparentObject(13,"h",-2.65,-10.37);
 
-        var GC1_door1 = createTransparentObject(13,"v",-9.71,-12.43);
+        var GC1_door1 = createTransparentObject(9,"v",-9.71,-12.43);
         //var GC1_door2 = createTransparentObject(18,"v",-12.90,-17.57);
-        var GC1_door3 = createTransparentObject(13,"v",-21.2,-22.3);
-        var GC1_door4 = createTransparentObject(13,"h",-16.51,-25.22);
+        var GC1_door3 = createTransparentObject(9,"v",-21.2,-22.3);
+        var GC1_door4 = createTransparentObject(9,"h",-16.51,-25.22);
 
-        var GC2_door1 = createTransparentObject(14,"v",-20.98,-27.6);
-        var GC2_door2 = createTransparentObject(14,"v",-20.98,-22.3);
-        var GC2_door3 = createTransparentObject(14,"h",-23.89,-19.61);
-        var GC2_door4 = createTransparentObject(14,"h",-23.7,-30.22);
+        var GC2_door1 = createTransparentObject(15,"v",-20.98,-27.6);
+        var GC2_door2 = createTransparentObject(15,"v",-20.98,-22.3);
+        var GC2_door3 = createTransparentObject(15,"h",-23.89,-19.61);
+        var GC2_door4 = createTransparentObject(15,"h",-23.7,-30.22);
 
-        var GL1_door1 = createTransparentObject(15,"h",-2.65,-57.3);
+        var GL1_door1 = createTransparentObject(16,"h",-2.65,-57.3);
 
-        var GS1_door1 = createTransparentObject(16,"v",-6.29,-67.7);
+        var GS1_door1 = createTransparentObject(17,"v",-6.29,-67.7);
 
-        var G00_door1 = createTransparentObject(11,"v",-0.1,-75.11);
-        var G00_door2 = createTransparentObject(11,"v",-6.07,-67.7);
-        var G00_door3 = createTransparentObject(11,"h",-8.43,-57.48);
-        var G00_door4 = createTransparentObject(11,"v",-11.37,-61.9);
-        var G00_door5 = createTransparentObject(11,"v",-11.37,-68.63);
+        var G00_door1 = createTransparentObject(18,"v",-0.1,-75.11);
+        var G00_door2 = createTransparentObject(18,"v",-6.07,-67.7);
+        var G00_door3 = createTransparentObject(18,"h",-8.43,-57.48);
+        var G00_door4 = createTransparentObject(18,"v",-11.37,-61.9);
+        var G00_door5 = createTransparentObject(18,"v",-11.37,-68.63);
 
 
         var PanelsList = [];
@@ -1201,7 +1201,7 @@ console.log(departmentDatabase[0]);
 
         var panel10_1BB = createTransparentPanel(10,4.4,4.975,-2.59,-22.53);        PanelsList.push(panel10_1BB);
         
-        var panel11_1BB = createTransparentPanel(10,4.56,4.975,-7.27,-22.53);       PanelsList.push(panel11_1BB);
+        var panel11_1BB = createTransparentPanel(11,4.56,4.975,-7.27,-22.53);       PanelsList.push(panel11_1BB);
     
         var panel12_1BB = createTransparentPanel(12,9.2,4.23,-5,-12.5);             PanelsList.push(panel12_1BB);
 
@@ -1209,21 +1209,21 @@ console.log(departmentDatabase[0]);
 
         var panel14_1BB = createTransparentPanel(10,2.3,4.8,-3.65,-17.44);          PanelsList.push(panel14_1BB);
 
-        var panel15_1BB = createTransparentPanel(10,2.3,4.8,-6.15,-17.44);          PanelsList.push(panel15_1BB);
+        var panel15_1BB = createTransparentPanel(11,2.3,4.8,-6.15,-17.44);          PanelsList.push(panel15_1BB);
 
-        var panel16_1BB = createTransparentPanel(10,2.1,4.8,-8.55,-17.44);          PanelsList.push(panel16_1BB);
+        var panel16_1BB = createTransparentPanel(11,2.1,4.8,-8.55,-17.44);          PanelsList.push(panel16_1BB);
 
        // var panel18_1BB = createTransparentPanel(18,2.74,14.6,-11.33,-17.65);       PanelsList.push(panel18_1BB);
        // var panel18_2BB = createTransparentPanel(18,8.2,4.7,-16.8,-22.6);           PanelsList.push(panel18_2BB);
 
-        var panel19_1BB = createTransparentPanel(14,4.6,9.967,-23.59,-25.22);       PanelsList.push(panel19_1BB);
+        var panel19_1BB = createTransparentPanel(15,4.6,9.967,-23.59,-25.22);       PanelsList.push(panel19_1BB);
         
-        var panel20_1BB = createTransparentPanel(15,5.6,7,-3.2,-61.47);             PanelsList.push(panel20_1BB);
-        
-        var panel21_1BB = createTransparentPanel(16,5.6,4.6,-3.2,-67.67);           PanelsList.push(panel21_1BB);
+        var panel20_1BB = createTransparentPanel(16,5.6,7,-3.2,-61.47);             PanelsList.push(panel20_1BB);
+    
+        var panel21_1BB = createTransparentPanel(17,5.6,4.6,-3.2,-67.67);           PanelsList.push(panel21_1BB);
        
-        var panel22_1BB = createTransparentPanel(11,10.75,9.2,-5.775,-75);          PanelsList.push(panel22_1BB);
-        var panel22_2BB = createTransparentPanel(11,4.8,12.8,-8.67,-64);            PanelsList.push(panel22_2BB);
+        var panel22_1BB = createTransparentPanel(18,10.75,9.2,-5.775,-75);          PanelsList.push(panel22_1BB);
+        var panel22_2BB = createTransparentPanel(18,4.8,12.8,-8.67,-64);            PanelsList.push(panel22_2BB);
 
         
         var transparentWallsList = [];
@@ -1318,14 +1318,12 @@ console.log(departmentDatabase[0]);
         scene.add( lightt );
 
         document.getElementById("label").innerHTML = departmentDatabase[0][1];
-        // //console.log(departmentDatabase[0]);
         document.getElementById("list").innerHTML = departmentDatabase[0][2];
-         //document.getElementById("label2").innerHTML = "More information about" + departmentDatabase[0][1];
-        // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+        document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][1];
+        document.getElementById("list2").innerHTML = departmentDatabase[0][3];
 
         animate();
 
     </script>
 </body>
 </html>
-
