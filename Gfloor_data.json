@@ -1,4 +1,14 @@
 [
+    {
+        "category":4,
+        "id":0,
+        "name" :"Department Building",
+        "data1":"Welcome to Computer Engineering Department",
+        "data2":"Head of the department is Prof.Roshan Ragel",
+        "data3":"This is a 4 story building",
+        "data4":"This is Ground Floor",
+        "data5":"University of Peradeniya"
+    },
 {
     "category":2,
     "id":1,
@@ -17,7 +27,7 @@
     "more":"This is the room of the Head of the Department",
     "tags":"private, staff",
     "incharge":"Prof.Ragel",
-    "contact":"none"
+    "contact":"https://google.com"
     
 },
 {
