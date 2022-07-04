@@ -60,10 +60,15 @@ function addMouseEvents(cube, buildingID){                                      
                 document.getElementById("more_information").style.margin = "0%";
                 document.getElementById("label2").style.fontSize = "0vmin";
                 document.getElementById("list2").style.fontSize = "0vmin";
-                cube.material.opacity = 0.6;
+                for(var i=0;i<idNUM;i++){
+                    transparentMaterialArray[i].opacity = 0.6;
+                }
                 document.getElementById("label3").style.backgroundColor = "#1A5276";
                 showNavigator();        //Show the navigating panel
                 clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the information about the particular room on the top right labels
+                document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
             }else{                                                                  //If user hasn't clicked earlier
                 document.getElementById("hint").innerHTML = "More details below ↓";
                 document.getElementById("information").style.height = "60%";
@@ -126,6 +131,9 @@ function addMouseEventsForWalls(cube,buildingID){                               
                 document.getElementById("label3").style.backgroundColor = "#1A5276";
                 showNavigator();        //Show the navigating panel
                 clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the information about the particular room on the top right labels
+                document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
             }else{                                                                  //If user hasn't clicked earlier
                 document.getElementById("hint").innerHTML = "More details below ↓";
                 document.getElementById("information").style.height = "60%";
@@ -177,10 +185,15 @@ function addMouseEventsForPanels(cube, buildingID){                             
                 document.getElementById("more_information").style.margin = "0%";
                 document.getElementById("label2").style.fontSize = "0vmin";
                 document.getElementById("list2").style.fontSize = "0vmin";
-                cube.material.opacity = 0;
+                for(var i=0;i<idNUM;i++){
+                    transparentMaterialForPanelsArray[i].opacity = 0;
+                }
                 document.getElementById("label3").style.backgroundColor = "#1A5276";
                 showNavigator();        //Show the navigating panel
                 clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the information about the particular room on the top right labels
+                document.getElementById("list").innerHTML = departmentDatabase[0][1];
+                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
             }else{                                                                  //If user hasn't clicked earlier
                 document.getElementById("hint").innerHTML = "More details below ↓";
                 document.getElementById("information").style.height = "60%";
@@ -1005,11 +1018,14 @@ function checkRoom(){       //This function checks whether top camera ball is in
                 document.getElementById("list").innerHTML = departmentDatabase[0][1];
                 document.getElementById("list2").innerHTML = departmentDatabase[0][2];
                 lastpanel = i;
+            }else if((clicked) && (i!=lastpanel)){
+                departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]];
+                lastpanel = i;
             }        
             return 0;
         }
     }
-    if(departmentDatabase[0] != building0){
+    if(departmentDatabase[0] != building0 && (!clicked)){
         departmentDatabase[0] = building0;                                              //Set that particular element which has the default information about the department as the first element of the database
         document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
         document.getElementById("list").innerHTML = departmentDatabase[0][1];
