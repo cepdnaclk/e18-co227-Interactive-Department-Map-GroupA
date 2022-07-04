@@ -205,6 +205,7 @@
             domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
                 if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.6;
+                   // console.log("hi");
                     defaultInfo();
                     // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                     // document.getElementById("list").innerHTML = departmentDatabase[0][1];
@@ -330,6 +331,7 @@
             domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
                 if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0;
+                    //console.log(buildingID);
                     defaultInfo();
                     // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                     // document.getElementById("list").innerHTML = departmentDatabase[0][1];
@@ -1033,7 +1035,7 @@ console.log(departmentDatabase[0]);
             for(var i=0;i<PanelsList.length;i++){
                 if(topballBB.intersectsBox(PanelsList[i])){
                     if((!clicked) && (i!=lastpanel)){
-                       // departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]]; 
+                        departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]]; 
                         //console.log(idsOfPanelList[i])  ;
                         
                         roomInfo(departmentDatabase[idsOfPanelList[i]][1]);
@@ -1047,15 +1049,18 @@ console.log(departmentDatabase[0]);
                     return 0;
                 }
             }
+
             if(departmentDatabase[0] != building0){
                 departmentDatabase[0] = building0;
+                
                 defaultInfo();
+                
                 // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                 // document.getElementById("list").innerHTML = departmentDatabase[0][1];
                 // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
             }
             
-        }
+       }
 
         function nowin(){
             out = 0;
@@ -1095,33 +1100,33 @@ console.log(departmentDatabase[0]);
         function roomInfo(buildingID){
         //console.log(my_json[buildingID-1].name);
         document.getElementById("label").innerHTML = my_json[buildingID-1].name;                           //Update the default information about the department on the top right labels
-        document.getElementById("list").innerHTML ='<ul><li>G '+my_json[buildingID-1].id+
+        document.getElementById("list").innerHTML ='<li>G '+my_json[buildingID-1].id+
                                                     '</li><li>'+my_json[buildingID-1].more+
                                                     '</li><li>Accessible to '+my_json[buildingID-1].accessibility+
-                                                    '</li></ul>';
+                                                    '</li>';
         if(my_json[buildingID-1].category==1){
-            document.getElementById("list2").innerHTML ='<ul><li>This has a capacity of '+my_json[buildingID-1].capacity+
+            document.getElementById("list2").innerHTML ='<li>This has a capacity of '+my_json[buildingID-1].capacity+
                                                     '</li><li>This is a '+my_json[buildingID-1].tags+' area'+
                                                     '</li><li>Staff of the lab - '+my_json[buildingID-1].staff+
                                                     '</li><li>Features & Assets - '+my_json[buildingID-1].features+
                                                     '</li><li>Contact Info - <button id="btnLink">Website</button>'+
-                                                    '</li></ul>';       
+                                                    '</li>';       
         }
        
         if(my_json[buildingID-1].category==2){
             let text = my_json[buildingID-1].incharge;
             let lecturer = text.link(my_json[buildingID-1].contact);
-            document.getElementById("list2").innerHTML ='<ul><li>This room belongs to '+lecturer+
+            document.getElementById("list2").innerHTML ='<li>This room belongs to '+lecturer+
                                                     '</li><li>Contact info - '+my_json[buildingID-1].contact+
                                                     '</li><li>This is a '+my_json[buildingID-1].tags+' area'+
-                                                    '</li></ul>';
+                                                    '</li>';
             
         }
         if(my_json[buildingID-1].category==3){
             
-            document.getElementById("list2").innerHTML ='<ul><li>'+my_json[buildingID-1].features+
+            document.getElementById("list2").innerHTML ='<li>'+my_json[buildingID-1].features+
                                                         '</li><li>This is a '+my_json[buildingID-1].tags+' area'+
-                                                    '</li></ul>';
+                                                    '</li>';
             
         }                                 
        }
