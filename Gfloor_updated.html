@@ -174,10 +174,13 @@
                         document.getElementById("more_information").style.margin = "0%";
                         document.getElementById("label2").style.fontSize = "0vmin";
                         document.getElementById("list2").style.fontSize = "0vmin";
-                        cube.material.opacity = 0.6;
+                        for(var i=0;i<19;i++){
+                            transparentMaterialArray[i].opacity = 0.6;
+                        }
                         document.getElementById("label3").style.backgroundColor = "#1A5276";
                         showNavigator();
                         clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                        roomInfo(defaultID);
                     }else{                                                                  //If user hasn't clicked earlier
                             //Decrease the opacity of top right main information label to 0.5
                         document.getElementById("hint").innerHTML = "More details below ↓";
@@ -247,6 +250,7 @@
                         document.getElementById("label3").style.backgroundColor = "#1A5276";
                         showNavigator();
                         clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                        roomInfo(defaultID);
                     }else{                                                                  //If user hasn't clicked earlier
                             //Decrease the opacity of top right main information label to 0.5
                         document.getElementById("hint").innerHTML = "More details below ↓";
@@ -302,10 +306,14 @@
                         document.getElementById("more_information").style.margin = "0%";
                         document.getElementById("label2").style.fontSize = "0vmin";
                         document.getElementById("list2").style.fontSize = "0vmin";
+                        for(var i=0;i<19;i++){
+                            transparentMaterialForPanelsArray[i].opacity = 0;
+                        }
                         cube.material.opacity = 0;
                         document.getElementById("label3").style.backgroundColor = "#1A5276";
                         showNavigator();
                         clicked = !clicked;                                                 //change the 'clicked' flag to 0
+                        roomInfo(defaultID);
                     }else{                                                                  //If user hasn't clicked earlier
                             //Decrease the opacity of top right main information label to 0.5
                         document.getElementById("hint").innerHTML = "More details below ↓";
@@ -1046,32 +1054,21 @@ function createWall(y,z,Y,Z){
             for(var i=0;i<PanelsList.length;i++){
                 if(topballBB.intersectsBox(PanelsList[i])){
                     if((!clicked) && (i!=lastpanel)){
-                        //departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]]; 
                         defaultID=idsOfPanelList[i];
-                        //console.log(idsOfPanelList[i])  ;
                         roomInfo(defaultID);
-                       // roomInfo(departmentDatabase[idsOfPanelList[i]][1]);
-                        console.log(idsOfPanelList[i]);
-                       // roomInfo(departmentDatabase[0][1]); 
-                //         document.getElementById("label").innerHTML = departmentDatabase[0][0]                             //Update the default information about the department on the top right labels
-                //         document.getElementById("list").innerHTML = '<ul>'+'<li>'+my_json[0].email+'</li>'+'<li>'+departmentDatabase[0][2]+'</li>'+'</ul>';
-                //         document.getElementById("list2").innerHTML = '<ul>'+'<li>'+departmentDatabase[0][1]+'</li>'+'<li>'+departmentDatabase[0][2]+'</li>'+'</ul>';
-                //    
-                lastpanel = i;
-                    }        
+                        lastpanel = i;
+                    }else if((clicked) && (i!=lastpanel)){
+                        defaultID=idsOfPanelList[i];
+                        lastpanel = i;
+                    }     
                     return 0;
                 }
             }
 
-            if(defaultID !=0){
-             //   departmentDatabase[0] = building0;
-                defaultID=0;
-                
+            if(defaultID !=0 && (!clicked)){
+                defaultID=0;                
                 roomInfo(defaultID);
-                
-                // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-                // document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+
             }
             
        }
@@ -1101,32 +1098,24 @@ function createWall(y,z,Y,Z){
                 checkCollision();
             }
             renderer.render(scene,camera);
-           // roomInfo(defaultID);
             requestAnimationFrame(animate);
         };
         
-        //defaultInfo();
-        // function defaultInfo(){
-		// 	   document.getElementById("label").innerHTML = departmentDatabase[0][2];                             //Update the default information about the department on the top right labels
-        //         document.getElementById("list").innerHTML = '<li>'+departmentDatabase[0][3]+'</li>'+'<li>'+departmentDatabase[0][4]+'</li>';
-        //         document.getElementById("list2").innerHTML = '<li>'+departmentDatabase[0][5]+'</li>'+'<li>'+departmentDatabase[0][6]+'</li>'+'<li>'+departmentDatabase[0][7]+'</li>';
-		//    }
 			   
         function roomInfo(buildingID){
-        //console.log(my_json[buildingID-1].name);
         document.getElementById("label").innerHTML = my_json[buildingID].name;                           //Update the default information about the department on the top right labels
         if(my_json[buildingID].category==4){
         document.getElementById("list").innerHTML ='<li>G '+my_json[buildingID].id+
                                                     '</li><li>'+my_json[buildingID].data1+
                                                     '</li><li>Accessible to '+my_json[buildingID].data2+
                                                     '</li>';
-        }
-        else{
+        }else{
             document.getElementById("list").innerHTML ='<li>G '+my_json[buildingID].id+
                                                     '</li><li>'+my_json[buildingID].more+
                                                     '</li><li>Accessible to '+my_json[buildingID].accessibility+
                                                     '</li>';
         }
+
         if(my_json[buildingID].category==1){
             document.getElementById("list2").innerHTML ='<li>This has a capacity of '+my_json[buildingID].capacity+
                                                     '</li><li>This is a '+my_json[buildingID].tags+' area'+
@@ -1134,10 +1123,7 @@ function createWall(y,z,Y,Z){
                                                     '</li><li>Features & Assets - '+my_json[buildingID].features+
                                                     '</li><li>Contact Info - <button id="btnLink">Website</button>'+
                                                     '</li>';       
-        }
-       
-        else if(my_json[buildingID].category==2){
-            //let text = my_json[buildingID].incharge;
+        }else if(my_json[buildingID].category==2){
             let text = my_json[buildingID].incharge;
             let lecturer = text.link("https://google.com");
             document.getElementById("list2").innerHTML ='<li>This room belongs to '+lecturer+
@@ -1145,15 +1131,13 @@ function createWall(y,z,Y,Z){
                                                     '</li><li>This is a '+my_json[buildingID].tags+' area'+
                                                     '</li>';
             
-        }
-        else if(my_json[buildingID].category==3){
+        }else if(my_json[buildingID].category==3){
             
             document.getElementById("list2").innerHTML ='<li>'+my_json[buildingID].features+
                                                         '</li><li>This is a '+my_json[buildingID].tags+' area'+
                                                     '</li>';
             
-        } 
-        else if(my_json[buildingID].category==4){
+        }else if(my_json[buildingID].category==4){
             
             document.getElementById("list2").innerHTML ='<li>'+my_json[buildingID].data3+
                                                         '</li><li>'+my_json[buildingID].data4+
@@ -1381,15 +1365,6 @@ function createWall(y,z,Y,Z){
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
 
-        
-       
-        // document.getElementById("label").innerHTML = departmentDatabase[0][1];
-        // document.getElementById("list").innerHTML = departmentDatabase[0][2]+departmentDatabase[0][3];
-        // document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][1];
-        // document.getElementById("list2").innerHTML = departmentDatabase[0][4]+departmentDatabase[0][5]+departmentDatabase[0][6];
-
-        
-      
         
         animate();
     </script>
