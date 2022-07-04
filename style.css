@@ -59,6 +59,7 @@ body {
     font-size: 0vmin;
     padding-left: 15%;
     padding-right: 5%;
+    padding-top: 3%;
     padding-bottom: 10%;
 }
 
@@ -332,9 +333,3 @@ img {
 }
 
 
-ul {
-   
-    padding: 5%;
-    list-style-image: url(images/bullet2.png);
-    
-  }

@@ -606,6 +606,9 @@ async function switchtoWALK(){      //This function changes the view to 'WALK'
         okToGoFront = 0;
         angle_y = 0;
     }
+    document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
+    document.getElementById("list").innerHTML = departmentDatabase[0][1];
+    document.getElementById("list2").innerHTML = departmentDatabase[0][2];
     lastpanel = -1;
     ViewMode = "walk";
     transition = 0;            

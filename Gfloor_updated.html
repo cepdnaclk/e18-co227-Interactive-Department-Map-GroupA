@@ -55,41 +55,46 @@
         <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
     </div>
     <div id="aim" class="aim"></div>
+    
     <script type="text/javascript"> 
     
         
         
-        var departmentDatabase=[];
-        var building0 = [3,0,"Department Building","Welcome to Computer Engineering Department","Head of the department is Prof.Roshan Ragel","This is a 4 story building","This is Ground Floor","University of Peradeniya"];
-        departmentDatabase.push(building0);
+     //   var departmentDatabase=[];
+      //  var building0 = [3,0,"Department Building","Welcome to Computer Engineering Department","Head of the department is Prof.Roshan Ragel","This is a 4 story building","This is Ground Floor","University of Peradeniya"];
+     //   departmentDatabase.push(building0);
+     var my_json={};   
         loadBuildings();
-        var my_json={};
+        
     
         function loadBuildings(){
+            
+            //console.log('hi');
             var xhr = new XMLHttpRequest();
             xhr.open('GET','Gfloor_data.json',true);
 
             xhr.onload = function(){
                 if(this.status==200){
                      my_json = JSON.parse(this.responseText);
-                     var data =[];
-                     my_json.forEach((val,index)=>{
-                            if(my_json[index]!==null){
-                                for(var i in my_json[index]) {
-                                        data.push(my_json[index][i]);
-                                }
-                                departmentDatabase.push(data);
-                                data=[];
-                            }	
-                        })
-                        console.log(departmentDatabase);
-                        console.log(my_json);
+                    //  var data =[];
+                    //  my_json.forEach((val,index)=>{
+                    //         if(my_json[index]!==null){
+                    //             for(var i in my_json[index]) {
+                    //                     data.push(my_json[index][i]);
+                    //             }
+                    //             departmentDatabase.push(data);
+                    //             data=[];
+                    //         }	
+                    //     })
+                    //     console.log(departmentDatabase);
+                         console.log(my_json);
+                         roomInfo(defaultID);
                 }
             }
             xhr.send();
-            
+           //roomInfo(defaultID);
         }
-
+      
 
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
@@ -102,7 +107,8 @@
         var initialCamera_Xangle = 0;
         var yR = 0, zR = R; 
         var angle_x=initialCamera_Xangle,angle_y=0;                //Starting rotation values of the camera
-
+        var defaultID=0;
+        
         
         //Scene
         var scene = new THREE.Scene();
@@ -113,6 +119,7 @@
         renderer.setSize(window.innerWidth-14,window.innerHeight-17);     
         $('body').append(renderer.domElement);    
         
+      
         
 //Creating Backgroud
         //Import images to the cube
@@ -206,7 +213,7 @@
                 if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0.6;
                    // console.log("hi");
-                    defaultInfo();
+                   roomInfo(defaultID);
                     // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                     // document.getElementById("list").innerHTML = departmentDatabase[0][1];
                     // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
@@ -332,7 +339,7 @@
                 if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
                     cube.material.opacity = 0;
                     //console.log(buildingID);
-                    defaultInfo();
+                    roomInfo(defaultID);
                     // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                     // document.getElementById("list").innerHTML = departmentDatabase[0][1];
                     // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
@@ -639,6 +646,7 @@ function createWall(y,z,Y,Z){
 //Camera Position
         var ViewMode = "walk";
         async function switchtoWALK(){
+            defaultID=0;
             updateAngles();
             document.getElementById("rightTop").innerHTML = "W";
             document.getElementById("rightBottom").innerHTML = "WALK";
@@ -704,18 +712,20 @@ function createWall(y,z,Y,Z){
                 okToGoFront = 0;
                 angle_y = 0;
             }
+            roomInfo(defaultID);
             lastpanel = -1;
             ViewMode = "walk";            
         }
 
         async function switchtoDRONE(){
+            defaultID=0;
             updateAngles();
             document.getElementById("rightTop").innerHTML = "D";
             document.getElementById("rightBottom").innerHTML = "DRONE";
             document.getElementById("leftTopButton").innerHTML = "BIRD";
             document.getElementById("leftBottomButton").innerHTML = "WALK";
             if(ViewMode=="walk"){
-                departmentDatabase[0] = building0;
+               // departmentDatabase[0] = building0;
                 if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                     //Decrease the opacity of top right main information label to 0.5 
                     if(expanded){      
@@ -753,12 +763,12 @@ function createWall(y,z,Y,Z){
                 okToGoBack = 1;
                 okToGoFront = 1;
                 angle_y = Math.PI/8;
-                defaultInfo();
+                roomInfo(defaultID);
                 // document.getElementById("label").innerHTML = departmentDatabase[0][0];  
                 // document.getElementById("list").innerHTML = departmentDatabase[0][1];
                 // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
             }else if(ViewMode=="sky"){
-                departmentDatabase[0] = building0;
+               // departmentDatabase[0] = building0;
                 for(var i=0;i<20;i++){
                     await sleep(20);
                     camera.position.x = 40 -(i+1)*1.5;
@@ -772,14 +782,15 @@ function createWall(y,z,Y,Z){
         }
 
         async function switchtoSKY(){
+            defaultID=0;
             updateAngles();
             document.getElementById("rightTop").innerHTML = "B";
             document.getElementById("rightBottom").innerHTML = "BIRD";
             document.getElementById("leftTopButton").innerHTML = "DRONE";
             document.getElementById("leftBottomButton").innerHTML = "WALK";
             if(ViewMode=="walk"){   //Going up
-                departmentDatabase[0] = building0;
-console.log(departmentDatabase[0]);     
+               // departmentDatabase[0] = building0;
+//console.log(departmentDatabase[0]);     
                 if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                             //Decrease the opacity of top right main information label to 0.5 
                     if(expanded){      
@@ -832,12 +843,12 @@ console.log(departmentDatabase[0]);
                 okToGoFront = 1;
                 angle_y = Math.PI/2;
                 angle_x = 0;
-                defaultInfo();
+                roomInfo(defaultID);
                 // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                 // document.getElementById("list").innerHTML = departmentDatabase[0][1];
                 // document.getElementById("list2").innerHTML = departmentDatabase[0][2];
             }else if(ViewMode=="drone"){
-                departmentDatabase[0] = building0;
+                //departmentDatabase[0] = building0;
                 var y = camera.position.y;
                 var z = camera.position.z;
                 var xr = camera.rotation.x;
@@ -1029,16 +1040,18 @@ console.log(departmentDatabase[0]);
                 okToGoBack = 1;
             }
         }
-
+       
         var lastpanel = -1;
         function checkRoom(){
             for(var i=0;i<PanelsList.length;i++){
                 if(topballBB.intersectsBox(PanelsList[i])){
                     if((!clicked) && (i!=lastpanel)){
-                        departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]]; 
+                        //departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]]; 
+                        defaultID=idsOfPanelList[i];
                         //console.log(idsOfPanelList[i])  ;
-                        
-                        roomInfo(departmentDatabase[idsOfPanelList[i]][1]);
+                        roomInfo(defaultID);
+                       // roomInfo(departmentDatabase[idsOfPanelList[i]][1]);
+                        console.log(idsOfPanelList[i]);
                        // roomInfo(departmentDatabase[0][1]); 
                 //         document.getElementById("label").innerHTML = departmentDatabase[0][0]                             //Update the default information about the department on the top right labels
                 //         document.getElementById("list").innerHTML = '<ul>'+'<li>'+my_json[0].email+'</li>'+'<li>'+departmentDatabase[0][2]+'</li>'+'</ul>';
@@ -1050,10 +1063,11 @@ console.log(departmentDatabase[0]);
                 }
             }
 
-            if(departmentDatabase[0] != building0){
-                departmentDatabase[0] = building0;
+            if(defaultID !=0){
+             //   departmentDatabase[0] = building0;
+                defaultID=0;
                 
-                defaultInfo();
+                roomInfo(defaultID);
                 
                 // document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
                 // document.getElementById("list").innerHTML = departmentDatabase[0][1];
@@ -1061,7 +1075,7 @@ console.log(departmentDatabase[0]);
             }
             
        }
-
+    
         function nowin(){
             out = 0;
         }
@@ -1075,7 +1089,7 @@ console.log(departmentDatabase[0]);
         camera.rotation.x += initialCamera_Xangle;
         camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
 
-
+       
 //Rendering
         var animate = function(){
             renderer.setSize(window.innerWidth-14,window.innerHeight-17);
@@ -1087,45 +1101,63 @@ console.log(departmentDatabase[0]);
                 checkCollision();
             }
             renderer.render(scene,camera);
+           // roomInfo(defaultID);
             requestAnimationFrame(animate);
         };
-
+        
         //defaultInfo();
-        function defaultInfo(){
-			   document.getElementById("label").innerHTML = departmentDatabase[0][2];                             //Update the default information about the department on the top right labels
-                document.getElementById("list").innerHTML = '<li>'+departmentDatabase[0][3]+'</li>'+'<li>'+departmentDatabase[0][4]+'</li>';
-                document.getElementById("list2").innerHTML = '<li>'+departmentDatabase[0][5]+'</li>'+'<li>'+departmentDatabase[0][6]+'</li>'+'<li>'+departmentDatabase[0][7]+'</li>';
-		   }
+        // function defaultInfo(){
+		// 	   document.getElementById("label").innerHTML = departmentDatabase[0][2];                             //Update the default information about the department on the top right labels
+        //         document.getElementById("list").innerHTML = '<li>'+departmentDatabase[0][3]+'</li>'+'<li>'+departmentDatabase[0][4]+'</li>';
+        //         document.getElementById("list2").innerHTML = '<li>'+departmentDatabase[0][5]+'</li>'+'<li>'+departmentDatabase[0][6]+'</li>'+'<li>'+departmentDatabase[0][7]+'</li>';
+		//    }
 			   
         function roomInfo(buildingID){
         //console.log(my_json[buildingID-1].name);
-        document.getElementById("label").innerHTML = my_json[buildingID-1].name;                           //Update the default information about the department on the top right labels
-        document.getElementById("list").innerHTML ='<li>G '+my_json[buildingID-1].id+
-                                                    '</li><li>'+my_json[buildingID-1].more+
-                                                    '</li><li>Accessible to '+my_json[buildingID-1].accessibility+
+        document.getElementById("label").innerHTML = my_json[buildingID].name;                           //Update the default information about the department on the top right labels
+        if(my_json[buildingID].category==4){
+        document.getElementById("list").innerHTML ='<li>G '+my_json[buildingID].id+
+                                                    '</li><li>'+my_json[buildingID].data1+
+                                                    '</li><li>Accessible to '+my_json[buildingID].data2+
                                                     '</li>';
-        if(my_json[buildingID-1].category==1){
-            document.getElementById("list2").innerHTML ='<li>This has a capacity of '+my_json[buildingID-1].capacity+
-                                                    '</li><li>This is a '+my_json[buildingID-1].tags+' area'+
-                                                    '</li><li>Staff of the lab - '+my_json[buildingID-1].staff+
-                                                    '</li><li>Features & Assets - '+my_json[buildingID-1].features+
+        }
+        else{
+            document.getElementById("list").innerHTML ='<li>G '+my_json[buildingID].id+
+                                                    '</li><li>'+my_json[buildingID].more+
+                                                    '</li><li>Accessible to '+my_json[buildingID].accessibility+
+                                                    '</li>';
+        }
+        if(my_json[buildingID].category==1){
+            document.getElementById("list2").innerHTML ='<li>This has a capacity of '+my_json[buildingID].capacity+
+                                                    '</li><li>This is a '+my_json[buildingID].tags+' area'+
+                                                    '</li><li>Staff of the lab - '+my_json[buildingID].staff+
+                                                    '</li><li>Features & Assets - '+my_json[buildingID].features+
                                                     '</li><li>Contact Info - <button id="btnLink">Website</button>'+
                                                     '</li>';       
         }
        
-        if(my_json[buildingID-1].category==2){
-            let text = my_json[buildingID-1].incharge;
-            let lecturer = text.link(my_json[buildingID-1].contact);
+        else if(my_json[buildingID].category==2){
+            //let text = my_json[buildingID].incharge;
+            let text = my_json[buildingID].incharge;
+            let lecturer = text.link("https://google.com");
             document.getElementById("list2").innerHTML ='<li>This room belongs to '+lecturer+
-                                                    '</li><li>Contact info - '+my_json[buildingID-1].contact+
-                                                    '</li><li>This is a '+my_json[buildingID-1].tags+' area'+
+                                                    '</li><li>Contact info - '+my_json[buildingID].contact+
+                                                    '</li><li>This is a '+my_json[buildingID].tags+' area'+
                                                     '</li>';
             
         }
-        if(my_json[buildingID-1].category==3){
+        else if(my_json[buildingID].category==3){
             
-            document.getElementById("list2").innerHTML ='<li>'+my_json[buildingID-1].features+
-                                                        '</li><li>This is a '+my_json[buildingID-1].tags+' area'+
+            document.getElementById("list2").innerHTML ='<li>'+my_json[buildingID].features+
+                                                        '</li><li>This is a '+my_json[buildingID].tags+' area'+
+                                                    '</li>';
+            
+        } 
+        else if(my_json[buildingID].category==4){
+            
+            document.getElementById("list2").innerHTML ='<li>'+my_json[buildingID].data3+
+                                                        '</li><li>'+my_json[buildingID].data4+
+                                                        '</li><li>'+my_json[buildingID].data5+
                                                     '</li>';
             
         }                                 
@@ -1349,14 +1381,17 @@ console.log(departmentDatabase[0]);
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
 
-        defaultInfo();
+        
+       
         // document.getElementById("label").innerHTML = departmentDatabase[0][1];
         // document.getElementById("list").innerHTML = departmentDatabase[0][2]+departmentDatabase[0][3];
         // document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][1];
         // document.getElementById("list2").innerHTML = departmentDatabase[0][4]+departmentDatabase[0][5]+departmentDatabase[0][6];
 
+        
+      
+        
         animate();
-
     </script>
 </body>
 </html>
