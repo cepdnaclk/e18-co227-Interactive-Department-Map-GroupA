@@ -74,7 +74,7 @@ function addMouseEvents(cube, buildingID){                                      
                 document.getElementById("information").style.height = "60%";
                 document.getElementById("main_information").style.height = "50%";
                 document.getElementById("hint").style.height = "5%";
-                document.getElementById("controlLayout").style.height = "80%";
+                document.getElementById("controlLayout").style.height = "70%";
                 document.getElementById("more_information").style.minHeight = "50%";
                 document.getElementById("more_information").style.padding = "5%";
                 document.getElementById("more_information").style.marginTop = "2.5%";
@@ -139,7 +139,7 @@ function addMouseEventsForWalls(cube,buildingID){                               
                 document.getElementById("information").style.height = "60%";
                 document.getElementById("main_information").style.height = "50%";
                 document.getElementById("hint").style.height = "5%";
-                document.getElementById("controlLayout").style.height = "80%";
+                document.getElementById("controlLayout").style.height = "70%";
                 document.getElementById("more_information").style.minHeight = "50%";
                 document.getElementById("more_information").style.padding = "5%";
                 document.getElementById("more_information").style.marginTop = "2.5%";
@@ -199,7 +199,7 @@ function addMouseEventsForPanels(cube, buildingID){                             
                 document.getElementById("information").style.height = "60%";
                 document.getElementById("main_information").style.height = "50%";
                 document.getElementById("hint").style.height = "5%";
-                document.getElementById("controlLayout").style.height = "80%";
+                document.getElementById("controlLayout").style.height = "70%";
                 document.getElementById("more_information").style.minHeight = "50%";
                 document.getElementById("more_information").style.padding = "5%";
                 document.getElementById("more_information").style.marginTop = "2.5%";
@@ -484,6 +484,7 @@ async function showInformation(){               //This function shrinks the top 
             document.getElementById("list").style.opacity = 1-(0.1*(i+1));                  //dissappears the main information list
             document.getElementById("more_information").style.opacity = 0.09*(i+1);         //Shows the more information label
             document.getElementById("main_information").style.height = 50-4.4*(i+1)+"%";   //Shrinks the main information label
+            document.getElementById("link").style.height = 15-0.75*i+"%";
         }
         document.getElementById("hint").style.backgroundColor = "#21618C";
         expanding=0;        //set the expanding flag to 0
@@ -499,6 +500,7 @@ async function hideInformation(){               //This function expands the top 
             await sleep(20);                    //Sleep for 20 millieseconds
             document.getElementById("more_information").style.opacity = 0.9-0.09*(i+1);     //Dissappears the more information label
             document.getElementById("main_information").style.height = 6+4.4*(i+1)+"%";    //Expands the main information label
+            document.getElementById("link").style.height = 7.5+0.85*i+"%";
         }
         document.getElementById("hint").style.backgroundColor = "#0B5345";
         expanding=0;            //set the expanding flag to 0
@@ -514,10 +516,12 @@ async function hideNavigator(){
             document.getElementById("navigator").style.opacity = 0.9 - (i+1)*0.07;
             document.getElementById("main_information").style.opacity = 0.6 + (i+1)*0.04;
         }
+    document.getElementById("link").style.opacity = 1;
     document.getElementById("roomList").style.height = "0";
     document.getElementById("searchBar").style.opacity = 0;
 }
 async function showNavigator(){
+    document.getElementById("link").style.opacity = 0;
     document.getElementById("roomList").style.height = "100%";
     document.getElementById("searchBar").style.opacity = 1;
     for(var i =0;i<10;i++){                 //Used a loop for smooth animations
