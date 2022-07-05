@@ -1,0 +1,196 @@
+[
+    {
+        "category":4,
+        "id":"G-FLOOR",
+        "name" :"Ground Floor",
+        "data1":"Welcome to Computer Engineering Department UoP",
+        "data2":"The Head of the departmnt is Prof.Roshan Ragel",
+        "data3":"This is a 5 storey building",
+        "data4":"This is the Fourth Floor",
+        "data5":"http://www.ce.pdn.ac.lk/"
+    },
+    {
+        "category":2,
+        "id":"G-01",
+        "name" :"Department Office",
+        "accessibility":"ALL",
+        "more":"http://www.ce.pdn.ac.lk/",
+        "tags":"public",
+        "staff":"Mr.John Doe",
+        "contact1":"+94 81 2393470",
+        "contact2":"headce@pdn.ac.lk"
+    },
+    {
+        "category":2,
+        "id":"G-02",
+        "name" :"HoD Office",
+        "accessibility":"ALL",
+        "more":"https://people.ce.pdn.ac.lk/staff/academic/roshan-ragel/",
+        "tags":"private, staff",
+        "staff":"Prof. Roshan G. Ragel",
+        "contact1":"+94 81 239 3913",
+        "contact2":"roshanr@eng.pdn.ac.lk"
+    },
+    {
+        "category":1,
+        "id":"G-03",
+        "name" :"Conference Room",
+        "accessibility":"ALL",
+        "more":"This is for official gatherings",
+        "tags":"public",
+        "capacity":"15",
+        "staff":"none",
+        "features":"This conference room has facilities like Smart Display,Conference Camera, Conference Mic",
+        "contact":"https://ce.pdn.ac.lk/facilities/conference-room/"
+    
+    },
+    {
+        "category":3,
+        "id":"G-04",
+        "name" :"Central Lobby",
+        "accessibility":"ALL",
+        "more":"This is a transit area",
+        "tags":"public",
+        "features":"This space consists of a library and a museaum"
+        
+    },
+    {
+        "category":3,
+        "id":"G-05",
+        "name" :"Filing Room & Storage",
+        "accessibility":"TO",
+        "more":"It has a Storage area",
+        "tags":"authorized",
+        "features":"This belongs to floor 4"
+        
+    },
+    {
+        "category":3,
+        "id":"G-06",
+        "name" :"Staff Common-Room 1 ",
+        "accessibility":"S,I,TO",
+        "more":"Currently used by TOs",
+        "tags":"staff",
+        "features":"It has facilities for staff gatherings"
+        
+    },
+    {
+        "category":3,
+        "id":"G-07",
+        "name" :"Staff Common Room 2 ",
+        "accessibility":"S,I,TO",
+        "more":"to be used for lunch, tea and other informal gatherings.",
+        "tags":"staff",
+        "features":"It has facilities for gatherings"
+
+    },
+    {
+        "category":1,
+        "id":"G-08",
+        "name" :"Open Lab-1",
+        "accessibility":"ALL",
+        "more":"This is used by students for group-work, 'tech-talks', etc..After Hours access through G11",
+        "tags":"lab",
+        "capacity": "30-40",
+        "staff":"none",
+        "features":"Whiteboards and facilities for using laptops",
+        "contact":"https://ce.pdn.ac.lk/facilities/open-lab"
+    },
+    {
+        "category":1,
+        "id":"G-09",
+        "name" :"Open Lab-2",
+        "accessibility":"ALL",
+        "more":"This is used by students for group-work, 'tech-talks', etc..After Hours access through G11",
+        "tags":"lab",
+        "capacity": "5-10",
+        "staff":"none",
+        "features":"Open lab with Sofa and some seating arrangements",
+        "contact":"https://ce.pdn.ac.lk/facilities/open-lab"
+    },
+    {
+        "category":3,
+        "id":"G-10G",
+        "name" :"Gents Washrooms ",
+        "accessibility":"ALL",
+        "more":"These washromms are For the use of Gents",
+        "tags":"public",
+        "features":"This belongs to GFloor"
+    },
+    {
+        "category":3,
+        "id":"G-10L",
+        "name" :"Ladies Washrooms ",
+        "accessibility":"ALL",
+        "more":"These washromms are For the use of",
+        "tags":"public",
+        "features":"This belongs to GFloor"
+    },
+
+    {
+        "category":3,
+        "id":"G-11",
+        "name" :"Open lab Entr.Lobby",
+        "accessibility":"ALL",
+        "more":"Providing after hours access to G-08 and G-09",
+        "tags":"public",
+        "features":"This space is used for activities in ACES"
+    
+    },
+    {
+        "category":3,
+        "id":"G-OUTSIDE",
+        "name" :"Garden",
+        "accessibility":"ALL",
+        "more":"This is the outside area of the Dept",
+        "tags":"public",
+        "features":"This is the outside area of the Dept"
+    },
+    {
+        "category":3,
+        "id":"G-CR01",
+        "name" :"Corridor-01",
+        "accessibility":"ALL",
+        "more":"This corridor can be used to enter the department through the open lab2",
+        "tags":"public",
+        "features":"This belongs to ground floor" 
+    },
+    {
+        "category":3,
+        "id":"G-CR02",
+        "name" :"Corridor-02",
+        "accessibility":"ALL",
+        "more":"This corridor connects central lobby,department office,conference room, operator room",
+        "tags":"public",
+        "features":"This belongs to ground floor" 
+    },
+    {
+        "category":3,
+        "id":"G-LIFT",
+        "name" :"Lift",
+        "accessibility":"ALL",
+        "more":"Can be used to enter other floors",
+        "tags":"public",
+        "features":"This belongs to ground floor"
+    },
+    {
+        "category":3,
+        "id":"G-OP",
+        "name" :"Operator-room",
+        "accessibility":"TO",
+        "more":"",
+        "tags":"authorized",
+        "features":"This belongs to ground Floor"
+    },
+
+    {
+        "category":3,
+        "id":"G-18",
+        "name" :"Entrance Lobby",
+        "accessibility":"ALL",
+        "more":"This is the entrance area",
+        "tags":"public",
+        "features":"Seating arrangements are in this entrance area"
+    
+    }
+]
