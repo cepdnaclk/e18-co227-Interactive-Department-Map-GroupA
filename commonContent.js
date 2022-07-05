@@ -66,9 +66,7 @@ function addMouseEvents(cube, buildingID){                                      
                 document.getElementById("label3").style.backgroundColor = "#1A5276";
                 showNavigator();        //Show the navigating panel
                 clicked = !clicked;                                                 //change the 'clicked' flag to 0
-                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the information about the particular room on the top right labels
-                document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+                roomInfo(defaultID);    
             }else{                                                                  //If user hasn't clicked earlier
                 document.getElementById("hint").innerHTML = "More details below ↓";
                 document.getElementById("information").style.height = "60%";
@@ -91,17 +89,13 @@ function addMouseEvents(cube, buildingID){                                      
     domEvents.addEventListener(cube,'mouseover',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
         if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
             cube.material.opacity = 0.8;
-            document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
-            document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
-            document.getElementById("list2").innerHTML = departmentDatabase[buildingID][2];
+            roomInfo(buildingID);    
         }
     });    
     domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
         if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
             cube.material.opacity = 0.6;
-            document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-            document.getElementById("list").innerHTML = departmentDatabase[0][1];
-            document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+            roomInfo(defaultID); 
         }
     }); 
 }
@@ -131,9 +125,7 @@ function addMouseEventsForWalls(cube,buildingID){                               
                 document.getElementById("label3").style.backgroundColor = "#1A5276";
                 showNavigator();        //Show the navigating panel
                 clicked = !clicked;                                                 //change the 'clicked' flag to 0
-                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the information about the particular room on the top right labels
-                document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+                roomInfo(defaultID);
             }else{                                                                  //If user hasn't clicked earlier
                 document.getElementById("hint").innerHTML = "More details below ↓";
                 document.getElementById("information").style.height = "60%";
@@ -191,9 +183,7 @@ function addMouseEventsForPanels(cube, buildingID){                             
                 document.getElementById("label3").style.backgroundColor = "#1A5276";
                 showNavigator();        //Show the navigating panel
                 clicked = !clicked;                                                 //change the 'clicked' flag to 0
-                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the information about the particular room on the top right labels
-                document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+                roomInfo(defaultID);
             }else{                                                                  //If user hasn't clicked earlier
                 document.getElementById("hint").innerHTML = "More details below ↓";
                 document.getElementById("information").style.height = "60%";
@@ -216,17 +206,13 @@ function addMouseEventsForPanels(cube, buildingID){                             
     domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
         if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
             cube.material.opacity = 0.4;
-            document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
-            document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
-            document.getElementById("list2").innerHTML = departmentDatabase[buildingID][2];
+            roomInfo(buildingID);
         }
     });    
     domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
         if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
             cube.material.opacity = 0;
-            document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-            document.getElementById("list").innerHTML = departmentDatabase[0][1];
-            document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+            roomInfo(defaultID);
         }
     }); 
 }
@@ -473,9 +459,11 @@ async function backward(){          //This function brings the camera to front b
     }    
 }
 
+var mouseIN = 0;    //This is used to flag whether mouse pointer in on the controllayout or not (if on-> 1)
 
 //Information Panel movements
 async function showInformation(){               //This function shrinks the top right main information label and makes the more information label appear
+    if(clicked){mouseIN=1;}                     //Flag that mouse pointer is over the control layout
     if(clicked&&(!expanding)&&(!expanded)){     //If a building is clicked, labels are not expanding currently and more information label is dissappeared
         expanding=1;                            //set the expanding flag to 1
         document.getElementById("label2").innerHTML = "More information about "+document.getElementById("label").innerHTML;     //set the second label
@@ -490,9 +478,14 @@ async function showInformation(){               //This function shrinks the top 
         expanding=0;        //set the expanding flag to 0
         expanded = 1;       //Set the expanded flag to 1
     }
+    await sleep(50);
+    if(!mouseIN){           //If mouse pointer has gone out of the layout hide again
+        hideInformation();
+    }
 }
 
 async function hideInformation(){               //This function expands the top right main information label and makes the more information label dissappear
+    if(clicked){mouseIN=0;}                     //Flag that mouse pointer is out of the layout
     if(clicked&&(!expanding)&&expanded){        //If a building is clicked, labels are not expanding currently and more information label is appeared
         expanding=1;                            //set the expanding flag to 1
         document.getElementById("list").style.opacity = 1;      //Shows the main information list
@@ -506,6 +499,10 @@ async function hideInformation(){               //This function expands the top 
         expanding=0;            //set the expanding flag to 0
         expanded = 0;           //Set the expanded flag to 0
     }
+    await sleep(50);
+    if(mouseIN){            //If mouse pointer has come on to the layout show again
+        showInformation();
+    }
 }
 
 //Latter Panel movements
@@ -516,11 +513,20 @@ async function hideNavigator(){
             document.getElementById("navigator").style.opacity = 0.9 - (i+1)*0.07;
             document.getElementById("main_information").style.opacity = 0.6 + (i+1)*0.04;
         }
-    document.getElementById("link").style.opacity = 1;
     document.getElementById("roomList").style.height = "0";
     document.getElementById("searchBar").style.opacity = 0;
+    document.getElementById("link").style.height = "7.5%";
+    document.getElementById("link").style.opacity = 1;
+    for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+        await sleep(20);                    //Sleep for 20 millieseconds
+        document.getElementById("link").style.height = 7.5+0.85*i+"%";
+    }
 }
 async function showNavigator(){
+    for(var i =0;i<5;i++){                 //Used a loop for smooth animations
+        await sleep(20);                    //Sleep for 20 millieseconds
+        document.getElementById("link").style.height = 15-1.5*i+"%";
+    }
     document.getElementById("link").style.opacity = 0;
     document.getElementById("roomList").style.height = "100%";
     document.getElementById("searchBar").style.opacity = 1;
@@ -558,6 +564,7 @@ var transition = 0;     //This is to flag whether view is being changed
 
 async function switchtoWALK(){      //This function changes the view to 'WALK'
     transition = 1;     //Flag that view is changing
+    defaultID=0;
     updateAngles();     
     document.getElementById("rightTop").innerHTML = "W";
     document.getElementById("rightBottom").innerHTML = "WALK";
@@ -623,9 +630,7 @@ async function switchtoWALK(){      //This function changes the view to 'WALK'
         okToGoFront = 0;
         angle_y = 0;
     }
-    document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-    document.getElementById("list").innerHTML = departmentDatabase[0][1];
-    document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+    roomInfo(defaultID);
     lastpanel = -1;
     ViewMode = "walk";
     transition = 0;            
@@ -633,13 +638,13 @@ async function switchtoWALK(){      //This function changes the view to 'WALK'
 
 async function switchtoDRONE(){
     transition = 1;
+    defaultID=0;
     updateAngles();
     document.getElementById("rightTop").innerHTML = "D";
     document.getElementById("rightBottom").innerHTML = "DRONE";
     document.getElementById("leftTopButton").innerHTML = "BIRD";
     document.getElementById("leftBottomButton").innerHTML = "WALK";
     if(ViewMode=="walk"){
-        departmentDatabase[0] = building0;
         if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
             //Decrease the opacity of top right main information label to 0.5 
             if(expanded){      
@@ -677,11 +682,8 @@ async function switchtoDRONE(){
         okToGoBack = 1;
         okToGoFront = 1;
         angle_y = Math.PI/8;
-        document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-        document.getElementById("list").innerHTML = departmentDatabase[0][1];
-        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+        roomInfo(defaultID);
     }else if(ViewMode=="sky"){
-        departmentDatabase[0] = building0;
         for(var i=0;i<20;i++){
             await sleep(20);
             camera.position.x = 40 -(i+1)*1.5;
@@ -697,13 +699,13 @@ async function switchtoDRONE(){
 
 async function switchtoSKY(){
     transition = 1;
+    defaultID=0;
     updateAngles();
     document.getElementById("rightTop").innerHTML = "B";
     document.getElementById("rightBottom").innerHTML = "BIRD";
     document.getElementById("leftTopButton").innerHTML = "DRONE";
     document.getElementById("leftBottomButton").innerHTML = "WALK";
     if(ViewMode=="walk"){   //Going up
-        departmentDatabase[0] = building0;
         if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
                     //Decrease the opacity of top right main information label to 0.5 
             if(expanded){      
@@ -756,11 +758,8 @@ async function switchtoSKY(){
         okToGoFront = 1;
         angle_y = Math.PI/2;
         angle_x = 0;
-        document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-        document.getElementById("list").innerHTML = departmentDatabase[0][1];
-        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+        roomInfo(defaultID);
     }else if(ViewMode=="drone"){
-        departmentDatabase[0] = building0;
         var y = camera.position.y;
         var z = camera.position.z;
         var xr = camera.rotation.x;
@@ -892,8 +891,8 @@ function showPath(buildingID){
         for(var i=0;i<navigatingItemList.length;i++){
             document.getElementById(navigatingItemList[i]).style.color = i==buildingID?"#000000":"#BBBBBB";     //Highlight the selected item    
         }
-        for(var i=0;i<departmentDatabase[buildingIDList[buildingID][1]][3].length;i++){
-            NavigatingMaterialArray[departmentDatabase[buildingIDList[buildingID][1]][3][i]].opacity = 1;   //Show thw path (using bars)
+        for(var i=0;i<buildingIDList[buildingID][2].length;i++){
+            NavigatingMaterialArray[buildingIDList[buildingID][2][i]].opacity = 1;   //Show thw path (using bars)
         }
         lastID = buildingIDList[buildingID][1];        //Set the LastID
     }    
@@ -1017,23 +1016,19 @@ function checkRoom(){       //This function checks whether top camera ball is in
     for(var i=0;i<PanelsList.length;i++){
         if(topballBB.intersectsBox(PanelsList[i])){
             if((!clicked) && (i!=lastpanel)){           //If object hasn't been clicked and if top camera ball intersects with a new panel
-                departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]];          //Set that particular element which has the information about the room as the first element of the database  
-                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the information about the particular room on the top right labels
-                document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+                defaultID=idsOfPanelList[i];
+                roomInfo(defaultID);
                 lastpanel = i;
             }else if((clicked) && (i!=lastpanel)){
-                departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]];
+                defaultID=idsOfPanelList[i];
                 lastpanel = i;
             }        
             return 0;
         }
     }
-    if(departmentDatabase[0] != building0 && (!clicked)){
-        departmentDatabase[0] = building0;                                              //Set that particular element which has the default information about the department as the first element of the database
-        document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-        document.getElementById("list").innerHTML = departmentDatabase[0][1];
-        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
+    if(defaultID !=0 && (!clicked)){
+        defaultID=0;                
+        roomInfo(defaultID);
     }
     
 }
@@ -1065,3 +1060,49 @@ var animate = function(){
     renderer.render(scene,camera);
     requestAnimationFrame(animate);
 };
+
+//Update information panel
+function roomInfo(buildingID){
+    document.getElementById("label").innerHTML = my_json[buildingID].name;                           //Update the default information about the department on the top right labels
+    if(my_json[buildingID].category==4){
+    document.getElementById("list").innerHTML ='<li>G '+my_json[buildingID].id+                         //Update the main information panel
+                                                '</li><li>'+my_json[buildingID].data1+
+                                                '</li><li>Accessible to '+my_json[buildingID].data2+
+                                                '</li>';
+    }else{
+        document.getElementById("list").innerHTML ='<li>G '+my_json[buildingID].id+
+                                                '</li><li>'+my_json[buildingID].more+
+                                                '</li><li>Accessible to '+my_json[buildingID].accessibility+
+                                                '</li>';
+    }
+
+    if(my_json[buildingID].category==1){                                                                //Update the more information panel
+        document.getElementById("list2").innerHTML ='<li>This has a capacity of '+my_json[buildingID].capacity+
+                                                '</li><li>This is a '+my_json[buildingID].tags+' area'+
+                                                '</li><li>Staff of the lab - '+my_json[buildingID].staff+
+                                                '</li><li>Features & Assets - '+my_json[buildingID].features+
+                                                '</li><li>Contact Info - <button id="btnLink">Website</button>'+
+                                                '</li>';       
+    }else if(my_json[buildingID].category==2){
+        let text = my_json[buildingID].incharge;
+        let lecturer = text.link("https://google.com");
+        document.getElementById("list2").innerHTML ='<li>This room belongs to '+lecturer+
+                                                '</li><li>Contact info - '+my_json[buildingID].contact+
+                                                '</li><li>This is a '+my_json[buildingID].tags+' area'+
+                                                '</li>';
+        
+    }else if(my_json[buildingID].category==3){
+        
+        document.getElementById("list2").innerHTML ='<li>'+my_json[buildingID].features+
+                                                    '</li><li>This is a '+my_json[buildingID].tags+' area'+
+                                                '</li>';
+        
+    }else if(my_json[buildingID].category==4){
+        
+        document.getElementById("list2").innerHTML ='<li>'+my_json[buildingID].data3+
+                                                    '</li><li>'+my_json[buildingID].data4+
+                                                    '</li><li>'+my_json[buildingID].data5+
+                                                '</li>';
+        
+    }                                 
+   }

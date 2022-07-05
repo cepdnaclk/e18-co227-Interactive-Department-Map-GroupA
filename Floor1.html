@@ -35,7 +35,10 @@
     </div>
     
     <div id="latterPanel" class="latterPanelClass">
-        <div id="link" class="link_class">Link<br>jhgujuyg</div>
+        <div id="link" class="link_class">
+            <div id="linkHead" class="linkHead_class">Link</div>
+            <div id="url" class="url_class">https://cebcare.ceb.lk/Incognito/DemandMgmtSchedule</div>
+        </div>
         <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
             <div id="searchBar" class="searchBar">
                 <input id="searchQueryInput" class="searchQueryInput_class" type="text" name="searchQueryInput" placeholder="Search" value="" />
@@ -75,69 +78,24 @@
     <div id="aim" class="aim"></div>
     <script type="text/javascript"> 
     
-        // var conn = new ActiveXObject("ADODB.Connection");
-        // var conn_str = "";
-        // var db_Host = "";
-        // var db_User = "";
-        // var db_Password = "";
-        // var db_Provider = "";
-        // var db_Default = "";
+//Database
+        //This database is used to load the information about the buildings
+        var my_json={};   
+        loadBuildings();
+    
+        function loadBuildings(){     
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','Gfloor_data.json',true);
 
-        // function Show_Data(){
-        //     db_Host = "RUCHIRA"
-        //     db_User = "root"
-        //     db_Password = ""
-        //     db_Provider = "SQLOLEDB"
-        //     db_Default = "ex"
-        //     conn_str = "Provider=" + db_Provider+";Data Source="+db_Host+"; User Id="+db_User+"; password="+db_Password+"; initial Catalog="+db_Default;
-        //     show_data_from_database();
-        // }
-
-        // function show_data_from_database(){
-        //     try{
-        //         conn.Open(conn_str);
-        //         var reader = new ActiveXObject("ADODB.Recordset");
-        //         var strQuery = "SELECT * FROM USERS";
-        //         reader.Open(strQuery,conn);
-        //         reader.MoveFirst();
-        //         while(!reader.eof){
-        //             reader.fields(0);
-        //             reader.fields(1);
-        //             reader.movenext();
-        //         }
-        //     }catch(e){
-        //         alert("Error");
-        //     }
-        // }
-
-        // loadBuildings();
-        // var departmentDatabase=[];
-       
-        // function loadBuildings(){
-        //     var xhr = new XMLHttpRequest();
-        //     xhr.open('GET','data.php',true);
-
-        //     xhr.onload = function(){
-        //         if(this.status==200){
-                    
-        //             var my_json = JSON.parse(this.responseText);
-        //             var data =[];
-                   
-        //                 my_json.forEach((val,index)=>{
-        //                     if(my_json[index]!==null){
-        //                         for(var i in my_json[index]) {
-        //                                 data.push(my_json[index][i]);
-        //                         }
-        //                         departmentDatabase.push(data);
-        //                         data=[];
-        //                     }	
-        //                 })
-        //                  // console.log("...java Script Array... \n"+JSON.stringify(departmentDatabase));
-        //                 //users = JSON.parse(this.responseText);       
-        //         }
-        //     }
-        //     xhr.send();
-        // }
+            xhr.onload = function(){
+                if(this.status==200){
+                     my_json = JSON.parse(this.responseText);
+                         console.log(my_json);
+                         roomInfo(defaultID);       //Set initial information should be appeared in the panels
+                }
+            }
+            xhr.send();
+        }
 
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
@@ -154,32 +112,12 @@
         var idNUM = 15;     //Number of ids
         var doorHeight=-1.72, panelHeight = 3.85, wallHeight=-0.7, barHeight=-4.95;     //Height of the doors,panels,walls and the bars should be set
         var barNUM = 18;    //Number of navigating bars
-
-
-//Database
-        //This database is used to load the information about the buildings
-        var departmentDatabase;
+        var defaultID=0;    //This is the id of the default information should be shown
         
-        //Data of a particular room can be added to the database as an array
-        var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li><li>This is Floor 1</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>",[]];
-        var building1 = ["Technical Offcer's room","<li>1-01</li><li>Private</li><li>Staff</li>","<li>Room ID is 1-01</li><li>This is First floor</li><li>This is Technical officer's room</li><li>Used by Technical officer and assistant</li>",[1,2,3,5]];
-        var building2 = ["Insructors' Room","<li>1-02</li><li>Public</li><li>Staff</li>","<li>Room ID is 1-02</li><li>This is First floor</li><li>This is Instructors'/PG students' room</li><li>There is working space and storage</li>",[1,6,7,10]];
-        var building3 = ["Lecturer's Room 1","<li>1-03</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-03</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,6,7,8]];
-        var building4 = ["Lecturer's Room 2","<li>1-04</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-04</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,6,7,8,9]];
-        var building5 = ["Lecturer's Room 3","<li>1-05</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-05</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,11,12]];
-        var building6 = ["Lecturer's Room 4","<li>1-06</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-06</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,11,13,14]];
-        var building7 = ["Lecturer's Room 5","<li>1-07</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-07</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,11,13,15,16]];
-        var building8 = ["Lecturer's Room 6","<li>1-08</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>Room ID is 1-08</li><li>This is First floor</li><li>This is 'Lecturer's name' room</li>",[1,11,13,15,17]];
-        var building9 = ["Network Engineering Lab","<li>1-09</li><li>Public</li><li>Student</li>","<li>Room ID is 1-09</li><li>This is First floor</li><li>This is Network engineering Lab</li><li>Capacity - 30 students</li><li>Can be used for lab activities</li>",[1,11]];
-        var building10 = ["Corridor","<li>First floor</li><li>Public</li><li>This for public use</li>","<li>This is First floor</li><li>Can be used to walk between Lecturers' Room 1, 2, Instructors' Room and the Main room</li>",[1,6]];
-        var building11 = ["Main room","<li>First floor</li><li>Public</li><li>This is for public use</li>","<li>This is First floor</li><li>You can access the lift or the staircase to enter any floor from this room</li>",[]];
-        var building12 = ["Servant Room","<li>Private</li><li>First Floor</li>","<li>For the use of Servants</li><li>This is a public room</li><li>This is in First Floor</li>",[1,2,3,4]];
-        var building13 = ["Lift","<li>Public</li><li>First Floor</li>","<li>This is for Public use</li><li>This is in First Floor</li><li>Can be used to enter to any floor</li>",[0]];
-        var building14 = ["Computer Laboratory 2","<li>1-00</li><li>Public</li><li>Student</li>","<li>Room ID is 1-00</li><li>This is First floor</li><li>This is lab room 2</li><li>Capacity - 64 students</li><li>There is 2 built in projectors and screens</li><li>Can be used for lab activities</li>",[1,2]];
 
-        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14];
-        
-        var buildingIDList = [["Technical Offcer's room",1],["Insructors' Room",2],["Lecturer's Room 1",3],["Lecturer's Room 2",4],["Lecturer's Room 3",5],["Lecturer's Room 4",6],["Lecturer's Room 5",7],["Lecturer's Room 6",8],["Network Engineering Lab",9],["Corridor",10],["Main Room",11],["Servant Room",12],["Lift",13],["Computer Laboratory 2",14]];
+        //Navigating bars, ids and the names of the rooms
+        var buildingIDList = [["Technical Offcer's room",1,[1,2,3,5]],["Insructors' Room",2,[1,6,7,10]],["Lecturer's Room 1",3,[1,6,7,8]],["Lecturer's Room 2",4,[1,6,7,8,9]],["Lecturer's Room 3",5,[1,11,12]],["Lecturer's Room 4",6,[1,11,13,14]],["Lecturer's Room 5",7,[1,11,13,15,16]],["Lecturer's Room 6",8,[1,11,13,15,17]],["Network Engineering Lab",9,[1,11]],["Corridor",10,[1,6]],["Main Room",11,[]],["Servant Room",12,[1,2,3,4]],["Lift",13,[0]],["Computer Laboratory 2",14,[1,2]]];
+        //List of navigating items in the navigating panel
         var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13","navigatingItem14"];
 
     </script>
@@ -358,11 +296,6 @@
         
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
-
-        document.getElementById("label").innerHTML = departmentDatabase[0][0];
-        document.getElementById("list").innerHTML = departmentDatabase[0][1];
-        document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][0];
-        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
 
         animate();
 
