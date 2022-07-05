@@ -76,7 +76,26 @@
     </div>
     <div id="aim" class="aim"></div>
     <script type="text/javascript">
-        
+       
+//Database
+        //This database is used to load the information about the buildings
+        var my_json={};   
+        loadBuildings();
+    
+        function loadBuildings(){     
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','Gfloor_data.json',true);
+
+            xhr.onload = function(){
+                if(this.status==200){
+                     my_json = JSON.parse(this.responseText);
+                         console.log(my_json);
+                         roomInfo(defaultID);   //Set initial information should be appeared in the panels
+                }
+            }
+            xhr.send();
+        }
+
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
@@ -92,30 +111,12 @@
         var idNUM = 14;     //Number of ids
         var doorHeight=-1.72, panelHeight = 3.85, wallHeight=-0.7, barHeight=-4.95;     //Height of the doors,panels,walls and the bars should be set
         var barNUM = 19;    //Number of navigating bars
+        var defaultID=0;    //This is the id of the default information should be shown
 
-        //Database
-        //This database is used to load the information about the buildings
-        var departmentDatabase;
 
-        //Data of a particular room can be added to the database as an array
-        var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li><li>This is Floor 2</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>",[]];
-        var building1 = ["Technical Offcer's room","<li>2-01</li><li>Private</li><li>Staff</li>","<li>This is Second floor</li><li>This is Technical officer's room</li><li>Used by Technical officer and assistant</li>",[1,2,3,4,18,6,8]];
-        var building2 = ["Insructors' Room","<li>2-02</li><li>Public</li><li>Staff</li>","<li>This is Second floor</li><li>This is Instructors'/PG students' room</li><li>There is working space and storage</li>",[1,2,3,9]];
-        var building3 = ["Industrial Automation Lab","<li>2-03</li><li>Public</li><li>Student</li>","<li>This is Second floor</li><li>This is industrial automation lab</li><li>used for lab activities</li>",[1,2,3,9,10]];
-        var building4 = ["Discussion Room","<li>2-04</li><li>Public</li><li>Student and staff</li>","<li>This is Second floor</li><li>This is Discussion room</li><li>This room is used to discuss projects, labs, assignments etc</li>",[1,2,3,11]];
-        var building5 = ["Lecturer's Room 1","<li>2-05</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,12]];
-        var building6 = ["Lecturer's Room 2","<li>2-06</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,13,14]];
-        var building7 = ["Lecturer's Room 3","<li>2-07</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,13,15,16]];
-        var building8 = ["Lecturer's Room 4","<li>2-08</li><li>Private</li><li>Staff</li><li>'lecturer's name' room</li>","<li>This is Second floor</li><li>This is 'Lecturer's name' room</li>",[1,2,3,11,13,15,17]];
-        var building9 = ["Main room","<li>Second floor</li><li>Public</li><li>This is for public use</li>","<li>This is Second floor</li><li>You can access the lift or the staircase to enter any floor from this room</li>",[1]];
-        var building10 = ["Lift","<li>Public</li><li>Second Floor</li>","<li>This is for Public use</li><li>This is in Second Floor</li><li>Can be used to enter to any floor</li>",[1,0]];
-        var building11 = ["Corridor","<li>Second floor</li><li>Public</li><li>This for public use</li>","<li>This is Second floor</li><li>Can be used to walk between 1-09,1-03,1-04,1-02 and main room</li>",[1,2,3,4]];
-        var building12 = ["Servant Room","<li>Private</li><li>Second Floor</li>","<li>For the use of Servants</li><li>This is a public room</li><li>This is in Second Floor</li>",[1,2,3,4,18,6,7]];
-        var building13 = ["Electronics Laboratory","<li>2-00</li><li>Public</li><li>Student</li>","<li>This is Second floor</li><li>This is electronic laboratory</li><li>Capacity - 60 students</li><li>There is 30 computers, oscilloscopes and power supplies</li><li>To be used for Digital Design, Embedded Systems and other courses</li>",[1,2,3,4,18,5]];
-
-        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13];
-
-        var buildingIDList = [["Technical Offcer's room",1],["Insructors' Room",2],["Industrial Automation Lab",3],["Discussion Room",4],["Lecturer's Room 1",5],["Lecturer's Room 2",6],["Lecturer's Room 3",7],["Lecturer's Room 4",8],["Main room",9],["Lift",10],["Corridor",11],["Servant Room",12],["Electronics Laboratory",13]];
+        //Navigating bars, ids and the names of the rooms
+        var buildingIDList = [["Technical Offcer's room",1,[1,2,3,4,18,6,8]],["Insructors' Room",2,[1,2,3,9]],["Industrial Automation Lab",3,[1,2,3,9,10]],["Discussion Room",4,[1,2,3,11]],["Lecturer's Room 1",5,[1,2,3,11,12]],["Lecturer's Room 2",6,[1,2,3,11,13,14]],["Lecturer's Room 3",7,[1,2,3,11,13,15,16]],["Lecturer's Room 4",8,[1,2,3,11,13,15,17]],["Main room",9,[1]],["Lift",10,[1,0]],["Corridor",11,[1,2,3,4]],["Servant Room",12,[1,2,3,4,18,6,7]],["Electronics Laboratory",13,[1,2,3,4,18,5]]];
+        //List of navigating items in the navigating panel
         var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13"];
 
     </script>
@@ -189,7 +190,7 @@
 
         var panel10_1BB = createTransparentPanel(10,5.3,5.76,-2.65,-62.12);         PanelsList.push(panel10_1BB);
     
-        var panel11_1BB = createTransparentPanel(11,0.94,3.2,-5.44,-67.2);          PanelsList.push(panel11_1BB);
+        var panel11_1BB = createTransparentPanel(11,0.96,3.2,-5.44,-67.2);          PanelsList.push(panel11_1BB);
         var panel11_2BB = createTransparentPanel(11,4.43,10.1,-8.13,-63.75);        PanelsList.push(panel11_2BB);
 
         var panel12_1BB = createTransparentPanel(12,4.9,3.2,-2.45,-67.2);           PanelsList.push(panel12_1BB);
@@ -287,12 +288,6 @@
 
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
-
-        //Set initial information should be appeared in the panels
-        document.getElementById("label").innerHTML = departmentDatabase[0][0];
-        document.getElementById("list").innerHTML = departmentDatabase[0][1];
-        document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][0];
-        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
 
         animate();
 
