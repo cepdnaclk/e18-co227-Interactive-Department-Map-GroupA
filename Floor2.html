@@ -37,7 +37,7 @@
     <div id="latterPanel" class="latterPanelClass">
         <div id="link" class="link_class">
             <div id="linkHead" class="linkHead_class">Link</div>
-            <div id="url" class="url_class">https://cebcare.ceb.lk/Incognito/DemandMgmtSchedule</div>
+            <a href="http://www.ce.pdn.ac.lk/" id="url" target="_blank">Click here for more info</a>
         </div>
         <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
             <div id="searchBar" class="searchBar">
@@ -84,7 +84,7 @@
     
         function loadBuildings(){     
             var xhr = new XMLHttpRequest();
-            xhr.open('GET','Gfloor_data.json',true);
+            xhr.open('GET','json/F2data.json',true);
 
             xhr.onload = function(){
                 if(this.status==200){
