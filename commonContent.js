@@ -473,7 +473,7 @@ async function showInformation(){               //This function shrinks the top 
     if(clicked&&(!expanding)&&(!expanded)){     //If a building is clicked, labels are not expanding currently and more information label is dissappeared
         expanding=1;                            //set the expanding flag to 1
         document.getElementById("label2").innerHTML = "More information about "+document.getElementById("label").innerHTML;     //set the second label
-        document.getElementById("label").style.whiteSpace = "nowrap";
+        // document.getElementById("label").style.whiteSpace = "nowrap";
         for(var i =0;i<10;i++){                 //Used a loop for smooth animations
             await sleep(20);                    //Sleep for 20 millieseconds
             document.getElementById("list").style.opacity = 1-(0.1*(i+1));                  //dissappears the main information list
@@ -481,6 +481,7 @@ async function showInformation(){               //This function shrinks the top 
             document.getElementById("main_information").style.height = 50-4.4*(i+1)+"%";   //Shrinks the main information label
             document.getElementById("link").style.height = 15-0.75*i+"%";
         }
+        document.getElementById("label").style.whiteSpace = "nowrap";
         document.getElementById("hint").style.backgroundColor = "#21618C";
         expanding=0;        //set the expanding flag to 0
         expanded = 1;       //Set the expanded flag to 1
