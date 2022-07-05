@@ -128,7 +128,6 @@ body {
     bottom: 16%;
     height: 15%;
     overflow: hidden;
-    background-color:#4a9599;
 }
 
 .linkHead_class{
@@ -143,7 +142,7 @@ body {
 .url_class{
     padding-top: 0.5vmin;
     padding-bottom: 1.2vmin;
-    font-size: 1.4vmin;
+    font-size: 1.6vmin;
     width: 100%;
     background-color:white;
 }
