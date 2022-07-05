@@ -1063,46 +1063,56 @@ var animate = function(){
 
 //Update information panel
 function roomInfo(buildingID){
+
     document.getElementById("label").innerHTML = my_json[buildingID].name;                           //Update the default information about the department on the top right labels
-    if(my_json[buildingID].category==4){
-    document.getElementById("list").innerHTML ='<li>G '+my_json[buildingID].id+                         //Update the main information panel
-                                                '</li><li>'+my_json[buildingID].data1+
-                                                '</li><li>Accessible to '+my_json[buildingID].data2+
+                               //Update the default information about the department on the top right labels
+    
+    if(my_json[buildingID].category==1){
+    document.getElementById("url").innerHTML = my_json[buildingID].contact;
+    document.getElementById("list").innerHTML ='<li>Accessible for : '+my_json[buildingID].accessibility+                         //Update the main information panel
+                                                '</li><li>Incharge : '+my_json[buildingID].staff+
+                                                '</li><li>Capacity : '+my_json[buildingID].capacity+
+                                                '</li><li>Contact  : '+my_json[buildingID].more+
                                                 '</li>';
-    }else{
-        document.getElementById("list").innerHTML ='<li>G '+my_json[buildingID].id+
-                                                '</li><li>'+my_json[buildingID].more+
-                                                '</li><li>Accessible to '+my_json[buildingID].accessibility+
+                                                                  //Update the more information panel
+    document.getElementById("list2").innerHTML ='<li>Location ID : '+my_json[buildingID].id+
+                                                '</li><li>'+my_json[buildingID].features+
+                                                '</li><li>This is a '+my_json[buildingID].tags+'area'
                                                 '</li>';
     }
-
-    if(my_json[buildingID].category==1){                                                                //Update the more information panel
-        document.getElementById("list2").innerHTML ='<li>This has a capacity of '+my_json[buildingID].capacity+
-                                                '</li><li>This is a '+my_json[buildingID].tags+' area'+
-                                                '</li><li>Staff of the lab - '+my_json[buildingID].staff+
-                                                '</li><li>Features & Assets - '+my_json[buildingID].features+
-                                                '</li><li>Contact Info - <button id="btnLink">Website</button>'+
-                                                '</li>';       
-    }else if(my_json[buildingID].category==2){
-        let text = my_json[buildingID].incharge;
-        let lecturer = text.link("https://google.com");
-        document.getElementById("list2").innerHTML ='<li>This room belongs to '+lecturer+
-                                                '</li><li>Contact info - '+my_json[buildingID].contact+
-                                                '</li><li>This is a '+my_json[buildingID].tags+' area'+
-                                                '</li>';
-        
-    }else if(my_json[buildingID].category==3){
-        
-        document.getElementById("list2").innerHTML ='<li>'+my_json[buildingID].features+
-                                                    '</li><li>This is a '+my_json[buildingID].tags+' area'+
-                                                '</li>';
-        
-    }else if(my_json[buildingID].category==4){
-        
-        document.getElementById("list2").innerHTML ='<li>'+my_json[buildingID].data3+
+    else if(my_json[buildingID].category==2){
+        document.getElementById("url").innerHTML = my_json[buildingID].more;
+        document.getElementById("list").innerHTML ='<li>Accessible for : '+my_json[buildingID].accessibility+                         //Update the main information panel
+                                                    '</li><li>Incharge : '+my_json[buildingID].staff+
+                                                    '</li><li>Office No : '+my_json[buildingID].contact1+
+                                                    '</li><li>Email  : '+my_json[buildingID].contact2+
+                                                    '</li>';
+                                                                      //Update the more information panel
+        document.getElementById("list2").innerHTML ='<li>Location ID : '+my_json[buildingID].id+
+                                                    '</li><li>This is a '+my_json[buildingID].tags+'area'
+                                                    '</li>';
+    }
+    else if(my_json[buildingID].category==3){
+        document.getElementById("url").innerHTML = my_json[0].data5;
+        document.getElementById("list").innerHTML ='<li>Accessible for : '+my_json[buildingID].accessibility+                         //Update the main information panel
+                                                    '</li><li>'+my_json[buildingID].more+
+                                                    '</li>';
+                                                                      //Update the more information panel
+        document.getElementById("list2").innerHTML ='<li>Location ID : '+my_json[buildingID].id+
+                                                    '</li><li>'+my_json[buildingID].features+
+                                                    '</li><li>This is a '+my_json[buildingID].tags+'area'
+                                                    '</li>';
+    }
+    else {
+        document.getElementById("url").innerHTML = my_json[buildingID].data5;
+        document.getElementById("list").innerHTML ='<li>'+my_json[buildingID].data1+                         //Update the main information panel
+                                                    '</li><li>'+my_json[buildingID].data2+
+                                                    '</li>';
+                                                                      //Update the more information panel
+        document.getElementById("list2").innerHTML ='<li>Location ID : '+my_json[buildingID].id+
+                                                    '</li><li>'+my_json[buildingID].data3+
                                                     '</li><li>'+my_json[buildingID].data4+
-                                                    '</li><li>'+my_json[buildingID].data5+
-                                                '</li>';
-        
-    }                                 
+                                                    '</li>';
+    }
+                               
    }
