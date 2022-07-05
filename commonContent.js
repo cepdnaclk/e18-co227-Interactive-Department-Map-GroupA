@@ -88,6 +88,9 @@ function addMouseEvents(cube, buildingID){                                      
     });
     domEvents.addEventListener(cube,'mouseover',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
         if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+            for(var i=0;i<idNUM;i++){                                           //Set opacity of all the doors to 0.6
+                transparentMaterialArray[i].opacity = 0.6;
+            }
             cube.material.opacity = 0.8;
             roomInfo(buildingID);    
         }
@@ -205,6 +208,9 @@ function addMouseEventsForPanels(cube, buildingID){                             
     });
     domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
         if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
+            for(var i=0;i<idNUM;i++){                                           //Set opacity of all the panels to 0
+                transparentMaterialForPanelsArray[i].opacity = 0;
+            }
             cube.material.opacity = 0.4;
             roomInfo(buildingID);
         }
@@ -833,6 +839,7 @@ function changeCorners(){   //Change the shape of the corners of the layouts
         document.getElementById("RightButton").style.borderRadius = "0vmin";
         document.getElementById("leftTopButton").style.borderRadius = "0vmin";
         document.getElementById("leftBottomButton").style.borderRadius = "0vmin";
+        document.getElementById("link").style.borderRadius = "0vmin";
     }else{
         circleCorners = 1;
         document.getElementById("changeCorners").innerHTML = "Square Corners";
@@ -844,6 +851,7 @@ function changeCorners(){   //Change the shape of the corners of the layouts
         document.getElementById("RightButton").style.borderRadius = "0 1.4vmin 1.4vmin 0";
         document.getElementById("leftTopButton").style.borderRadius = "1.4vmin 0 0 0";
         document.getElementById("leftBottomButton").style.borderRadius = "0 0 0 1.4vmin";
+        document.getElementById("link").style.borderRadius = "3vmin";
     }
 }
 
