@@ -1,0 +1,162 @@
+[
+    {
+        "category":4,
+        "id":"02-FLOOR",
+        "name" :"Second Floor",
+        "data1":"Welcome to Computer Engineering Department UoP",
+        "data2":"The Head of the departmnt is Prof.Roshan Ragel",
+        "data3":"This is a 5 storey building",
+        "data4":"This is the Second Floor",
+        "data5":"http://www.ce.pdn.ac.lk/"
+
+        
+    },
+{
+    "category":3,
+    "id":"02-01",
+    "name" :"Technical Offcer's room",
+    "accessibility":"TO",
+    "more":"This room is used by Technical officer and assistant",
+    "tags":"staff",
+    "features":"This belongs to second Floor"
+    
+},
+{
+    "category":3,
+    "id":"02-02",
+    "name" :"Insructors' Room",
+    "accessibility":"I PG",
+    "more":"This is the room for Instructors and Past Graduate students",
+    "tags":"staff",
+    "features":"This contains a working space for four"
+    
+},
+{
+    "category":1,
+    "id":"02-03",
+    "name" :"Industrial Automation Laboratory",
+    "accessibility":"S I TO UG PG",
+    "more":"This lab is used for related lab activities",
+    "tags":"lab",
+    "capacity": "6",
+    "staff":"none",
+    "features":"This lab has PLC Board, Industrial Conveyor Belt",
+    "contact":"https://ce.pdn.ac.lk/facilities/industrial-automation-lab"
+     
+},
+{
+    "category":3,
+    "id":"02-09",
+    "name" :"Discussion Room",
+    "accessibility":"ALL",
+    "more":"This room is used to have discussions of projects,activities etc",
+    "tags":"public",
+    "features":"This contains space for 30 students"
+    
+},
+{
+    "category":2,
+    "id":"02-05",
+    "name" :"Lecturer's Room 1",
+    "accessibility":"Staff",
+    "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+    "tags":"staff",
+    "staff":"Dr.John Doe1",
+    "contact1":"011-1234567",
+    "contact2":"abc@ce.pdn.ac.lk"
+    
+},
+{
+    "category":2,
+    "id":"02-06",
+    "name" :"Lecturer's Room 2",
+    "accessibility":"Staff",
+    "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+    "tags":"staff",
+    "staff":"Dr.John Doe2",
+    "contact1":"011-1234567",
+    "contact2":"abc@ce.pdn.ac.lk"
+    
+    
+},
+{
+    "category":2,
+    "id":"02-07",
+    "name" :"Lecturer's Room 3",
+    "accessibility":"Staff",
+    "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+    "tags":"staff",
+    "staff":"Dr.John Doe3",
+    "contact1":"011-1234567",
+    "contact2":"abc@ce.pdn.ac.lk"
+    
+
+},
+{
+    "category":2,
+    "id":"02-08",
+    "name" :"Lecturer's Room 4",
+    "accessibility":"Staff",
+    "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+    "tags":"staff",
+    "staff":"Dr.John Doe4",
+    "contact1":"011-1234567",
+    "contact2":"abc@ce.pdn.ac.lk"
+    
+},
+
+{
+    "category":3,
+    "id":"02-ENTR",
+    "name" :"Main Room",
+    "accessibility":"ALL",
+    "more":"The lift or the staircases to enter other floors can be accessed from here",
+    "tags":"public",
+    "features":"Entrance and the Exit points are in here"
+   
+},
+{
+    "category":3,
+    "id":"02-LIFT",
+    "name" :"Lift",
+    "accessibility":"ALL",
+    "more":"Can be used to enter other floors",
+    "tags":"public",
+    "features":"This belongs to Floor2"
+},
+
+{
+    "category":3,
+    "id":"02-CR01",
+    "name" :"Corridor-01",
+    "accessibility":"ALL",
+    "more":"This corridor can be used to reach discussion room,Hardware & CI lab,TO room and Main room",
+    "tags":"public",
+    "features":"This belongs to floor 2"
+    
+   
+},
+{
+    "category":3,
+    "id":"02-OP",
+    "name" :"Operator-room",
+    "accessibility":"TO",
+    "more":"",
+    "tags":"authorized",
+    "features":"This belongs to second Floor"
+},
+{
+    "category":1,
+    "id":"02-00",
+    "name" :"Hardware and Computer Interfacing Lab",
+    "accessibility":"S I TO UG",
+    "more":"This lab is used for Digital Design, Embedded Systems and other courses",
+    "tags":"lab",
+    "capacity": "60",
+    "staff":"none",
+    "features":"This lab contains 30 Computers, Oscilloscopes, Power Supplies, Signal Generators",
+    "contact":"https://ce.pdn.ac.lk/facilities/hardware-and-interfacing-lab/"
+   
+}
+
+]

@@ -1,0 +1,176 @@
+[
+    {
+        "category":4,
+        "id":"01-FLOOR",
+        "name" :"First Floor",
+        "data1":"Welcome to Computer Engineering Department UoP",
+        "data2":"The Head of the department is Prof.Roshan Ragel",
+        "data3":"This is a 5 storey building",
+        "data4":"This is the First Floor",
+        "data5":"http://www.ce.pdn.ac.lk/"
+
+        
+    },
+{
+    "category":3,
+    "id":"01-01",
+    "name" :"Technical Officer's room",
+    "accessibility":"TO",
+    "more":"This room is used by Technical officer and assistant",
+    "tags":"staff",
+    "features":"This belongs to first Floor"
+    
+},
+{
+    "category":3,
+    "id":"01-02",
+    "name" :"Insructors' Room",
+    "accessibility":"I PG",
+    "more":"This is the room for Instructors and Past Graduate students",
+    "tags":"staff",
+    "features":"This contains a working space for four"
+    
+},
+{
+    "category":2,
+    "id":"01-03",
+    "name" :"Lecturer's Room 1",
+    "accessibility":"Staff",
+    "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+    "tags":"staff",
+    "staff":"Dr.John Doe1",
+    "contact1":"011-1234567",
+    "contact2":"abc@ce.pdn.ac.lk"
+     
+},
+{
+    "category":2,
+    "id":"01-04",
+    "name" :"Lecturer's Room 2",
+    "accessibility":"Staff",
+    "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+    "tags":"staff",
+    "staff":"Dr.John Doe2",
+    "contact1":"011-1234567",
+    "contact2":"abc@ce.pdn.ac.lk"
+    
+},
+{
+    "category":2,
+    "id":"01-05",
+    "name" :"Lecturer's Room 3",
+    "accessibility":"Staff",
+    "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+    "tags":"staff",
+    "staff":"Dr.John Doe3",
+    "contact1":"011-1234567",
+    "contact2":"abc@ce.pdn.ac.lk"
+    
+},
+{
+    "category":2,
+    "id":"01-06",
+    "name" :"Lecturer's Room 4",
+    "accessibility":"Staff",
+    "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+    "tags":"staff",
+    "staff":"Dr.John Doe4",
+    "contact1":"011-1234567",
+    "contact2":"abc@ce.pdn.ac.lk"
+    
+    
+},
+{
+    "category":2,
+    "id":"01-07",
+    "name" :"Lecturer's Room 5",
+    "accessibility":"Staff",
+    "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+    "tags":"staff",
+    "staff":"Dr.John Doe5",
+    "contact1":"011-1234567",
+    "contact2":"abc@ce.pdn.ac.lk"
+    
+
+},
+{
+    "category":2,
+    "id":"01-08",
+    "name" :"Lecturer's Room 6",
+    "accessibility":"Staff",
+    "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+    "tags":"staff",
+    "staff":"Dr.John Doe6",
+    "contact1":"011-1234567",
+    "contact2":"abc@ce.pdn.ac.lk"
+    
+},
+{
+    "category":1,
+    "id":"01-09",
+    "name" :"Network & Communication Lab",
+    "accessibility":"S I TO UG PG",
+    "more":"This lab is used for Networking related courses",
+    "tags":"lab",
+    "capacity": "30",
+    "staff":"none",
+    "features":"This lab has Computers, Networking Devices etc.",
+    "contact":"https://ce.pdn.ac.lk/facilities/networking-lab"
+   
+   
+},
+{
+    "category":3,
+    "id":"01-CR01",
+    "name" :"Corridor-01",
+    "accessibility":"ALL",
+    "more":"This corridor can be used to reach Lecturers' Room 1, 2, Instructors' Room and the Main room",
+    "tags":"public",
+    "features":"This belongs to floor 1"
+    
+   
+},
+{
+    "category":3,
+    "id":"01-ENTR",
+    "name" :"Main Room",
+    "accessibility":"ALL",
+    "more":"The lift or the staircases to enter other floors can be accessed from here",
+    "tags":"public",
+    "features":"Entrance and the Exit points are in here"
+},
+
+{
+    "category":3,
+    "id":"01-OP",
+    "name" :"Operator-room",
+    "accessibility":"TO",
+    "more":"",
+    "tags":"authorized",
+    "features":"This belongs to Floor1"
+   
+},
+{
+    "category":3,
+        "id":"01-LIFT",
+        "name" :"Lift",
+        "accessibility":"ALL",
+        "more":"Can be used to enter other floors",
+        "tags":"public",
+        "features":"This belongs to Floor1"
+},
+{
+    "category":1,
+    "id":"01-00",
+    "name" :"Computer Laboratory 2",
+    "accessibility":"S I TO UG PG",
+    "more":"Can be used for lab activities",
+    "tags":"lab",
+    "capacity": "64",
+    "staff":"none",
+    "features":"This lab contains 2 built in projectors and screens and 64 computers",
+    "contact":"https://ce.pdn.ac.lk/facilities/computer-lab2"
+   
+}
+
+]
