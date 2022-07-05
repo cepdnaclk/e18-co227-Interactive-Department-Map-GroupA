@@ -76,6 +76,7 @@
         <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
     </div>
     <div id="aim" class="aim"></div>
+    <script src="commonContent.js"></script>
     <script type="text/javascript"> 
     
 //Database
@@ -85,7 +86,7 @@
     
         function loadBuildings(){     
             var xhr = new XMLHttpRequest();
-            xhr.open('GET','Gfloor_data.json',true);
+            xhr.open('GET','F1data.json',true);
 
             xhr.onload = function(){
                 if(this.status==200){
@@ -121,7 +122,7 @@
         var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13","navigatingItem14"];
 
     </script>
-    <script src="commonContent.js"></script>
+    
     <script type="text/javascript"> 
 
         //var blenderBuilding9 = importObject('./floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);    
