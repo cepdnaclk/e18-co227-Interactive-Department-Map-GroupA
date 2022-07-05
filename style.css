@@ -47,12 +47,22 @@ body {
     border-radius: 3.5vmin;
 }
 
+.label1_class{
+    width: 100%;
+    white-space: normal;
+    font-size: 3.35vmin;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .label2_class{
     font-size: 0vmin;
 }
 
 .list_class{
+    padding-top: 4.5%;
     padding-left: 15%;
+    padding-right: 5%;
 }
 
 .list2_class{
@@ -363,3 +373,6 @@ img {
     border-radius: 0.5vmin;
 }
 
+li{
+    padding-bottom: 1vmin;
+}

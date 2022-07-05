@@ -473,6 +473,7 @@ async function showInformation(){               //This function shrinks the top 
     if(clicked&&(!expanding)&&(!expanded)){     //If a building is clicked, labels are not expanding currently and more information label is dissappeared
         expanding=1;                            //set the expanding flag to 1
         document.getElementById("label2").innerHTML = "More information about "+document.getElementById("label").innerHTML;     //set the second label
+        document.getElementById("label").style.whiteSpace = "nowrap";
         for(var i =0;i<10;i++){                 //Used a loop for smooth animations
             await sleep(20);                    //Sleep for 20 millieseconds
             document.getElementById("list").style.opacity = 1-(0.1*(i+1));                  //dissappears the main information list
@@ -495,6 +496,7 @@ async function hideInformation(){               //This function expands the top 
     if(clicked&&(!expanding)&&expanded){        //If a building is clicked, labels are not expanding currently and more information label is appeared
         expanding=1;                            //set the expanding flag to 1
         document.getElementById("list").style.opacity = 1;      //Shows the main information list
+        document.getElementById("label").style.whiteSpace = "normal";
         for(var i =0;i<10;i++){                 //Used a loop for smooth animations
             await sleep(20);                    //Sleep for 20 millieseconds
             document.getElementById("more_information").style.opacity = 0.9-0.09*(i+1);     //Dissappears the more information label
