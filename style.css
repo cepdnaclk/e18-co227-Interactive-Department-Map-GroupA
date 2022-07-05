@@ -73,17 +73,6 @@ body {
     padding-bottom: 10%;
 }
 
-.moreButton_class{
-    border-radius: 1.25vmin;
-    position: absolute;
-    background-color: #21618C;
-    border: none;
-    outline: none;
-    color: white;
-    padding:  1vmin 2vmin 1vmin 2vmin;
-    right: 10%;
-    bottom: 5%;
-}
 #btnLink{
     border-radius: 1.25vmin;
     background-color: #4a9599;
