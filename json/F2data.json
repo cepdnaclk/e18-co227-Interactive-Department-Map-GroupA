@@ -16,9 +16,9 @@
     "id":"02-01",
     "name" :"Technical Offcer's room",
     "accessibility":"TO",
-    "more":"This room is used by Technical officer and assistant",
+    "more":"This room is used by Technical officer and assistant.Mr.Kelum is currently incharge in here",
     "tags":"staff",
-    "features":"This belongs to second Floor"
+    "features":"This room has a Hardware component storage"
     
 },
 {
@@ -28,7 +28,7 @@
     "accessibility":"I PG",
     "more":"This is the room for Instructors and Past Graduate students",
     "tags":"staff",
-    "features":"This contains a working space for four"
+    "features":"This room has working space for four"
     
 },
 {
@@ -40,7 +40,7 @@
     "tags":"lab",
     "capacity": "6",
     "staff":"none",
-    "features":"This lab has PLC Board, Industrial Conveyor Belt",
+    "features":"This lab has PLC Boards, Industrial Conveyor Belts",
     "contact":"https://ce.pdn.ac.lk/facilities/industrial-automation-lab"
      
 },
@@ -51,7 +51,7 @@
     "accessibility":"ALL",
     "more":"This room is used to have discussions of projects,activities etc",
     "tags":"public",
-    "features":"This contains space for 30 students"
+    "features":"This has a space for 30 students and  White Boards and study tables are availbale"
     
 },
 {
@@ -73,7 +73,7 @@
     "accessibility":"Staff",
     "more":"https://people.ce.pdn.ac.lk/staff/academic/",
     "tags":"staff",
-    "staff":"Dr.John Doe2",
+    "staff":"Dr.Damayanthi Herath",
     "contact1":"011-1234567",
     "contact2":"abc@ce.pdn.ac.lk"
     
@@ -153,7 +153,7 @@
     "more":"This lab is used for Digital Design, Embedded Systems and other courses",
     "tags":"lab",
     "capacity": "60",
-    "staff":"none",
+    "staff":"Mr.Kelum",
     "features":"This lab contains 30 Computers, Oscilloscopes, Power Supplies, Signal Generators",
     "contact":"https://ce.pdn.ac.lk/facilities/hardware-and-interfacing-lab/"
    

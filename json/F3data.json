@@ -1,0 +1,188 @@
+[
+    {
+        "category":4,
+        "id":"03-FLOOR",
+        "name" :"Third Floor",
+        "data1":"Welcome to Computer Engineering Department UoP",
+        "data2":"The Head of the departmnt is Prof.Roshan Ragel",
+        "data3":"This is a 5 storey building",
+        "data4":"This is the Third Floor",
+        "data5":"http://www.ce.pdn.ac.lk/"
+    },
+    {
+        "category":2,
+        "id":"03-01",
+        "name" :"Lecturer's Room 2",
+        "accessibility":"Staff",
+        "more":"Currently not in use",
+        "tags":"staff",
+        "staff":"Not assigned",
+        "contact1":"Currently not in use",
+        "contact2":"Currently not in use"
+    },
+    {
+        "category":2,
+        "id":"03-02",
+        "name" :"Lecturer's Room 3",
+        "accessibility":"Staff",
+        "more":"https://people.ce.pdn.ac.lk/staff/academic/sithumini-ekanayake/",
+        "tags":"staff",
+        "staff":"Dr. Sithumini Ekanayake",
+        "contact1":"011-xxxxxxx",
+        "contact2":"sithuminie@eng.pdn.ac.lk"   
+    },
+    {
+        "category":2,
+        "id":"03-03",
+        "name" :"Lecturer's Room 4",
+        "accessibility":"Staff",
+        "more":"https://people.ce.pdn.ac.lk/staff/academic/mahanama-wickramasinghe/",
+        "tags":"staff",
+        "staff":"Dr. Mahanama Wickramasinghe",
+        "contact1":"+94704153780",
+        "contact2":"mahanamaw@eng.pdn.ac.lk" 
+    },
+    {
+        "category":2,
+        "id":"03-04",
+        "name" :"Lecturer's Room 5",
+        "accessibility":"Staff",
+        "more":"Currently not in use",
+        "tags":"staff",
+        "staff":"Not assigned",
+        "contact1":"Currently not in use",
+        "contact2":"Currently not in use"
+    },
+    {
+        "category":2,
+        "id":"03-05",
+        "name" :"Lecturer's Room 6",
+        "accessibility":"Staff",
+        "more":"https://people.ce.pdn.ac.lk/staff/academic/nadeesha-adikari/",
+        "tags":"staff",
+        "staff":"Mrs. Nadeesha Adikari",
+        "contact1":"011-xxxxxxx",
+        "contact2":"nadeeshaa@eng.pdn.ac.lk"    
+    },
+    {
+        "category":3,
+        "id":"03-06",
+        "name" :"Insructors' Room",
+        "accessibility":"I PG",
+        "more":"This is the room for Instructors and Past Graduate students",
+        "tags":"staff",
+        "features":"This contains a working space for six people and a storage" 
+    },
+    {
+        "category":3,
+        "id":"03-07",
+        "name" :"Technical Offcer's room",
+        "accessibility":"TO",
+        "more":"This room is used by Technical officer and assistant.Mr. Wasundara is currently incharge in here",
+        "tags":"staff",
+        "features":"This space is Additionally used as material storage"
+    },
+
+    {
+        "category":1,
+        "id":"03-08",
+        "name" :"ESCAL Makerspace Lab",
+        "accessibility":"S I TO UG PG",
+        "more":"This lab has 5 Working Stations with Fabrication facilities",
+        "tags":"lab",
+        "capacity": "20",
+        "staff":"none",
+        "features":"This lab has PLC Board, Industrial Conveyor Belt",
+        "contact":"https://ce.pdn.ac.lk/facilities/makerspace"
+    },
+    {
+        "category":1,
+        "id":"03-09",
+        "name" :"ESCAL Makerspace-Machine Room",
+        "accessibility":"S I TO UG PG",
+        "more":"This is for MakerSpace Heavy Machinery Work",
+        "tags":"lab",
+        "capacity": "4",
+        "staff":"none",
+        "features":"This is for MakerSpace Heavy Machinery Work",
+        "contact":"https://ce.pdn.ac.lk/facilities/makerspace"
+    },
+    {
+        "category":1,
+        "id":"03-10",
+        "name" :"ESCAL Robotics Lab1",
+        "accessibility":"S I TO UG PG",
+        "more":"This is for Robotics related works",
+        "tags":"lab",
+        "capacity": "12",
+        "staff":"none",
+        "features":"This is for Robotics related works",
+        "contact":"https://ce.pdn.ac.lk/facilities/robotics-lab"
+    },
+    {
+        "category":1,
+        "id":"03-11",
+        "name" :"ESCAL Robotics Lab2",
+        "accessibility":"S I TO UG PG",
+        "more":"This is for Robotics related works",
+        "tags":"lab",
+        "capacity": "12",
+        "staff":"none",
+        "features":"This is for Robotics related works",
+        "contact":"https://ce.pdn.ac.lk/facilities/robotics-lab"
+    },
+    {
+        "category":3,
+        "id":"03-CR01",
+        "name" :"Corridor-01",
+        "accessibility":"ALL",
+        "more":"This corridor can be used to reach all 6 lecturer's rooms, instructor room,operator rooma and main room",
+        "tags":"public",
+        "features":"This belongs to floor 3"
+        
+       
+    },
+    {
+        "category":3,
+        "id":"03-ENTR",
+        "name" :"Main Room",
+        "accessibility":"ALL",
+        "more":"The lift or the staircases to enter other floors can be accessed from here",
+        "tags":"public",
+        "features":"Entrance and the Exit points are in here"
+    
+    },
+    {
+        "category":3,
+        "id":"03-LIFT",
+        "name" :"Lift",
+        "accessibility":"ALL",
+        "more":"Can be used to enter other floors",
+        "tags":"public",
+        "features":"This belongs to Floor3"
+    },
+
+
+    {
+        "category":3,
+        "id":"03-OP",
+        "name" :"Operator-room",
+        "accessibility":"TO",
+        "more":"",
+        "tags":"authorized",
+        "features":"This belongs to third Floor"
+    },
+    {
+        "category":2,
+        "id":"03-00",
+        "name" :"Lecturer's Room 1",
+        "accessibility":"Staff",
+        "more":"https://people.ce.pdn.ac.lk/staff/academic/isuru-nawinne/",
+        "tags":"staff",
+        "staff":"Dr. Isuru Nawinne",
+        "contact1":"+94 81 239 3470",
+        "contact2":"isurunawinne@eng.pdn.ac.lk"    
+    }
+
+
+]
