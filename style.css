@@ -78,7 +78,6 @@ body {
     bottom: 1.5vmin;
     height: 0.5vmin;
     border-radius: 0.5vmin;
-    /* background-color: #1A5276; */
     margin-left: 30%;
     width: 30%;
     background-color: #A1C3D0;
@@ -264,20 +263,47 @@ body {
 
 .changeCorners_class{
     position: absolute;
-    height: 4.1%;
+    height: 3.7%;
     width: 6.7vmin;
     font-size: 1.32vmin;
     border-radius: 1.65vmin;
     background-image: conic-gradient(#9B59B6 0deg, #9B59B6 90deg, #633974 90deg, #633974 180deg, #633974 180deg, #633974 270deg, #9B59B6 270deg);
     color: white;
     border-width: 0vmin;
-    bottom: 5.7vmin;
-    right: 33vmin;
+    bottom: 6.2vmin;
+    right: 33.4vmin;
 }
 
 .changeCorners_class:active {
     transform: translateY(0.22vmin);
 }
+
+.otherpages_class{
+    position: absolute;
+    white-space: nowrap;
+    width: 24.685vmin;
+    height: 3.3%;
+    bottom: 2.25vmin;
+    background: rgba(99, 57, 116, 0.8);
+    right: 15.6vmin;
+    border-radius: 1vmin;
+}
+
+.pagebutton_class{
+    background: rgba(99, 57,116, 0);
+    color: white;
+    width: 13.5%;
+    font-size: 2vmin;
+    text-align: center;
+    border-color: white;
+    height: 100%;
+    border-radius: 1vmin;
+} 
+
+.pagebutton_class:active {
+    transform: translateY(0.22vmin);
+}
+
 
 .viewsButtonClass{
     position: absolute;

@@ -843,6 +843,7 @@ function changeCorners(){   //Change the shape of the corners of the layouts
         document.getElementById("leftTopButton").style.borderRadius = "0vmin";
         document.getElementById("leftBottomButton").style.borderRadius = "0vmin";
         document.getElementById("link").style.borderRadius = "0vmin";
+        document.getElementById("otherpages").style.borderRadius = "0vmin";
     }else{
         circleCorners = 1;
         document.getElementById("changeCorners").innerHTML = "Square Corners";
@@ -855,6 +856,7 @@ function changeCorners(){   //Change the shape of the corners of the layouts
         document.getElementById("leftTopButton").style.borderRadius = "1.4vmin 0 0 0";
         document.getElementById("leftBottomButton").style.borderRadius = "0 0 0 1.4vmin";
         document.getElementById("link").style.borderRadius = "3vmin";
+        document.getElementById("otherpages").style.borderRadius = "1vmin";
     }
 }
 
@@ -908,6 +910,26 @@ function showPath(buildingID){
         lastID = buildingIDList[buildingID][1];        //Set the LastID
     }    
     itemSelected = !itemSelected;   //Change the flag
+}
+//Redirecting to other pages
+function redirecttoPage(pageID){
+    switch(pageID){
+        case 0:
+            window.open("FloorG.html");
+            break;
+        case 1:
+            window.open("Floor1.html");
+            break;
+        case 2:
+            window.open("Floor2.html");
+            break;
+        case 3:
+            window.open("Floor3.html");
+            break;
+        case 4:
+            window.open("Floor4.html");
+            break;
+    }
 }
 
 //Key Controls
