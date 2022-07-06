@@ -22,7 +22,7 @@
                 <li>list item 3</li>
             </ul>
         </div>
-        <div id="hint" class="hint_class">Click on the blue panel for more details</div>
+        <div id="hint" class="hint_class">Click on the building for more details</div>
         <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
             <p2 id="label2" class="label2_class">More information here</p2>          
             <ul id="list2" class="list2_class" style="list-style-image: url(images/bullet2.png);">                                             <!--Top right more information list-->
@@ -30,7 +30,7 @@
                 <li>list item 2</li>
                 <li>list item 3</li>
             </ul>
-            <div class="line"></div>
+            <button id="moreButton" class="moreButton_class">More</button>
         </div>
     </div>
     
@@ -86,18 +86,25 @@
         loadBuildings();
     
         function loadBuildings(){     
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET','json/F1data.json',true);
+		
+        var xhr = new XMLHttpRequest();		//create XHR object
+        xhr.open('GET','json/F1data.json',true);
 
-            xhr.onload = function(){
-                if(this.status==200){
-                    my_json = JSON.parse(this.responseText);
-                    console.log(my_json);
-                    roomInfo(defaultID);       //Set initial information should be appeared in the panels
-                    animate();
-                }
+        xhr.onload = function(){
+            if(this.status==200){       
+                 my_json = JSON.parse(this.responseText);   //added wrapper such that values of the objects can be accessed
+                     //console.log(my_json);		
+                     roomInfo(defaultID);       			//Set initial information should be appeared in the panels
+                     animate();
             }
-            xhr.send();
+            else{
+                alert("File not found..!! Check the database file name or URL and try again !! ");	//when there's an error in accessing the json file
+            }
+        }
+        xhr.onerror = function(){
+            console.log('Request Error occured!!');			//when there's an issue with the network level
+        }
+        xhr.send();
         }
 
         var clicked = 0;                //To check whether a building has been clicked or not
@@ -115,7 +122,7 @@
         var idNUM = 15;     //Number of ids
         var doorHeight=-1.72, panelHeight = 3.85, wallHeight=-0.7, barHeight=-4.95;     //Height of the doors,panels,walls and the bars should be set
         var barNUM = 18;    //Number of navigating bars
-        var defaultID=11;    //This is the id of the default information should be shown
+        var defaultID=0;    //This is the id of the default information should be shown
         
 
         //Navigating bars, ids and the names of the rooms
