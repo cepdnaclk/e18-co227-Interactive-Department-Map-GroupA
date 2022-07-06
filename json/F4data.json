@@ -1,0 +1,211 @@
+[
+    {
+        "category":4,
+        "id":"04-FLOOR",
+        "name" :"Fourth Floor",
+        "data1":"Welcome to Computer Engineering Department UoP",
+        "data2":"The Head of the departmnt is Prof.Roshan Ragel",
+        "data3":"This is a 5 storey building",
+        "data4":"This is the Fourth Floor",
+        "data5":"http://www.ce.pdn.ac.lk/"
+    },
+    {
+        "category":3,
+        "id":"04-01",
+        "name" :"Incubation Centre 1",
+        "accessibility":"Not specified",
+        "more":"These space is to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)",
+        "tags":"Not specified",
+        "features":"This belongs to floor 3"
+    },
+    {
+        "category":3,
+        "id":"04-02",
+        "name" :"Incubation Centre 2",
+        "accessibility":"Not specified",
+        "more":"These space is to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)",
+        "tags":"Not specified",
+        "features":"This belongs to floor 3"
+    },
+    {
+        "category":3,
+        "id":"04-03",
+        "name" :"Incubation Centre 3",
+        "accessibility":"Not specified",
+        "more":"These space is to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)",
+        "tags":"Not specified",
+        "features":"This belongs to floor 3"
+    },
+    {
+        "category":3,
+        "id":"04-04",
+        "name" :"Incubation Centre 4",
+        "accessibility":"Not specified",
+        "more":"These space is to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)",
+        "tags":"Not specified",
+        "features":"This belongs to floor 3"
+    },
+    {
+        "category":1,
+        "id":"04-00",
+        "name" :"ESCAL Computer Vision Lab",
+        "accessibility":"S I TO UG PG",
+        "more":"This is for computer vision related projects,work",
+        "tags":"lab",
+        "capacity": "4",
+        "staff":"none",
+        "features":"This is for computer vision related projects,work",
+        "contact":"https://ce.pdn.ac.lk/facilities/computer-vision-lab"
+    },
+    {
+        "category":2,
+        "id":"04-05",
+        "name" :"Lecturer's Room 1",
+        "accessibility":"Staff",
+        "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+        "tags":"staff",
+        "staff":"Dr.John Doe1",
+        "contact1":"011-1234567",
+        "contact2":"abc@ce.pdn.ac.lk"    
+    },
+    {
+        "category":2,
+        "id":"04-06",
+        "name" :"Lecturer's Room 2",
+        "accessibility":"Staff",
+        "more":"https://people.ce.pdn.ac.lk/staff/academic/",
+        "tags":"staff",
+        "staff":"Dr.John Doe2",
+        "contact1":"011-1234567",
+        "contact2":"abc@ce.pdn.ac.lk"   
+    },
+    {
+        "category":1,
+        "id":"04-08",
+        "name" :"Computer Laboratory 1",
+        "accessibility":"S I TO UG PG",
+        "more":"This is the main computer laboratory of the department",
+        "tags":"lab",
+        "capacity": "70",
+        "staff":"none",
+        "features":"This lab has teaching aids, facilities like Multimedia Projector",
+        "contact":"https://ce.pdn.ac.lk/facilities/main-computer-lab"
+    },
+    {
+        "category":2,
+        "id":"04-09",
+        "name" :"Lecturer's Room 3",
+        "accessibility":"Staff",
+        "more":"https://people.ce.pdn.ac.lk/staff/academic/dhammika-elkaduwe/",
+        "tags":"staff",
+        "staff":"Dr. Dhammika Elkaduwe",
+        "contact1":"+94 81 239 3914",
+        "contact2":"dhammika@eng.pdn.ac.lk"   
+    },
+    {
+        "category":2,
+        "id":"04-10",
+        "name" :"Lecturer's Room 4",
+        "accessibility":"Staff",
+        "more":"https://people.ce.pdn.ac.lk/staff/academic/upul-jayasinghe/",
+        "tags":"staff",
+        "staff":"Dr. Upul Jayasinghe",
+        "contact1":"+94 81 239 3470",
+        "contact2":"upuljm@eng.pdn.ac.lk"   
+    },
+    {
+        "category":2,
+        "id":"04-11",
+        "name" :"Lecturer's Room 5",
+        "accessibility":"Staff",
+        "more":"https://people.ce.pdn.ac.lk/staff/academic/janaka-alawatugoda/",
+        "tags":"staff",
+        "staff":"Dr. Janaka Alawatugoda",
+        "contact1":"+94 81 239 3470",
+        "contact2":"alawatugoda@eng.pdn.ac.lk"   
+    },
+    {
+        "category":3,
+        "id":"04-12",
+        "name" :"Server room",
+        "accessibility":"TO",
+        "more":"This space for Department servers",
+        "tags":"authorized",
+        "features":"https://ce.pdn.ac.lk/facilities/server-room" 
+    },
+    {
+        "category":3,
+        "id":"04-13",
+        "name" :"Insructors' Room",
+        "accessibility":"I PG",
+        "more":"This is the room for Instructors and Past Graduate students",
+        "tags":"staff",
+        "features":"This contains a working space for two people and a storage" 
+    },
+    {
+        "category":3,
+        "id":"04-07L",
+        "name" :"Ladies Washroom",
+        "accessibility":"ALL",
+        "more":"These washromms are For the use of Ladies",
+        "tags":"public",
+        "features":"These washromms are For the use of Ladies" 
+    },
+    {
+        "category":3,
+        "id":"04-07G",
+        "name" :"Gents Washroom",
+        "accessibility":"ALL",
+        "more":"These washromms are For the use of Gents",
+        "tags":"public",
+        "features":"These washromms are For the use of Gents" 
+    },
+
+    {
+        "category":3,
+        "id":"04-ENTR",
+        "name" :"Main Room",
+        "accessibility":"ALL",
+        "more":"The lift or the staircases to enter other lower floors can be accessed from here",
+        "tags":"public",
+        "features":"Entrance and the Exit points are in here"
+    },
+    {
+        "category":3,
+        "id":"04-CR01",
+        "name" :"Corridor-01",
+        "accessibility":"ALL",
+        "more":"This corridor can be used to reach instructor room,main room and wash rooms",
+        "tags":"public",
+        "features":"This belongs to floor 4" 
+    },
+    {
+        "category":3,
+        "id":"04-LIFT",
+        "name" :"Lift",
+        "accessibility":"ALL",
+        "more":"Can be used to enter other floors",
+        "tags":"public",
+        "features":"This belongs to Floor4"
+    },
+    {
+        "category":3,
+        "id":"04-OP",
+        "name" :"Operator-room",
+        "accessibility":"TO",
+        "more":"",
+        "tags":"authorized",
+        "features":"This belongs to fourth Floor"
+    },
+    {
+        "category":3,
+        "id":"04-CR02",
+        "name" :"Corridor-02",
+        "accessibility":"ALL",
+        "more":"This corridor can be used to enter to the computer vision lab,main room and operators",
+        "tags":"public",
+        "features":"This belongs to floor 4" 
+    }
+
+
+]
