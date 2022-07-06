@@ -63,7 +63,7 @@
                     <div id="navigatingItem9" class="items" onclick="showPath(8)">Main room</div>
                     <div id="navigatingItem10" class="items" onclick="showPath(9)">Lift</div>
                     <div id="navigatingItem11" class="items" onclick="showPath(10)">Corridor</div>
-                    <div id="navigatingItem12" class="items" onclick="showPath(11)">Servant Room</div>
+                    <div id="navigatingItem12" class="items" onclick="showPath(11)">Operator-room</div>
                     <div id="navigatingItem13" class="items" onclick="showPath(12)">Electronics Laboratory</div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
 
 
         //Navigating bars, ids and the names of the rooms
-        var buildingIDList = [["Technical Offcer's room",1,[1,2,3,4,18,6,8]],["Insructors' Room",2,[1,2,3,9]],["Industrial Automation Lab",3,[1,2,3,9,10]],["Discussion Room",4,[1,2,3,11]],["Lecturer's Room 1",5,[1,2,3,11,12]],["Lecturer's Room 2",6,[1,2,3,11,13,14]],["Lecturer's Room 3",7,[1,2,3,11,13,15,16]],["Lecturer's Room 4",8,[1,2,3,11,13,15,17]],["Main room",9,[1]],["Lift",10,[1,0]],["Corridor",11,[1,2,3,4]],["Servant Room",12,[1,2,3,4,18,6,7]],["Electronics Laboratory",13,[1,2,3,4,18,5]]];
+        var buildingIDList = [["Technical Offcer's room",1,[1,2,3,4,18,6,8]],["Insructors' Room",2,[1,2,3,9]],["Industrial Automation Lab",3,[1,2,3,9,10]],["Discussion Room",4,[1,2,3,11]],["Lecturer's Room 1",5,[1,2,3,11,12]],["Lecturer's Room 2",6,[1,2,3,11,13,14]],["Lecturer's Room 3",7,[1,2,3,11,13,15,16]],["Lecturer's Room 4",8,[1,2,3,11,13,15,17]],["Main room",9,[1]],["Lift",10,[1,0]],["Corridor",11,[1,2,3,4]],["Operator-room",12,[1,2,3,4,18,6,7]],["Electronics Laboratory",13,[1,2,3,4,18,5]]];
         //List of navigating items in the navigating panel
         var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13"];
 
@@ -130,7 +130,7 @@
         //Importing the blender object using the created function above
         var blenderBuilding = importObject('./floors/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    
 
-        //Creating transparent objects using the created function above
+        //Creating transparent doors using the created function above
         var S01_door1 = createTransparentObject(1,"h",-8.45,-68.41); //a
 
         var S02_door1 = createTransparentObject(2,"v",-10.5,-54.57); //b
@@ -170,7 +170,7 @@
         
         var S13_door1 = createTransparentObject(13,"vs",-10.35,-64.25); //k
 
-//Creating transparent panels using the created function above
+        //Creating transparent panels using the created function above
         var PanelsList = [];
         var idsOfPanelList = [];
 
@@ -202,7 +202,7 @@
         var panel13_1BB = createTransparentPanel(13,20.6,21.4,-20.7,-69.3);         PanelsList.push(panel13_1BB);
         var panel13_2BB = createTransparentPanel(13,20,1.35,-21,-57.925);           PanelsList.push(panel13_2BB);
 
-//Creating transparent walls using the created function above
+        //Creating transparent walls using the created function above
         var transparentWallsList = [];
 
         var cubeV1BB = createWall(Y,70,0.3,-45);            transparentWallsList.push(cubeV1BB);
@@ -238,7 +238,7 @@
         var cubeH15BB = createWall(3.3,Y,-1.7,-52.5);       transparentWallsList.push(cubeH15BB);
         var cubeH16BB = createWall(3,Y,-5,-46);             transparentWallsList.push(cubeH16BB);
            
-//Creating navigating bars using the created function above
+        //Creating navigating bars using the created function above
         var bar0 = createNavigatingBars(0,"v",5,-3,-57.35);
         var bar1 = createNavigatingBars(1,"v",0.5,-3,-54.6);
         var bar2 = createNavigatingBars(2,"h",4.7,-5.6,-54.6);
@@ -260,7 +260,7 @@
         var bar17 = createNavigatingBars(17,"v",11.5,-8.2,-17.3);
         var bar18 = createNavigatingBars(17,"h",13.5,-15.2,-11.8);
 
-//Set lights by using the created function above
+        //Set lights by using the created function above
         var light09 = setPointLight(3,5,-5);
         var light01 = setPointLight(3,5,-10);
         var light02 = setPointLight(3,5,-20);
@@ -294,7 +294,6 @@
         scene.add( lightt );
 
     </script>
-
 
 </body>
 </html>

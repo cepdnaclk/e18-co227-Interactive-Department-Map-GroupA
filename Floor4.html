@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+//Importing the blender object using the created function above<!DOCTYPE html>
 <html>
 <head>
     <link rel="shortcut icon" href="#">
@@ -135,11 +135,10 @@
     <script type="text/javascript"> 
  
 
-
+        //Importing the blender object using the created function above
         var blenderBuilding9 = importObject('./floors/Floor4.gltf',-5,0,-80,0,3.28084); 
-        // var blenderBuilding10 = importObject('./assets/F4_Assets.gltf',-5,0,-80,0,3.28084);    //wall
-
-        //Creating transparent objects by using the created function above        
+    
+        //Creating transparent doors by using the created function above        
         var F01_door1 = createTransparentObject(1,"h",-16.52,-61.98);
 
         var F02_door1 = createTransparentObject(2,"v",-23.04,-64.4); 
@@ -197,7 +196,7 @@
         var F20_door2 = createTransparentObject(20,"th4",-7.71,-57.60);
         var F20_door3 = createTransparentObject(20,"v",-9.49,-66.42);
         
-
+        //Creating transparent panels using the created function above
         var PanelsList = [];
         var idsOfPanelList = [];
         
@@ -249,9 +248,8 @@
         
         var panel20_01 = createTransparentPanel(20,2.68,10.12,-7.75,-62.98);        PanelsList.push(panel20_01);
        
-
+        //Creating transparent walls using the created function above
         var transparentWallsList = [];
-
         
         var cubeV1BB = createWall(Y,70,-0.2,-45);           transparentWallsList.push(cubeV1BB);
         var cubeV2BB = createWall(Y,70,-30.8,-45);          transparentWallsList.push(cubeV2BB);
@@ -294,6 +292,7 @@
         var cubeH21BB = createWall(3.3,Y,-2.2,-51.5);       transparentWallsList.push(cubeH21BB);
         var cubeH22BB = createWall(3,Y,-5.6,-45);           transparentWallsList.push(cubeH22BB);
 
+        //Creating navigating bars using the created function above
         var bar0 = createNavigatingBars(0,"v",4.5,-3,-56.7);
         var bar1 = createNavigatingBars(1,"v",0.5,-3,-54.2);
         var bar2 = createNavigatingBars(2,"v",2,-3,-52.95);
@@ -353,14 +352,13 @@
         var light16 = setPointLight(3,-35,-66);
 
         // var light17 = setPointLight(3,-6,5);
-        // var light18 = setPointLight(3,-12,5);
-        // var light19 = setPointLight(3,-18,5);
+        var light18 = setPointLight(3,-15,5);
+        //var light19 = setPointLight(3,-20,5);
         // var light20 = setPointLight(3,-24,5);
         
-        var light21 = setPointLight(3,-6,-75);
-        var light22 = setPointLight(3,-12,-75);
-        var light23 = setPointLight(3,-18,-75);
-        var light24 = setPointLight(3,-24,-75);
+        var light21 = setPointLight(3,-5,-85);
+        var light22 = setPointLight(3,-15,-85);
+        var light24 = setPointLight(3,-25,-85);
     
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
