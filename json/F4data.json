@@ -175,7 +175,7 @@
         "id":"04-CR01",
         "name" :"Corridor-01",
         "accessibility":"ALL",
-        "more":"This corridor can be used to reach instructor room,main room and wash rooms",
+        "more":"This corridor can be used to reach lift,corridor2,instructor room,staircase,computer lab1 and washrooms",
         "tags":"public",
         "features":"This belongs to floor 4" 
     },
