@@ -164,7 +164,7 @@
     {
         "category":3,
         "id":"04-ENTR",
-        "name" :"Main Room",
+        "name" :"Staircase",
         "accessibility":"ALL",
         "more":"The lift or the staircases to enter other lower floors can be accessed from here",
         "tags":"public",

@@ -91,10 +91,10 @@
 
             xhr.onload = function(){
                 if(this.status==200){
-                     my_json = JSON.parse(this.responseText);
-                         console.log(my_json);
-                         roomInfo(defaultID);       //Set initial information should be appeared in the panels
-                         animate();
+                    my_json = JSON.parse(this.responseText);
+                    console.log(my_json);
+                    roomInfo(defaultID);       //Set initial information should be appeared in the panels
+                    animate();
                 }
             }
             xhr.send();
