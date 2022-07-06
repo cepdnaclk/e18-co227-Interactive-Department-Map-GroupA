@@ -15,20 +15,20 @@
     <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="information" class="information_class" >                    
         <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
-            <div id="label" class="label1_class">Department Building</div>
+            <div id="label" class="label1_class">Room Name</div>
             <ul id="list" class="list_class" style="list-style-image: url(images/bullet2.png); font-size: 2.15vmin;">                                   <!--Top right main information list-->
-                <li>Welcome to Computer Engineering Department</li>
-                <li>Head of the department is Mr.Rohitha</li>
-                <li>This is a 4 story building</li>
+                <li>list item 1</li>
+                <li>list item 2</li>
+                <li>list item 3</li>
             </ul>
         </div>
         <div id="hint" class="hint_class">Click on the building for more details</div>
         <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
             <p2 id="label2" class="label2_class">More information here</p2>          
             <ul id="list2" class="list2_class" style="list-style-image: url(images/bullet2.png);">                                             <!--Top right more information list-->
-                <li>Welcome to Computer Engineering Department, University of Peradeniya.</li>
-                <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
-                <li>This is a 4 story building which has 4 labs and bla bla bla</li>
+                <li>list item 1</li>
+                <li>list item 2</li>
+                <li>list item 3</li>
             </ul>
             <button id="moreButton" class="moreButton_class">More</button>
         </div>
@@ -62,7 +62,7 @@
                     <div id="navigatingItem9" class="items" onclick="showPath(8)">Network Engineering Lab</div>
                     <div id="navigatingItem10" class="items" onclick="showPath(9)">Corridor</div>
                     <div id="navigatingItem11" class="items" onclick="showPath(10)">Main Room</div>
-                    <div id="navigatingItem12" class="items" onclick="showPath(11)">Servant Room</div>
+                    <div id="navigatingItem12" class="items" onclick="showPath(11)">Operator-room</div>
                     <div id="navigatingItem13" class="items" onclick="showPath(12)">Lift</div>
                     <div id="navigatingItem14" class="items" onclick="showPath(13)">Computer Laboratory 2</div>
                 </div>
@@ -126,7 +126,7 @@
         
 
         //Navigating bars, ids and the names of the rooms
-        var buildingIDList = [["Technical Offcer's room",1,[1,2,3,5]],["Insructors' Room",2,[1,6,7,10]],["Lecturer's Room 1",3,[1,6,7,8]],["Lecturer's Room 2",4,[1,6,7,8,9]],["Lecturer's Room 3",5,[1,11,12]],["Lecturer's Room 4",6,[1,11,13,14]],["Lecturer's Room 5",7,[1,11,13,15,16]],["Lecturer's Room 6",8,[1,11,13,15,17]],["Network Engineering Lab",9,[1,11]],["Corridor",10,[1,6]],["Main Room",11,[]],["Servant Room",12,[1,2,3,4]],["Lift",13,[0]],["Computer Laboratory 2",14,[1,2]]];
+        var buildingIDList = [["Technical Offcer's room",1,[1,2,3,5]],["Insructors' Room",2,[1,6,7,10]],["Lecturer's Room 1",3,[1,6,7,8]],["Lecturer's Room 2",4,[1,6,7,8,9]],["Lecturer's Room 3",5,[1,11,12]],["Lecturer's Room 4",6,[1,11,13,14]],["Lecturer's Room 5",7,[1,11,13,15,16]],["Lecturer's Room 6",8,[1,11,13,15,17]],["Network Engineering Lab",9,[1,11]],["Corridor",10,[1,6]],["Main Room",11,[]],["Operator-room",12,[1,2,3,4]],["Lift",13,[0]],["Computer Laboratory 2",14,[1,2]]];
         //List of navigating items in the navigating panel
         var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13","navigatingItem14"];
 
@@ -134,10 +134,10 @@
     <script src="commonContent.js"></script>
     <script type="text/javascript"> 
 
-        //var blenderBuilding9 = importObject('./floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);    
+        //Importing the blender object using the created function above        
         var blenderBuilding = importObject('./floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);    
 
-        //Creating transparent objects by using the created function above
+        //Creating transparent doors by using the created function above
         var O01_door1 = createTransparentObject(1,"v",-5.06,-73.75); //m
         
         var O02_door1 = createTransparentObject(2,"v",-16.64,-48.2); //n
@@ -180,6 +180,7 @@
         var O14_door2 = createTransparentObject(14,"v",-4.84,-67.15); //j
         var O14_door3 = createTransparentObject(14,"hss",-8.15,-58.47); //z
 
+        //Creating transparent panels using the created function above
         var PanelsList = [];
         var idsOfPanelList = [];
 
@@ -214,6 +215,7 @@
         var panel14_2BB = createTransparentPanel(14,25.1,21.3,-18.45,-69.35);   PanelsList.push(panel14_2BB);
         var panel14_3BB = createTransparentPanel(14,20,1.45,-21,-57.975);       PanelsList.push(panel14_3BB);
 
+        //Creating transparent walls using the created function above
         var transparentWallsList = [];
 
         var cubeV1BB = createWall(Y,70,0.3,-45);            transparentWallsList.push(cubeV1BB);
@@ -255,6 +257,7 @@
         var cubeH18BB = createWall(4,Y,-1.7,-52.5);         transparentWallsList.push(cubeH18BB);
         var cubeH19BB = createWall(3,Y,-5,-46);             transparentWallsList.push(cubeH19BB);
    
+        //Creating navigating bars using the created function above
         var bar0 = createNavigatingBars(0,"v",6,-2.9,-57.35);
         var bar1 = createNavigatingBars(1,"h",5,-5.4,-54.6);
         var bar2 = createNavigatingBars(2,"v",6,-8.15,-57.35);
