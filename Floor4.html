@@ -154,15 +154,15 @@
         var blenderBuilding9 = importObject('./floors/Floor4.gltf',-5,0,-80,0,3.28084); 
     
         //Creating transparent doors by using the created function above        
-        var F01_door1 = createTransparentObject(1,"h",-16.52,-61.98);
+        var F01_door1 = createTransparentObject(1,"h",-16.52,-61.98);   //incubation centre 1
 
-        var F02_door1 = createTransparentObject(2,"v",-23.04,-64.4); 
+        var F02_door1 = createTransparentObject(2,"v",-23.04,-64.4);    //incubation centre 2
 
-        var F03_door1 = createTransparentObject(3,"v",-23.04,-71.33); 
+        var F03_door1 = createTransparentObject(3,"v",-23.04,-71.33);   //incubation centre 3
         
-        var F04_door1 = createTransparentObject(4,"v",-23.04,-78); 
+        var F04_door1 = createTransparentObject(4,"v",-23.04,-78);      //incubation centre 4
         
-        var F05_door1 = createTransparentObject(5,"v",-9.27,-76.98);
+        var F05_door1 = createTransparentObject(5,"v",-9.27,-76.98);    //computer vision lab
         var F05_door2 = createTransparentObject(5,"v",-9.27,-71.82);
         var F05_door3 = createTransparentObject(5,"v",-9.27,-66.42);
         var F05_door4 = createTransparentObject(5,"h",-16.52,-61.76);
@@ -170,44 +170,47 @@
         var F05_door6 = createTransparentObject(5,"v",-23.26,-78); 
         var F05_door7 = createTransparentObject(5,"v",-23.26,-64.4); 
 
-        var F06_door1 = createTransparentObject(6,"v",-9.49,-76.98);
+        var F06_door1 = createTransparentObject(6,"v",-9.49,-76.98);    //lec room 1
 
-        var F07_door1 = createTransparentObject(7,"v",-9.49,-71.82);
+        var F07_door1 = createTransparentObject(7,"v",-9.49,-71.82);    //lec room 2
 
-        var F08_door1 = createTransparentObject(8,"v",-11.14,-54.14);
+        var F08_door1 = createTransparentObject(8,"v",-11.14,-54.14);   //computer lab 1
         var F08_door2 = createTransparentObject(8,"v",-11.14,-24.05);
         var F08_door3 = createTransparentObject(8,"a",-11.875,-19.2); 
         var F08_door4 = createTransparentObject(8,"h",-17.37,-17.65);
         var F08_door5 = createTransparentObject(8,"h",-22.6,-17.65); 
         var F08_door6 = createTransparentObject(8,"h",-28.51,-17.65);
         
-        var F09_door1 = createTransparentObject(9,"h",-28.51,-17.87); 
+        var F09_door1 = createTransparentObject(9,"h",-28.51,-17.87);   //lec room 3
         
-        var F10_door1 = createTransparentObject(10,"h",-22.6,-17.87); 
+        var F10_door1 = createTransparentObject(10,"h",-22.6,-17.87);   //lec room 4
         
-        var F11_door1 = createTransparentObject(11,"h",-17.37,-17.87);
+        var F11_door1 = createTransparentObject(11,"h",-17.37,-17.87);  //lec room 5
 
-        var F12_door1 = createTransparentObject(12,"a",-12.08,-19.3); 
+        var F12_door1 = createTransparentObject(12,"a",-12.08,-19.3);   //server room
 
-        var F13_door1 = createTransparentObject(13,"v",-11.36,-24.05); 
+        var F13_door1 = createTransparentObject(13,"v",-11.36,-24.05);  //instuctor's toom
         var F13_door2 = createTransparentObject(13,"h",-9.16,-31.85); 
 
-        var F14_door2 = createTransparentObject(14,"v",-7.48,-38.05);
+        var F14_door2 = createTransparentObject(14,"v",-7.48,-38.05);   //ladies wash room
 
-        var F15_door1 = createTransparentObject(15,"v",-7.48,-33.75);
+        var F15_door1 = createTransparentObject(15,"v",-7.48,-33.75);   //gents washroom
         
-        var F17_door1 = createTransparentObject(17,"v",-7.26,-38.05);
+        var F16_door1 = createTransparentObject(16,"h",-3.76,-52.71);   //staircase
+        
+        var F17_door1 = createTransparentObject(17,"v",-7.26,-38.05);   //corridor 1
         var F17_door2 = createTransparentObject(17,"v",-7.26,-33.75);
         var F17_door3 = createTransparentObject(17,"h",-9.16,-31.63);
         var F17_door4 = createTransparentObject(17,"v",-11.36,-54.14);
         var F17_door5 = createTransparentObject(17,"th4",-7.71,-57.82);
         var F17_door6 = createTransparentObject(17,"h",-3.13,-57.87);
+        var F17_door7 = createTransparentObject(17,"h",-3.76,-52.49);
 
-        var F18_door1 = createTransparentObject(18,"h",-3.13,-57.65);
+        var F18_door1 = createTransparentObject(18,"h",-3.13,-57.65);   //lift
 
-        var F19_door1 = createTransparentObject(19,"tv",-6.31,-66.64);
+        var F19_door1 = createTransparentObject(19,"tv",-6.31,-66.64);  //operator room
         
-        var F20_door1 = createTransparentObject(20,"tv",-6.09,-66.64);
+        var F20_door1 = createTransparentObject(20,"tv",-6.09,-66.64);  //corridor 2
         var F20_door2 = createTransparentObject(20,"th4",-7.71,-57.60);
         var F20_door3 = createTransparentObject(20,"v",-9.49,-66.42);
         
@@ -252,10 +255,10 @@
         
         var panel15_01 = createTransparentPanel(15,6.63,4,-3.715,-38);              PanelsList.push(panel15_01);
         
-        var panel16_01 = createTransparentPanel(16,6.62,11.15,-3.71,-45.98);        PanelsList.push(panel16_01);
+       var panel16_01 = createTransparentPanel(16,6.62,12.15,-3.71,-46.48);        PanelsList.push(panel16_01);
          
-        var panel17_01 = createTransparentPanel(17,10.63,5.58,-5.715,-54.78);       PanelsList.push(panel17_01);
-        var panel17_02 = createTransparentPanel(17,3.65,20.04,-9.22,-41.97);        PanelsList.push(panel17_02);
+        var panel17_01 = createTransparentPanel(17,10.63,5.58,-5.715,-55.18);       PanelsList.push(panel17_01);
+        var panel17_02 = createTransparentPanel(17,3.65,20.84,-9.22,-42.37);        PanelsList.push(panel17_02);
         
         var panel18_01 = createTransparentPanel(18,5.6,7,-3.2,-61.47);              PanelsList.push(panel18_01);
 
@@ -281,8 +284,8 @@
         var cubeV13BB = createWall(Y,3.5,-23.25,-67.8);   transparentWallsList.push(cubeV13BB);
         var cubeV14BB = createWall(Y,5.8,-23.25,-59.7);   transparentWallsList.push(cubeV14BB);
         var cubeV15BB = createWall(Y,1.468,-11.25,-21.68);  transparentWallsList.push(cubeV15BB);
-        var cubeV16BB = createWall(Y,9,-3.6,-47.2);         transparentWallsList.push(cubeV16BB);
-        var cubeV17BB = createWall(0.4,7,-7.2,-43.5);       transparentWallsList.push(cubeV17BB);
+        //var cubeV16BB = createWall(Y,9,-3.6,-47.2);         transparentWallsList.push(cubeV16BB);
+        var cubeV17BB = createWall(Y,12,-7.2,-46);       transparentWallsList.push(cubeV17BB);
         
         var cubeH1BB = createWall(31,Y,-15.5,-79.8);        transparentWallsList.push(cubeH1BB);
         var cubeH2BB = createWall(31,Y,-15.5,-10.2);        transparentWallsList.push(cubeH2BB);
@@ -304,8 +307,8 @@
         var cubeH18BB = createWall(11.45,Y,-5.725,-21.17);  transparentWallsList.push(cubeH18BB);
         var cubeH19BB = createWall(1.96,Y,-19.98,-17.77);   transparentWallsList.push(cubeH19BB);
         var cubeH20BB = createWall(2.62,Y,-25.54,-17.77);   transparentWallsList.push(cubeH20BB);
-        var cubeH21BB = createWall(3.3,Y,-2.2,-51.5);       transparentWallsList.push(cubeH21BB);
-        var cubeH22BB = createWall(3,Y,-5.6,-45);           transparentWallsList.push(cubeH22BB);
+        var cubeH21BB = createWall(1.76,Y,-1.08,-52.5);       transparentWallsList.push(cubeH21BB);
+        var cubeH22BB = createWall(1.6,Y,-6.25,-52.5);           transparentWallsList.push(cubeH22BB);
 
         //Creating navigating bars using the created function above
         var bar0 = createNavigatingBars(0,"v",4.5,-3,-56.7);
