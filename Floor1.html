@@ -22,7 +22,7 @@
                 <li>This is a 4 story building</li>
             </ul>
         </div>
-        <div id="hint" class="hint_class">Click on the building for more details</div>
+        <div id="hint" class="hint_class">Click on the blue panel for more details</div>
         <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
             <p2 id="label2" class="label2_class">More information here</p2>          
             <ul id="list2" class="list2_class" style="list-style-image: url(images/bullet2.png);">                                             <!--Top right more information list-->
@@ -30,7 +30,7 @@
                 <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
                 <li>This is a 4 story building which has 4 labs and bla bla bla</li>
             </ul>
-            <button id="moreButton" class="moreButton_class">More</button>
+            <div class="line"></div>
         </div>
     </div>
     
@@ -91,10 +91,10 @@
 
             xhr.onload = function(){
                 if(this.status==200){
-                     my_json = JSON.parse(this.responseText);
-                         console.log(my_json);
-                         roomInfo(defaultID);       //Set initial information should be appeared in the panels
-                         animate();
+                    my_json = JSON.parse(this.responseText);
+                    console.log(my_json);
+                    roomInfo(defaultID);       //Set initial information should be appeared in the panels
+                    animate();
                 }
             }
             xhr.send();
@@ -115,7 +115,7 @@
         var idNUM = 15;     //Number of ids
         var doorHeight=-1.72, panelHeight = 3.85, wallHeight=-0.7, barHeight=-4.95;     //Height of the doors,panels,walls and the bars should be set
         var barNUM = 18;    //Number of navigating bars
-        var defaultID=0;    //This is the id of the default information should be shown
+        var defaultID=11;    //This is the id of the default information should be shown
         
 
         //Navigating bars, ids and the names of the rooms

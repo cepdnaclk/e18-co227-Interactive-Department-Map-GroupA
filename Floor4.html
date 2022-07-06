@@ -15,25 +15,33 @@
     <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="information" class="information_class" >                    
         <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
-            <p1 style="font-size: 3.3vmin;" id="label">Department Building</p1><br><br>                             
-            <ul id="list" style="list-style-type:square; font-size: 2.15vmin;">                                   <!--Top right main information list-->
-                <li>Welcome to Computer Engineering Department</li>
-                <li>Head of the department is Mr.Rohitha</li>
-                <li>This is a 4 story building</li>
+            <div id="label" class="label1_class">Room Name</div>
+            <ul id="list" class="list_class" style="list-style-image: url(images/bullet2.png); font-size: 2.15vmin;">                                   <!--Top right main information list-->
+                <li>list item 1</li>
+                <li>list item 2</li>
+                <li>list item 3</li>
             </ul>
         </div>
-        <div id="hint" class="hint_class">Click on the building for more details</div>
+        <div id="hint" class="hint_class">Click on the blue panel for more details</div>
         <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
             <p2 id="label2" class="label2_class">More information here</p2>          
-            <ul id="list2" class="list2_class" style="list-style-type:square;">                                             <!--Top right more information list-->
-                <li>Welcome to Computer Engineering Department, University of Peradeniya.</li>
-                <li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li>
-                <li>This is a 4 story building which has 4 labs and bla bla bla</li>
+            <ul id="list2" class="list2_class" style="list-style-image: url(images/bullet2.png);">                                             <!--Top right more information list-->
+                <li>list item 1</li>
+                <li>list item 2</li>
+                <li>list item 3</li>
             </ul>
-            <button id="moreButton" class="moreButton_class">More</button>
+            <div class="line"></div>
         </div>
     </div>
+    
     <div id="latterPanel" class="latterPanelClass">
+        <div id="link" class="link_class">
+            <div id="linkHead" class="linkHead_class">Link</div>
+            <div class="url_class">
+                <a href="http://www.ce.pdn.ac.lk/" id="url" target="_blank">Click here for more info</a>
+            </div>
+            
+        </div>
         <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
             <div id="searchBar" class="searchBar">
                 <input id="searchQueryInput" class="searchQueryInput_class" type="text" name="searchQueryInput" placeholder="Search" value="" />
@@ -41,6 +49,30 @@
                   <svg style="width:3.4vmin;height:3.4vmin" viewBox="0 0 24 24"><path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
                   </svg>
                 </button>
+            </div>
+            <div id="roomListContainer" class="roomListContainer_class">
+                <div id="roomList" class="roomList_class">
+                    <div id="navigatingItem1" class="items" onclick="showPath(0)">Incubation Centre 1</div>
+                    <div id="navigatingItem2" class="items" onclick="showPath(1)">Incubation Centre 2</div>
+                    <div id="navigatingItem3" class="items" onclick="showPath(2)">Incubation Centre 3</div>
+                    <div id="navigatingItem4" class="items" onclick="showPath(3)">Incubation Centre 4</div>
+                    <div id="navigatingItem5" class="items" onclick="showPath(4)">ESCAL Computer Vision Lab</div>
+                    <div id="navigatingItem6" class="items" onclick="showPath(5)">Lecturer's Room 1</div>
+                    <div id="navigatingItem7" class="items" onclick="showPath(6)">Lecturer's Room 2</div>
+                    <div id="navigatingItem8" class="items" onclick="showPath(7)">Computer Laboratory 1</div>
+                    <div id="navigatingItem9" class="items" onclick="showPath(8)">Lecturer's Room 3</div>
+                    <div id="navigatingItem10" class="items" onclick="showPath(9)">Lecturer's Room 4</div>
+                    <div id="navigatingItem11" class="items" onclick="showPath(10)">Lecturer's Room 5</div>
+                    <div id="navigatingItem12" class="items" onclick="showPath(11)">Server Room</div>
+                    <div id="navigatingItem13" class="items" onclick="showPath(12)">Insructors' Room</div>
+                    <div id="navigatingItem14" class="items" onclick="showPath(13)">Ladies Washroom</div>
+                    <div id="navigatingItem15" class="items" onclick="showPath(14)">Gents Washroom</div>
+                    <div id="navigatingItem16" class="items" onclick="showPath(15)">Staircase</div>
+                    <div id="navigatingItem17" class="items" onclick="showPath(16)">Corridor-01</div>
+                    <div id="navigatingItem18" class="items" onclick="showPath(17)">Lift</div>
+                    <div id="navigatingItem19" class="items" onclick="showPath(18)">Operator-room</div>
+                    <div id="navigatingItem20" class="items" onclick="showPath(19)">Corridor-02</div>
+                </div>
             </div>
         </div>
         <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
@@ -53,1103 +85,59 @@
         <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
     </div>
     <div id="aim" class="aim"></div>
-    <script type="text/javascript"> 
-    
-        // var conn = new ActiveXObject("ADODB.Connection");
-        // var conn_str = "";
-        // var db_Host = "";
-        // var db_User = "";
-        // var db_Password = "";
-        // var db_Provider = "";
-        // var db_Default = "";
-
-        // function Show_Data(){
-        //     db_Host = "RUCHIRA"
-        //     db_User = "root"
-        //     db_Password = ""
-        //     db_Provider = "SQLOLEDB"
-        //     db_Default = "ex"
-        //     conn_str = "Provider=" + db_Provider+";Data Source="+db_Host+"; User Id="+db_User+"; password="+db_Password+"; initial Catalog="+db_Default;
-        //     show_data_from_database();
-        // }
-
-        // function show_data_from_database(){
-        //     try{
-        //         conn.Open(conn_str);
-        //         var reader = new ActiveXObject("ADODB.Recordset");
-        //         var strQuery = "SELECT * FROM USERS";
-        //         reader.Open(strQuery,conn);
-        //         reader.MoveFirst();
-        //         while(!reader.eof){
-        //             reader.fields(0);
-        //             reader.fields(1);
-        //             reader.movenext();
-        //         }
-        //     }catch(e){
-        //         alert("Error");
-        //     }
-        // }
-
-        // loadBuildings();
-        // var departmentDatabase=[];
+    <script type="text/javascript">
        
-        // function loadBuildings(){
-        //     var xhr = new XMLHttpRequest();
-        //     xhr.open('GET','data.php',true);
-
-        //     xhr.onload = function(){
-        //         if(this.status==200){
-                    
-        //             var my_json = JSON.parse(this.responseText);
-        //             var data =[];
-                   
-        //                 my_json.forEach((val,index)=>{
-        //                     if(my_json[index]!==null){
-        //                         for(var i in my_json[index]) {
-        //                                 data.push(my_json[index][i]);
-        //                         }
-        //                         departmentDatabase.push(data);
-        //                         data=[];
-        //                     }	
-        //                 })
-        //                  // console.log("...java Script Array... \n"+JSON.stringify(departmentDatabase));
-        //                 //users = JSON.parse(this.responseText);       
-        //         }
-        //     }
-        //     xhr.send();
-        // }
-
-
+//Database
+        //This database is used to load the information about the buildings
+        var my_json={};   
+        loadBuildings();
+            
+        function loadBuildings(){     
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','json/F4data.json',true);
+        
+            xhr.onload = function(){
+                if(this.status==200){
+                    my_json = JSON.parse(this.responseText);
+                    console.log(my_json);
+                    roomInfo(defaultID);   //Set initial information should be appeared in the panels
+                    animate();
+                }
+            }
+            xhr.send();
+        }
+        
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
-        var circleCorners = 1;
+        var circleCorners = 1;          //To flag whether layouts have circle corners or square corners (circle(1)-default)
         var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
-        var X = 0.52,Y=0.7,R=0.9,S=0.08;
+        var X = 0.52,Y=0.7,R=0.9,S=0.08;    //X- length of front,back boxes, Y- thickness of transparent walls,R- gap between camera and front/back boxes,  
         var Floor = 0;
-        var initialCamera_X = 0, initialCamera_Y = -3, initialCamera_Z = -54.2;
-        var initialCamera_Xangle = -Math.PI/2;
-        var yR = 0, zR = R; 
-        var angle_x=initialCamera_Xangle,angle_y=0;                //Starting rotation values of the camera
-
-//Database
-        //This database is used to load the information about the buildings
-        var departmentDatabase;
-        
-        //Data of a particular room can be added to the database as an array
-        var building0 = ["Department Building","<li>Welcome to Computer Engineering Department</li><li>Head of the department is Mr.Rohitha</li><li>This is a 4 story building</li><li>This is Floor 4</li>","<li>Welcome to Computer Engineering Department</li><li>University of Peradeniya</li><li>Head of the department is Mr.Rohitha (BsC .jhbasdvll)</li><li>This is a 4 story building which has 4 labs and bla bla bla</li>"];
-        var building1 = ["Incubation Centre 1","<li>4-01</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-01</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>",[1,3,4,5,7,12,13]];
-        var building2 = ["Incubation Centre 2","<li>4-02</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-02</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>",[1,3,4,5,7,12,14,15]];
-        var building3 = ["Incubation Centre 3","<li>4-03</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-03</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>",[1,3,4,5,7,12,14,17,18]];
-        var building4 = ["Incubation Centre 4","<li>4-04</li><li>Fourth Floor</li><li>Public</li>","<li>Room ID is 4-04</li><li>This is in Fourth Floor</li><li>This is a Public Room</li><li>These spaces are to be used as the Incubation Centre for start-ups, Industry-Funded Laboratories (such as the Cambio Lab)</li>",[1,3,4,5,7,12,14,17,19]];
-        var building5 = ["Computer Vision Lab","<li>4-00</li><li>This is the ESCAL Computer Vision</li><li>Fourth Floor</li><li>Lab</li>","<li>Room ID is 4-00</li><li>This is in Fourth Floor</li><li>This is a lab room</li>",[1,3,4,5,7]];
-        var building6 = ["Lecturer Room 1","<li>4-05</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-05</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>",[1,3,4,5,7,8,10]];
-        var building7 = ["Lecturer Room 2","<li>4-06</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-06</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>",[1,3,4,5,7,8,9]];
-        var building8 = ["Computer Lab","<li>4-08</li><li>Fourth Floor</li><li>Lab</li>","<li>Room ID is 4-08</li><li>There is capacity for 70 students</li><li>This is in Fourth Floor</li><li>This is a Lab Room</li>",[1,3,21,27]];
-        var building9 = ["Lecturer Room 3","<li>4-09</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-09</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>",[1,3,21,27,28,30,32,34]];
-        var building10 = ["Lecturer Room 4","<li>4-10</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-10</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>",[1,3,21,27,28,30,32,33]];
-        var building11 = ["Lecturer Room 5","<li>4-11</li><li>Fourth Floor</li><li>Staff</li>","<li>Room ID is 4-11</li><li>This is in Fourth Floor</li><li>This is a Staff Room</li>",[1,3,21,27,28,30,31]];
-        var building12 = ["Server room","<li>Private</li><li>Fourth Floor</li>","<li>This is a private room</li><li>This is in Fourth Floor</li>",[1,3,21,27,28,29]];
-        var building13 = ["Instructors' Room","<li>4-13</li><li>Fourth Floor</li><li>Private</li>","<li>Room ID is 4-13</li><li>This is in Fourth Floor</li><li>This is a Private Room</li><li>This is also the PD Students'Room</li></li>There is working space and storage here<li>",[1,3,21,22,24,26]];
-        var building14 = ["Ladies Washroom","<li>Public</li><li>For Ladies</li><li>Fourth Floor</li>","<li>This is for Public use</li><li>For use of Ladies</li><li>This is in Fourth Floor</li>",[1,3,21,22,24,25]];
-        var building15 = ["Gents Washroom","<li>Public</li><li>For Gents</li><li>Fourth Floor</li>","<li>This is for Public use</li><li>For use of Gents</li><li>This is in Fourth Floor</li>",[1,3,21,22,23]];
-        var building16 = ["MainRoom","<li>Public</li><li>Foutth Floor</li>","<li>This is for Public use</li><li>This is in Fourth Floor</li><li>Can be used to go to Third Floor</li>",[1,2]];
-        var building17 = ["Corridor 1","<li>Public</li><li>Fourth Floor</li><li>Six doors</li>","<li>This is a Public Area</li><li>This is in Fourth Floor</li><li>Can be used enter to the Washrooms</li><li>Can be used enter to the Instructors' Room</li><li>Can be used enter to the Computer Lab</li><li>Can be used enter to the Corridor 2</li><li>Can be used enter to the Lift</li>",[1]];
-        var building18 = ["Lift","<li>Public</li><li>Fourth Floor</li>","<li>This is for the public use</li><li>This is in Fourth Floor</li><li>Can be used to go to any floor</li>",[1,0]];
-        var building19 = ["Servant Room","<li>Private</li><li>Fourth Floor</li>","<li>This is a private room</li><li>This is in Fourth Floor</li>",[1,3,4,5,6]];
-        var building20 = ["Corridor 2","<li>Public</li><li>Fourth Floor</li><li>Three doors</li>","<li>This is a Public Area</li><li>This is in Fourth Floor</li><li>Can be used enter to the Servant Room</li><li>Can be used enter to the Corridor 1</li><li>Can be used enter to the Computer Vision Lab</li>",[1,3,4]];
-
-        departmentDatabase = [building0,building1,building2,building3,building4,building5,building6,building7,building8,building9,building10,building11,building12,building13,building14,building15,building16,building17,building18,building19,building20];
-        
-
-        //Scene
-        var scene = new THREE.Scene();
-        //Camera
-        var camera = new THREE.PerspectiveCamera(85,window.innerWidth/(window.innerHeight*1.5));
-        //Renderer
-        var renderer = new THREE.WebGLRenderer({antilias:true});
-        renderer.setSize(window.innerWidth-14,window.innerHeight-17);     
-        $('body').append(renderer.domElement);    
+        var initialCamera_X = 0, initialCamera_Y = -3, initialCamera_Z = -54.2;     //Coordinates of the camera at the initial point
+        var initialBirdY=-20,initialBirdZ=-45;          ////Coordinates of the camera at the initial point in the bird view
+        var initialCamera_Xangle = -Math.PI/2;          //Rotation of the camera around x axis at the initial point
+        var yR = R, zR = 0;         //The gap between front,back boxes along y and z axes
+        var angle_x= initialCamera_Xangle, angle_y=0;                //Starting rotation values of the camera
+        var idNUM = 21;     //Number of ids
+        var doorHeight=-1.72, panelHeight = 3.85, wallHeight=-0.7, barHeight=-4.95;     //Height of the doors,panels,walls and the bars should be set
+        var barNUM = 35;    //Number of navigating bars
+        var defaultID=16;    //This is the id of the default information should be shown
         
         
-//Creating Backgroud
-        //Import images to the cube
-        let materialArray = [];
-        let texture_ft = new THREE.TextureLoader().load('./images/4.png');
-        let texture_bk = new THREE.TextureLoader().load('./images/5.png');
-        let texture_up = new THREE.TextureLoader().load('./images/2.png');
-        let texture_dn = new THREE.TextureLoader().load('./images/6.png');
-        let texture_rt = new THREE.TextureLoader().load('./images/3.png');
-        let texture_lf = new THREE.TextureLoader().load('./images/1.png');
-
-        materialArray.push(new THREE.MeshBasicMaterial({map: texture_ft}));
-        materialArray.push(new THREE.MeshBasicMaterial({map: texture_bk}));
-        materialArray.push(new THREE.MeshBasicMaterial({map: texture_up}));
-        materialArray.push(new THREE.MeshBasicMaterial({map: texture_dn}));
-        materialArray.push(new THREE.MeshBasicMaterial({map: texture_rt}));
-        materialArray.push(new THREE.MeshBasicMaterial({map: texture_lf}));
-
-        for(let i=0;i<6;i++){
-            materialArray[i].side = THREE.BackSide;
-        }
-
-        let skyboxGeo = new THREE.BoxGeometry(1500,250,1500);       //Creats the backgroud cube
-        let skybox = new THREE.Mesh(skyboxGeo, materialArray);
-        scene.add(skybox);
-        skybox.rotation.z -= Math.PI/2;         //Set the position of the cube
-        skybox.position.set(119,0,0);
-
-
-//Mouse Event Listeners
-        const domEvents = new THREEx.DomEvents(camera,renderer.domEvents);
-        function addMouseEvents(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
-            domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
-                if(out==0 && ViewMode=="walk"){
-                    if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)   
-                        if(expanded){      
-                            document.getElementById("list").style.opacity = 1;      //Shows the main information list       
-                            document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
-                            document.getElementById("main_information").style.height = "50%";    //Expands the main information label
-                            document.getElementById("hint").style.backgroundColor = "#0B5345";  
-                            expanded = 0;           //Set the expanded flag to 0
-                        }
-                        document.getElementById("hint").innerHTML = "Click on the building for more details";   //Decrease the opacity of top right main information label to 0.5
-                        document.getElementById("information").style.height = "40%";
-                        document.getElementById("main_information").style.height = "75%";
-                        document.getElementById("hint").style.height = "7.5%";
-                        document.getElementById("controlLayout").style.height = "20%";
-                        document.getElementById("more_information").style.removeProperty('min-height');
-                        document.getElementById("more_information").style.padding = "0%";
-                        document.getElementById("more_information").style.marginTop = "0%";
-                        document.getElementById("more_information").style.margin = "0%";
-                        document.getElementById("label2").style.fontSize = "0vmin";
-                        document.getElementById("list2").style.fontSize = "0vmin";
-                        cube.material.opacity = 0.6;
-                        document.getElementById("label3").style.backgroundColor = "#1A5276";
-                        showNavigator();
-                        clicked = !clicked;                                                 //change the 'clicked' flag to 0
-                    }else{                                                                  //If user hasn't clicked earlier
-                            //Decrease the opacity of top right main information label to 0.5
-                        document.getElementById("hint").innerHTML = "More details below ↓";
-                        document.getElementById("information").style.height = "60%";
-                        document.getElementById("main_information").style.height = "50%";
-                        document.getElementById("hint").style.height = "5%";
-                        document.getElementById("controlLayout").style.height = "80%";
-                        document.getElementById("more_information").style.minHeight = "50%";
-                        document.getElementById("more_information").style.padding = "5%";
-                        document.getElementById("more_information").style.marginTop = "2.5%";
-                        document.getElementById("more_information").style.margin = "1.5%";
-                        document.getElementById("label2").style.fontSize = "2.8vmin";
-                        document.getElementById("list2").style.fontSize = "2.15vmin";
-                        cube.material.opacity = 0.9;
-                        document.getElementById("label3").style.backgroundColor = "#5F6A6A";
-                        hideNavigator();
-                        clicked = !clicked;                                                 //change the 'clicked' flag to 1
-                    }
-                }
-            });
-            domEvents.addEventListener(cube,'mouseover',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
-                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    cube.material.opacity = 0.8;
-                    document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
-                    document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
-                    document.getElementById("list2").innerHTML = departmentDatabase[buildingID][2];
-                }
-            });    
-            domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
-                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    cube.material.opacity = 0.6;
-                    document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-                    document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                    document.getElementById("list2").innerHTML = departmentDatabase[0][2];
-                }
-            }); 
-        }
-
-        function addMouseEventsForWalls(cube,buildingID){                                      //This function sets particular mouse event listeners to building objects
-            domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
-                if(out==0 && ViewMode=="walk"){
-                    if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
-                            //Decrease the opacity of top right main information label to 0.5 
-                        if(expanded){      
-                            document.getElementById("list").style.opacity = 1;      //Shows the main information list       
-                            document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
-                            document.getElementById("main_information").style.height = "50%";    //Expands the main information label
-                            document.getElementById("hint").style.backgroundColor = "#0B5345";  
-                            expanded = 0;           //Set the expanded flag to 0
-                        }
-                        document.getElementById("hint").innerHTML = "Click on the building for more details";
-                        document.getElementById("information").style.height = "40%";
-                        document.getElementById("main_information").style.height = "75%";
-                        document.getElementById("hint").style.height = "7.5%";
-                        document.getElementById("controlLayout").style.height = "20%";
-                        document.getElementById("more_information").style.removeProperty('min-height');
-                        document.getElementById("more_information").style.padding = "0%";
-                        document.getElementById("more_information").style.marginTop = "0%";
-                        document.getElementById("more_information").style.margin = "0%";
-                        document.getElementById("label2").style.fontSize = "0vmin";
-                        document.getElementById("list2").style.fontSize = "0vmin";
-                        document.getElementById("label3").style.backgroundColor = "#1A5276";
-                        showNavigator();
-                        clicked = !clicked;                                                 //change the 'clicked' flag to 0
-                    }else{                                                                  //If user hasn't clicked earlier
-                            //Decrease the opacity of top right main information label to 0.5
-                        document.getElementById("hint").innerHTML = "More details below ↓";
-                        document.getElementById("information").style.height = "60%";
-                        document.getElementById("main_information").style.height = "50%";
-                        document.getElementById("hint").style.height = "5%";
-                        document.getElementById("controlLayout").style.height = "80%";
-                        document.getElementById("more_information").style.minHeight = "50%";
-                        document.getElementById("more_information").style.padding = "5%";
-                        document.getElementById("more_information").style.marginTop = "2.5%";
-                        document.getElementById("more_information").style.margin = "1.5%";
-                        document.getElementById("label2").style.fontSize = "2.8vmin";
-                        document.getElementById("list2").style.fontSize = "2.15vmin";
-                        document.getElementById("label3").style.backgroundColor = "#5F6A6A";
-                        hideNavigator();
-                        clicked = !clicked;                                                 //change the 'clicked' flag to 1
-                    }
-                }
-            });
-            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
-                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    
-                }
-            }); 
-            domEvents.addEventListener(cube,'mouseout',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
-                if(clicked==0 && out==0 && ViewMode=="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    
-                }
-            }); 
-        }
+        //Navigating bars, ids and the names of the rooms
+        var buildingIDList = [["Incubation Centre 1",1,[1,3,4,5,7,12,13]],["Incubation Centre 2",2,[1,3,4,5,7,12,14,15]],["Incubation Centre 3",3,[1,3,4,5,7,12,14,17,18]],["Incubation Centre 4",4,[1,3,4,5,7,12,14,17,19]],["ESCAL Computer Vision Lab",5,[1,3,4,5,7]],["Lecturer's Room 1",6,[1,3,4,5,7,8,10]],["Lecturer's Room 2",7,[1,3,4,5,7,8,9]],["Computer Laboratory 1",8,[1,3,21,27]],["Lecturer's Room 3",9,[1,3,21,27,28,30,32,34]],["Lecturer's Room 4",10,[1,3,21,27,28,30,32,33]],["Lecturer's Room 5",11,[1,3,21,27,28,30,31]],["Server Room",12,[1,3,21,27,28,29]],["Insructors' Room",13,[1,3,21,22,24,26]],["Ladies Washroom",14,[1,3,21,22,24,25]],["Gents Washroom",15,[1,3,21,22,23]],["Staircase",16,[1,2]],["Corridor 1",17,[1]],["Lift",18,[1,0]],["Servant Room",19,[1,3,4,5,6]],["Corridor 2",20,[1,3,4]]];
+        //List of navigating items in the navigating panel
+        var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13","navigatingItem14","navigatingItem15","navigatingItem16","navigatingItem17","navigatingItem18","navigatingItem19","navigatingItem20"];
         
-
-        function addMouseEventsForPanels(cube, buildingID){                                      //This function sets particular mouse event listeners to building objects
-            domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
-                if(out==0 && ViewMode!="walk"){
-                    if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
-                            //Decrease the opacity of top right main information label to 0.5 
-                        if(expanded){      
-                            document.getElementById("list").style.opacity = 1;      //Shows the main information list       
-                            document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
-                            document.getElementById("main_information").style.height = "50%";    //Expands the main information label
-                            document.getElementById("hint").style.backgroundColor = "#0B5345";  
-                            expanded = 0;           //Set the expanded flag to 0
-                        }
-                        for(var i=0;i<NavigatingMaterialArray.length;i++){
-                            NavigatingMaterialArray[i].opacity = 0;
-                        }
-                        document.getElementById("hint").innerHTML = "Click on the building for more details";
-                        document.getElementById("information").style.height = "40%";
-                        document.getElementById("main_information").style.height = "75%";
-                        document.getElementById("hint").style.height = "7.5%";
-                        document.getElementById("controlLayout").style.height = "20%";
-                        document.getElementById("more_information").style.removeProperty('min-height');
-                        document.getElementById("more_information").style.padding = "0%";
-                        document.getElementById("more_information").style.marginTop = "0%";
-                        document.getElementById("more_information").style.margin = "0%";
-                        document.getElementById("label2").style.fontSize = "0vmin";
-                        document.getElementById("list2").style.fontSize = "0vmin";
-                        cube.material.opacity = 0;
-                        document.getElementById("label3").style.backgroundColor = "#1A5276";
-                        showNavigator();
-                        clicked = !clicked;                                                 //change the 'clicked' flag to 0
-                    }else{                                                                  //If user hasn't clicked earlier
-                            //Decrease the opacity of top right main information label to 0.5
-                        for(var i=0;i<departmentDatabase[buildingID][3].length;i++){
-                            NavigatingMaterialArray[departmentDatabase[buildingID][3][i]].opacity = 1;
-                        }    
-                        document.getElementById("hint").innerHTML = "More details below ↓";
-                        document.getElementById("information").style.height = "60%";
-                        document.getElementById("main_information").style.height = "50%";
-                        document.getElementById("hint").style.height = "5%";
-                        document.getElementById("controlLayout").style.height = "80%";
-                        document.getElementById("more_information").style.minHeight = "50%";
-                        document.getElementById("more_information").style.padding = "5%";
-                        document.getElementById("more_information").style.marginTop = "2.5%";
-                        document.getElementById("more_information").style.margin = "1.5%";
-                        document.getElementById("label2").style.fontSize = "2.8vmin";
-                        document.getElementById("list2").style.fontSize = "2.15vmin";
-                        cube.material.opacity = 0.6;
-                        document.getElementById("label3").style.backgroundColor = "#5F6A6A";
-                        hideNavigator();
-                        clicked = !clicked;                                                 //change the 'clicked' flag to 1
-                    }
-                }
-            });
-            domEvents.addEventListener(cube,'mousemove',event => {                      //Onmousemove listener (Signals when mouse pointer is moving on the building)
-                if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    cube.material.opacity = 0.4;
-                    document.getElementById("label").innerHTML = departmentDatabase[buildingID][0];                 //Update the particular information about the building appearing on the top right labels
-                    document.getElementById("list").innerHTML = departmentDatabase[buildingID][1];
-                    document.getElementById("list2").innerHTML = departmentDatabase[buildingID][2];
-                }
-            });    
-            domEvents.addEventListener(cube,'mouseout',event => {                       //Onmouseout listener (Signals when mouse pointer is moving out from the building)
-                if(clicked==0 && out==0 && ViewMode!="walk"){                                                         //If user hasn't clicked some building (logic is when user has clicked on a particular building, data on the labels are not changing unitil he again clicks on that)
-                    cube.material.opacity = 0;
-                    document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-                    document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                    document.getElementById("list2").innerHTML = departmentDatabase[0][2];
-                }
-            }); 
-        }
-
-//Import Blender Objects
-        let buildingloader = new THREE.GLTFLoader();    //Create a loader to load the objects
-
-        function importObject(location,xValue,yValue,zValue,xrotatevalue,scale=1){   //This function imports the blender object, sets the position, angle and adds to the scene
-            var blenderBuilding;
-            buildingloader.load(location,(gltf) => {
-                blenderBuilding = gltf.scene;
-                blenderBuilding.scale.set(scale,scale,scale);                                            //Set the scale of the object
-                scene.add(blenderBuilding);                                                  //Add to the scene
-                blenderBuilding.position.x = xValue;                                         //Set the position
-                blenderBuilding.position.y = yValue;
-                blenderBuilding.position.z = zValue;
-                blenderBuilding.rotation.z = Math.PI/2;                                      //Set the rotation
-                blenderBuilding.rotation.x = xrotatevalue;
-                blenderBuilding.rotation.y = Math.PI;
-                blenderBuilding.side = THREE.FrontSide;
-            });
-            return blenderBuilding;
-        }
-        
-
-//Creating Transparent Objects
-        var transparentMaterialArray = [];
-        for(var i=0;i<21;i++){
-            transparentMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0.6});
-        }
-        function createTransparentObject(buildingID,horv,yPosition,zPosition){
-            if(horv=="h"){
-                var geometry = new THREE.BoxGeometry(6.5617,2.6247,0.2);
-            }else if(horv=="v"){
-                var geometry = new THREE.BoxGeometry(6.5617,0.2,2.6247);
-            }else if(horv=="th4"){
-                var geometry = new THREE.BoxGeometry(6.5617,1.6,0.2);
-            }else if(horv=="tv"){
-                var geometry = new THREE.BoxGeometry(6.5617,0.2,1.6);
-            }
-            else if(horv=="a"){
-                var geometry = new THREE.BoxGeometry(6.5617,0.2,1.6);
-                var material = transparentMaterialArray[buildingID]
-                var cube = new THREE.Mesh(geometry,material);
-                scene.add(cube);
-                cube.position.x = -1.72;
-                cube.position.y = yPosition;
-                cube.position.z = zPosition;
-                cube.rotation.x = Math.PI*0.12;
-                addMouseEvents(cube,buildingID);
-                return cube;
-            }
-            var material = transparentMaterialArray[buildingID]
-            var cube = new THREE.Mesh(geometry,material);
-            scene.add(cube);
-            cube.position.x = -1.72;
-            cube.position.y = yPosition;
-            cube.position.z = zPosition;
-            addMouseEvents(cube,buildingID);
-            return cube;
-        }
-
-        var transparentMaterialForPanelsArray = [];
-        for(var i=0;i<21;i++){
-            transparentMaterialForPanelsArray[i] = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
-        }
-        function createTransparentPanel(buildingID,yvalue,zvalue,yPosition,zPosition){
-            var geometry = new THREE.BoxGeometry(0.01,yvalue,zvalue);
-            var material = transparentMaterialForPanelsArray[buildingID];
-            var cube = new THREE.Mesh(geometry,material);
-            scene.add(cube);
-            cube.position.x = 3.85; //3.75
-            cube.position.y = yPosition;
-            cube.position.z = zPosition;
-            addMouseEventsForPanels(cube,buildingID);
-            idsOfPanelList.push(buildingID);
-            let cubeBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
-            cubeBB.setFromObject(cube);
-            return cubeBB;
-        }
-
-//Transparent Walls
-function createWall(y,z,Y,Z){
-            var geometry = new THREE.BoxGeometry(8.3,y,z); 
-            var material = new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0});
-            var cube = new THREE.Mesh(geometry,material);
-            scene.add(cube);
-            cube.position.x = -0.7; //5
-            cube.position.y = Y;
-            cube.position.z = Z;
-            addMouseEventsForWalls(cube);
-            let cubeBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
-            cubeBB.setFromObject(cube);
-            return cubeBB;
-        }
+    </script>
+    <script src="commonContent.js"></script>
+    <script type="text/javascript"> 
+ 
 
 
-//Creating Navigating Bars
-        //Creating Transparent Objects
-        var NavigatingMaterialArray = [];
-        for(var i=0;i<35;i++){
-            NavigatingMaterialArray[i] = new THREE.MeshBasicMaterial({color: 0xE91747 , transparent:true, opacity:0});
-        }
-        function createNavigatingBars(buildingID,horv,length,yPosition,zPosition){
-            if(horv=="h"){
-                var geometry5 = new THREE.BoxGeometry(0.001,length,0.5);
-            }else if(horv=="v"){
-                var geometry5 = new THREE.BoxGeometry(0.001,0.5,length);
-            }
-            var material5 = NavigatingMaterialArray[buildingID];
-            var cube5 = new THREE.Mesh(geometry5,material5);
-            scene.add(cube5);
-            cube5.position.x = -4.95;
-            cube5.position.y = yPosition;
-            cube5.position.z = zPosition;
-            return cube5;
-        }
-
-
-//Set Lights
-        function setDirectionalLight(X,Y,Z) {                           //This function set the light
-            var lightId = new THREE.DirectionalLight(0xffffff,0.2); //Soft white light
-            scene.add(lightId);                           //Add light to the scene
-            lightId.position.set(X,Y,Z);
-            return lightId;
-        }
-
-        function setPointLight(X,Y,Z) {                           //This function set the light
-            var lightId = new THREE.PointLight(0xffffff,0.2); //Soft white light
-            scene.add(lightId);                           //Add light to the scene
-            lightId.position.set(X,Y,Z);
-            return lightId;
-        }
-
-
-//Controls
-        async function sleep(miliseconds){  //This function sleeps for particular time 
-            return new Promise((resolve) => setTimeout(resolve,miliseconds));
-        }
-
-        var okToGoFront = 1, okToGoBack = 1;
-
-        async function turnleft(){          //This function turns the camera to left by unit amount
-            if(ViewMode=="sky"){
-                for(var i =0;i<10;i++){         //Used a loop for smooth movements
-                    await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.position.y += Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.y += Math.cos(angle_x)*S; 
-                    backCameraBall.position.y += Math.cos(angle_x)*S;
-                    topCameraBall.position.y += Math.cos(angle_x)*S;
-                    camera.position.z += Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.z += Math.sin(angle_x)*S; 
-                    backCameraBall.position.z += Math.sin(angle_x)*S;
-                    topCameraBall.position.z += Math.sin(angle_x)*S;
-                }
-            }else{
-                for(var i =0;i<10;i++){         //Used a loop for smooth movements
-                    await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.rotation.x += Math.PI/200;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    angle_x = angle_x + Math.PI/200;        //Update the new camera angle
-                    frontCameraBall.rotation.x += Math.PI/200;
-                    frontCameraBall.position.y = camera.position.y + (Math.sin(angle_x)*R);
-                    frontCameraBall.position.z = camera.position.z - (Math.cos(angle_x)*R);
-                    backCameraBall.rotation.x += Math.PI/200;
-                    backCameraBall.position.y = camera.position.y - (Math.sin(angle_x)*R);
-                    backCameraBall.position.z = camera.position.z + (Math.cos(angle_x)*R);
-                }
-            }
-        }
-        async function turnright(){         //This function turns the camera to left by unit amount
-            if(ViewMode=="sky"){
-                for(var i =0;i<10;i++){         //Used a loop for smooth movements
-                    await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.position.y -= Math.cos(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.y -= Math.cos(angle_x)*S; 
-                    backCameraBall.position.y -= Math.cos(angle_x)*S;
-                    topCameraBall.position.y -= Math.cos(angle_x)*S;
-                    camera.position.z -= Math.sin(angle_x)*S;       //Rotate the cmaera around x axis by 0.9 degrees to the left
-                    frontCameraBall.position.z -= Math.sin(angle_x)*S; 
-                    backCameraBall.position.z -= Math.sin(angle_x)*S;
-                    topCameraBall.position.z -= Math.sin(angle_x)*S;
-                }
-            }else{
-                for(var i =0;i<10;i++){         //Used a loop for smooth movements
-                    await sleep(20);                        //Sleep for 20 millieseconds
-                    camera.rotation.x -= Math.PI/200;       //Rotate the camera around x axis by 0.9 degrees to the right
-                    angle_x = angle_x - Math.PI/200;        //Update the new camera angle
-                    frontCameraBall.rotation.x -= Math.PI/200;
-                    frontCameraBall.position.y = camera.position.y + (Math.sin(angle_x)*R);
-                    frontCameraBall.position.z = camera.position.z - (Math.cos(angle_x)*R);
-                    backCameraBall.rotation.x -= Math.PI/200;
-                    backCameraBall.position.y = camera.position.y - (Math.sin(angle_x)*R);
-                    backCameraBall.position.z = camera.position.z + (Math.cos(angle_x)*R);
-                }
-            }
-        }
-        async function turnup(){            //This function turns the camera to left by unit amount
-            for(var i =0;i<10;i++){         //Used a loop for smooth movements
-                await sleep(20);                        //Sleep for 20 millieseconds
-                camera.rotation.y -= Math.PI/200;       //Rotate the cmaera around y axis by 0.9 degrees to the up 
-                angle_y = angle_y - Math.PI/200;        //Update the new camera angle
-            }
-        }
-        async function turndown(){          //This function turns the camera to left by unit amount
-            for(var i =0;i<10;i++){         //Used a loop for smooth movements
-                await sleep(20);                        //Sleep for 20 millieseconds
-                camera.rotation.y += Math.PI/200;       //Rotate the camera around y axis by 0.9 degrees to the down
-                angle_y = angle_y + Math.PI/200;        //Update the new camera angle
-            }
-        }
-        async function forward(){           //This function brings the camera to back by unit amount
-            for(var i =0;i<10;i++){         //Used a loop for smooth movements                                    //Sleep for 20 millieseconds
-                await sleep(20);
-                if(okToGoFront){
-                    camera.position.y += (Math.sin(angle_x)*S);      //Change the position of camera on y axis towards the facing direction
-                    camera.position.z -= (Math.cos(angle_x)*S);      //Change the position of camera on z axis towards the facing direction
-                    frontCameraBall.position.y += (Math.sin(angle_x)*S);
-                    backCameraBall.position.y += (Math.sin(angle_x)*S);
-                    topCameraBall.position.y += (Math.sin(angle_x)*S);
-                    frontCameraBall.position.z -= (Math.cos(angle_x)*S);
-                    backCameraBall.position.z -= (Math.cos(angle_x)*S);
-                    topCameraBall.position.z -= (Math.cos(angle_x)*S);
-                }
-            }
-        }
-        async function backward(){          //This function brings the camera to front by unit amount
-            for(var i =0;i<10;i++){         //Used a loop for smooth movements
-                await sleep(20);                                    //Sleep for 20 millieseconds
-                if(okToGoBack){
-                    camera.position.y -= (Math.sin(angle_x)*S);        //Change the position of camera on y axis towards the facing direction
-                    camera.position.z += (Math.cos(angle_x)*S);        //Change the position of camera on z axis towards the facing direction
-                    frontCameraBall.position.y -= (Math.sin(angle_x)*S);
-                    backCameraBall.position.y -= (Math.sin(angle_x)*S);
-                    topCameraBall.position.y -= (Math.sin(angle_x)*S);
-                    frontCameraBall.position.z += (Math.cos(angle_x)*S);
-                    backCameraBall.position.z += (Math.cos(angle_x)*S);
-                    topCameraBall.position.z += (Math.cos(angle_x)*S);
-                }
-            }    
-        }
-
-
-//Information Panel movements
-        async function showInformation(){               //This function shrinks the top right main information label and makes the more information label appear
-            if(clicked&&(!expanding)&&(!expanded)){     //If a building is clicked, labels are not expanding currently and more information label is dissappeared
-                expanding=1;                            //set the expanding flag to 1
-                document.getElementById("label2").innerHTML = "More information about "+document.getElementById("label").innerHTML;     //set the second label
-                for(var i =0;i<10;i++){                 //Used a loop for smooth animations
-                    await sleep(20);                    //Sleep for 20 millieseconds
-                    document.getElementById("list").style.opacity = 1-(0.1*(i+1));                  //dissappears the main information list
-                    document.getElementById("more_information").style.opacity = 0.09*(i+1);         //Shows the more information label
-                    document.getElementById("main_information").style.height = 50-4.4*(i+1)+"%";   //Shrinks the main information label
-                }
-                document.getElementById("hint").style.backgroundColor = "#21618C";
-                expanding=0;        //set the expanding flag to 0
-                expanded = 1;       //Set the expanded flag to 1
-            }
-        }
-
-        async function hideInformation(){               //This function expands the top right main information label and makes the more information label dissappear
-            if(clicked&&(!expanding)&&expanded){        //If a building is clicked, labels are not expanding currently and more information label is appeared
-                expanding=1;                            //set the expanding flag to 1
-                document.getElementById("list").style.opacity = 1;      //Shows the main information list
-                for(var i =0;i<10;i++){                 //Used a loop for smooth animations
-                    await sleep(20);                    //Sleep for 20 millieseconds
-                    document.getElementById("more_information").style.opacity = 0.9-0.09*(i+1);     //Dissappears the more information label
-                    document.getElementById("main_information").style.height = 6+4.4*(i+1)+"%";    //Expands the main information label
-                }
-                document.getElementById("hint").style.backgroundColor = "#0B5345";
-                expanding=0;            //set the expanding flag to 0
-                expanded = 0;           //Set the expanded flag to 0
-            }
-        }
-
-//Latter Panel movements
-        async function hideNavigator(){
-            for(var i =0;i<10;i++){                 //Used a loop for smooth animations
-                await sleep(20);                    //Sleep for 20 millieseconds
-                document.getElementById("navigator").style.height = 93 - (i+1)*8.6 + "%";     //Dissappears the more information label
-                document.getElementById("navigator").style.opacity = 0.9 - (i+1)*0.07;
-                document.getElementById("main_information").style.opacity = 0.6 + (i+1)*0.04;
-            }
-            document.getElementById("searchBar").style.opacity = 0;
-        }
-        async function showNavigator(){
-            document.getElementById("searchBar").style.opacity = 1;
-            for(var i =0;i<10;i++){                 //Used a loop for smooth animations
-                await sleep(20);                    //Sleep for 20 millieseconds
-                document.getElementById("navigator").style.height = 7 + (i+1)*8.6 + "%";     //Dissappears the more information label
-                document.getElementById("navigator").style.opacity = 0.2 + (i+1)*0.07;
-                document.getElementById("main_information").style.opacity = 1 - (i+1)*0.04;
-            }
-        }
-
-//Maintain angles
-        function updateAngles(){
-            angle_x %= (Math.PI*2); 
-            angle_y %= (Math.PI*2);
-            camera.rotation.x %= (Math.PI*2);
-            camera.rotation.y %= (Math.PI*2);
-            if(Math.abs(angle_x)>Math.PI){
-                angle_x = (angle_x>0)?-(2*Math.PI-angle_x):2*Math.PI+angle_x;
-            }
-            if(Math.abs(angle_y)>Math.PI){
-                angle_y = (angle_y>0)?-(2*Math.PI-angle_y):2*Math.PI+angle_y;
-            }
-            if(Math.abs(camera.rotation.x)>Math.PI){
-                camera.rotation.x = (camera.rotation.x>0)?-(2*Math.PI-camera.rotation.x):2*Math.PI+camera.rotation.x;
-            }
-            if(Math.abs(camera.rotation.y)>Math.PI){
-                camera.rotation.y = (camera.rotation.y>0)?-(2*Math.PI-camera.rotation.y):2*Math.PI+camera.rotation.y;
-            }
-        }
-
-//Camera Position
-var ViewMode = "walk";
-        async function switchtoWALK(){
-            updateAngles();
-            document.getElementById("rightTop").innerHTML = "W";
-            document.getElementById("rightBottom").innerHTML = "WALK";
-            document.getElementById("leftTopButton").innerHTML = "BIRD";
-            document.getElementById("leftBottomButton").innerHTML = "DRONE";
-            if(ViewMode=="sky" || ViewMode=="drone"){
-                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
-                    //Decrease the opacity of top right main information label to 0.5 
-                    if(expanded){      
-                        document.getElementById("list").style.opacity = 1;      //Shows the main information list       
-                        document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
-                        document.getElementById("main_information").style.height = "50%";    //Expands the main information label
-                        document.getElementById("hint").style.backgroundColor = "#0B5345";  
-                        expanded = 0;           //Set the expanded flag to 0
-                    }
-                    document.getElementById("hint").innerHTML = "Click on the building for more details";
-                    document.getElementById("information").style.height = "40%";
-                    document.getElementById("main_information").style.height = "75%";
-                    document.getElementById("hint").style.height = "7.5%";
-                    document.getElementById("controlLayout").style.height = "20%";
-                    document.getElementById("more_information").style.removeProperty('min-height');
-                    document.getElementById("more_information").style.padding = "0%";
-                    document.getElementById("more_information").style.marginTop = "0%";
-                    document.getElementById("more_information").style.margin = "0%";
-                    document.getElementById("label2").style.fontSize = "0vmin";
-                    document.getElementById("list2").style.fontSize = "0vmin";
-                    document.getElementById("label3").style.backgroundColor = "#1A5276";
-                    showNavigator();
-                    clicked = !clicked;    
-                }
-                for(var i=0;i<transparentMaterialArray.length;i++){
-                    transparentMaterialArray[i].color.set(0x2758E7);
-                    transparentMaterialArray[i].opacity = 0.6;
-                    transparentMaterialForPanelsArray[i].opacity = 0;
-                }
-                var y  = camera.position.y;
-                var z = camera.position.z;
-                var x = camera.position.x;
-                var xr = camera.rotation.x;
-                for(var i=0;i<15;i++){
-                    await sleep(20);
-                    if(ViewMode=="sky"){
-                        camera.position.y = y - (i+1)*((y-initialCamera_Y)/15);
-                        camera.position.z = z - (i+1)*((z-initialCamera_Z)/15);
-                        camera.rotation.x = xr-(i+1)*((xr-initialCamera_Xangle)/15);
-
-                    }
-                    camera.position.x=x-((i+1)*(x/15));    //8,20
-                    camera.rotation.y = angle_y-(i+1)*(angle_y/15);
-                }
-                if(ViewMode=="sky"){
-                    frontCameraBall.position.y = initialCamera_Y-yR;
-                    backCameraBall.position.y = initialCamera_Y+yR;
-                    topCameraBall.position.y = initialCamera_Y;
-                    frontCameraBall.position.z = initialCamera_Z-zR;
-                    backCameraBall.position.z = initialCamera_Z+zR;
-                    topCameraBall.position.z = initialCamera_Z;
-                    frontCameraBall.rotation.x = initialCamera_Xangle;
-                    backCameraBall.rotation.x = initialCamera_Xangle;
-                    angle_x = initialCamera_Xangle;
-                }
-                okToGoBack = 0;
-                okToGoFront = 0;
-                angle_y = 0;
-            }
-            lastpanel = -1;
-            ViewMode = "walk";            
-        }
-
-        async function switchtoDRONE(){
-            updateAngles();
-            document.getElementById("rightTop").innerHTML = "D";
-            document.getElementById("rightBottom").innerHTML = "DRONE";
-            document.getElementById("leftTopButton").innerHTML = "BIRD";
-            document.getElementById("leftBottomButton").innerHTML = "WALK";
-            if(ViewMode=="walk"){
-                departmentDatabase[0] = building0;
-                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
-                    //Decrease the opacity of top right main information label to 0.5 
-                    if(expanded){      
-                        document.getElementById("list").style.opacity = 1;      //Shows the main information list       
-                        document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
-                        document.getElementById("main_information").style.height = "50%";    //Expands the main information label
-                        document.getElementById("hint").style.backgroundColor = "#0B5345";  
-                        expanded = 0;           //Set the expanded flag to 0
-                    }
-                    document.getElementById("hint").innerHTML = "Click on the building for more details";
-                    document.getElementById("information").style.height = "40%";
-                    document.getElementById("main_information").style.height = "75%";
-                    document.getElementById("hint").style.height = "7.5%";
-                    document.getElementById("controlLayout").style.height = "20%";
-                    document.getElementById("more_information").style.removeProperty('min-height');
-                    document.getElementById("more_information").style.padding = "0%";
-                    document.getElementById("more_information").style.marginTop = "0%";
-                    document.getElementById("more_information").style.margin = "0%";
-                    document.getElementById("label2").style.fontSize = "0vmin";
-                    document.getElementById("list2").style.fontSize = "0vmin";
-                    document.getElementById("label3").style.backgroundColor = "#1A5276";
-                    showNavigator();
-                    clicked = !clicked;    
-                }
-                for(var i=0;i<transparentMaterialArray.length;i++){
-                    transparentMaterialArray[i].color.set(0x000000);
-                    transparentMaterialArray[i].opacity = 1;
-                    transparentMaterialForPanelsArray[i].opacity = 0;
-                }        
-                for(var i=0;i<10;i++){
-                    await sleep(20);
-                    camera.position.x=(i+1)*1;
-                    camera.rotation.y = angle_y-(i+1)*((angle_y-Math.PI/8)/10); 
-                }
-                okToGoBack = 1;
-                okToGoFront = 1;
-                angle_y = Math.PI/8;
-                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-                document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
-            }else if(ViewMode=="sky"){
-                departmentDatabase[0] = building0;
-                for(var i=0;i<20;i++){
-                    await sleep(20);
-                    camera.position.x = 40 -(i+1)*1.5;
-                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/8))/20); 
-                }
-                okToGoBack = 1;
-                okToGoFront = 1;
-                angle_y = Math.PI/8;
-            }
-            ViewMode = "drone";
-        }
-
-        async function switchtoSKY(){
-            updateAngles();
-            document.getElementById("rightTop").innerHTML = "B";
-            document.getElementById("rightBottom").innerHTML = "BIRD";
-            document.getElementById("leftTopButton").innerHTML = "DRONE";
-            document.getElementById("leftBottomButton").innerHTML = "WALK";
-            if(ViewMode=="walk"){   //Going up
-                departmentDatabase[0] = building0;
-                if(clicked){                                                            //If user has already clicked (it means now he has clicked to unclick the previous click)
-                            //Decrease the opacity of top right main information label to 0.5 
-                    if(expanded){      
-                        document.getElementById("list").style.opacity = 1;      //Shows the main information list       
-                        document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
-                        document.getElementById("main_information").style.height = "50%";    //Expands the main information label
-                        document.getElementById("hint").style.backgroundColor = "#0B5345";  
-                        expanded = 0;           //Set the expanded flag to 0
-                    }
-                    document.getElementById("hint").innerHTML = "Click on the building for more details";
-                    document.getElementById("information").style.height = "40%";
-                    document.getElementById("main_information").style.height = "75%";
-                    document.getElementById("hint").style.height = "7.5%";
-                    document.getElementById("controlLayout").style.height = "20%";
-                    document.getElementById("more_information").style.removeProperty('min-height');
-                    document.getElementById("more_information").style.padding = "0%";
-                    document.getElementById("more_information").style.marginTop = "0%";
-                    document.getElementById("more_information").style.margin = "0%";
-                    document.getElementById("label2").style.fontSize = "0vmin";
-                    document.getElementById("list2").style.fontSize = "0vmin";
-                    document.getElementById("label3").style.backgroundColor = "#1A5276";
-                    showNavigator();
-                    clicked = !clicked;    
-                }
-                for(var i=0;i<transparentMaterialArray.length;i++){
-                    transparentMaterialArray[i].color.set(0x000000);
-                    transparentMaterialArray[i].opacity = 1;
-                    transparentMaterialForPanelsArray[i].opacity = 0;
-                }
-                var y = camera.position.y;
-                var z = camera.position.z;
-                var xr = camera.rotation.x;
-                for(var i=0;i<20;i++){
-                    await sleep(20);
-                    camera.position.x=(i+1)*2;
-                    camera.position.y = y - (i+1)*(y/20+1);
-                    camera.position.z = z - (i+1)*(z/20+2.25);
-                    camera.rotation.x = xr - (i+1)*(xr/20);
-                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/2))/20); 
-                }
-                frontCameraBall.position.y = -20; 
-                backCameraBall.position.y = -20;
-                topCameraBall.position.y = -20;
-                frontCameraBall.position.z = -45-R;
-                backCameraBall.position.z = -45+R;
-                topCameraBall.position.z = -45;
-                frontCameraBall.rotation.x = 0;
-                backCameraBall.rotation.x = 0;
-                okToGoBack = 1;
-                okToGoFront = 1;
-                angle_y = Math.PI/2;
-                angle_x = 0;
-                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-                document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
-            }else if(ViewMode=="drone"){
-                departmentDatabase[0] = building0;
-                var y = camera.position.y;
-                var z = camera.position.z;
-                var xr = camera.rotation.x;
-                for(var i=0;i<20;i++){
-                    await sleep(20);
-                    camera.position.x = 10 +(i+1)*1.5;
-                    camera.position.y = y - (i+1)*(y/20+1);
-                    camera.position.z = z - (i+1)*(z/20+2.25);
-                    camera.rotation.x = xr - (i+1)*(xr/20);
-                    camera.rotation.y = angle_y-(i+1)*((angle_y-(Math.PI/2))/20); 
-                }
-                frontCameraBall.position.y = -20; 
-                backCameraBall.position.y = -20;
-                topCameraBall.position.y = -20;
-                frontCameraBall.position.z = -45-R;
-                backCameraBall.position.z = -45+R;
-                topCameraBall.position.z = -45;
-                frontCameraBall.rotation.x = 0;
-                backCameraBall.rotation.x = 0;
-                okToGoBack = 1;
-                okToGoFront = 1;
-                angle_y = Math.PI/2;
-                angle_x = 0;
-            }
-            ViewMode = "sky";
-        }
-
-        function leftTop(){
-            switch(ViewMode){
-                case "walk":
-                    switchtoSKY();    
-                    break;
-                case "sky":
-                    switchtoDRONE();
-                    break;
-                case "drone":
-                    switchtoSKY();    
-                    break;
-            }
-        }
-
-        function leftBottom(){
-            switch(ViewMode){
-                case "walk":
-                    switchtoDRONE();    
-                    break;
-                case "sky":
-                    switchtoWALK();    
-                    break;
-                case "drone":
-                    switchtoWALK();    
-                    break;
-            }
-        }
-
-//Corner Controls
-        function changeCorners(){
-            if(circleCorners==1){
-                circleCorners = 0;
-                document.getElementById("changeCorners").innerHTML = "Circle Corners";
-                document.getElementById("main_information").style.borderRadius = "0vmin";
-                document.getElementById("hint").style.borderRadius = "0vmin";
-                document.getElementById("more_information").style.borderRadius = "0vmin";
-                document.getElementById("navigator").style.borderRadius = "0vmin";
-                document.getElementById("changeCorners").style.borderRadius = "0vmin";
-                document.getElementById("RightButton").style.borderRadius = "0vmin";
-                document.getElementById("leftTopButton").style.borderRadius = "0vmin";
-                document.getElementById("leftBottomButton").style.borderRadius = "0vmin";
-            }else{
-                circleCorners = 1;
-                document.getElementById("changeCorners").innerHTML = "Square Corners";
-                document.getElementById("main_information").style.borderRadius = "3.5vmin 3.5vmin 0vmin 0vmin";
-                document.getElementById("hint").style.borderRadius = "0vmin 0vmin 3.5vmin 3.5vmin";
-                document.getElementById("more_information").style.borderRadius = "3.5vmin";
-                document.getElementById("navigator").style.borderRadius = "3.5vmin 3.5vmin 0vmin 0vmin";
-                document.getElementById("changeCorners").style.borderRadius = "1.65vmin";
-                document.getElementById("RightButton").style.borderRadius = "0 1.4vmin 1.4vmin 0";
-                document.getElementById("leftTopButton").style.borderRadius = "1.4vmin 0 0 0";
-                document.getElementById("leftBottomButton").style.borderRadius = "0 0 0 1.4vmin";
-            }
-        }
-
-//Key Controls
-        document.onkeydown = function(event){   //Set event listeners for key presses
-            switch (event.keyCode){
-                case 37:    //arrow left
-                    turnleft();
-                    break;
-                case 38:    //Aroow up
-                    forward();
-                    break;
-                case 39:    //Arrow right
-                    turnright();
-                    break;
-                case 40:    //Arrow down
-                    backward();
-                    break;
-                case 83:    //Letter s
-                    turnup();
-                    break;
-                case 65:    //Letter a
-                    turndown();
-                    break;
-                case 87:    //Letter w
-                    if(ViewMode=="sky" || ViewMode=="drone"){
-                        switchtoWALK();
-                    }
-                    break;
-                case 68:    //Letter d
-                    if(ViewMode=="sky" || ViewMode=="walk"){
-                        switchtoDRONE();
-                    }
-                    break;
-                case 66:    //Letter b
-                    if(ViewMode=="drone" || ViewMode=="walk"){
-                        switchtoSKY();
-                    }
-                    break;
-        }
-        }
-
-        //Front cube
-        var frontCameraBall = new THREE.Mesh(
-            new THREE.BoxGeometry(1,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
-        );
-        scene.add(frontCameraBall);
-        frontCameraBall.position.x = initialCamera_X+3.2;
-        frontCameraBall.position.y = initialCamera_Y-yR;
-        frontCameraBall.position.z = initialCamera_Z-zR;
-        frontCameraBall.rotation.x = initialCamera_Xangle;
-        let frontballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
-        frontballBB.setFromObject(frontCameraBall);
-
-        //Back cube
-        var backCameraBall = new THREE.Mesh(
-            new THREE.BoxGeometry(2,0.2,1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
-        );
-        scene.add(backCameraBall);
-        backCameraBall.position.x = initialCamera_X;
-        backCameraBall.position.y = initialCamera_Y+yR;
-        backCameraBall.position.z = initialCamera_Z+zR;
-        backCameraBall.rotation.x = initialCamera_Xangle;
-        let backballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
-        backballBB.setFromObject(backCameraBall);
-
-        //Top cube
-        var topCameraBall = new THREE.Mesh(
-            new THREE.BoxGeometry(0.1,0.1,0.1),
-            new THREE.MeshBasicMaterial({color: 0x2758E7, transparent:true, opacity:0})
-        );
-        scene.add(topCameraBall);
-        topCameraBall.position.x = 3.8;
-        topCameraBall.position.y = initialCamera_Y;
-        topCameraBall.position.z = initialCamera_Z;
-        let topballBB = new THREE.Box3(new THREE.Vector3(),new THREE.Vector3());
-        topballBB.setFromObject(topCameraBall);
-
-
-        function checkfrontIntersection(){
-            var sum=0;
-            for(var i=0;i<transparentWallsList.length;i++){
-                if(frontballBB.intersectsBox(transparentWallsList[i])){
-                    return 1;
-                } 
-            }
-            return 0;
-        }
-        function checkbackIntersection(){
-            var sum=0;
-            for(var i=0;i<transparentWallsList.length;i++){
-                if(backballBB.intersectsBox(transparentWallsList[i])){
-                    return 1;
-                } 
-            }
-            return 0;
-        }
-
-        function checkCollision(){
-            if(checkfrontIntersection()){
-                okToGoFront = 0;
-            }else{
-                okToGoFront = 1;
-            }
-            if(checkbackIntersection()){
-                okToGoBack = 0;
-            }else{
-                okToGoBack = 1;
-            }
-        }
-
-        var lastpanel = -1;
-        function checkRoom(){
-            for(var i=0;i<PanelsList.length;i++){
-                if(topballBB.intersectsBox(PanelsList[i])){
-                    if((!clicked) && (i!=lastpanel)){
-                        departmentDatabase[0] = departmentDatabase[idsOfPanelList[i]];    
-                        document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-                        document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
-                        lastpanel = i;
-                    }        
-                    return 0;
-                }
-            }
-            if(departmentDatabase[0] != building0){
-                departmentDatabase[0] = building0;
-                document.getElementById("label").innerHTML = departmentDatabase[0][0];                             //Update the default information about the department on the top right labels
-                document.getElementById("list").innerHTML = departmentDatabase[0][1];
-                document.getElementById("list2").innerHTML = departmentDatabase[0][2];
-            }
-            
-        }
-
-        function nowin(){
-            out = 0;
-        }
-        function nowout(){
-            out = 1;
-        } 
-
-        camera.position.x = initialCamera_X;              //Set the camera elevation (default value is 0)
-        camera.position.y = initialCamera_Y;
-        camera.position.z = initialCamera_Z;
-        camera.rotation.x += initialCamera_Xangle;
-        camera.rotation.z -= Math.PI/2;     //Set the rotation of the camera
-
-
-//Rendering
-        var animate = function(){
-            renderer.setSize(window.innerWidth-14,window.innerHeight-17);
-            frontballBB.copy(frontCameraBall.geometry.boundingBox).applyMatrix4(frontCameraBall.matrixWorld);
-            backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);
-            topballBB.copy(topCameraBall.geometry.boundingBox).applyMatrix4(topCameraBall.matrixWorld);
-            if(ViewMode=="walk"){
-                checkRoom();
-                checkCollision();
-            }
-            renderer.render(scene,camera);
-            requestAnimationFrame(animate);
-        };
-
-
-        var blenderBuilding9 = importObject('./floors/Floor4.gltf',-5,0,-80,0,3.28084);    //wall
-       // var blenderBuilding10 = importObject('./assets/F4_Assets.gltf',-5,0,-80,0,3.28084);    //wall
+        var blenderBuilding9 = importObject('./floors/Floor4.gltf',-5,0,-80,0,3.28084); 
+        // var blenderBuilding10 = importObject('./assets/F4_Assets.gltf',-5,0,-80,0,3.28084);    //wall
 
         //Creating transparent objects by using the created function above        
         var F01_door1 = createTransparentObject(1,"h",-16.52,-61.98);
@@ -1364,10 +352,10 @@ var ViewMode = "walk";
         var light15 = setPointLight(3,-35,-60);
         var light16 = setPointLight(3,-35,-66);
 
-        var light17 = setPointLight(3,-6,5);
-        var light18 = setPointLight(3,-12,5);
-        var light19 = setPointLight(3,-18,5);
-        var light20 = setPointLight(3,-24,5);
+        // var light17 = setPointLight(3,-6,5);
+        // var light18 = setPointLight(3,-12,5);
+        // var light19 = setPointLight(3,-18,5);
+        // var light20 = setPointLight(3,-24,5);
         
         var light21 = setPointLight(3,-6,-75);
         var light22 = setPointLight(3,-12,-75);
@@ -1376,14 +364,6 @@ var ViewMode = "walk";
     
         const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
         scene.add( lightt );
-
-        document.getElementById("label").innerHTML = departmentDatabase[0][0];
-        document.getElementById("list").innerHTML = departmentDatabase[0][1];
-        document.getElementById("label2").innerHTML = "More information abount" + departmentDatabase[0][0];
-        document.getElementById("list2").innerHTML = departmentDatabase[0][2];
-
-    
-        animate();
 
     </script>
 </body>

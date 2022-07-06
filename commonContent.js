@@ -46,10 +46,10 @@ function addMouseEvents(cube, buildingID){                                      
                     document.getElementById("list").style.opacity = 1;      //Shows the main information list       
                     document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
                     document.getElementById("main_information").style.height = "50%";    //Expands the main information label
-                    document.getElementById("hint").style.backgroundColor = "#0B5345";   //Change the background colour of the bar at the bottom of the main_info panel  
+                    document.getElementById("hint").style.backgroundColor = "#0E6655";   //Change the background colour of the bar at the bottom of the main_info panel  
                     expanded = 0;           //Set the expanded flag to 0
                 }    
-                document.getElementById("hint").innerHTML = "Click on the building for more details";
+                document.getElementById("hint").innerHTML = "Click on the blue panel for more details";
                 document.getElementById("information").style.height = "40%";
                 document.getElementById("main_information").style.height = "75%";
                 document.getElementById("hint").style.height = "7.5%";
@@ -111,10 +111,10 @@ function addMouseEventsForWalls(cube,buildingID){                               
                     document.getElementById("list").style.opacity = 1;      //Shows the main information list       
                     document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
                     document.getElementById("main_information").style.height = "50%";    //Expands the main information label
-                    document.getElementById("hint").style.backgroundColor = "#0B5345";      //Change the background colour of the bar at the bottom of the main_info panel   
+                    document.getElementById("hint").style.backgroundColor = "#0E6655";      //Change the background colour of the bar at the bottom of the main_info panel   
                     expanded = 0;           //Set the expanded flag to 0
                 }
-                document.getElementById("hint").innerHTML = "Click on the building for more details";
+                document.getElementById("hint").innerHTML = "Click on the blue panel for more details";
                 document.getElementById("information").style.height = "40%";
                 document.getElementById("main_information").style.height = "75%";
                 document.getElementById("hint").style.height = "7.5%";
@@ -166,10 +166,10 @@ function addMouseEventsForPanels(cube, buildingID){                             
                     document.getElementById("list").style.opacity = 1;      //Shows the main information list       
                     document.getElementById("more_information").style.opacity = 0;     //Dissappears the more information label
                     document.getElementById("main_information").style.height = "50%";    //Expands the main information label
-                    document.getElementById("hint").style.backgroundColor = "#0B5345";  
+                    document.getElementById("hint").style.backgroundColor = "#0E6655";  
                     expanded = 0;           //Set the expanded flag to 0
                 }    
-                document.getElementById("hint").innerHTML = "Click on the building for more details";
+                document.getElementById("hint").innerHTML = "Click on the blue panel for more details";
                 document.getElementById("information").style.height = "40%";
                 document.getElementById("main_information").style.height = "75%";
                 document.getElementById("hint").style.height = "7.5%";
@@ -504,7 +504,7 @@ async function hideInformation(){               //This function expands the top 
             document.getElementById("main_information").style.height = 6+4.4*(i+1)+"%";    //Expands the main information label
             document.getElementById("link").style.height = 7.5+0.85*i+"%";
         }
-        document.getElementById("hint").style.backgroundColor = "#0B5345";
+        document.getElementById("hint").style.backgroundColor = "#0E6655";
         expanding=0;            //set the expanding flag to 0
         expanded = 0;           //Set the expanded flag to 0
     }
