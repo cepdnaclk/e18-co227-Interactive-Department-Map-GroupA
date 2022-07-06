@@ -1,6 +1,9 @@
 body {
     font-family: 'Roboto', Arial, sans-serif;
   } 
+  body:hover {
+    cursor: context-menu;
+  } 
   
 .information_class {
     position: absolute;
@@ -278,6 +281,10 @@ body {
     transform: translateY(0.22vmin);
 }
 
+.changeCorners_class:hover {
+    cursor: pointer;
+  } 
+
 .otherpages_class{
     position: absolute;
     white-space: nowrap;
@@ -299,6 +306,10 @@ body {
     height: 100%;
     border-radius: 1vmin;
 } 
+
+.pagebutton_class:hover {
+    cursor: pointer;
+  } 
 
 .pagebutton_class:active {
     transform: translateY(0.22vmin);
@@ -328,6 +339,11 @@ body {
     border-radius: 1.4vmin 0 0 0;
     background-color: #5B2C6F;
 }
+
+.leftTopButtonClass:hover {
+    cursor: pointer;
+  } 
+
 .leftBottomButtonClass{
     padding: 0;
     position: absolute;
@@ -342,6 +358,11 @@ body {
     border-radius: 0 0 0 1.4vmin;
     background-color: #5B2C6F;
 }
+
+.leftBottomButtonClass:hover {
+    cursor: pointer;
+  } 
+
 .RightButtonClass{
     padding: 0;
     position: absolute;
