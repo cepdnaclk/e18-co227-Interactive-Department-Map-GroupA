@@ -120,18 +120,6 @@
         "contact":"https://ce.pdn.ac.lk/facilities/robotics-lab"
     },
     {
-        "category":1,
-        "id":"03-11",
-        "name" :"ESCAL Robotics Lab2",
-        "accessibility":"S I TO UG PG",
-        "more":"This is for Robotics related works",
-        "tags":"lab",
-        "capacity": "12",
-        "staff":"none",
-        "features":"This is for Robotics related works",
-        "contact":"https://ce.pdn.ac.lk/facilities/robotics-lab"
-    },
-    {
         "category":3,
         "id":"03-CR01",
         "name" :"Corridor-01",

@@ -331,7 +331,12 @@ function createNavigatingBars(buildingID,horv,length,yPosition,zPosition){
         var geometry5 = new THREE.BoxGeometry(0.001,length,0.5);
     }else if(horv=="v"){
         var geometry5 = new THREE.BoxGeometry(0.001,0.5,length);
+    }else if(horv=="V"){
+        var geometry5 = new THREE.BoxGeometry(0.001,0.4,length);
+    }else if(horv=="H"){
+        var geometry5 = new THREE.BoxGeometry(0.001,length,0.6);
     }
+
     var material5 = NavigatingMaterialArray[buildingID];
     var cube5 = new THREE.Mesh(geometry5,material5);
     scene.add(cube5);
@@ -911,6 +916,7 @@ function showPath(buildingID){
     }    
     itemSelected = !itemSelected;   //Change the flag
 }
+
 //Redirecting to other pages
 function redirecttoPage(pageID){
     switch(pageID){
