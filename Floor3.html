@@ -46,11 +46,13 @@
         <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
     </div>
     <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
-    <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
-    <div class="viewsButtonClass" id="viewsButton">
-        <button class="leftTopButtonClass" id="leftTopButton" onclick="leftTop()">BIRD</button>
-        <button class="leftBottomButtonClass" id="leftBottomButton" onclick="leftBottom()">DRONE</button>
-        <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
+    <div id="dashboard" class="dashboard_class">
+        <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
+        <div class="viewsButtonClass" id="viewsButton">
+            <button class="leftTopButtonClass" id="leftTopButton" onclick="leftTop()">BIRD</button>
+            <button class="leftBottomButtonClass" id="leftBottomButton" onclick="leftBottom()">DRONE</button>
+            <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
+        </div>
     </div>
     <div id="aim" class="aim"></div>
     <script type="text/javascript"> 
