@@ -78,19 +78,21 @@
         <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
     </div>
     <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
-    <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
-    <div id="otherpages" class="otherpages_class">
-        <p10 style="font-size: 1.1vmin; color:white; padding-left: 0.8vmin; padding-right: 0; margin-top: 0.5vmin;">FLOOR</p10>
-        <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(0)">G</button>
-        <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(1)">1</button>
-        <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(2)">2</button>
-        <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(3)">3</button>
-        <button id="page" class="pagebutton_class">4</button>
-    </div>
-    <div class="viewsButtonClass" id="viewsButton">
-        <button class="leftTopButtonClass" id="leftTopButton" onclick="leftTop()">BIRD</button>
-        <button class="leftBottomButtonClass" id="leftBottomButton" onclick="leftBottom()">DRONE</button>
-        <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
+    <div id="dashboard" class="dashboard_class">
+        <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
+        <div id="otherpages" class="otherpages_class">
+            <p10 style="font-size: 1.2vmin; color:white; padding-left: 0.8vmin; padding-right: 0; margin-top: 0.5vmin;">FLOOR</p10>
+            <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(0)">G</button>
+            <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(1)">1</button>
+            <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(2)">2</button>
+            <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(3)">3</button>
+            <button id="page" class="pagebutton_class">4</button>
+        </div>
+        <div class="viewsButtonClass" id="viewsButton">
+            <button class="leftTopButtonClass" id="leftTopButton" onclick="leftTop()">BIRD</button>
+            <button class="leftBottomButtonClass" id="leftBottomButton" onclick="leftBottom()">DRONE</button>
+            <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button> 
+        </div>
     </div>
     <div id="aim" class="aim"></div>
     <script type="text/javascript">
@@ -258,7 +260,7 @@
        var panel16_01 = createTransparentPanel(16,6.62,10.15,-3.71,-45.48);        PanelsList.push(panel16_01);
          
         var panel17_01 = createTransparentPanel(17,10.63,7.58,-5.715,-54.18);       PanelsList.push(panel17_01);
-        var panel17_02 = createTransparentPanel(17,3.65,18.84,-9.22,-41.37);        PanelsList.push(panel17_02);
+        var panel17_02 = createTransparentPanel(17,3.65,18.84,-9.22,-40.97);        PanelsList.push(panel17_02);
         
         var panel18_01 = createTransparentPanel(18,5.6,7,-3.2,-61.47);              PanelsList.push(panel18_01);
 
@@ -312,7 +314,7 @@
         //Creating navigating bars using the created function above
         var bar0 = createNavigatingBars(0,"v",4.5,-3,-56.7);
         var bar1 = createNavigatingBars(1,"v",0.5,-3,-54.2);
-        var bar2 = createNavigatingBars(2,"v",2,-3,-52.95);
+        var bar2 = createNavigatingBars(2,"v",5,-3,-51.45);
         var bar3 = createNavigatingBars(3,"h",4.7,-5.6,-54.2);
         var bar4 = createNavigatingBars(4,"v",4.5,-7.7,-56.7);
         var bar5 = createNavigatingBars(5,"v",7.8,-7.7,-62.85);

@@ -198,9 +198,9 @@ body {
     outline: none;
 } 
   
-  .searchQuerySubmit_class:hover {
+.searchQuerySubmit_class:hover {
     cursor: pointer;
-  } 
+} 
 
 .roomListContainer_class{
     margin-left: 2%;
@@ -227,22 +227,26 @@ body {
 
 .roomList_class::-webkit-scrollbar {
     width: 1vmin;
-  }
+}
    
-  .roomList_class::-webkit-scrollbar-track {
+.roomList_class::-webkit-scrollbar-track {
     box-shadow: inset 0 0 1vmin white;
-  }
+}
    
-  .roomList_class::-webkit-scrollbar-thumb {
+.roomList_class::-webkit-scrollbar-thumb {
     background-color: #E1E1E1;
     border-radius: 1vmin;
-  }
+}
 
-  .items:hover {
-    cursor: pointer;
-  } 
+.roomList_class::-webkit-scrollbar-thumb:hover {
+    background-color: #cfd0d1;
+}
 
-  .items:active {
+.items:hover {
+   cursor: pointer;
+} 
+
+.items:active {
     transform: translateY(0.22vmin);
 }
 
@@ -264,17 +268,31 @@ body {
     
 }
 
+.dashboard_class{
+    position: absolute;
+    background: rgba(250, 250, 250, 0);
+    bottom: 1.7%;
+    right: 1.56vmin;
+    height: 8.8%;
+    width: 38.9vmin;
+    border-radius: 1.4vmin;
+}
+
 .changeCorners_class{
     position: absolute;
-    height: 3.7%;
-    width: 6.7vmin;
+    height: 45%;
+    width: 16%;
     font-size: 1.32vmin;
-    border-radius: 1.65vmin;
+    border-radius: 1.4vmin;
     background-image: conic-gradient(#9B59B6 0deg, #9B59B6 90deg, #633974 90deg, #633974 180deg, #633974 180deg, #633974 270deg, #9B59B6 270deg);
     color: white;
-    border-width: 0vmin;
-    bottom: 6.2vmin;
-    right: 33.4vmin;
+    outline: none;
+    border: none;
+    top: 5%;
+    left: 0.8%;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
 }
 
 .changeCorners_class:active {
@@ -288,27 +306,29 @@ body {
 .otherpages_class{
     position: absolute;
     white-space: nowrap;
-    width: 24.685vmin;
-    height: 3.3%;
-    bottom: 2.25vmin;
+    width: 65%;
+    height: 40%;
+    bottom: 4%;
     background: rgba(99, 57, 116, 0.8);
-    right: 15.6vmin;
+    left: 0.8%;
     border-radius: 1vmin;
 }
 
 .pagebutton_class{
-    background: rgba(99, 57,116, 0);
+    background: rgba(137, 139, 145, 0);
     color: white;
     width: 13.5%;
     font-size: 2vmin;
     text-align: center;
     border-color: white;
+    outline: none;
     height: 100%;
     border-radius: 1vmin;
 } 
 
 .pagebutton_class:hover {
     cursor: pointer;
+    background-color: #8f5ba3;
   } 
 
 .pagebutton_class:active {
@@ -318,16 +338,18 @@ body {
 
 .viewsButtonClass{
     position: absolute;
-    height: 7.7%;
-    width: 12.2vmin;
+    background: rgba(250, 250, 250, 0);
+    height: 90%;
+    width: 32%;
     border-width: 0vmin;
-    bottom: 2.1vmin;
-    right: 2.5vmin;
+    bottom: 4%;
+    right: 1%;
 }
 
 .leftTopButtonClass{
     padding: 0;
     position: absolute;
+    outline: none;
     height: 48%;
     width: 50%;
     left: 0%;
@@ -337,16 +359,18 @@ body {
     color: white;
     border-color: #D7BDE2;
     border-radius: 1.4vmin 0 0 0;
-    background-color: #5B2C6F;
+    background-color: #5B2C6F
 }
 
 .leftTopButtonClass:hover {
     cursor: pointer;
+    background-color: #8f5ba3;
   } 
 
 .leftBottomButtonClass{
     padding: 0;
     position: absolute;
+    outline: none;
     height: 48%;
     width: 50%;
     left: 0%;
@@ -361,6 +385,7 @@ body {
 
 .leftBottomButtonClass:hover {
     cursor: pointer;
+    background-color: #8f5ba3;
   } 
 
 .RightButtonClass{
@@ -370,8 +395,9 @@ body {
     width: 46%;
     right: 0%;
     border-color: white;
+    outline: none;
     border-radius: 0 1.4vmin 1.4vmin 0;
-    background-color: white;
+    background-color: white; 
 }
 
 .rightTopClass{
@@ -384,7 +410,6 @@ body {
 
 .rightBottomClass{
     padding: 0;
-    margin-left: -15%;
     color: #5B2C6F;
     text-align: center;
     font-size: 1.2vmin;
