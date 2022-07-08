@@ -221,10 +221,23 @@ body {
 .items{
     padding-left: 2.5%;
     width: 100%;
-    height: 10%;
-    margin-bottom: 1%;
+    min-height: 9%;
+    margin-bottom: 4%;
     font-size: 2.1vmin; 
     color: #616160;
+}
+
+.hel{
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    /* white-space: nowrap; */
+    text-overflow: ellipsis;
+    font-size: 1.4vmin;
+    /* height: 1.8vmin; */
+    width: 90%;
+    /* text-align: end; */
+    color: #B2B3B4;
 }
 
 .roomList_class::-webkit-scrollbar {
