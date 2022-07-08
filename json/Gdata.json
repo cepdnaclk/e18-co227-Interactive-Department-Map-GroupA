@@ -149,16 +149,7 @@
     {
         "category":3,
         "id":"G-CR01",
-        "name" :"Corridor-01",
-        "accessibility":"ALL",
-        "more":"This corridor can be used to enter the department through the open lab2",
-        "tags":"public",
-        "features":"This belongs to ground floor" 
-    },
-    {
-        "category":3,
-        "id":"G-CR02",
-        "name" :"Corridor-02",
+        "name" :"Corridor",
         "accessibility":"ALL",
         "more":"This corridor connects central lobby,department office,conference room, operator room",
         "tags":"public",
