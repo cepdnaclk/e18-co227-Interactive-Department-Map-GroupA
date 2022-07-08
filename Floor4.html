@@ -109,9 +109,9 @@
             xhr.onload = function(){
                 if(this.status==200){       
                     my_json = JSON.parse(this.responseText);   //added wrapper such that values of the objects can be accessed
-                        //console.log(my_json);		
-                        roomInfo(defaultID);       			//Set initial information should be appeared in the panels
-                        animate();
+                    //console.log(my_json);		
+                    roomInfo(defaultID);       			//Set initial information should be appeared in the panels
+                    animate();
                 }
                 else{
                     alert("File not found..!! Check the database file name or URL and try again !! ");	//when there's an error in accessing the json file

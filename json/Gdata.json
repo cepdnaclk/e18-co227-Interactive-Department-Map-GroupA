@@ -126,16 +126,51 @@
         "tags":"public",
         "features":"This belongs to GFloor"
     },
-
     {
         "category":3,
         "id":"G-11",
-        "name" :"Open lab Entr.Lobby",
+        "name" :"Open lab Entry Lobby",
         "accessibility":"ALL",
         "more":"Providing after hours access to G-08 and G-09",
         "tags":"public",
         "features":"This space is used for activities in ACES"
     
+    },
+    {
+        "category":3,
+        "id":"G-10G",
+        "name" :"Gents Washrooms ",
+        "accessibility":"ALL",
+        "more":"These washromms are For the use of Gents",
+        "tags":"public",
+        "features":"This belongs to GFloor"
+    },
+    {
+        "category":3,
+        "id":"G-10G",
+        "name" :"Gents Washrooms ",
+        "accessibility":"ALL",
+        "more":"These washromms are For the use of Gents",
+        "tags":"public",
+        "features":"This belongs to GFloor"
+    },
+    {
+        "category":3,
+        "id":"G-10L",
+        "name" :"Ladies Washrooms ",
+        "accessibility":"ALL",
+        "more":"These washromms are For the use of",
+        "tags":"public",
+        "features":"This belongs to GFloor"
+    },
+    {
+        "category":3,
+        "id":"G-10L",
+        "name" :"Ladies Washrooms ",
+        "accessibility":"ALL",
+        "more":"These washromms are For the use of",
+        "tags":"public",
+        "features":"This belongs to GFloor"
     },
     {
         "category":3,
@@ -173,7 +208,6 @@
         "tags":"authorized",
         "features":"This belongs to ground Floor"
     },
-
     {
         "category":3,
         "id":"G-18",
