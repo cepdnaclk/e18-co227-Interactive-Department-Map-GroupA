@@ -916,6 +916,98 @@ function showPath(buildingID){
     itemSelected = !itemSelected;   //Change the flag
 }
 
+function findData(){
+    
+    var newBuildingIDList = [];
+    var currentWord = document.getElementById("searchQueryInput").value.toLowerCase();
+    for(var i=0;i<currentWord.length;i++){
+        for(var k=0;k<i+1;k++){
+            currentInput = currentWord.substr(k,currentWord.length-i);
+            console.log("  "+currentInput);
+            for(var j=0;j<buildingIDList.length;){
+                console.log(buildingIDList[j][0]);                
+                if(my_json[buildingIDList[j][1]].id.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].id;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].name.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].name;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].accessibility.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].accessibility;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].more.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].more;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].tags.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].tags;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].hasOwnProperty("capacity") && my_json[buildingIDList[j][1]].capacity.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].capacity;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].hasOwnProperty("staff") && my_json[buildingIDList[j][1]].staff.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].staff;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].hasOwnProperty("features") && my_json[buildingIDList[j][1]].features.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].features;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].hasOwnProperty("contact") && my_json[buildingIDList[j][1]].contact.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].hasOwnProperty("contact1") && my_json[buildingIDList[j][1]].contact1.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact1;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].hasOwnProperty("contact2") && my_json[buildingIDList[j][1]].contact2.toLowerCase().includes(currentInput)){
+                    console.log("found");
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact2;
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }
+                j=j+1;    
+            }
+        }
+    }
+    for(var i=0;i<buildingIDList.length;i++){       //Update the navigating Item list according to the new buildingID list
+        buildingIDList[i][3] = "not found";    
+    }
+    buildingIDList = newBuildingIDList.concat(buildingIDList);
+    for(var i=0;i<navigatingItemList.length;i++){       //Update the navigating Item list according to the new buildingID list
+        document.getElementById(navigatingItemList[i]).innerHTML = buildingIDList[i][0] + "<div class='hel'>"+buildingIDList[i][3]+"</div>";
+        console.log(buildingIDList[i][3]);    
+    }
+}
+
+
 //Redirecting to other pages
 function redirecttoPage(pageID){
     switch(pageID){
