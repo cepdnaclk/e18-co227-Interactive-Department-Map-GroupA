@@ -40,7 +40,6 @@
             <div class="url_class">
                 <a href="http://www.ce.pdn.ac.lk/" id="url" target="_blank">Click here for more info</a>
             </div>
-            
         </div>
         <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
             <div id="searchBar" class="searchBar">
@@ -75,13 +74,13 @@
                 </div>
             </div>
         </div>
-        <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
+        <div id="label3" class="label3_class">Navigator</div>
     </div>
     <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="dashboard" class="dashboard_class">
         <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
         <div id="otherpages" class="otherpages_class">
-            <p10 style="font-size: 1.2vmin; color:white; padding-left: 0.8vmin; padding-right: 0; margin-top: 0.5vmin;">FLOOR</p10>
+            <div style="font-size: 1.2vmin; color:white; padding-left: 0.8vmin; padding-right: 0; width: 17%; margin-top: 1.2vmin;">FLOOR</div>
             <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(0)">G</button>
             <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(1)">1</button>
             <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(2)">2</button>
@@ -104,25 +103,25 @@
             
         function loadBuildings(){     
 		
-        var xhr = new XMLHttpRequest();		//create XHR object
-        xhr.open('GET','json/F4data.json',true);
+            var xhr = new XMLHttpRequest();		//create XHR object
+            xhr.open('GET','json/F4data.json',true);
 
-        xhr.onload = function(){
-            if(this.status==200){       
-                 my_json = JSON.parse(this.responseText);   //added wrapper such that values of the objects can be accessed
-                     //console.log(my_json);		
-                     roomInfo(defaultID);       			//Set initial information should be appeared in the panels
-                     animate();
+            xhr.onload = function(){
+                if(this.status==200){       
+                    my_json = JSON.parse(this.responseText);   //added wrapper such that values of the objects can be accessed
+                        //console.log(my_json);		
+                        roomInfo(defaultID);       			//Set initial information should be appeared in the panels
+                        animate();
+                }
+                else{
+                    alert("File not found..!! Check the database file name or URL and try again !! ");	//when there's an error in accessing the json file
+                }
             }
-            else{
-                alert("File not found..!! Check the database file name or URL and try again !! ");	//when there's an error in accessing the json file
+            xhr.onerror = function(){
+                console.log('Request Error occured!!');			//when there's an issue with the network level
             }
+            xhr.send();
         }
-        xhr.onerror = function(){
-            console.log('Request Error occured!!');			//when there's an issue with the network level
-        }
-        xhr.send();
-    }
         
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
@@ -220,7 +219,6 @@
         var PanelsList = [];
         var idsOfPanelList = [];
         
-        
         var panel01_01 = createTransparentPanel(1,13.55,3.7,-16.23,-59.75);         PanelsList.push(panel01_01);
         var panel01_02 = createTransparentPanel(1,11.57,1.075,-17.2,-57.36);        PanelsList.push(panel01_02);
         
@@ -230,7 +228,7 @@
         
         var panel04_01 = createTransparentPanel(4,7.348,6.41,-26.925,-76.395);      PanelsList.push(panel04_01);
         
-        var panel05_01 = createTransparentPanel(5,13.55,17.8,-16.23,-70.7);         PanelsList.push(panel05_01);  
+        var panel05_01 = createTransparentPanel(5,13.65,17.8,-16.25,-70.7);         PanelsList.push(panel05_01);  
         
         var panel06_01 = createTransparentPanel(6,8.83,5.37,-4.8,-76.92);           PanelsList.push(panel06_01);
         
@@ -257,7 +255,7 @@
         
         var panel15_01 = createTransparentPanel(15,6.63,4,-3.715,-38);              PanelsList.push(panel15_01);
         
-       var panel16_01 = createTransparentPanel(16,6.62,10.15,-3.71,-45.48);        PanelsList.push(panel16_01);
+        var panel16_01 = createTransparentPanel(16,6.62,10.15,-3.71,-45.48);        PanelsList.push(panel16_01);
          
         var panel17_01 = createTransparentPanel(17,10.63,7.58,-5.715,-54.18);       PanelsList.push(panel17_01);
         var panel17_02 = createTransparentPanel(17,3.65,18.84,-9.22,-40.97);        PanelsList.push(panel17_02);
@@ -266,7 +264,7 @@
 
         var panel19_01 = createTransparentPanel(19,5.6,2.65,-3.2,-66.695);          PanelsList.push(panel19_01);
         
-        var panel20_01 = createTransparentPanel(20,2.68,10.12,-7.75,-62.98);        PanelsList.push(panel20_01);
+        var panel20_01 = createTransparentPanel(20,2.74,10.12,-7.77,-62.98);        PanelsList.push(panel20_01);
        
         //Creating transparent walls using the created function above
         var transparentWallsList = [];
@@ -286,8 +284,8 @@
         var cubeV13BB = createWall(Y,3.5,-23.25,-67.8);     transparentWallsList.push(cubeV13BB);
         var cubeV14BB = createWall(Y,5.8,-23.25,-59.7);     transparentWallsList.push(cubeV14BB);
         var cubeV15BB = createWall(Y,1.468,-11.25,-21.68);  transparentWallsList.push(cubeV15BB);
-        //var cubeV16BB = createWall(Y,9,-3.6,-47.2);         transparentWallsList.push(cubeV16BB);
-        var cubeV17BB = createWall(Y,10,-7.2,-45);       transparentWallsList.push(cubeV17BB);     
+        //var cubeV16BB = createWall(Y,9,-3.6,-47.2);       transparentWallsList.push(cubeV16BB);
+        var cubeV17BB = createWall(Y,10,-7.2,-45);          transparentWallsList.push(cubeV17BB);     
         var cubeH1BB = createWall(31,Y,-15.5,-79.8);        transparentWallsList.push(cubeH1BB);
         var cubeH2BB = createWall(31,Y,-15.5,-10.2);        transparentWallsList.push(cubeH2BB);
         var cubeH3BB = createWall(9.56,Y,-4.75,-74.29);     transparentWallsList.push(cubeH3BB);
