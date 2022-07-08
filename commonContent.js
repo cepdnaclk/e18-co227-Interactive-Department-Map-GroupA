@@ -157,7 +157,6 @@ function addMouseEventsForWalls(cube,buildingID){                               
     }); 
 }
 
-
 function addMouseEventsForPanels(cube, buildingID){                                      //This function sets particular mouse event listeners to panels
     domEvents.addEventListener(cube,'click',event => {                          //Click listener (Signals when user has clicked on the building)
         if(out==0 && ViewMode!="walk"){                 //These functions work only when mouse poister is over the scene and user is in the drone/bird view
