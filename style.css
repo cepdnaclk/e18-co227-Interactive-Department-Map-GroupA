@@ -452,3 +452,15 @@ img {
 li{
     padding-bottom: 1vmin;
 }
+
+#num:hover{
+    background-color: rgb(200, 245, 245);
+    color: black;
+    cursor: pointer;
+}
+#num{
+    margin-bottom: 0em;  margin-top: 0em;
+}
+#abc{
+     margin: 0; 
+}
