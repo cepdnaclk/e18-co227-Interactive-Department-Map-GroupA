@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="#">
+    <title>First Floor</title>   <!--Name of the website -->
+    <link rel="stylesheet" href="style.css"/>   <!--Linking the css file-->
+</head>
+<body>
+    <script src="./js/three.js"></script>            <!-- Importing the three.js library-->
+    <script src="./js/jquery.js"></script>           <!-- Importing the jquery.js library-->
+    <script src="./js/threex.domevents.js"></script> <!-- Importing the threex.domevents.js library-->
+    <script src="./js/GLTFLoader.js"></script>       <!-- Importing the GLTFLoader.js library-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <div id="glass" class="glass" onmouseover="nowin()" onmouseleave="nowout()"></div>
+    <img src="images/logo.png">
+    <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    <div id="information" class="information_class" >                    
+        <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
+            <div id="label" class="label1_class">Room Name</div>
+            <ul id="list" class="list_class" style="list-style-image: url(images/bullet2.png); font-size: 2.15vmin;">                                   <!--Top right main information list-->
+                <li>list item 1</li>
+                <li>list item 2</li>
+                <li>list item 3</li>
+            </ul>
+        </div>
+        <div id="hint" class="hint_class">Click on the building for more details</div>
+        <div id="more_information" class="more_information_class">                          <!--Top right more information label-->
+            <p2 id="label2" class="label2_class">More information here</p2>          
+            <ul id="list2" class="list2_class" style="list-style-image: url(images/bullet2.png);">                                             <!--Top right more information list-->
+                <li>list item 1</li>
+                <li>list item 2</li>
+                <li>list item 3</li>
+            </ul>
+            <div class="line"></div>
+        </div>
+    </div>
+    
+    <div id="latterPanel" class="latterPanelClass">
+        <div id="link" class="link_class">
+            <div id="linkHead" class="linkHead_class">Link</div>
+            <div class="url_class">
+                <a href="http://www.ce.pdn.ac.lk/" id="url" target="_blank">Click here for more info</a>
+            </div>
+        </div>
+        <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
+            <div id="searchBar" class="searchBar">
+                <input id="searchQueryInput" class="searchQueryInput_class" type="text" name="searchQueryInput" placeholder="Search" value="" />
+                <button id="searchQuerySubmit" class="searchQuerySubmit_class" type="submit" name="searchQuerySubmit">
+                  <svg style="width:3.4vmin;height:3.4vmin" viewBox="0 0 24 24"><path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                  </svg>
+                </button>
+                
+            </div>
+            <div id="roomListContainer" class="roomListContainer_class">
+                <div id="roomList" class="roomList_class">
+                    <table id="myTable">
+                        <tr  class="bg-info"></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div style="font-size: 2.4vmin;" id="label3" class="label3_class">Navigator</div>
+    </div>
+    <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
+    <div id="dashboard" class="dashboard_class">
+        <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
+        <div id="otherpages" class="otherpages_class">
+            <p10 style="font-size: 1.2vmin; color: white; padding-left: 0.8vmin; padding-right: 0; margin-top: 0.5vmin;">FLOOR</p10>
+            <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(0)">G</button>
+            <button id="page" class="pagebutton_class">1</button>
+            <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(2)">2</button>
+            <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(3)">3</button>
+            <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(4)">4</button>
+        </div>
+        <div class="viewsButtonClass" id="viewsButton">
+            <button class="leftTopButtonClass" id="leftTopButton" onclick="leftTop()">BIRD</button>
+            <button class="leftBottomButtonClass" id="leftBottomButton" onclick="leftBottom()">DRONE</button>
+            <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
+        </div>
+    </div>
+    <div id="aim" class="aim"></div>
+    <script type="text/javascript"> 
+    
+//Database
+        //This database is used to load the information about the buildings
+        var my_json={};
+        var data=[];   
+        loadBuildings();
+    
+        function loadBuildings(){     
+		
+        var xhr = new XMLHttpRequest();		//create XHR object
+        xhr.open('GET','json/F1paths.json',true);
+
+        xhr.onload = function(){
+            if(this.status==200){       
+                 my_json = JSON.parse(this.responseText);   //added wrapper such that values of the objects can be accessed
+                     console.log(my_json);		
+                     buildTable(my_json);
+                     roomInfo(defaultID);       			//Set initial information should be appeared in the panels
+                     
+                     animate();
+            }
+            else{
+                alert("File not found..!! Check the database file name or URL and try again !! ");	//when there's an error in accessing the json file
+            }
+        }
+        xhr.onerror = function(){
+            console.log('Request Error occured!!');			//when there's an issue with the network level
+        }
+        xhr.send();
+        }
+
+        var clicked = 0;                //To check whether a building has been clicked or not
+        var expanding = 0;              //To check if top right labels are expanding or not
+        var expanded = 0;               //To check whether top right main label has been expanded or not
+        var circleCorners = 1;          //To flag whether layouts have circle corners or square corners (circle(1)-default)
+        var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
+        var X = 0.52,Y=0.7,R=0.9,S=0.08;    //X- length of front,back boxes, Y- thickness of transparent walls,R- gap between camera and front/back boxes,  
+        var Floor = 0;
+        var initialCamera_X = 0, initialCamera_Y = -2.22, initialCamera_Z = -55.27;     //Coordinates of the camera at the initial point
+        var initialBirdY=-20,initialBirdZ=-45;          ////Coordinates of the camera at the initial point in the bird view
+        var initialCamera_Xangle = -Math.PI/2;          //Rotation of the camera around x axis at the initial point
+        var yR = R, zR = 0;         //The gap between front,back boxes along y and z axes
+        var angle_x= initialCamera_Xangle, angle_y=0;                //Starting rotation values of the camera
+        var idNUM = 15;     //Number of ids
+        var doorHeight=-1.72, panelHeight = 3.85, wallHeight=-0.7, barHeight=-4.95;     //Height of the doors,panels,walls and the bars should be set
+        var barNUM = 18;    //Number of navigating bars
+        var defaultID=0;    //This is the id of the default information should be shown
+        
+    </script>
+    <script src="modified_common.js"></script>
+    <script type="text/javascript">
+        
+    defaultNavDisplay();
+    searchingNav();
+    
+        //Importing the blender object using the created function above        
+        var blenderBuilding = importObject('./floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);    
+
+        //Creating transparent doors by using the created function above
+        var O01_door1 = createTransparentObject(1,"v",-5.06,-73.75); //m
+        
+        var O02_door1 = createTransparentObject(2,"v",-16.64,-48.2); //n
+
+        var O03_door1 = createTransparentObject(3,"v",-20.58,-54); //d
+        var O03_door2 = createTransparentObject(3,"h",-23.6,-47.8); //o
+        
+        var O04_door1 = createTransparentObject(4,"h",-23.6,-48.02); //o
+
+        var O05_door1 = createTransparentObject(5,"v",-20.58,-36.4); //h
+        
+        var O06_door1 = createTransparentObject(6,"v",-20.58,-27.4); //g
+        
+        var O07_door1 = createTransparentObject(7,"v",-20.58,-23.25); //f
+        
+        var O08_door1 = createTransparentObject(8,"v",-20.58,-11.85); //e
+
+        var O09_door1 = createTransparentObject(9,"v",-20.8,-11.85); //e
+        var O09_door2 = createTransparentObject(9,"v",-20.8,-23.25); //f
+        var O09_door3 = createTransparentObject(9,"v",-20.8,-27.4); //g
+        var O09_door4 = createTransparentObject(9,"v",-20.8,-36.4); //h
+        var O09_door5 = createTransparentObject(9,"h",-18.43,-40.42); //c
+        var O09_door6 = createTransparentObject(9,"h",-8.5,-40.42); //i
+
+        var O10_door1 = createTransparentObject(10,"v",-10.5,-54.57); //b
+        var O10_door2 = createTransparentObject(10,"v",-16.42,-48.2); //n
+        var O10_door3 = createTransparentObject(10,"h",-18.43,-40.2); //c
+        var O10_door4 = createTransparentObject(10,"v",-20.8,-54); //d
+
+        var O11_door1 = createTransparentObject(11,"h",-8.5,-40.2); //i
+        var O11_door2 = createTransparentObject(11,"v",-10.72,-54.57); //b
+        var O11_door3 = createTransparentObject(11,"hss",-8.15,-58.53); //z
+        var O11_door4 = createTransparentObject(11,"hl",-2.85,-59.2); //l
+
+        var O12_door1 = createTransparentObject(12,"v",-5.06,-67.15); //j
+
+        var O13_door1 = createTransparentObject(13,"hl",-2.85,-58.98); //l
+        
+        var O14_door1 = createTransparentObject(14,"v",-4.84,-73.75); //m
+        var O14_door2 = createTransparentObject(14,"v",-4.84,-67.15); //j
+        var O14_door3 = createTransparentObject(14,"hss",-8.15,-58.47); //z
+
+        //Creating transparent panels using the created function above
+        var PanelsList = [];
+        var idsOfPanelList = [];
+
+        var panel01_1BB = createTransparentPanel(1,5,11.2,-2.5,-74.45);         PanelsList.push(panel01_1BB);
+
+        var panel02_1BB = createTransparentPanel(2,5.51,10,-13.75,-45.6);       PanelsList.push(panel02_1BB);
+        
+        var panel03_1BB = createTransparentPanel(3,10,8.64,-26,-52.28);         PanelsList.push(panel03_1BB);
+
+        var panel04_1BB = createTransparentPanel(4,10,7.3,-26,-44.24);          PanelsList.push(panel04_1BB);  
+
+        var panel05_1BB = createTransparentPanel(5,10,6.85,-26,-36.57);         PanelsList.push(panel05_1BB);
+
+        var panel06_1BB = createTransparentPanel(6,10,6.85,-26,-29.08);         PanelsList.push(panel06_1BB);
+
+        var panel07_1BB = createTransparentPanel(7,10,6.85,-26,-21.58);         PanelsList.push(panel07_1BB);
+
+        var panel08_1BB = createTransparentPanel(8,10,7.48,-26,-13.75);         PanelsList.push(panel08_1BB);
+        
+        var panel09_1BB = createTransparentPanel(9,20.39,30,-10.15,-24.995);    PanelsList.push(panel09_1BB);
+
+        var panel10_1BB = createTransparentPanel(10,9.42,5.95,-15.71,-53.625);  PanelsList.push(panel10_1BB);
+        var panel10_2BB = createTransparentPanel(10,3.86,10.04,-18.49,-45.63);  PanelsList.push(panel10_2BB);
+        
+        var panel11_1BB = createTransparentPanel(11,10.4,18,-5.2,-49.6);        PanelsList.push(panel11_1BB);
+    
+        var panel12_1BB = createTransparentPanel(12,5,3.2,-2.5,-67.2);          PanelsList.push(panel12_1BB);
+
+        var panel13_1BB = createTransparentPanel(13,5.3,5.76,-2.65,-62.12);     PanelsList.push(panel13_1BB);
+
+        var panel14_1BB = createTransparentPanel(14,0.84,14.4,-5.48,-72.8);     PanelsList.push(panel14_1BB);
+        var panel14_2BB = createTransparentPanel(14,25.1,21.3,-18.45,-69.35);   PanelsList.push(panel14_2BB);
+        var panel14_3BB = createTransparentPanel(14,20,1.45,-21,-57.975);       PanelsList.push(panel14_3BB);
+
+        //Creating transparent walls using the created function above
+        var transparentWallsList = [];
+
+        var cubeV1BB = createWall(Y,70,0.3,-45);            transparentWallsList.push(cubeV1BB);
+        var cubeV2BB = createWall(Y,70,-31.3,-45);          transparentWallsList.push(cubeV2BB);
+        var cubeV3BB = createWall(Y,7.4,-5.6,-62.1);        transparentWallsList.push(cubeV3BB);
+        var cubeV4BB = createWall(Y,3.4,-5,-70.35);         transparentWallsList.push(cubeV4BB);
+        var cubeV5BB = createWall(Y,4.4,-5,-77.7);          transparentWallsList.push(cubeV5BB);
+        var cubeV6BB = createWall(Y,12.8,-10.6,-46.5);      transparentWallsList.push(cubeV6BB);
+        var cubeV7BB = createWall(Y,2.4,-10.6,-57.4);       transparentWallsList.push(cubeV7BB);
+        var cubeV8BB = createWall(Y,6.6,-16.6,-43.3);       transparentWallsList.push(cubeV8BB);
+        var cubeV9BB = createWall(Y,1,-16.6,-50.4);         transparentWallsList.push(cubeV9BB);
+        var cubeV10BB = createWall(Y,1.7,-20.7,-56.44);     transparentWallsList.push(cubeV10BB);
+        var cubeV11BB = createWall(Y,14.4,-20.7,-45.2);     transparentWallsList.push(cubeV11BB);
+        var cubeV12BB = createWall(Y,5.7,-20.7,-31.85);     transparentWallsList.push(cubeV12BB);
+        var cubeV13BB = createWall(Y,1,-20.7,-25.35);       transparentWallsList.push(cubeV13BB);
+        var cubeV14BB = createWall(Y,8.1,-20.7,-17.55);     transparentWallsList.push(cubeV14BB);
+        var cubeV15BB = createWall(Y,0.6,-20.7,-10);        transparentWallsList.push(cubeV15BB);
+        var cubeV16BB = createWall(Y,9,-3.3,-48);           transparentWallsList.push(cubeV16BB);
+        var cubeV17BB = createWall(0.4,7,-6.3,-44);         transparentWallsList.push(cubeV17BB);
+
+ 
+        var cubeH1BB = createWall(32.3,Y,-15.5,-9.7);       transparentWallsList.push(cubeH1BB);
+        var cubeH2BB = createWall(32.3,Y,-15.5,-80.3);      transparentWallsList.push(cubeH2BB);
+        var cubeH3BB = createWall(5.4,Y,-2.6,-69.2);        transparentWallsList.push(cubeH3BB);
+        var cubeH4BB = createWall(5.4,Y,-2.6,-65.3);        transparentWallsList.push(cubeH4BB);
+        var cubeH5BB = createWall(1.1,Y,-0.6,-58.9);        transparentWallsList.push(cubeH5BB);
+        var cubeH6BB = createWall(2.7,Y,-5.9,-58.7);        transparentWallsList.push(cubeH6BB);
+        var cubeH7BB = createWall(1.8,Y,-10.05,-58.7);      transparentWallsList.push(cubeH7BB);
+        var cubeH8BB = createWall(20.5,Y,-21,-56.9);        transparentWallsList.push(cubeH8BB);
+        var cubeH9BB = createWall(1.5,Y,-21.25,-48);        transparentWallsList.push(cubeH9BB);
+        var cubeH10BB = createWall(5.9,Y,-28.2,-48);        transparentWallsList.push(cubeH10BB);
+        var cubeH11BB = createWall(11,Y,-25.55,-40.35);     transparentWallsList.push(cubeH11BB);
+        var cubeH12BB = createWall(10,Y,-26,-32.85);        transparentWallsList.push(cubeH12BB);
+        var cubeH13BB = createWall(10,Y,-26,-25.3);         transparentWallsList.push(cubeH13BB);
+        var cubeH14BB = createWall(10,Y,-26,-17.8);         transparentWallsList.push(cubeH14BB);
+        var cubeH15BB = createWall(6.15,Y,-13.2,-40.35);    transparentWallsList.push(cubeH15BB);
+        var cubeH16BB = createWall(7,Y,-3.38,-40.35);       transparentWallsList.push(cubeH16BB);
+        var cubeH17BB = createWall(6,Y,-13.7,-50.5);        transparentWallsList.push(cubeH17BB);
+        var cubeH18BB = createWall(4,Y,-1.7,-52.5);         transparentWallsList.push(cubeH18BB);
+        var cubeH19BB = createWall(3,Y,-5,-46);             transparentWallsList.push(cubeH19BB);
+   
+        //Creating navigating bars using the created function above
+        var bar0 = createNavigatingBars(0,"v",6,-2.9,-57.35);
+        var bar1 = createNavigatingBars(1,"h",5,-5.4,-54.6);
+        var bar2 = createNavigatingBars(2,"v",6,-8.15,-57.35);
+        var bar3 = createNavigatingBars(3,"v",7,-8.15,-63.85);
+        var bar4 = createNavigatingBars(4,"h",4,-5.9,-67.1);
+        var bar5 = createNavigatingBars(5,"v",6.75,-8.15,-70.725);
+        var bar6 = createNavigatingBars(5,"h",4,-5.9,-73.85);
+        var bar7 = createNavigatingBars(6,"h",4.5,-10.15,-54.6);
+        var bar8 = createNavigatingBars(7,"h",6,-15.4,-54.6);
+        var bar9 = createNavigatingBars(7,"v",0.7,-18.15,-54);
+        var bar10 = createNavigatingBars(8,"h",4,-20.4,-53.9);
+        var bar11 = createNavigatingBars(9,"h",1,-22.9,-53.9);
+        var bar12 = createNavigatingBars(9,"v",8,-23.65,-50.15);
+        var bar13 = createNavigatingBars(10,"v",6,-18.15,-50.65);
+        var bar14 = createNavigatingBars(10,"h",2.6,-16.6,-47.9);
+        var bar15 = createNavigatingBars(11,"v",18.5,-8.15,-45.6);
+        var bar16 = createNavigatingBars(12,"h",14,-14.9,-36.35);
+        var bar17 = createNavigatingBars(13,"v",9,-8.15,-31.85);
+        var bar18 = createNavigatingBars(14,"h",14,-14.9,-27.4);
+        var bar19 = createNavigatingBars(15,"v",4,-8.15,-25.35);
+        var bar20 = createNavigatingBars(16,"h",14,-14.9,-23.2);
+        var bar21 = createNavigatingBars(17,"v",11.4,-8.15,-17.65);
+        var bar22 = createNavigatingBars(17,"h",14,-14.9,-11.85);
+
+        //Set lights by using the created function above
+        var light01 = setPointLight(3,5,-20);
+        var light02 = setPointLight(3,5,-30);
+        var light03 = setPointLight(3,5,-40);
+        var light04 = setPointLight(3,5,-50);
+        var light05 = setPointLight(3,5,-60);
+        var light06 = setPointLight(3,5,-66);
+        var light07 = setPointLight(3,5,-72);
+        var light08 = setPointLight(3,5,-78);
+
+        var light09 = setPointLight(3,-35,-20);
+        var light10 = setPointLight(3,-35,-30);
+        var light11 = setPointLight(3,-35,-40);
+        var light12 = setPointLight(3,-35,-50);
+        var light13 = setPointLight(3,-35,-60);
+        var light15 = setPointLight(3,-35,-76);
+
+        var light16 = setPointLight(3,-6,-5);
+        var light17 = setPointLight(3,-12,-5);
+        var light18 = setPointLight(3,-18,-5);
+        var light19 = setPointLight(3,-24,-5);
+        
+        var light20 = setPointLight(3,-3,-85);
+        var light21 = setPointLight(3,-9,-85); 
+        
+        const lightt = new THREE.AmbientLight( 0x404040 ); // soft white light
+        scene.add( lightt );
+
+    </script>
+
+</body>
+</html>
+
