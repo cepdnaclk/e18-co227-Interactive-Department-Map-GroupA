@@ -928,67 +928,78 @@ function findData(){
                 console.log(buildingIDList[j][0]);                
                 if(my_json[buildingIDList[j][1]].id.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].id;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].id.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].name.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].name;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].name.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].accessibility.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].accessibility;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].accessibility.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].more.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].more;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].more.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].tags.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].tags;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].tags.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("capacity") && my_json[buildingIDList[j][1]].capacity.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].capacity;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].capacity.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("staff") && my_json[buildingIDList[j][1]].staff.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].staff;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].staff.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("features") && my_json[buildingIDList[j][1]].features.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].features;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].features.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("contact") && my_json[buildingIDList[j][1]].contact.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("contact1") && my_json[buildingIDList[j][1]].contact1.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact1;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact1.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("contact2") && my_json[buildingIDList[j][1]].contact2.toLowerCase().includes(currentInput)){
                     console.log("found");
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact2;
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact2.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
@@ -998,7 +1009,7 @@ function findData(){
         }
     }
     for(var i=0;i<buildingIDList.length;i++){       //Update the navigating Item list according to the new buildingID list
-        buildingIDList[i][3] = "not found";    
+        buildingIDList[i][3] = "<not style='color:#CBAAAA'>not found</not>";    
     }
     buildingIDList = newBuildingIDList.concat(buildingIDList);
     for(var i=0;i<navigatingItemList.length;i++){       //Update the navigating Item list according to the new buildingID list
