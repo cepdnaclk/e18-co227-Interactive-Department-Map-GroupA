@@ -204,6 +204,10 @@ body {
     cursor: pointer;
 } 
 
+.searchQuerySubmit_class:active {
+    background-color: white;
+}
+
 .roomListContainer_class{
     margin-left: 2%;
     width: 98%;
@@ -230,9 +234,7 @@ body {
 .hel{
     position: relative;
     overflow: hidden;
-    display: flex;
-    /* white-space: nowrap; */
-    text-overflow: ellipsis;
+    text-align: left;
     font-size: 1.4vmin;
     /* height: 1.8vmin; */
     width: 90%;
