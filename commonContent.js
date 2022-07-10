@@ -799,6 +799,10 @@ async function switchtoSKY(){
     }
     ViewMode = "sky";
     transition = 0;
+    if(initNo!=-1){
+        showPath(initNo);
+        initNo = -1;
+    }
 }
 
 function leftTop(){
@@ -892,7 +896,7 @@ document.getElementById("searchQueryInput").addEventListener('input',function(ev
         }
     }
 });
-
+    
 var lastID = -5;        //BuldingID of the last showPath function call
 var itemSelected = 0;   //Used to flag whether item has been selected or not
 function showPath(buildingID){
@@ -903,6 +907,12 @@ function showPath(buildingID){
         for(var i=0;i<NavigatingMaterialArray.length;i++){          //Dissapear the showed path
             NavigatingMaterialArray[i].opacity = 0;
         }
+        if(ViewMode=="sky" || ViewMode=="drone"){
+            for(var i=0;i<idNUM;i++){                                           //Set opacity of all the panels to 0
+                transparentMaterialForPanelsArray[i].opacity = 0;
+            }
+            roomInfo(defaultID);
+        }
         lastID = -5;    //Set lastItem to -5
     }else{              //If item hasn't been selected
         for(var i=0;i<navigatingItemList.length;i++){
@@ -910,6 +920,13 @@ function showPath(buildingID){
         }
         for(var i=0;i<buildingIDList[buildingID][2].length;i++){
             NavigatingMaterialArray[buildingIDList[buildingID][2][i]].opacity = 1;   //Show thw path (using bars)
+        }
+        if(ViewMode=="sky" || ViewMode=="drone"){
+            for(var i=0;i<idNUM;i++){                                           //Set opacity of all the panels to 0
+                transparentMaterialForPanelsArray[i].opacity = 0;
+            }
+            transparentMaterialForPanelsArray[buildingIDList[buildingID][1]].opacity = 0.4;
+            roomInfo(buildingIDList[buildingID][1]);
         }
         lastID = buildingIDList[buildingID][1];        //Set the LastID
     }    
@@ -923,81 +940,68 @@ function findData(){
     for(var i=0;i<currentWord.length;i++){
         for(var k=0;k<i+1;k++){
             currentInput = currentWord.substr(k,currentWord.length-i);
-            console.log("  "+currentInput);
-            for(var j=0;j<buildingIDList.length;){
-                console.log(buildingIDList[j][0]);                
+            for(var j=0;j<buildingIDList.length;){               
                 if(my_json[buildingIDList[j][1]].id.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].id.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].name.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].name.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].accessibility.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].accessibility.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].more.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].more.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].tags.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].tags.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("capacity") && my_json[buildingIDList[j][1]].capacity.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].capacity.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("staff") && my_json[buildingIDList[j][1]].staff.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].staff.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("features") && my_json[buildingIDList[j][1]].features.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].features.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("contact") && my_json[buildingIDList[j][1]].contact.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("contact1") && my_json[buildingIDList[j][1]].contact1.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact1.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
                 }else if(my_json[buildingIDList[j][1]].hasOwnProperty("contact2") && my_json[buildingIDList[j][1]].contact2.toLowerCase().includes(currentInput)){
-                    console.log("found");
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact2.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
@@ -1014,7 +1018,6 @@ function findData(){
     buildingIDList = newBuildingIDList.concat(buildingIDList);
     for(var i=0;i<navigatingItemList.length;i++){       //Update the navigating Item list according to the new buildingID list
         document.getElementById(navigatingItemList[i]).innerHTML = buildingIDList[i][0] + "<div class='hel'>"+buildingIDList[i][3]+"</div>";
-        console.log(buildingIDList[i][3]);    
     }
 }
 
@@ -1080,6 +1083,78 @@ document.onkeydown = function(event){   //Set event listeners for key presses
         }
     }
 }
+
+buttoncontrolsarray = ["left","right","up","down","front","back"];
+
+async function activeButtons(){
+    if(activebuttons){
+        for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+            await sleep(20);                    //Sleep for 20 millieseconds
+            buttoncontrolsarray.forEach(element => {
+                document.getElementById(element).style.width = 10-(i+1)*1 + "vmin";
+                document.getElementById(element).style.fontSize = 2-(i+1)*0.2 + "vmin";
+            });
+        }
+        buttoncontrolsarray.forEach(element => {
+            document.getElementById(element).style.opacity = 0;    
+            document.getElementById(element).disabled = true;
+        });
+    }else{
+        buttoncontrolsarray.forEach(element => {
+            document.getElementById(element).style.opacity = 0.7;    
+            document.getElementById(element).disabled = false;
+        });
+        for(var i =0;i<10;i++){                 //Used a loop for smooth animations
+            await sleep(20);                    //Sleep for 20 millieseconds
+            buttoncontrolsarray.forEach(element => {
+                document.getElementById(element).style.width = (i+1)*1 + "vmin";    
+                document.getElementById(element).style.fontSize = (i+1)*0.2 + "vmin";
+            });
+        }
+    }
+    activebuttons = !activebuttons;
+}
+
+function buttonControls(buttonID){
+    if(!transition){    //If input field hasn't been focused
+        switch (buttonID){
+            case 1:    //arrow left
+                turnleft();
+                break;
+            case 2:    //Aroow up
+                turnright();
+                break;
+            case 3:    //Arrow right
+                turnup();
+                break;
+            case 4:    //Arrow down
+                turndown();
+                break;
+            case 5:    //Letter s
+                forward();
+                break;
+            case 6:    //Letter a
+                backward();
+                break;
+        }
+    }
+}
+
+var initNo = -1;
+
+async function checkURL(){
+    urlHash = location.hash.substring(1);
+    if(urlHash!=""){
+        for(var i=0;i<buildingIDList.length;i++){
+            if(my_json[buildingIDList[i][1]].id==urlHash){
+                switchtoSKY();
+                initNo = i;
+                return 0;
+            }
+        }
+    }
+}
+
 
 //Front cube
 var frontCameraBall = new THREE.Mesh(

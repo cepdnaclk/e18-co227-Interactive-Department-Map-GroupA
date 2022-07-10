@@ -173,7 +173,7 @@
     {
         "category":3,
         "id":"04-CR01",
-        "name" :"Corridor-01",
+        "name" :"Corridor 1",
         "accessibility":"ALL",
         "more":"This corridor can be used to reach lift,corridor2,instructor room,staircase,computer lab1 and washrooms",
         "tags":"public",
@@ -200,7 +200,7 @@
     {
         "category":3,
         "id":"04-CR02",
-        "name" :"Corridor-02",
+        "name" :"Corridor 2",
         "accessibility":"ALL",
         "more":"This corridor can be used to enter to the computer vision lab,main room and operators",
         "tags":"public",

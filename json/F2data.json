@@ -128,7 +128,7 @@
 {
     "category":3,
     "id":"02-CR01",
-    "name" :"Corridor-01",
+    "name" :"Corridor",
     "accessibility":"ALL",
     "more":"This corridor can be used to reach discussion room,Hardware & CI lab,TO room and Main room",
     "tags":"public",

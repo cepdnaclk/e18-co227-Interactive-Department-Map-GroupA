@@ -110,7 +110,7 @@
     {
         "category":1,
         "id":"03-10",
-        "name" :"ESCAL Robotics Lab1",
+        "name" :"ESCAL Robotics Lab 1",
         "accessibility":"S I TO UG PG",
         "more":"This is for Robotics related works",
         "tags":"lab",
@@ -122,7 +122,7 @@
     {
         "category":3,
         "id":"03-CR01",
-        "name" :"Corridor-01",
+        "name" :"Corridor",
         "accessibility":"ALL",
         "more":"This corridor can be used to reach all 6 lecturer's rooms, instructor room,operator rooma and main room",
         "tags":"public",
