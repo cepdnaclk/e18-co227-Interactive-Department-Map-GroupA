@@ -51,21 +51,21 @@
             </div>
             <div id="roomListContainer" class="roomListContainer_class">
                 <div id="roomList" class="roomList_class">
-                    <div id="navigatingItem1" class="items" onclick="showPath(0)">Lecturers' Room 2</div>
-                    <div id="navigatingItem2" class="items" onclick="showPath(1)">Lecturers' Room 3</div>
-                    <div id="navigatingItem3" class="items" onclick="showPath(2)">Lecturers' Room 4</div>
-                    <div id="navigatingItem4" class="items" onclick="showPath(3)">Lecturers' Room 5</div>
-                    <div id="navigatingItem5" class="items" onclick="showPath(4)">Lecturers' Room 6</div>
+                    <div id="navigatingItem1" class="items" onclick="showPath(0)">Lecturer's Room 2</div>
+                    <div id="navigatingItem2" class="items" onclick="showPath(1)">Lecturer's Room 3</div>
+                    <div id="navigatingItem3" class="items" onclick="showPath(2)">Lecturer's Room 4</div>
+                    <div id="navigatingItem4" class="items" onclick="showPath(3)">Lecturer's Room 5</div>
+                    <div id="navigatingItem5" class="items" onclick="showPath(4)">Lecturer's Room 6</div>
                     <div id="navigatingItem6" class="items" onclick="showPath(5)">Intructors' Room</div>
-                    <div id="navigatingItem7" class="items" onclick="showPath(6)">ESCAL Makerspace 1</div>
-                    <div id="navigatingItem8" class="items" onclick="showPath(7)">ESCAL Makerspace 2</div>
-                    <div id="navigatingItem9" class="items" onclick="showPath(8)">ESCAL Makerspace 3</div>
-                    <div id="navigatingItem10" class="items" onclick="showPath(9)">ESCAL Robotics 1</div>
+                    <div id="navigatingItem7" class="items" onclick="showPath(6)">Technical Offcer's room</div>
+                    <div id="navigatingItem8" class="items" onclick="showPath(7)">ESCAL Makerspace Lab</div>
+                    <div id="navigatingItem9" class="items" onclick="showPath(8)">ESCAL Makerspace-Machine Room</div>
+                    <div id="navigatingItem10" class="items" onclick="showPath(9)">ESCAL Robotics Lab 1</div>
                     <div id="navigatingItem11" class="items" onclick="showPath(10)">Corridor</div>
                     <div id="navigatingItem12" class="items" onclick="showPath(11)">Main Room</div>
                     <div id="navigatingItem13" class="items" onclick="showPath(12)">Lift</div>
                     <div id="navigatingItem14" class="items" onclick="showPath(13)">Operator-room</div>
-                    <div id="navigatingItem15" class="items" onclick="showPath(14)">Lecturers' Room 1</div>
+                    <div id="navigatingItem15" class="items" onclick="showPath(14)">Lecturer's Room 1</div>
                 </div>
             </div>
         </div>
@@ -74,6 +74,7 @@
     <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="dashboard" class="dashboard_class">
         <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
+        <button id="buttonControlswitch" class="buttonControlswitch_class" onclick="activeButtons()">BUTTON CONTROLLERS</button>
         <div id="otherpages" class="otherpages_class">
             <div style="font-size: 1.2vmin; color:white; padding-left: 0.8vmin; padding-right: 0; width: 17%; margin-top: 1.2vmin;">FLOOR</div>
             <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(0)">G</button>
@@ -88,6 +89,12 @@
             <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button> 
         </div>
     </div>
+    <button id="left" class="left_class" onclick="buttonControls(1)">LEFT</button>
+    <button id="right" class="right_class" onclick="buttonControls(2)">RIGHT</button>
+    <button id="up" class="up_class" onclick="buttonControls(3)">UP</button>
+    <button id="down" class="down_class" onclick="buttonControls(4)">DOWN</button>
+    <button id="front" class="front_class" onclick="buttonControls(5)">FRONT</button>
+    <button id="back" class="back_class" onclick="buttonControls(6)">BACK</button>
     <div id="aim" class="aim"></div>
     <script type="text/javascript">
 
@@ -107,6 +114,7 @@
                         //console.log(my_json);		
                         roomInfo(defaultID);       			//Set initial information should be appeared in the panels
                         animate();
+                        checkURL();
                 }
                 else{
                     alert("File not found..!! Check the database file name or URL and try again !! ");	//when there's an error in accessing the json file
@@ -134,10 +142,11 @@
         var doorHeight=-1.72, panelHeight = 3.85, wallHeight=-0.7, barHeight=-4.95;     //Height of the doors,panels,walls and the bars should be set
         var barNUM = 28;    //Number of navigating bars
         var defaultID=12;    //This is the id of the default information should be shown
+        var activebuttons = 0;      //This indicates whether button controls are active or not
 
 
         //Navigating bars, ids and the names of the rooms
-        var buildingIDList = [["Lecturers' Room 2",1,[1,2,3,4,6,8,10,11,12]],["Lecturers' Room 3",2,[1,2,3,4,6,8,10,11,13,14]],["Lecturers' Room 4",3,[1,2,3,4,6,8,10,11,13,15,16]],["Lecturers' Room 5",4,[1,2,3,4,6,8,10,11,13,15,17,18]],["Lecturers' Room 6",5,[1,2,3,4,6,8,10,11,13,15,17,19]],["Intructors' Room",6,[1,2,3,4,5]],["ESCAL Makerspace 1",7,[1,2,27,20,21]],["ESCAL Makerspace 2",8,[1,2,27,22]],["ESCAL Makerspace 3",9,[1,2,27,22,23,24,26]],["ESCAL Robotics 1",10,[1,2,27,22,23,24,25]],["Corridor",11,[1,2,3]],["Main Room",12,[1]],["Lift",13,[0,1]],["Operator-room",14,[1,2,3,4,6,7]],["Lecturers' Room 1",15,[1,2,3,4,6,8,9]]];
+        var buildingIDList = [["Lecturer's Room 2",1,[1,2,3,4,6,8,10,11,12]],["Lecturer's Room 3",2,[1,2,3,4,6,8,10,11,13,14]],["Lecturer's Room 4",3,[1,2,3,4,6,8,10,11,13,15,16]],["Lecturer's Room 5",4,[1,2,3,4,6,8,10,11,13,15,17,18]],["Lecturer's Room 6",5,[1,2,3,4,6,8,10,11,13,15,17,19]],["Intructors' Room",6,[1,2,3,4,5]],["Technical Offcer's room",7,[1,2,27,20,21]],["ESCAL Makerspace Lab",8,[1,2,27,22]],["ESCAL Makerspace-Machine Room",9,[1,2,27,22,23,24,26]],["ESCAL Robotics Lab 1",10,[1,2,27,22,23,24,25]],["Corridor",11,[1,2,3]],["Main Room",12,[1]],["Lift",13,[0,1]],["Operator-room",14,[1,2,3,4,6,7]],["Lecturer's Room 1",15,[1,2,3,4,6,8,9]]];
         //List of navigating items in the navigating panel
         var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13","navigatingItem14","navigatingItem15"];
         

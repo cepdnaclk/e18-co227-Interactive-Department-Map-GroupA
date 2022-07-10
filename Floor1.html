@@ -73,6 +73,7 @@
     <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="dashboard" class="dashboard_class">
         <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
+        <button id="buttonControlswitch" class="buttonControlswitch_class" onclick="activeButtons()">BUTTON CONTROLLERS</button>
         <div id="otherpages" class="otherpages_class">
             <div style="font-size: 1.2vmin; color:white; padding-left: 0.8vmin; padding-right: 0; width: 17%; margin-top: 1.2vmin;">FLOOR</div>
             <button id="page" class="pagebutton_class" style="border: none;" onclick="redirecttoPage(0)">G</button>
@@ -87,6 +88,12 @@
             <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button>
         </div>
     </div>
+    <button id="left" class="left_class" onclick="buttonControls(1)">LEFT</button>
+    <button id="right" class="right_class" onclick="buttonControls(2)">RIGHT</button>
+    <button id="up" class="up_class" onclick="buttonControls(3)">UP</button>
+    <button id="down" class="down_class" onclick="buttonControls(4)">DOWN</button>
+    <button id="front" class="front_class" onclick="buttonControls(5)">FRONT</button>
+    <button id="back" class="back_class" onclick="buttonControls(6)">BACK</button>
     <div id="aim" class="aim"></div>
     <script type="text/javascript"> 
     
@@ -106,6 +113,7 @@
                         //console.log(my_json);		
                         roomInfo(defaultID);       			//Set initial information should be appeared in the panels
                         animate();
+                        checkURL();
                 }
                 else{
                     alert("File not found..!! Check the database file name or URL and try again !! ");	//when there's an error in accessing the json file
@@ -116,6 +124,7 @@
             }
             xhr.send();
             }
+
 
         var clicked = 0;                //To check whether a building has been clicked or not
         var expanding = 0;              //To check if top right labels are expanding or not
@@ -133,10 +142,10 @@
         var doorHeight=-1.72, panelHeight = 3.85, wallHeight=-0.7, barHeight=-4.95;     //Height of the doors,panels,walls and the bars should be set
         var barNUM = 18;    //Number of navigating bars
         var defaultID=0;    //This is the id of the default information should be shown
-        
+        var activebuttons = 0;      //This indicates whether button controls are active or not
 
         //Navigating bars, ids and the names of the rooms
-        var buildingIDList = [["Technical Offcer's room",1,[1,2,3,5]],["Insructors' Room",2,[1,6,7,10]],["Lecturer's Room 1",3,[1,6,7,8]],["Lecturer's Room 2",4,[1,6,7,8,9]],["Lecturer's Room 3",5,[1,11,12]],["Lecturer's Room 4",6,[1,11,13,14]],["Lecturer's Room 5",7,[1,11,13,15,16]],["Lecturer's Room 6",8,[1,11,13,15,17]],["Network Engineering Lab",9,[1,11]],["Corridor",10,[1,6]],["Main Room",11,[]],["Operator-room",12,[1,2,3,4]],["Lift",13,[0]],["Computer Laboratory 2",14,[1,2]]];
+        var buildingIDList = [["Technical Offcer's room",1,[1,2,3,5]],["Insructors' Room",2,[1,6,7,10]],["Lecturer's Room 1",3,[1,6,7,8]],["Lecturer's Room 2",4,[1,6,7,8,9]],["Lecturer's Room 3",5,[1,11,12]],["Lecturer's Room 4",6,[1,11,13,14]],["Lecturer's Room 5",7,[1,11,13,15,16]],["Lecturer's Room 6",8,[1,11,13,15,17]],["Network & Communication Lab",9,[1,11]],["Corridor",10,[1,6]],["Main Room",11,[]],["Operator-room",12,[1,2,3,4]],["Lift",13,[0]],["Computer Laboratory 2",14,[1,2]]];
         //List of navigating items in the navigating panel
         var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13","navigatingItem14"];
 
