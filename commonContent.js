@@ -114,8 +114,8 @@ function addMouseEventsForWalls(cube,buildingID){                               
                     document.getElementById("hint").style.backgroundColor = "#0E6655";      //Change the background colour of the bar at the bottom of the main_info panel   
                     expanded = 0;           //Set the expanded flag to 0
                 }
-                document.getElementById("hint").innerHTML = "Click on the blue panel for more details";
                 document.getElementById("information").style.height = "40%";
+                document.getElementById("hint").innerHTML = "Click on the blue panel for more details";
                 document.getElementById("main_information").style.height = "75%";
                 document.getElementById("hint").style.height = "7.5%";
                 document.getElementById("controlLayout").style.height = "20%";
@@ -223,7 +223,15 @@ function addMouseEventsForPanels(cube, buildingID){                             
 }
 
 //Import Blender Objects
-let buildingloader = new THREE.GLTFLoader();    //Create a loader to load the objects
+const loadingManager = new THREE.LoadingManager();
+loadingManager.onStart = function(){
+    document.getElementById("glass").style.opacity = 0.7;
+}
+loadingManager.onLoad = function(){
+    document.getElementById("glass").style.opacity = 0;
+    document.getElementById("waiting").remove();
+}
+let buildingloader = new THREE.GLTFLoader(loadingManager);    //Create a loader to load the objects
 
 function importObject(location,xValue,yValue,zValue,xrotatevalue,scale=1){   //This function imports the blender object, sets the position, angle and adds to the scene
     var blenderBuilding;
@@ -469,7 +477,7 @@ async function backward(){          //This function brings the camera to front b
     }    
 }
 
-var mouseIN = 0;    //This is used to flag whether mouse pointer in on the controllayout or not (if on-> 1)
+var mouseIN = 0;    //This is used to flag whether mouse pointer is on the controllayout or not (if on-> 1)
 
 //Information Panel movements
 async function showInformation(){               //This function shrinks the top right main information label and makes the more information label appear
@@ -799,7 +807,7 @@ async function switchtoSKY(){
     }
     ViewMode = "sky";
     transition = 0;
-    if(initNo!=-1){
+    if(initNo!=-1){         //This will show the path if there is a hash segment in the URL
         showPath(initNo);
         initNo = -1;
     }
@@ -852,6 +860,7 @@ function changeCorners(){   //Change the shape of the corners of the layouts
         document.getElementById("leftBottomButton").style.borderRadius = "0vmin";
         document.getElementById("link").style.borderRadius = "0vmin";
         document.getElementById("otherpages").style.borderRadius = "0vmin";
+        document.getElementById("buttonControlswitch").style.borderRadius = "0vmin";
     }else{
         circleCorners = 1;
         document.getElementById("changeCorners").innerHTML = "Square Corners";
@@ -865,6 +874,7 @@ function changeCorners(){   //Change the shape of the corners of the layouts
         document.getElementById("leftBottomButton").style.borderRadius = "0 0 0 1.4vmin";
         document.getElementById("link").style.borderRadius = "3vmin";
         document.getElementById("otherpages").style.borderRadius = "1vmin";
+        document.getElementById("buttonControlswitch").style.borderRadius = "1.4vmin";
     }
 }
 
@@ -933,20 +943,20 @@ function showPath(buildingID){
     itemSelected = !itemSelected;   //Change the flag
 }
 
-function findData(){
+function findData(){    //This function gives the search results of navigating panel
     
     var newBuildingIDList = [];
     var currentWord = document.getElementById("searchQueryInput").value.toLowerCase();
-    for(var i=0;i<currentWord.length;i++){
+    for(var i=0;i<currentWord.length;i++){      //Here all the substrings in gvien word will be searched (exx:-  for 'abc' -> abc, ab, bc, a, b ,c)
         for(var k=0;k<i+1;k++){
             currentInput = currentWord.substr(k,currentWord.length-i);
             for(var j=0;j<buildingIDList.length;){               
                 if(my_json[buildingIDList[j][1]].id.toLowerCase().includes(currentInput)){
-                    var regx = new RegExp(currentInput,'gi');
-                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].id.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
-                    newBuildingIDList.push(buildingIDList[j]);
-                    buildingIDList.splice(j,1);
-                    j=j-1;
+                    var regx = new RegExp(currentInput,'gi');       //Creating the regular expression
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].id.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");   //Replacing the regular expression by bold word
+                    newBuildingIDList.push(buildingIDList[j]);      //Add that to a new list
+                    buildingIDList.splice(j,1);                     //Remove from the previous list
+                    j=j-1;                                          //Decrease j since element is removed from the list
                 }else if(my_json[buildingIDList[j][1]].name.toLowerCase().includes(currentInput)){
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].name.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
@@ -1118,22 +1128,22 @@ async function activeButtons(){
 function buttonControls(buttonID){
     if(!transition){    //If input field hasn't been focused
         switch (buttonID){
-            case 1:    //arrow left
+            case 1:    //left
                 turnleft();
                 break;
-            case 2:    //Aroow up
+            case 2:    //right
                 turnright();
                 break;
-            case 3:    //Arrow right
+            case 3:    //up
                 turnup();
                 break;
-            case 4:    //Arrow down
+            case 4:    //down
                 turndown();
                 break;
-            case 5:    //Letter s
+            case 5:    //front
                 forward();
                 break;
-            case 6:    //Letter a
+            case 6:    //back
                 backward();
                 break;
         }
@@ -1142,14 +1152,14 @@ function buttonControls(buttonID){
 
 var initNo = -1;
 
-async function checkURL(){
-    urlHash = location.hash.substring(1);
-    if(urlHash!=""){
-        for(var i=0;i<buildingIDList.length;i++){
-            if(my_json[buildingIDList[i][1]].id==urlHash){
-                switchtoSKY();
-                initNo = i;
-                return 0;
+async function checkURL(){  //If there is a hash segment in the URL, this functon will switch camera to bird mode and show the particular room 
+    urlHash = location.hash.substring(1);   //Take the hash segment
+    if(urlHash!=""){                        //Checking whether it is empty
+        for(var i=0;i<buildingIDList.length;i++){   //Match with room id s
+            if(my_json[buildingIDList[i][1]].id==urlHash){      //If there is a matching id,
+                switchtoSKY();      //Switch to bird mode
+                initNo = i;         //Flag to switchtoSKY function that path to the room should be shown
+                return 0;           //Stop looping
             }
         }
     }

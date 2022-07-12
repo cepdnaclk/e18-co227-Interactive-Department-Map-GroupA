@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="shortcut icon" href="#">
+    <link rel="shortcut icon" type="x-icon" href="images/icon.png">
     <title>Second Floor</title>   <!--Name of the website -->
     <link rel="stylesheet" href="style.css"/>   <!--Linking the css file-->
 </head>
@@ -95,6 +95,7 @@
     <button id="front" class="front_class" onclick="buttonControls(5)">FRONT</button>
     <button id="back" class="back_class" onclick="buttonControls(6)">BACK</button>
     <div id="aim" class="aim"></div>
+    <div id="waiting" class="waiting_class"><strong>Loading...</strong></div>
     <script type="text/javascript">
        
 //Database
@@ -130,9 +131,8 @@
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
         var circleCorners = 1;          //To flag whether layouts have circle corners or square corners (circle(1)-default)
-        var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
+        var out = 1;                    //To check whether mouse pointer is on threejs scene or on the panel
         var X = 0.52,Y=0.7,R=0.9,S=0.08;    //X- length of front,back boxes, Y- thickness of transparent walls,R- gap between camera and front/back boxes,  
-        var Floor = 0;
         var initialCamera_X = 0, initialCamera_Y = -3, initialCamera_Z = -54.6;     //Coordinates of the camera at the initial point
         var initialBirdY=-20,initialBirdZ=-45;          ////Coordinates of the camera at the initial point in the bird view
         var initialCamera_Xangle = -Math.PI/2;          //Rotation of the camera around x axis at the initial point
@@ -155,7 +155,8 @@
     <script type="text/javascript"> 
 
         //Importing the blender object using the created function above
-        var blenderBuilding = importObject('./floors/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    
+        // var blenderBuilding = importObject('./floors/Floor2.gltf',-5,0,-10,Math.PI,3.28084);
+        var blenderBuilding = importObject('https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/floors/Floor2.gltf',-5,0,-10,Math.PI,3.28084);    
 
         //Creating transparent doors using the created function above
         var S01_door1 = createTransparentObject(1,"h",-8.45,-68.41); //a
