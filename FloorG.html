@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="shortcut icon" href="#">
+    <link rel="shortcut icon" type="x-icon" href="images/icon.png">
     <title>Ground Floor</title>   <!--Name of the website -->
     <link rel="stylesheet" href="style.css"/>   <!--Linking the css file-->
 </head>
@@ -90,13 +90,14 @@
             <button class="RightButtonClass" id="RightButton"><p3 id="rightTop" class="rightTopClass">W</p3><br><p4 id="rightBottom" class="rightBottomClass">WALK</p4></button> 
         </div>
     </div>
-    <button id="left" class="left_class" onclick="buttonControls(1)">L</button>
-    <button id="right" class="right_class" onclick="buttonControls(2)">R</button>
-    <button id="up" class="up_class" onclick="buttonControls(3)">U</button>
-    <button id="down" class="down_class" onclick="buttonControls(4)">D</button>
-    <button id="front" class="front_class" onclick="buttonControls(5)">F</button>
-    <button id="back" class="back_class" onclick="buttonControls(6)">B</button>
+    <button id="left" class="left_class" onclick="buttonControls(1)">LEFT</button>
+    <button id="right" class="right_class" onclick="buttonControls(2)">RIGHT</button>
+    <button id="up" class="up_class" onclick="buttonControls(3)">UP</button>
+    <button id="down" class="down_class" onclick="buttonControls(4)">DOWN</button>
+    <button id="front" class="front_class" onclick="buttonControls(5)">FRONT</button>
+    <button id="back" class="back_class" onclick="buttonControls(6)">BACK</button>
     <div id="aim" class="aim"></div>
+    <div id="waiting" class="waiting_class"><strong>Loading...</strong></div>
     <script type="text/javascript"> 
        
 //Database
@@ -130,9 +131,8 @@
         var expanding = 0;              //To check if top right labels are expanding or not
         var expanded = 0;               //To check whether top right main label has been expanded or not
         var circleCorners = 1;          //To flag whether layouts have circle corners or square corners (circle(1)-default)
-        var out = 0;                    //To check whether mouse pointer is on threejs scene or on the panel
+        var out = 1;                    //To check whether mouse pointer is on threejs scene or on the panel
         var X = 0.52,Y=0.7,R=0.9,S=0.08;    //X- length of front,back boxes, Y- thickness of transparent walls,R- gap between camera and front/back boxes,  
-        var Floor = 0;
         var initialCamera_X = 0, initialCamera_Y = -3.2, initialCamera_Z = -75.2;     //Coordinates of the camera at the initial point
         var initialBirdY=-20,initialBirdZ=-45;          ////Coordinates of the camera at the initial point in the bird view
         var initialCamera_Xangle = -Math.PI/2;          //Rotation of the camera around x axis at the initial point
@@ -155,8 +155,9 @@
     <script type="text/javascript">
 
 
-        var blenderBuilding9 = importObject('./floors/FloorG.gltf',-5,0,-80,0,3.28084);    //wall
-        // var blenderBuilding10 = importObject('./assets/G_Assets.gltf',-5,0,-80,0,3.28084);    //wall
+        // var blenderBuilding = importObject('./floors/FloorG.gltf',-5,0,-80,0,3.28084);  
+        var blenderBuilding = importObject('https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/floors/FloorG.gltf',-5,0,-80,0,3.28084);  
+        
 
         //Creating transparent objects by using the created function above
         var G01_door1 = createTransparentObject(1,"v",-11.15,-68.63);//

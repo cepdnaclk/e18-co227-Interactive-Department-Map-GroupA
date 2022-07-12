@@ -442,7 +442,7 @@ THREEx.DomEvents.prototype._onTouchEvent	= function(eventName, domEvent)
 {
 	if( domEvent.touches.length != 1 )	return undefined;
 
-	domEvent.preventDefault();
+	//domEvent.preventDefault();
 
 	var mouseX	= +(domEvent.touches[ 0 ].pageX / window.innerWidth ) * 2 - 1;
 	var mouseY	= -(domEvent.touches[ 0 ].pageY / window.innerHeight) * 2 + 1;

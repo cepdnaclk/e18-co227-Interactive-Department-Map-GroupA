@@ -1,6 +1,7 @@
 body {
     font-family: 'Roboto', Arial, sans-serif;
   } 
+  
   body:hover {
     cursor: context-menu;
   } 
@@ -330,13 +331,22 @@ body {
     top: 5%;
     border-radius: 1.4vmin;
     background-color: #633974;
-    color: #ecdcf2;
+    color: #faf5fc;
     outline: none;
     border-color: #D7BDE2;
     opacity: 0.9;
     font-size: 1.15vmin;
     left: 19%;
     border-width: 0.1vmin;
+}
+
+.buttonControlswitch_class:active{
+    transform: translateY(0.13vmin);
+}
+
+.buttonControlswitch_class:hover{
+    cursor: pointer;
+    background-color: #9B59B6;
 }
 
 .otherpages_class{
@@ -455,6 +465,7 @@ body {
 
 .glass{
     position: absolute;
+    background-color: black;
     height: 100%;
     width: 100%;
     top: 0;
@@ -465,6 +476,7 @@ body {
 img {
     position: absolute;
     border:0.5vmin solid #ddd;
+    outline: none;
     border-radius: 1vmin;
     left: 1.1vmin;
     top: 1.1vmin;
@@ -480,6 +492,16 @@ img {
     top: 55%;
     background-color: red;
     border-radius: 0.5vmin;
+}
+
+.waiting_class{
+    position: absolute;
+    color: #CACFD2;
+    font-size: 6vmin;
+    text-align: center;
+    width: 30%;
+    left: 35%;
+    top: 40%;
 }
 
 li{
