@@ -909,7 +909,7 @@ document.getElementById("searchQueryInput").addEventListener('input',function(ev
     
 var lastID = -5;        //BuldingID of the last showPath function call
 var itemSelected = 0;   //Used to flag whether item has been selected or not
-function showPath(buildingID){
+async function showPath(buildingID){
     if(itemSelected){   //If item has been selected
         for(var i=0;i<navigatingItemList.length;i++){
             document.getElementById(navigatingItemList[i]).style.color = "#616160";     //Set colours of the items to default    
@@ -924,23 +924,26 @@ function showPath(buildingID){
             roomInfo(defaultID);
         }
         lastID = -5;    //Set lastItem to -5
-    }else{              //If item hasn't been selected
+        itemSelected = !itemSelected;
+    }else if(ViewMode=="sky"){              //If item hasn't been selected
         for(var i=0;i<navigatingItemList.length;i++){
             document.getElementById(navigatingItemList[i]).style.color = i==buildingID?"#000000":"#BBBBBB";     //Highlight the selected item    
         }
         for(var i=0;i<buildingIDList[buildingID][2].length;i++){
             NavigatingMaterialArray[buildingIDList[buildingID][2][i]].opacity = 1;   //Show thw path (using bars)
         }
-        if(ViewMode=="sky" || ViewMode=="drone"){
-            for(var i=0;i<idNUM;i++){                                           //Set opacity of all the panels to 0
-                transparentMaterialForPanelsArray[i].opacity = 0;
-            }
-            transparentMaterialForPanelsArray[buildingIDList[buildingID][1]].opacity = 0.4;
-            roomInfo(buildingIDList[buildingID][1]);
+        for(var i=0;i<idNUM;i++){                                           //Set opacity of all the panels to 0
+            transparentMaterialForPanelsArray[i].opacity = 0;
         }
+        transparentMaterialForPanelsArray[buildingIDList[buildingID][1]].opacity = 0.4;
+        roomInfo(buildingIDList[buildingID][1]);
         lastID = buildingIDList[buildingID][1];        //Set the LastID
-    }    
-    itemSelected = !itemSelected;   //Change the flag
+        itemSelected = !itemSelected;
+    }else{
+        initNo = buildingID;
+        switchtoSKY();
+    }
+    // itemSelected = !itemSelected;   //Change the flag
 }
 
 function findData(){    //This function gives the search results of navigating panel
