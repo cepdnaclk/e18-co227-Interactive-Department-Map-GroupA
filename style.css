@@ -326,7 +326,8 @@ body {
 
 .buttonControlswitch_class{
     position: absolute;
-    width: 27%;
+    text-align: center;
+    width: 13%;
     height: 45%;
     top: 5%;
     border-radius: 1.4vmin;
@@ -335,7 +336,6 @@ body {
     outline: none;
     border-color: #D7BDE2;
     opacity: 0.9;
-    font-size: 1.15vmin;
     left: 19%;
     border-width: 0.1vmin;
 }
@@ -349,6 +349,33 @@ body {
     background-color: #9B59B6;
 }
 
+.contactus_button_class{
+    position: absolute;
+    width: 13%;
+    height: 45%;
+    top: 5%;
+    border-radius: 1.4vmin;
+    background-color: #633974;
+    color: #faf5fc;
+    outline: none;
+    border-color: #D7BDE2;
+    opacity: 0.9;
+    font-size: 1.12vmin;
+    left: 34%;
+    padding: 0;
+    border-width: 0.1vmin;
+}
+
+.contactus_button_class:active{
+    transform: translateY(0.13vmin);
+}
+
+.contactus_button_class:hover{
+    cursor: pointer;
+    background-color: #9B59B6;
+}
+
+
 .otherpages_class{
     position: absolute;
     display: flex;
@@ -356,6 +383,7 @@ body {
     width: 65%;
     height: 40%;
     bottom: 4%;
+    /* background-color: #2E86C1; */
     background: rgba(99, 57, 116, 0.8);
     left: 0.8%;
     border-radius: 1vmin;
@@ -470,6 +498,7 @@ body {
     width: 100%;
     top: 0;
     left: 0;
+    opacity: 0;
 }
 
 
@@ -502,6 +531,101 @@ img {
     width: 30%;
     left: 35%;
     top: 40%;
+}
+
+.contactus_class{
+    position: absolute;
+    padding: 0;
+    left: 32%;
+    top: 33%;
+    display: none;
+    height: 33vmin;
+    width: 85vmin;
+    background-color: white;
+    border-radius: 2vmin;
+}
+
+.contactus_close_class{
+    text-align: center;
+    position: absolute;
+    top: 2vmin;
+    right: 1vmin;
+    width:4vmin;
+    height:3.4vmin;
+    border-radius: 1vmin;
+}
+
+.contactus_close_class:hover{
+    background-color: #EAFAF1;
+}
+
+.contactus_close_class:active{
+    transform: translateY(0.5vmin);
+    background-color: white;
+}
+
+.name1_class{
+    padding: 1.5vmin;
+    padding-right: 0;
+    border-radius: 1vmin;
+    width: 37vmin;
+    position: absolute;
+    left: 2vmin;
+    top: 10vmin;
+}
+.name2_class{
+    padding: 1.5vmin;
+    padding-right: 0;
+    border-radius: 1vmin;
+    width: 37vmin;
+    position: absolute;
+    left: 42vmin;
+    top: 10vmin;
+}
+.name3_class{
+    padding: 1.5vmin;
+    padding-right: 0;
+    border-radius: 1vmin;
+    width: 37vmin;
+    position: absolute;
+    left: 2vmin;
+    top: 20vmin;
+}
+.name4_class{
+    padding: 1.5vmin;
+    padding-right: 0;
+    border-radius: 1vmin;
+    width: 37vmin;
+    position: absolute;
+    left: 42vmin;
+    top: 20vmin;
+}
+
+.name1_class:hover{
+    background-color: #E5E8E8;
+    cursor: pointer;
+}
+.name2_class:hover{
+    background-color: #E5E8E8;
+    cursor: pointer;
+}
+.name3_class:hover{
+    background-color: #E5E8E8;
+    cursor: pointer;
+}
+.name4_class:hover{
+    background-color: #E5E8E8;
+    cursor: pointer;
+}
+
+.name{
+    color: #0E6655;
+    font-size: 2.3vmin;
+}
+
+.mail{
+    color: #2170a3;
+    font-size: 1.8vmin;
 }
 
 li{
