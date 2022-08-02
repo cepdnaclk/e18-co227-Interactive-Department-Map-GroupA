@@ -226,10 +226,11 @@ function addMouseEventsForPanels(cube, buildingID){                             
 const loadingManager = new THREE.LoadingManager();
 loadingManager.onStart = function(){
     document.getElementById("glass1").style.display = "flex";
+    document.getElementById("waiting").style.display = "flex";
 }
 loadingManager.onLoad = function(){
     document.getElementById("glass1").style.display = "none";
-    document.getElementById("waiting").remove();
+    document.getElementById("waiting").style.display = "none";
 }
 let buildingloader = new THREE.GLTFLoader(loadingManager);    //Create a loader to load the objects
 
@@ -250,6 +251,36 @@ function importObject(location,xValue,yValue,zValue,xrotatevalue,scale=1){   //T
     return blenderBuilding;
 }
 
+var assets = 0;
+var assetsobjects;
+function ImportAssets(location,xValue,yValue,zValue,xrotatevalue,scale=1){
+    if(assets==0){
+        buildingloader.load(location,(gltf) => {
+            assetsobjects = gltf.scene;
+            assetsobjects.scale.set(scale,scale,scale);                                            //Set the scale of the object
+            scene.add(assetsobjects);                                                  //Add to the scene
+            assetsobjects.position.x = xValue;                                         //Set the position
+            assetsobjects.position.y = yValue;
+            assetsobjects.position.z = zValue;
+            assetsobjects.rotation.z = Math.PI/2;                                      //Set the rotation
+            assetsobjects.rotation.x = xrotatevalue;
+            assetsobjects.rotation.y = Math.PI;
+            assetsobjects.side = THREE.FrontSide;
+        });
+        assets = 2;
+    }else if(assets==1){
+        scene.add(assetsobjects);
+        assets = 2;
+    }else if(assets==2){
+        scene.remove(assetsobjects);
+        assets = 1;
+        document.getElementById("assets").innerHTML = "ASSETS";
+        document.getElementById("assets").style.fontSize = "1.3vmin";
+        return 0;
+    }
+    document.getElementById("assets").innerHTML = "REMOVE ASSETS";
+    document.getElementById("assets").style.fontSize = "1.1vmin";
+}
 
 //Creating Transparent doors
 var transparentMaterialArray = [];
@@ -861,6 +892,8 @@ function changeCorners(){   //Change the shape of the corners of the layouts
         document.getElementById("link").style.borderRadius = "0vmin";
         document.getElementById("otherpages").style.borderRadius = "0vmin";
         document.getElementById("buttonControlswitch").style.borderRadius = "0vmin";
+        document.getElementById("assets").style.borderRadius = "0vmin";
+        document.getElementById("contactus_button").style.borderRadius = "0vmin";
     }else{
         circleCorners = 1;
         document.getElementById("changeCorners").innerHTML = "Square Corners";
@@ -875,6 +908,8 @@ function changeCorners(){   //Change the shape of the corners of the layouts
         document.getElementById("link").style.borderRadius = "3vmin";
         document.getElementById("otherpages").style.borderRadius = "1vmin";
         document.getElementById("buttonControlswitch").style.borderRadius = "1.4vmin";
+        document.getElementById("assets").style.borderRadius = "1.4vmin";
+        document.getElementById("contactus_button").style.borderRadius = "1.4vmin";
     }
 }
 
@@ -1034,12 +1069,12 @@ function findData(){    //This function gives the search results of navigating p
     }
 }
 
-function showDetails(){
+function showDetails(){         //This function shows the pop up window (contact details of the developers)
     document.getElementById("glass1").style.display = "flex";
     document.getElementById("contactus").style.display = "flex";
 }
 
-function hideDetails(){
+function hideDetails(){         //This function hides the pop up window (contact details of the developers)
     document.getElementById("glass1").style.display = "none";
     document.getElementById("contactus").style.display = "none";
 }
@@ -1065,6 +1100,7 @@ function redirecttoPage(pageID){
     }
 }
 
+//Redirecting to developers' department web site pages
 function redirecttoAccount(pageID){
     switch(pageID){
         case 1:
