@@ -225,10 +225,10 @@ function addMouseEventsForPanels(cube, buildingID){                             
 //Import Blender Objects
 const loadingManager = new THREE.LoadingManager();
 loadingManager.onStart = function(){
-    document.getElementById("glass").style.opacity = 0.7;
+    document.getElementById("glass1").style.display = "flex";
 }
 loadingManager.onLoad = function(){
-    document.getElementById("glass").style.opacity = 0;
+    document.getElementById("glass1").style.display = "none";
     document.getElementById("waiting").remove();
 }
 let buildingloader = new THREE.GLTFLoader(loadingManager);    //Create a loader to load the objects
@@ -1034,24 +1034,50 @@ function findData(){    //This function gives the search results of navigating p
     }
 }
 
+function showDetails(){
+    document.getElementById("glass1").style.display = "flex";
+    document.getElementById("contactus").style.display = "flex";
+}
+
+function hideDetails(){
+    document.getElementById("glass1").style.display = "none";
+    document.getElementById("contactus").style.display = "none";
+}
 
 //Redirecting to other pages
 function redirecttoPage(pageID){
     switch(pageID){
         case 0:
-            window.open("FloorG.html");
+            window.open("FloorG.html","_self");
             break;
         case 1:
-            window.open("Floor1.html");
+            window.open("Floor1.html","_self");
             break;
         case 2:
-            window.open("Floor2.html");
+            window.open("Floor2.html","_self");
             break;
         case 3:
-            window.open("Floor3.html");
+            window.open("Floor3.html","_self");
             break;
         case 4:
-            window.open("Floor4.html");
+            window.open("Floor4.html","_self");
+            break;
+    }
+}
+
+function redirecttoAccount(pageID){
+    switch(pageID){
+        case 1:
+            window.open("https://people.ce.pdn.ac.lk/students/e15/140/");
+            break;
+        case 2:
+            window.open("https://people.ce.pdn.ac.lk/students/e18/318/");
+            break;
+        case 3:
+            window.open("https://people.ce.pdn.ac.lk/students/e18/327/");
+            break;
+        case 4:
+            window.open("https://people.ce.pdn.ac.lk/students/e18/354/");
             break;
     }
 }
