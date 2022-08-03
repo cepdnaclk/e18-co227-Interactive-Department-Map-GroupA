@@ -79,6 +79,7 @@ Sample model demonstrating the information panel
 
 ## Links
 
+- [Department Map](https://cepdnaclk.github.io/departmentMap/)
 - [Project Repository](https://github.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA.git)
 - [Project Page](https://cepdnaclk.github.io/e18-co227-Interactive-Department-Map-GroupA)
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
