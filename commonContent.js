@@ -915,6 +915,13 @@ function changeCorners(){   //Change the shape of the corners of the layouts
 
 document.getElementById("searchQueryInput").addEventListener('input',function(evt){     //When the input changes
     var currentInput = document.getElementById("searchQueryInput").value;       //Take the text in the input field
+    if(currentInput==""){
+        document.getElementById("searchQuerydelete").style.display = "none";        //Hide the input remover button
+        document.getElementById("searchQuerySubmit").style.marginLeft = "-15.1%";       //Set the alignment of submit button
+    }else{
+        document.getElementById("searchQuerydelete").style.display = "flex";        //Show the input remover button
+        document.getElementById("searchQuerySubmit").style.marginLeft = "-0.5%";       //Set the alignment of submit button
+    }
     document.getElementById("roomList").scrollTo(0, 0);                         //Scroll to top
     for(var i=0;i<buildingIDList.length;i++){                       //Sort the buildingID List according to the text
         for(var j=i+1;j<buildingIDList.length;j++){ 
@@ -982,7 +989,7 @@ async function showPath(buildingID){
 }
 
 function findData(){    //This function gives the search results of navigating panel
-    
+    if(itemSelected){showPath(5);}              //pickout the paths
     var newBuildingIDList = [];
     var currentWord = document.getElementById("searchQueryInput").value.toLowerCase();
     for(var i=0;i<currentWord.length;i++){      //Here all the substrings in gvien word will be searched (exx:-  for 'abc' -> abc, ab, bc, a, b ,c)
@@ -1067,6 +1074,13 @@ function findData(){    //This function gives the search results of navigating p
     for(var i=0;i<navigatingItemList.length;i++){       //Update the navigating Item list according to the new buildingID list
         document.getElementById(navigatingItemList[i]).innerHTML = buildingIDList[i][0] + "<div class='hel'>"+buildingIDList[i][3]+"</div>";
     }
+}
+
+function deleteInput(){
+    document.getElementById("searchQueryInput").value = "";
+    var event = document.createEvent('Event');
+    event.initEvent('input', true, true);
+    document.getElementById("searchQueryInput").dispatchEvent(event);
 }
 
 function showDetails(){         //This function shows the pop up window (contact details of the developers)
