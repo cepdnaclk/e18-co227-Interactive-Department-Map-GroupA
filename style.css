@@ -729,7 +729,7 @@ li{
     position: absolute;
     overflow: hidden;
     left: 1%;
-    top: 33%;
+    top: 30%;
     width: 0;
     opacity: 0;
     height: 10vmin;
@@ -748,7 +748,7 @@ li{
     position: absolute;
     overflow: hidden;
     left: 1%;
-    bottom: 33%;
+    top: 60%;
     width: 0;
     opacity: 0;
     height: 10vmin;
@@ -767,7 +767,7 @@ li{
     position: absolute;
     overflow: hidden;
     right: 42.1vmin;
-    top: 33%;
+    top: 30%;
     width: 0;
     opacity: 0;
     height: 10vmin;
@@ -786,7 +786,7 @@ li{
     position: absolute;
     overflow: hidden;
     right: 42.1vmin;
-    bottom: 33%;
+    top: 60%;
     width: 0;      /*5% */
     opacity: 0;
     height: 10vmin;
