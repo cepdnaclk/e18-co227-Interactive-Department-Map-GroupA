@@ -78,15 +78,20 @@ Sample model demonstrating the information panel
 ## Key Features
 
 -3D map with real time information panel
-![1](https://user-images.githubusercontent.com/73444543/182760170-9f83e9c1-79d1-4668-9192-c544de822825.png)
+
+![All](https://user-images.githubusercontent.com/73444543/182760981-d77dd5c4-dac8-4274-b0c7-e2cf8bb084d0.png)
+
 -Easily operated Navigating System
 
-![nav_serach](https://user-images.githubusercontent.com/73444543/182760284-a515c539-c12f-4554-afbf-91bc118c0763.png)|![nav](https://user-images.githubusercontent.com/73444543/182760320-0679dd90-5a4d-47b5-963b-f2c11470119e.png)
+![nav_serach](https://user-images.githubusercontent.com/73444543/182760284-a515c539-c12f-4554-afbf-91bc118c0763.png)   |  ![nav](https://user-images.githubusercontent.com/73444543/182761016-536f3817-3f93-4fb7-bf1f-8e6967be104a.png)
+
 -Customizable UI and Viewing options
+
 ![Screenshot 2022-08-03 132759](https://user-images.githubusercontent.com/73444543/182760359-fad3258c-689f-4303-965c-32e7d3b8b85d.png)
+
 -Mobile View - Landscape with button controllers
 
-![mobile](https://user-images.githubusercontent.com/73444543/182760407-8e908639-d41e-4f12-808d-e9b6151e6bbb.png)
+![mobile](https://user-images.githubusercontent.com/73444543/182761088-ee4b8f48-f126-4a64-9451-bd6627086da3.png)
 
 ## Links
 
