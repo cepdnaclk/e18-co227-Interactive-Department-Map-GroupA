@@ -11,12 +11,12 @@ $('body').append(renderer.domElement);
 //Creating Backgroud
 //Import images to the cube
 let materialArray = [];
-let texture_ft = new THREE.TextureLoader().load('./images/4.png');
-let texture_bk = new THREE.TextureLoader().load('./images/5.png');
-let texture_up = new THREE.TextureLoader().load('./images/2.png');
-let texture_dn = new THREE.TextureLoader().load('./images/6.png');
-let texture_rt = new THREE.TextureLoader().load('./images/3.png');
-let texture_lf = new THREE.TextureLoader().load('./images/1.png');
+let texture_ft = new THREE.TextureLoader().load('./images/background1/4.png');  //There are 4 background sets
+let texture_bk = new THREE.TextureLoader().load('./images/background1/5.png');
+let texture_up = new THREE.TextureLoader().load('./images/background1/2.png');
+let texture_dn = new THREE.TextureLoader().load('./images/background1/6.png');
+let texture_rt = new THREE.TextureLoader().load('./images/background1/3.png');
+let texture_lf = new THREE.TextureLoader().load('./images/background1/1.png');
 
 materialArray.push(new THREE.MeshBasicMaterial({map: texture_ft}));
 materialArray.push(new THREE.MeshBasicMaterial({map: texture_bk}));
