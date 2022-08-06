@@ -12,13 +12,6 @@
     <script src="./js/GLTFLoader.js"></script>       <!-- Importing the GLTFLoader.js library-->
     <div id="glass" class="glass" onmouseover="nowin()" onmouseleave="nowout()"></div>
     <img class="logo" src="images/logo.png">
-    <button id="helpbutton" class="helpbutton_class" title="help" onclick="showGuide()">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M11 10.9794C11 10.4271 11.4477 9.97937 12 9.97937C12.5523 9.97937 13 10.4271 13 10.9794V16.9794C13 17.5317 12.5523 17.9794 12 17.9794C11.4477 17.9794 11 17.5317 11 16.9794V10.9794Z" fill="currentColor"/>
-            <path d="M12 6.05115C11.4477 6.05115 11 6.49886 11 7.05115C11 7.60343 11.4477 8.05115 12 8.05115C12.5523 8.05115 13 7.60343 13 7.05115C13 6.49886 12.5523 6.05115 12 6.05115Z" fill="currentColor"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12Z" fill="currentColor"/>
-        </svg>
-    </button>
     <div class="controlLayoutColoured"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="information" class="information_class" >                    
         <div id ="main_information" class="main_information_class">                         <!--Top right main information label-->
@@ -86,8 +79,20 @@
     </div>
     <div id="controlLayout" class="controlLayout_class" onmouseover="showInformation()" onmouseout="hideInformation()"></div>    <!--This is an invisible layout which used to sense mouse activities on the label-->
     <div id="dashboard" class="dashboard_class">
-        <button class="changeCorners_class" id="changeCorners" onclick="changeCorners()">Square Corners</button>
-        <button id="buttonControlswitch" class="buttonControlswitch_class" onclick="activeButtons()">
+        <button title="Change shape" class="changeCorners_class" id="changeCorners" onclick="changeCorners()">
+            <svg width="2.8vmin" height="2.8vmin" viewBox="0 0 24 24" fill="none">
+                <path d="M5 5H19V19H16L16 8H5V5Z" fill="currentColor" />
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M10 19C12.7614 19 15 16.7614 15 14C15 11.2386 12.7614 9 10 9C7.23858 9 5 11.2386 5 14C5 16.7614 7.23858 19 10 19ZM10 16C11.1046 16 12 15.1046 12 14C12 12.8954 11.1046 12 10 12C8.89543 12 8 12.8954 8 14C8 15.1046 8.89543 16 10 16Z" fill="currentColor"/>
+          </svg>
+        </button>
+        <button id="helpbutton" class="helpbutton_class" title="help" onclick="showGuide()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M11 10.9794C11 10.4271 11.4477 9.97937 12 9.97937C12.5523 9.97937 13 10.4271 13 10.9794V16.9794C13 17.5317 12.5523 17.9794 12 17.9794C11.4477 17.9794 11 17.5317 11 16.9794V10.9794Z" fill="currentColor"/>
+                <path d="M12 6.05115C11.4477 6.05115 11 6.49886 11 7.05115C11 7.60343 11.4477 8.05115 12 8.05115C12.5523 8.05115 13 7.60343 13 7.05115C13 6.49886 12.5523 6.05115 12 6.05115Z" fill="currentColor"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12Z" fill="currentColor"/>
+            </svg>
+        </button>
+        <button title="Button Controllers" id="buttonControlswitch" class="buttonControlswitch_class" onclick="activeButtons()">
             <svg width="2.8vmin" height="2.8vmin" viewBox="1 2 22 18" fill="none">
                 <path d="M16.9451 5.05518C15.8405 5.05518 14.9451 5.95061 14.9451 7.05518C14.9451 8.15975 15.8405 9.05518 16.9451 9.05518C18.0496 9.05518 18.9451 8.15975 18.9451 7.05518C18.9451 5.95061 18.0496 5.05518 16.9451 5.05518Z" fill="currentColor"/>
                 <path d="M14.9451 16.8921C14.9451 15.7875 15.8405 14.8921 16.9451 14.8921C18.0496 14.8921 18.9451 15.7875 18.9451 16.8921C18.9451 17.9967 18.0496 18.8921 16.9451 18.8921C15.8405 18.8921 14.9451 17.9967 14.9451 16.8921Z" fill="currentColor"/>
@@ -96,10 +101,10 @@
                 <path d="M16.9451 9.97363C15.8405 9.97363 14.9451 10.8691 14.9451 11.9736C14.9451 13.0782 15.8405 13.9736 16.9451 13.9736C18.0496 13.9736 18.9451 13.0782 18.9451 11.9736C18.9451 10.8691 18.0496 9.97363 16.9451 9.97363Z" fill="currentColor"/>
                 <path d="M5.05518 11.9736C5.05518 10.8691 5.95061 9.97363 7.05518 9.97363C8.15975 9.97363 9.05518 10.8691 9.05518 11.9736C9.05518 13.0782 8.15975 13.9736 7.05518 13.9736C5.95061 13.9736 5.05518 13.0782 5.05518 11.9736Z" fill="currentColor"/></svg>
             </button>
-        <button id="contactus_button" class="contactus_button_class" onclick="showDetails()">
+        <button title="Contact developers" id="contactus_button" class="contactus_button_class" onclick="showDetails()">
             <svg width="2.2vmin" height="2.2vmin" viewBox="1 2 22 18" fill="none"><path d="M2 10V5C2 4.44775 2.44772 4 3 4H8C8.55228 4 9 4.44775 9 5V9C9 9.55225 8.55228 10 8 10H6C6 14.4182 9.58173 18 14 18V16C14 15.4478 14.4477 15 15 15H19C19.5523 15 20 15.4478 20 16V21C20 21.5522 19.5523 22 19 22H14C7.37259 22 2 16.6274 2 10Z" fill="currentColor"/></svg>
         </button>
-        <button id="assets" class="assets_class" onclick="ImportAssets('https\:\/\/raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/assets/G_Assets.gltf',-5,0,-80,0,3.28084)">ASSETS</button>
+        <button title="Load/Remove assets" id="assets" class="assets_class" onclick="ImportAssets('https\:\/\/raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/assets/G_Assets.gltf',-5,0,-80,0,3.28084)">ASSETS</button>
         <div id="otherpages" class="otherpages_class">
             <div style="font-size: 1.2vmin; color:white; padding-left: 0.8vmin; padding-right: 0; width: 17%; margin-top: 1.2vmin;">FLOOR</div>
             <button id="page" class="pagebutton_class">G</button>
@@ -144,7 +149,7 @@
             <div style="padding-left: 1vmin; padding-top: 1vmin; padding-bottom: 2vmin;"><strong>Hey there!! Welcome to the Department of Computer Engineering!</strong></div>
             <div id="Guide_close" class="Guide_close_class" name="Guide_close" color="#28B463" onclick="hideGuide()">
                 <svg width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="#505354" d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="currentColor"/>
+                    <path fill="#ffffff" d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="currentColor"/>
                 </svg>
             </div>
         </div>
@@ -157,15 +162,15 @@
                     You can see the information panel on your right side. It has Main 3 parts namely;</div>
                 <div style="display: flex;">
                     <ul class="g_list">
-                        <li class="h_para">Main info panel</li>
-                        <li class="h_para">Navigation panel</li>
-                        <li class="h_para">Dashboard</li>
+                        <li>Main info panel</li>
+                        <li>Navigation panel</li>
+                        <li>Dashboard</li>
                     </ul>
                     <img style=" height: 11vmin; padding-top: 2vmin; padding-left: 2vmin;" src="images/walking_view.png">
                     <img style=" height: 11vmin; padding-top: 2vmin; padding-left: 2vmin;" src="images/drone_view.png">
                     <img style=" height: 11vmin; padding-top: 2vmin; padding-left: 2vmin;" src="images/bird_view.png">
                 </div>
-                <div class="h_para">Let’s see how it changes with respect to the different 3 modes; walk, drone & bird.</div><br>
+                <div>Let’s see how it changes with respect to the different 3 modes; walk, drone & bird.</div><br>
             </div>
             <div class="g_2">
                 <div><strong>Walk mode</strong></div>

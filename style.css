@@ -317,34 +317,10 @@ body {
 
 .changeCorners_class{
     position: absolute;
-    height: 45%;
-    width: 16%;
-    font-size: 1.32vmin;
-    border-radius: 1.4vmin;
-    background-image: conic-gradient(#9B59B6 0deg, #9B59B6 90deg, #633974 90deg, #633974 180deg, #633974 180deg, #633974 270deg, #9B59B6 270deg);
-    color: white;
-    outline: none;
-    border: none;
-    top: 5%;
-    left: 0.8%;
-    padding-left: 0;
-    padding-right: 0;
     text-align: center;
-}
-
-.changeCorners_class:active {
-    transform: translateY(0.18vmin);
-}
-
-.changeCorners_class:hover {
-    cursor: pointer;
-    background-image: conic-gradient(#633974 0deg, #633974 90deg, #9B59B6 90deg, #9B59B6 180deg, #9B59B6 180deg, #9B59B6 270deg, #633974 270deg);
-  } 
-
-.buttonControlswitch_class{
-    position: absolute;
-    text-align: center;
-    width: 13%;
+    width: 10%;
+    padding-left: 0.4vmin;
+    padding-top: 0.4vmin;
     height: 45%;
     top: 5%;
     border-radius: 1.4vmin;
@@ -353,7 +329,60 @@ body {
     outline: none;
     border-color: #D7BDE2;
     opacity: 0.9;
-    left: 19%;
+    left: 0.8%;
+    border-width: 0.1vmin;
+}
+
+.changeCorners_class:active {
+    transform: translateY(0.13vmin);
+}
+
+.changeCorners_class:hover {
+    cursor: pointer;
+    background-color: #9B59B6;
+  } 
+
+.helpbutton_class{
+    position: absolute;
+    text-align: center;
+    width: 11.5%;
+    padding-top: 0.3vmin;
+    padding-left: 0.5vmin;
+    height: 45%;
+    top: 5%;
+    border-radius: 1.4vmin;
+    background-color: #633974;
+    color: #faf5fc;
+    outline: none;
+    border-color: #D7BDE2;
+    opacity: 0.9;
+    left: 12%;
+    border-width: 0.1vmin;
+}
+
+.helpbutton_class:active{
+    transform: translateY(0.13vmin);
+}
+
+.helpbutton_class:hover{
+    cursor: pointer;
+    background-color: #9B59B6;
+}
+
+.buttonControlswitch_class{
+    position: absolute;
+    text-align: center;
+    width: 12%;
+    height: 45%;
+    padding-top: 0.4vmin;
+    top: 5%;
+    border-radius: 1.4vmin;
+    background-color: #633974;
+    color: #faf5fc;
+    outline: none;
+    border-color: #D7BDE2;
+    opacity: 0.9;
+    left: 24.5%;
     border-width: 0.1vmin;
 }
 
@@ -368,7 +397,7 @@ body {
 
 .contactus_button_class{
     position: absolute;
-    width: 13%;
+    width: 11%;
     height: 45%;
     top: 5%;
     border-radius: 1.4vmin;
@@ -378,7 +407,7 @@ body {
     border-color: #D7BDE2;
     opacity: 0.9;
     font-size: 1.12vmin;
-    left: 34%;
+    left: 37.5%;
     padding: 0;
     border-width: 0.1vmin;
 }
@@ -394,7 +423,7 @@ body {
 
 .assets_class{
     position: absolute;
-    width: 17%;
+    width: 16%;
     height: 45%;
     top: 5%;
     border-radius: 1.4vmin;
@@ -404,7 +433,7 @@ body {
     border-color: #D7BDE2;
     opacity: 0.9;
     font-size: 1.3vmin;
-    left: 48.7%;
+    left: 49.6%;
     padding: 0;
     border-width: 0.1vmin;
 }
@@ -556,31 +585,6 @@ body {
     height : 8vmin;
   }
 
-.helpbutton_class{
-    position: absolute;
-    width: 3.5vmin;
-    height: 3.5vmin;
-    text-align: center;
-    top: 12vmin;
-    left: 2vmin;
-    border-radius: 2.4vmin;
-    background-color: #633974;
-    color: #faf5fc;
-    outline: none;
-    border-color: #D7BDE2;
-    opacity: 0.3;
-    font-size: 1.12vmin;
-    padding: 0;
-    border-width: 0.1vmin;
-}
-
-.helpbutton_class:hover{
-    opacity: 0.6;
-}
-
-.helpbutton_class:active{
-    opacity: 0.9;
-}
 
 .aim{
     height: 1vmin;
@@ -645,9 +649,8 @@ body {
 
 .g_header_class{
     width: 100%;
-    /* background-color: #1b71a8; */
-    background-color: black;
-    color: gray;
+    background-color: #2170a3;
+    color: white;
     font-size: 2.2vmin;
     border-radius: 2vmin 2vmin 0 0;
 }
@@ -658,9 +661,9 @@ body {
     font-size: 2.2vmin;
     overflow: hidden;
     overflow-y: scroll;
-    color: #CACFD2;
+    color: black;
     border-radius: 0 0 2vmin 2vmin;
-    background: rgba(255, 255, 255, 0.2);
+    background:rgba(255, 255, 255, 0.9);
 }
 
 .help_class::-webkit-scrollbar {
@@ -668,11 +671,11 @@ body {
 }
    
 .help_class::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 1vmin rgba(255, 255, 255, 0.286);
+    box-shadow: inset 2vmin 2vmin 1vmin rgba(200, 200, 200, 0.1);
 }
    
 .help_class::-webkit-scrollbar-thumb {
-    background-color: #E1E1E1;
+    background-color: #9ecae8;
     border-radius: 1vmin;
 }
 
@@ -681,7 +684,7 @@ body {
 }
 
 .g_list{
-    color: #CACFD2;
+    color: black;
 }
 
 .g_1{
@@ -690,7 +693,7 @@ body {
     border-radius: 2vmin;
 }
 .g_1:hover{
-    background: rgba(50, 50, 50, 0.7);
+    background-color: white;
 }
 .g_2{
     padding-right: 2vmin;
@@ -698,7 +701,7 @@ body {
     border-radius: 2vmin;
 }
 .g_2:hover{
-    background: rgba(50, 50, 50, 0.7);
+    background-color: white;
 }
 .g_3{
     padding-right: 2vmin;
@@ -706,7 +709,7 @@ body {
     border-radius: 2vmin;
 }
 .g_3:hover{
-    background: rgba(50, 50, 50, 0.7);
+    background-color: white;
 }
 .g_4{
     padding-right: 2vmin;
@@ -714,7 +717,7 @@ body {
     border-radius: 2vmin;
 }
 .g_4:hover{
-    background: rgba(50, 50, 50, 0.7);
+    background-color: white;
 }
 .g_5{
     padding-right: 2vmin;
@@ -722,7 +725,7 @@ body {
     border-radius: 2vmin;
 }
 .g_5:hover{
-    background: rgba(50, 50, 50, 0.7);
+    background-color: white;
 }
 .g_6{
     padding-right: 2vmin;
@@ -730,7 +733,7 @@ body {
     border-radius: 2vmin;
 }
 .g_6:hover{
-    background: rgba(50, 50, 50, 0.7);
+    background-color: white;
 }
 .g_7{
     padding-right: 2vmin;
@@ -738,7 +741,7 @@ body {
     border-radius: 2vmin;
 }
 .g_7:hover{
-    background: rgba(50, 50, 50, 0.7);
+    background-color: white;
 }
 .g_8{
     padding-right: 2vmin;
@@ -746,7 +749,7 @@ body {
     border-radius: 2vmin;
 }
 .g_8:hover{
-    background: rgba(50, 50, 50, 0.7);
+    background-color: white;
 }
 .g_9{
     padding-right: 2vmin;
@@ -755,7 +758,7 @@ body {
     padding-bottom: 5vmin;
 }
 .g_9:hover{
-    background: rgba(50, 50, 50, 0.7);
+    background-color: white;
 }
 
 
