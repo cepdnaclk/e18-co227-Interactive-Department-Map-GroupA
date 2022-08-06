@@ -1093,6 +1093,17 @@ function hideDetails(){         //This function hides the pop up window (contact
     document.getElementById("contactus").style.display = "none";
 }
 
+function showGuide(){         //This function shows the pop up window (contact details of the developers)
+    document.getElementById("glass1").style.display = "flex";
+    document.getElementById("guider").style.display = "inline";
+}
+
+function hideGuide(){         //This function hides the pop up window (contact details of the developers)
+    document.getElementById("glass1").style.display = "none";
+    document.getElementById("guider").style.display = "none";
+}
+
+
 //Redirecting to other pages
 function redirecttoPage(pageID){
     switch(pageID){
