@@ -880,7 +880,7 @@ function leftBottom(){
 function changeCorners(){   //Change the shape of the corners of the layouts
     if(circleCorners==1){
         circleCorners = 0;
-        document.getElementById("changeCorners").innerHTML = "Circle Corners";
+        document.getElementById("helpbutton").style.borderRadius = "0vmin";
         document.getElementById("main_information").style.borderRadius = "0vmin";
         document.getElementById("hint").style.borderRadius = "0vmin";
         document.getElementById("more_information").style.borderRadius = "0vmin";
@@ -896,7 +896,7 @@ function changeCorners(){   //Change the shape of the corners of the layouts
         document.getElementById("contactus_button").style.borderRadius = "0vmin";
     }else{
         circleCorners = 1;
-        document.getElementById("changeCorners").innerHTML = "Square Corners";
+        document.getElementById("helpbutton").style.borderRadius = "1.4vmin";
         document.getElementById("main_information").style.borderRadius = "3.5vmin 3.5vmin 0vmin 0vmin";
         document.getElementById("hint").style.borderRadius = "0vmin 0vmin 3.5vmin 3.5vmin";
         document.getElementById("more_information").style.borderRadius = "3.5vmin";
@@ -1096,6 +1096,7 @@ function hideDetails(){         //This function hides the pop up window (contact
 function showGuide(){         //This function shows the pop up window (contact details of the developers)
     document.getElementById("glass1").style.display = "flex";
     document.getElementById("guider").style.display = "inline";
+    document.getElementById("help").scrollTo(0, 0);
 }
 
 function hideGuide(){         //This function hides the pop up window (contact details of the developers)
