@@ -1093,13 +1093,13 @@ function hideDetails(){         //This function hides the pop up window (contact
     document.getElementById("contactus").style.display = "none";
 }
 
-function showGuide(){         //This function shows the pop up window (contact details of the developers)
+function showGuide(){         //This function shows the pop up window (information about the appllication)
     document.getElementById("glass1").style.display = "flex";
     document.getElementById("guider").style.display = "inline";
     document.getElementById("help").scrollTo(0, 0);
 }
 
-function hideGuide(){         //This function hides the pop up window (contact details of the developers)
+function hideGuide(){         //This function hides the pop up window (information about the appllication)
     document.getElementById("glass1").style.display = "none";
     document.getElementById("guider").style.display = "none";
 }

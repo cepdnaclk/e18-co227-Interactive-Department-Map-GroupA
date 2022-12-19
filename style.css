@@ -88,11 +88,6 @@ body {
     background-color: #A1C3D0;
 }
 
-#btnLink{
-    border-radius: 1.25vmin;
-    background-color: #4a9599;
-    color: white;
-}
 .controlLayout_class{
     position: absolute;
     top: 1.1vmin;
@@ -319,7 +314,7 @@ body {
     position: absolute;
     text-align: center;
     width: 10%;
-    padding-left: 0.4vmin;
+    padding: 0;
     padding-top: 0.4vmin;
     height: 45%;
     top: 5%;
@@ -346,8 +341,8 @@ body {
     position: absolute;
     text-align: center;
     width: 11.5%;
+    padding: 0;
     padding-top: 0.3vmin;
-    padding-left: 0.5vmin;
     height: 45%;
     top: 5%;
     border-radius: 1.4vmin;
@@ -371,10 +366,8 @@ body {
 
 .buttonControlswitch_class{
     position: absolute;
-    text-align: center;
     width: 12%;
     height: 45%;
-    padding-top: 0.4vmin;
     top: 5%;
     border-radius: 1.4vmin;
     background-color: #633974;
@@ -383,6 +376,8 @@ body {
     border-color: #D7BDE2;
     opacity: 0.9;
     left: 24.5%;
+    padding: 0;
+    text-align: center;
     border-width: 0.1vmin;
 }
 
@@ -409,6 +404,7 @@ body {
     font-size: 1.12vmin;
     left: 37.5%;
     padding: 0;
+    text-align: center;
     border-width: 0.1vmin;
 }
 
@@ -455,7 +451,6 @@ body {
     width: 65%;
     height: 40%;
     bottom: 4%;
-    /* background-color: #2E86C1; */
     background: rgba(99, 57, 116, 0.8);
     left: 0.8%;
     border-radius: 1vmin;
@@ -847,18 +842,6 @@ body {
 
 li{
     padding-bottom: 1vmin;
-}
-
-#num:hover{
-    background-color: rgb(200, 245, 245);
-    color: black;
-    cursor: pointer;
-}
-#num{
-    margin-bottom: 0em;  margin-top: 0em;
-}
-#abc{
-     margin: 0; 
 }
 
 .left_class{
