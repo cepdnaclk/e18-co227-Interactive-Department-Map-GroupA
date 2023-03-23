@@ -1371,8 +1371,10 @@ var animate = function(){
     backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);      //Update the position of the back bounding box
     topballBB.copy(topCameraBall.geometry.boundingBox).applyMatrix4(topCameraBall.matrixWorld);         //Update the position of the top bounding box
     if(ViewMode=="walk"){
-        checkRoom();
-        checkCollision();
+        setTimeout(function() {        
+            checkRoom();
+            checkCollision();
+        }, 2000);
     }
     renderer.render(scene,camera);
     requestAnimationFrame(animate);

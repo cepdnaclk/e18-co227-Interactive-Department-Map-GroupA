@@ -56,22 +56,22 @@
             </div>
             <div id="roomListContainer" class="roomListContainer_class">
                 <div id="roomList" class="roomList_class">
-                    <div id="navigatingItem1" class="items" onclick="showPath(0)">Department Office</div>
-                    <div id="navigatingItem2" class="items" onclick="showPath(1)">HoD's Office</div>
-                    <div id="navigatingItem3" class="items" onclick="showPath(2)">Conference Room</div>
-                    <div id="navigatingItem4" class="items" onclick="showPath(3)">Central Lobby</div>
-                    <div id="navigatingItem5" class="items" onclick="showPath(4)">Filing Room & Storage</div>
-                    <div id="navigatingItem6" class="items" onclick="showPath(5)">Staff Common Room 1</div>
-                    <div id="navigatingItem7" class="items" onclick="showPath(6)">Staff Common Room 2</div>
-                    <div id="navigatingItem8" class="items" onclick="showPath(7)">Open Lab 1</div>
-                    <div id="navigatingItem9" class="items" onclick="showPath(8)">Open Lab 2</div>
-                    <div id="navigatingItem10" class="items" onclick="showPath(9)">Gents Washroom</div>
-                    <div id="navigatingItem11" class="items" onclick="showPath(10)">Ladies Washroom</div>
-                    <div id="navigatingItem12" class="items" onclick="showPath(11)">Open lab Entry Lobby</div>
-                    <div id="navigatingItem13" class="items" onclick="showPath(12)">Corridor</div>
-                    <div id="navigatingItem14" class="items" onclick="showPath(13)">Lift</div>
-                    <div id="navigatingItem15" class="items" onclick="showPath(14)">Operator-room</div>
-                    <div id="navigatingItem16" class="items" onclick="showPath(15)">Entrance Lobby</div>
+                    <div id="navigatingItem1" class="items" onclick="showPath(0)"></div>
+                    <div id="navigatingItem2" class="items" onclick="showPath(1)"></div>
+                    <div id="navigatingItem3" class="items" onclick="showPath(2)"></div>
+                    <div id="navigatingItem4" class="items" onclick="showPath(3)"></div>
+                    <div id="navigatingItem5" class="items" onclick="showPath(4)"></div>
+                    <div id="navigatingItem6" class="items" onclick="showPath(5)"></div>
+                    <div id="navigatingItem7" class="items" onclick="showPath(6)"></div>
+                    <div id="navigatingItem8" class="items" onclick="showPath(7)"></div>
+                    <div id="navigatingItem9" class="items" onclick="showPath(8)"></div>
+                    <div id="navigatingItem10" class="items" onclick="showPath(9)"></div>
+                    <div id="navigatingItem11" class="items" onclick="showPath(10)"></div>
+                    <div id="navigatingItem12" class="items" onclick="showPath(11)"></div>
+                    <div id="navigatingItem13" class="items" onclick="showPath(12)"></div>
+                    <div id="navigatingItem14" class="items" onclick="showPath(13)"></div>
+                    <div id="navigatingItem15" class="items" onclick="showPath(14)"></div>
+                    <div id="navigatingItem16" class="items" onclick="showPath(15)"></div>
                 </div>
             </div>
         </div>
@@ -148,6 +148,12 @@
 //Database
         //This database is used to load the information about the buildings
         var my_json={};   
+        var numberofRooms = 16;
+        //List of navigating items in the navigating panel
+        let navigatingItemList=[];
+        //Navigating bars, ids and the names of the rooms
+        var buildingIDList = [["",1,[1,2,3,4]],["",2,[1,2,3,4,5]],["",3,[1,2,3,6,8,9]],["",4,[1,2,3,6,8,10]],["",5,[1,2,3,6,8,10,12,13]],["",6,[1,2,3,6,8,10,12,14,15,16,17]],["",7,[1,2,3,6,8,10,12,14,15,16,18]],["",8,[1,2,3,6,8,10,12,14]],["",9,[1,2,3,6,8,10,12,14,15,19,23]],["",10,[1,2,3,6,8,10,12,14,15,19,20,22]],["",11,[1,2,3,6,8,10,12,14,15,19,20,21]],["",12,[1,2,3,6,8,10,12,14,15,19,23,24]],["",18,[1,2,3,6,8,10,12,14,15,16]],["",19,[1,2,3,6,8,10,11]],["",20,[1,2,3,6,7]],["",21,[1]]];
+        
         loadBuildings();
                    
         function loadBuildings(){     
@@ -162,6 +168,19 @@
                     roomInfo(defaultID);       			//Set initial information should be appeared in the panels
                     animate();
                     checkURL();
+
+                    for(var i=0,j=0;i<16;i++,j++){
+                        navigatingItemList[i] = "navigatingItem"+(i+1).toString();
+                        buildingIDList[i][0] = my_json[j+1].name;
+                        if(j==11){
+                            j=16;
+                        }
+                    }    
+                    //Setting the initial names of the navigating panel list items
+                    for(var i=0;i<numberofRooms;i++){
+                        document.getElementById(navigatingItemList[i]).innerHTML = buildingIDList[i][0];
+                    }
+
                 }else{
                     alert("File not found..!! Check the database file name or URL and try again !! ");	//when there's an error in accessing the json file
                 }
@@ -190,11 +209,6 @@
         var activebuttons = 0;      //This indicates whether button controls are active or not
 
 
-        //Navigating bars, ids and the names of the rooms
-        var buildingIDList = [["Department Office",1,[1,2,3,4]],["HoD's Office",2,[1,2,3,4,5]],["Conference Room",3,[1,2,3,6,8,9]],["Central Lobby",4,[1,2,3,6,8,10]],["Filing Room & Storage",5,[1,2,3,6,8,10,12,13]],["Staff Common Room 1",6,[1,2,3,6,8,10,12,14,15,16,17]],["Staff Common Room 2",7,[1,2,3,6,8,10,12,14,15,16,18]],["Open Lab 1",8,[1,2,3,6,8,10,12,14]],["Open Lab 2",9,[1,2,3,6,8,10,12,14,15,19,23]],["Gents Washroom",10,[1,2,3,6,8,10,12,14,15,19,20,22]],["Ladies Washroom",11,[1,2,3,6,8,10,12,14,15,19,20,21]],["Open lab Entry Lobby",12,[1,2,3,6,8,10,12,14,15,19,23,24]],["Corridor",18,[1,2,3,6,8,10,12,14,15,16]],["Lift",19,[1,2,3,6,8,10,11]],["Operator-room",20,[1,2,3,6,7]],["Entrance Lobby",21,[1]]];
-        //List of navigating items in the navigating panel
-        var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13","navigatingItem14","navigatingItem15","navigatingItem16"];
-        
     </script>
     <script src="commonContent.js"></script>
     <script type="text/javascript">
