@@ -56,21 +56,21 @@
             </div>
             <div id="roomListContainer" class="roomListContainer_class">
                 <div id="roomList" class="roomList_class">
-                    <div id="navigatingItem1" class="items" onclick="showPath(0)">Lecturer's Room 2</div>
-                    <div id="navigatingItem2" class="items" onclick="showPath(1)">Lecturer's Room 3</div>
-                    <div id="navigatingItem3" class="items" onclick="showPath(2)">Lecturer's Room 4</div>
-                    <div id="navigatingItem4" class="items" onclick="showPath(3)">Lecturer's Room 5</div>
-                    <div id="navigatingItem5" class="items" onclick="showPath(4)">Lecturer's Room 6</div>
-                    <div id="navigatingItem6" class="items" onclick="showPath(5)">Intructors' Room</div>
-                    <div id="navigatingItem7" class="items" onclick="showPath(6)">Technical Offcer's room</div>
-                    <div id="navigatingItem8" class="items" onclick="showPath(7)">ESCAL Makerspace Lab</div>
-                    <div id="navigatingItem9" class="items" onclick="showPath(8)">ESCAL Makerspace-Machine Room</div>
-                    <div id="navigatingItem10" class="items" onclick="showPath(9)">ESCAL Robotics Lab 1</div>
-                    <div id="navigatingItem11" class="items" onclick="showPath(10)">Corridor</div>
-                    <div id="navigatingItem12" class="items" onclick="showPath(11)">Main Room</div>
-                    <div id="navigatingItem13" class="items" onclick="showPath(12)">Lift</div>
-                    <div id="navigatingItem14" class="items" onclick="showPath(13)">Operator-room</div>
-                    <div id="navigatingItem15" class="items" onclick="showPath(14)">Lecturer's Room 1</div>
+                    <div id="navigatingItem1" class="items" onclick="showPath(0)"></div>
+                    <div id="navigatingItem2" class="items" onclick="showPath(1)"></div>
+                    <div id="navigatingItem3" class="items" onclick="showPath(2)"></div>
+                    <div id="navigatingItem4" class="items" onclick="showPath(3)"></div>
+                    <div id="navigatingItem5" class="items" onclick="showPath(4)"></div>
+                    <div id="navigatingItem6" class="items" onclick="showPath(5)"></div>
+                    <div id="navigatingItem7" class="items" onclick="showPath(6)"></div>
+                    <div id="navigatingItem8" class="items" onclick="showPath(7)"></div>
+                    <div id="navigatingItem9" class="items" onclick="showPath(8)"></div>
+                    <div id="navigatingItem10" class="items" onclick="showPath(9)"></div>
+                    <div id="navigatingItem11" class="items" onclick="showPath(10)"></div>
+                    <div id="navigatingItem12" class="items" onclick="showPath(11)"></div>
+                    <div id="navigatingItem13" class="items" onclick="showPath(12)"></div>
+                    <div id="navigatingItem14" class="items" onclick="showPath(13)"></div>
+                    <div id="navigatingItem15" class="items" onclick="showPath(14)"></div>
                 </div>
             </div>
         </div>
@@ -146,7 +146,13 @@
     <script type="text/javascript">
 //Database
         //This database is used to load the information about the buildings
-        var my_json={};   
+        var my_json={};  
+        var numberofRooms = 15; 
+        //List of navigating items in the navigating panel
+        let navigatingItemList=[];
+        //Navigating bars, ids and the names of the rooms
+        var buildingIDList = [["",1,[1,2,3,4,6,8,10,11,12]],["",2,[1,2,3,4,6,8,10,11,13,14]],["",3,[1,2,3,4,6,8,10,11,13,15,16]],["",4,[1,2,3,4,6,8,10,11,13,15,17,18]],["",5,[1,2,3,4,6,8,10,11,13,15,17,19]],["",6,[1,2,3,4,5]],["",7,[1,2,27,20,21]],["",8,[1,2,27,22]],["",9,[1,2,27,22,23,24,26]],["",10,[1,2,27,22,23,24,25]],["",11,[1,2,3]],["",12,[1]],["",13,[0,1]],["",14,[1,2,3,4,6,7]],["",15,[1,2,3,4,6,8,9]]];
+
         loadBuildings();
             
         function loadBuildings(){     
@@ -161,6 +167,15 @@
                         roomInfo(defaultID);       			//Set initial information should be appeared in the panels
                         animate();
                         checkURL();
+
+                        for(var i=0;i<numberofRooms;i++){
+                            navigatingItemList[i] = "navigatingItem"+(i+1).toString();
+                            buildingIDList[i][0] = my_json[i+1].name;
+                        }    
+                        //Setting the initial names of the navigating panel list items
+                        for(var i=0;i<numberofRooms;i++){
+                            document.getElementById(navigatingItemList[i]).innerHTML = buildingIDList[i][0];
+                        }
                 }
                 else{
                     alert("File not found..!! Check the database file name or URL and try again !! ");	//when there's an error in accessing the json file
@@ -190,11 +205,7 @@
         var activebuttons = 0;      //This indicates whether button controls are active or not
 
 
-        //Navigating bars, ids and the names of the rooms
-        var buildingIDList = [["Lecturer's Room 2",1,[1,2,3,4,6,8,10,11,12]],["Lecturer's Room 3",2,[1,2,3,4,6,8,10,11,13,14]],["Lecturer's Room 4",3,[1,2,3,4,6,8,10,11,13,15,16]],["Lecturer's Room 5",4,[1,2,3,4,6,8,10,11,13,15,17,18]],["Lecturer's Room 6",5,[1,2,3,4,6,8,10,11,13,15,17,19]],["Intructors' Room",6,[1,2,3,4,5]],["Technical Offcer's room",7,[1,2,27,20,21]],["ESCAL Makerspace Lab",8,[1,2,27,22]],["ESCAL Makerspace-Machine Room",9,[1,2,27,22,23,24,26]],["ESCAL Robotics Lab 1",10,[1,2,27,22,23,24,25]],["Corridor",11,[1,2,3]],["Main Room",12,[1]],["Lift",13,[0,1]],["Operator-room",14,[1,2,3,4,6,7]],["Lecturer's Room 1",15,[1,2,3,4,6,8,9]]];
-        //List of navigating items in the navigating panel
-        var navigatingItemList = ["navigatingItem1","navigatingItem2","navigatingItem3","navigatingItem4","navigatingItem5","navigatingItem6","navigatingItem7","navigatingItem8","navigatingItem9","navigatingItem10","navigatingItem11","navigatingItem12","navigatingItem13","navigatingItem14","navigatingItem15"];
-        
+ 
     </script>
     <script src="commonContent.js"></script>
     <script type="text/javascript"> 
