@@ -165,11 +165,13 @@
             var xhr = new XMLHttpRequest();		//create XHR object
             xhr.open('GET','json/F4data.json',true);
 
-            xhr.onload = function(){
+            xhr.onload = async function(){
                 if(this.status==200){       
-                    my_json = JSON.parse(this.responseText);   //added wrapper such that values of the objects can be accessed
+                    my_json = await JSON.parse(this.responseText);   //added wrapper such that values of the objects can be accessed
                     //console.log(my_json);		
                     roomInfo(defaultID);       			//Set initial information should be appeared in the panels
+                    // var blenderBuilding = importObject('./floors/Floor4.gltf',-5,0,-80,0,3.28084); 
+                    var blenderBuilding = await importObject('https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/floors/Floor4.gltf',-5,0,-80,0,3.28084); 
                     animate();
                     checkURL();
 
@@ -216,9 +218,7 @@
  
 
         //Importing the blender object using the created function above
-        // var blenderBuilding = importObject('./floors/Floor4.gltf',-5,0,-80,0,3.28084); 
-        var blenderBuilding = importObject('https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/floors/Floor4.gltf',-5,0,-80,0,3.28084); 
-    
+
         //Creating transparent doors by using the created function above        
         var F01_door1 = createTransparentObject(1,"h",-16.52,-61.98);   //incubation centre 1
 
