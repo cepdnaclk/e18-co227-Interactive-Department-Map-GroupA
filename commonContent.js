@@ -1385,10 +1385,13 @@ var animate = function(){
     backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);      //Update the position of the back bounding box
     topballBB.copy(topCameraBall.geometry.boundingBox).applyMatrix4(topCameraBall.matrixWorld);         //Update the position of the top bounding box
     if(ViewMode=="walk"){
-        setTimeout(function() {        
-            checkRoom();
-            checkCollision();
-        }, 2000);
+        // setTimeout(function() {        
+        //     checkRoom();
+        //     checkCollision();
+        // }, 2000);
+        checkRoom();
+        checkCollision();
+        
     }
     renderer.render(scene,camera);
     requestAnimationFrame(animate);
@@ -1396,7 +1399,7 @@ var animate = function(){
 
 //Update information panel
 function roomInfo(buildingID){
-
+    console.log(defaultID);
     document.getElementById("label").innerHTML = my_json[buildingID].title;                           //Update the default information about the department on the top right labels
                                //Update the default information about the department on the top right labels
     
@@ -1409,8 +1412,11 @@ function roomInfo(buildingID){
         }
     }
     if(my_json[buildingID].tags!=""){
-        let temptext = my_json[buildingID].tags.join(" ");
-        list1Content += ('<li>Tags : '+ temptext +'</li>');
+        list1Content += '<div style="display:flex; flex-wrap: wrap;"><li>Tags : </li>';
+        for(var i=0;i<my_json[buildingID].tags.length;i++){
+            list1Content += ('<div class="tags_class1">'+ my_json[buildingID].tags[i] +'</div>');     
+        }
+        list1Content += '</div>';
     }
     if(my_json[buildingID].contact.email!=""){
         list1Content += ('<li>Email : '+ my_json[buildingID].contact.email +'</li>');
@@ -1418,7 +1424,7 @@ function roomInfo(buildingID){
     document.getElementById("list").innerHTML = list1Content;
 
     if(my_json[buildingID].title!=""){
-        list2Content += ('<li>Location ID : '+ my_json[buildingID].title +'</li>');
+        list2Content += ('<li>Location ID : '+ my_json[buildingID].label +'</li>');
     }
     if(my_json[buildingID].features!=""){
         for(var i=0;i<my_json[buildingID].features.length;i++){
@@ -1426,8 +1432,11 @@ function roomInfo(buildingID){
         }
     }
     if(my_json[buildingID].accessibility!=""){
-        let temptext = my_json[buildingID].accessibility.join(" ");
-        list2Content += ('<li>Accessibility : '+ temptext +'</li>');
+        list2Content += '<li>Accessibility : <div style="display:flex; flex-wrap: wrap;">';
+        for(var i=0;i<my_json[buildingID].accessibility.length;i++){
+            list2Content += ('<div class="tags_class2">'+ my_json[buildingID].accessibility[i] +'</div>');     
+        }
+        list2Content += '</div></li>';
     }
     if(my_json[buildingID].capacity!=""){
         list2Content += ('<li>Capacity : '+ my_json[buildingID].capacity +' students</li>');

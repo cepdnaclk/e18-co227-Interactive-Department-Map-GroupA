@@ -958,3 +958,27 @@ li{
     transform: translateY(0.5vmin);
     background-color: #1f7ab5;
 }
+
+.tags_class1{
+    color: white;
+    font-weight: bold;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.4vmin 0.7vmin 0.6vmin 0.7vmin;
+    margin: 0.2vmin;
+    border-radius: 0.8vmin;
+    font-size: 1.5vmin;
+    background-color: #229954;
+}
+
+.tags_class2{
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.4vmin 0.9vmin 0.3vmin 0.9vmin;
+    margin: 0.2vmin;
+    font-family: sans-serif;
+    border-radius: 0.8vmin;
+    font-size: 1.3vmin;
+    background-color: #2471A3;
+}

@@ -166,6 +166,8 @@
                     my_json = await JSON.parse(this.responseText);   //added wrapper such that values of the objects can be accessed
                         // console.log(my_json);		
                         roomInfo(defaultID);       			//Set initial information should be appeared in the panels
+                        // var blenderBuilding = importObject('./floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084); 
+                        var blenderBuilding = await importObject('https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);  
                         animate();
                         checkURL();
                 
@@ -211,10 +213,8 @@
     <script src="commonContent.js"></script>
     <script type="text/javascript"> 
 
-        //Importing the blender object using the created function above        
-        // var blenderBuilding = importObject('./floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);    
-        var blenderBuilding = importObject('https://raw.githubusercontent.com/cepdnaclk/e18-co227-Interactive-Department-Map-GroupA/main/floors/Floor1.gltf',-5,0,-10,Math.PI,3.28084);  
-
+        //Importing the blender object using the created function above           
+        
 
         //Creating transparent doors by using the created function above
         var O01_door1 = createTransparentObject(1,"v",-5.06,-73.75); //m
