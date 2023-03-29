@@ -38,7 +38,8 @@
         <div id="link" class="link_class">
             <div id="linkHead" class="linkHead_class">Link</div>
             <div class="url_class">
-                <a href="http://www.ce.pdn.ac.lk/" id="url" target="_blank">Click here for more info</a>
+                <a href="http://www.ce.pdn.ac.lk/" id="url" target="_blank" style="width: 50%;">Info</a>
+                <a href="http://www.ce.pdn.ac.lk/" id="Personurl" target="_blank" style="width: 50%;">Person Info</a>
             </div>
         </div>
         <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
@@ -163,11 +164,11 @@
         function loadBuildings(){     
 		
             var xhr = new XMLHttpRequest();		//create XHR object
-            xhr.open('GET','json/F4data.json',true);
+            xhr.open('GET','https://api.ce.pdn.ac.lk/locations/v1/04/index.json',true);
 
             xhr.onload = async function(){
                 if(this.status==200){       
-                    my_json = await JSON.parse(this.responseText);   //added wrapper such that values of the objects can be accessed
+                    my_json = await JSON.parse(this.responseText).locations;   //added wrapper such that values of the objects can be accessed
                     //console.log(my_json);		
                     roomInfo(defaultID);       			//Set initial information should be appeared in the panels
                     // var blenderBuilding = importObject('./floors/Floor4.gltf',-5,0,-80,0,3.28084); 

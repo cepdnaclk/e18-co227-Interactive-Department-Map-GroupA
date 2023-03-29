@@ -1020,19 +1020,31 @@ function findData(){    //This function gives the search results of navigating p
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
-                }else if(my_json[buildingIDList[j][1]].capacity!="" && my_json[buildingIDList[j][1]].capacity.toLowerCase().includes(currentInput)){
+                }else if(my_json[buildingIDList[j][1]].contact.name!="" && my_json[buildingIDList[j][1]].contact.name.toLowerCase().includes(currentInput)){
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact.name.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].contact.link!="" && my_json[buildingIDList[j][1]].contact.link.toLowerCase().includes(currentInput)){
+                    var regx = new RegExp(currentInput,'gi');
+                    buildingIDList[j][3] = my_json[buildingIDList[j][1]].contact.link.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
+                    newBuildingIDList.push(buildingIDList[j]);
+                    buildingIDList.splice(j,1);
+                    j=j-1;
+                }else if(my_json[buildingIDList[j][1]].capacity.toString()!="N/A" && my_json[buildingIDList[j][1]].capacity.toLowerCase().includes(currentInput)){
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].capacity.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
-                }else if(my_json[buildingIDList[j][1]].url!="" && my_json[buildingIDList[j][1]].url.toLowerCase().includes(currentInput)){
+                }else if(my_json[buildingIDList[j][1]].url.toString()!="#" && my_json[buildingIDList[j][1]].url.toLowerCase().includes(currentInput)){
                     var regx = new RegExp(currentInput,'gi');
                     buildingIDList[j][3] = my_json[buildingIDList[j][1]].url.replace(regx,"<highlighted style='color:black;'>"+currentInput+"</highlighted>");
                     newBuildingIDList.push(buildingIDList[j]);
                     buildingIDList.splice(j,1);
                     j=j-1;
-                }else if(my_json[buildingIDList[j][1]].description!="[]" && my_json[buildingIDList[j][1]].description.toString().toLowerCase().includes(currentInput)){
+                }else if(my_json[buildingIDList[j][1]].description.length!=0 && my_json[buildingIDList[j][1]].description.toString().toLowerCase().includes(currentInput)){
                     var regx = new RegExp(currentInput,'gi');
                     for(var k=0;k<my_json[buildingIDList[j][1]].description.length;k++){
                         if(my_json[buildingIDList[j][1]].description[k].toLowerCase().includes(currentInput)){
@@ -1043,7 +1055,7 @@ function findData(){    //This function gives the search results of navigating p
                             break;
                         }
                     }
-                }else if(my_json[buildingIDList[j][1]].features!="[]" && my_json[buildingIDList[j][1]].features.toString().toLowerCase().includes(currentInput)){
+                }else if(my_json[buildingIDList[j][1]].features.length!=0 && my_json[buildingIDList[j][1]].features.toString().toLowerCase().includes(currentInput)){
                     var regx = new RegExp(currentInput,'gi');
                     for(var k=0;k<my_json[buildingIDList[j][1]].features.length;k++){
                         if(my_json[buildingIDList[j][1]].features[k].toLowerCase().includes(currentInput)){
@@ -1054,7 +1066,7 @@ function findData(){    //This function gives the search results of navigating p
                             break;
                         }
                     }
-                }else if(my_json[buildingIDList[j][1]].tags!="[]" && my_json[buildingIDList[j][1]].tags.toString().toLowerCase().includes(currentInput)){
+                }else if(my_json[buildingIDList[j][1]].tags.length!=0 && my_json[buildingIDList[j][1]].tags.toString().toLowerCase().includes(currentInput)){
                     var regx = new RegExp(currentInput,'gi');
                     for(var k=0;k<my_json[buildingIDList[j][1]].tags.length;k++){
                         if(my_json[buildingIDList[j][1]].tags[k].toLowerCase().includes(currentInput)){
@@ -1065,7 +1077,7 @@ function findData(){    //This function gives the search results of navigating p
                             break;
                         }
                     }
-                }else if(my_json[buildingIDList[j][1]].accessibility!="[]" && my_json[buildingIDList[j][1]].accessibility.toString().toLowerCase().includes(currentInput)){
+                }else if(my_json[buildingIDList[j][1]].accessibility.length!=0 && my_json[buildingIDList[j][1]].accessibility.toString().toLowerCase().includes(currentInput)){
                     var regx = new RegExp(currentInput,'gi');
                     for(var k=0;k<my_json[buildingIDList[j][1]].accessibility.length;k++){
                         if(my_json[buildingIDList[j][1]].accessibility[k].toLowerCase().includes(currentInput)){
@@ -1385,13 +1397,8 @@ var animate = function(){
     backballBB.copy(backCameraBall.geometry.boundingBox).applyMatrix4(backCameraBall.matrixWorld);      //Update the position of the back bounding box
     topballBB.copy(topCameraBall.geometry.boundingBox).applyMatrix4(topCameraBall.matrixWorld);         //Update the position of the top bounding box
     if(ViewMode=="walk"){
-        // setTimeout(function() {        
-        //     checkRoom();
-        //     checkCollision();
-        // }, 2000);
         checkRoom();
         checkCollision();
-        
     }
     renderer.render(scene,camera);
     requestAnimationFrame(animate);
@@ -1399,54 +1406,59 @@ var animate = function(){
 
 //Update information panel
 function roomInfo(buildingID){
-    console.log(defaultID);
     document.getElementById("label").innerHTML = my_json[buildingID].title;                           //Update the default information about the department on the top right labels
                                //Update the default information about the department on the top right labels
     
     var list1Content = "";
     var list2Content = "";
 
-    if(my_json[buildingID].description!=""){
-        for(var i=0;i<my_json[buildingID].description.length;i++){
-            list1Content += ('<li>'+ my_json[buildingID].description[i] +'</li>');     
-        }
+    
+    for(var i=0;i<my_json[buildingID].description.length;i++){
+        list1Content += ('<li>'+ my_json[buildingID].description[i] +'</li>');     
     }
-    if(my_json[buildingID].tags!=""){
+    if(my_json[buildingID].tags.length!=0){
         list1Content += '<div style="display:flex; flex-wrap: wrap;"><li>Tags : </li>';
         for(var i=0;i<my_json[buildingID].tags.length;i++){
             list1Content += ('<div class="tags_class1">'+ my_json[buildingID].tags[i] +'</div>');     
         }
         list1Content += '</div>';
     }
+    if(my_json[buildingID].contact.name!=""){
+        list1Content += ('<li>In charge : '+ my_json[buildingID].contact.name +'</li>');
+    }
     if(my_json[buildingID].contact.email!=""){
         list1Content += ('<li>Email : '+ my_json[buildingID].contact.email +'</li>');
     }
     document.getElementById("list").innerHTML = list1Content;
 
+
     if(my_json[buildingID].title!=""){
         list2Content += ('<li>Location ID : '+ my_json[buildingID].label +'</li>');
     }
-    if(my_json[buildingID].features!=""){
-        for(var i=0;i<my_json[buildingID].features.length;i++){
-            list2Content += ('<li>'+ my_json[buildingID].features[i] +'</li>');     
-        }
+    for(var i=0;i<my_json[buildingID].features.length;i++){
+        list2Content += ('<li>'+ my_json[buildingID].features[i] +'</li>');     
     }
-    if(my_json[buildingID].accessibility!=""){
+    if(my_json[buildingID].accessibility.length!=0){
         list2Content += '<li>Accessibility : <div style="display:flex; flex-wrap: wrap;">';
         for(var i=0;i<my_json[buildingID].accessibility.length;i++){
             list2Content += ('<div class="tags_class2">'+ my_json[buildingID].accessibility[i] +'</div>');     
         }
         list2Content += '</div></li>';
     }
-    if(my_json[buildingID].capacity!=""){
+    if(my_json[buildingID].capacity.toString()!="N/A"){
         list2Content += ('<li>Capacity : '+ my_json[buildingID].capacity +' students</li>');
     }
     if(my_json[buildingID].contact.tele!=""){
         list2Content += ('<li>Telephone : '+ my_json[buildingID].contact.tele +'</li>');
     }
     document.getElementById("list2").innerHTML = list2Content;
-    document.getElementById("url").href = my_json[buildingID].url;
 
+    if(my_json[buildingID].url.toString()!="#"){
+        document.getElementById("url").href = my_json[buildingID].url;
+    }
+    if(my_json[buildingID].contact.link!=""){
+        document.getElementById("Personurl").href = my_json[buildingID].contact.link;
+    }
 
 
 

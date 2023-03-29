@@ -145,6 +145,8 @@ body {
     font-size: 1.6vmin;
     width: 100%;
     background-color:white;
+    align-content: space-between;
+    display: flex;
 }
 
 .navigate_class{
@@ -961,7 +963,7 @@ li{
 
 .tags_class1{
     color: white;
-    font-weight: bold;
+    /* font-weight: bold; */
     width: fit-content;
     height: fit-content;
     padding: 0.4vmin 0.7vmin 0.6vmin 0.7vmin;
@@ -975,7 +977,7 @@ li{
     color: white;
     width: fit-content;
     height: fit-content;
-    padding: 0.4vmin 0.9vmin 0.3vmin 0.9vmin;
+    padding: 0.4vmin 0.9vmin 0.4vmin 0.9vmin;
     margin: 0.2vmin;
     font-family: sans-serif;
     border-radius: 0.8vmin;
