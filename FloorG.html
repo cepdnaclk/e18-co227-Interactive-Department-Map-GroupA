@@ -38,7 +38,8 @@
         <div id="link" class="link_class">
             <div id="linkHead" class="linkHead_class">Link</div>
             <div class="url_class">
-                <a href="http://www.ce.pdn.ac.lk/" id="url" target="_blank">Click here for more info</a>
+                <a href="http://www.ce.pdn.ac.lk/" id="url" target="_blank" style="width: 50%;">Info</a>
+                <a href="http://www.ce.pdn.ac.lk/" id="Personurl" target="_blank" style="width: 50%;">Person Info</a>
             </div>
         </div>
         <div id ="navigator" class="navigate_class">                         <!--Top right main information label-->
@@ -159,11 +160,15 @@
         function loadBuildings(){     
                
             var xhr = new XMLHttpRequest();		//create XHR object
-            xhr.open('GET','json/Gdata.json',true);
+            xhr.open('GET','https://api.ce.pdn.ac.lk/locations/v1/G/index.json',true);
        
             xhr.onload = async function(){
                 if(this.status==200){       
-                    my_json = await JSON.parse(this.responseText);   //added wrapper such that values of the objects can be accessed
+                    my_json = await JSON.parse(this.responseText).locations;   //added wrapper such that values of the objects can be accessed
+                    var my_json1 = my_json.slice(0,13);
+                    var my_json2 = my_json.slice(13,);
+                    my_json1.push(my_json[10],my_json[10],my_json[11],my_json[11]);
+                    my_json = my_json1.concat(my_json2);
                     //console.log(my_json);		
                     roomInfo(defaultID);       			//Set initial information should be appeared in the panels
                     // var blenderBuilding = importObject('./floors/FloorG.gltf',-5,0,-80,0,3.28084);  
